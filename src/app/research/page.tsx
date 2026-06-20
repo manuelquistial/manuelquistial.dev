@@ -1,31 +1,17 @@
 import type { Metadata } from "next";
-import { getDictionary } from "@/i18n/getDictionary";
-import { parseLocale } from "@/i18n/parseLocale";
+import { siteContent } from "@/content";
 import { buildPageMetadata } from "@/lib/metadata";
 import { Section } from "@/components/layout/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 
-interface ResearchPageProps {
-  params: Promise<{ locale: string }>;
-}
+export const metadata: Metadata = buildPageMetadata({
+  title: siteContent.meta.pages.research.title,
+  description: siteContent.meta.pages.research.description,
+  path: "/research",
+});
 
-export async function generateMetadata({
-  params,
-}: ResearchPageProps): Promise<Metadata> {
-  const locale = parseLocale((await params).locale);
-  const { meta } = getDictionary(locale);
-
-  return buildPageMetadata(locale, {
-    title: meta.pages.research.title,
-    description: meta.pages.research.description,
-    path: "/research",
-  });
-}
-
-export default async function ResearchPage({ params }: ResearchPageProps) {
-  const locale = parseLocale((await params).locale);
-  const dictionary = getDictionary(locale);
-  const { researchPage } = dictionary;
+export default function ResearchPage() {
+  const { researchPage } = siteContent;
 
   return (
     <Section>

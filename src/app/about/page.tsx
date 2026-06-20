@@ -1,38 +1,19 @@
 import type { Metadata } from "next";
-import { getDictionary } from "@/i18n/getDictionary";
-import { parseLocale } from "@/i18n/parseLocale";
+import { siteContent } from "@/content";
 import { experience } from "@/data/experience";
 import { buildPageMetadata } from "@/lib/metadata";
 import { Section } from "@/components/layout/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { ExperienceCard } from "@/components/ui/ExperienceCard";
-import { resolveExperience } from "@/lib/content";
 
-interface AboutPageProps {
-  params: Promise<{ locale: string }>;
-}
+export const metadata: Metadata = buildPageMetadata({
+  title: siteContent.meta.pages.about.title,
+  description: siteContent.meta.pages.about.description,
+  path: "/about",
+});
 
-export async function generateMetadata({
-  params,
-}: AboutPageProps): Promise<Metadata> {
-  const locale = parseLocale((await params).locale);
-  const { meta } = getDictionary(locale);
-
-  return buildPageMetadata(locale, {
-    title: meta.pages.about.title,
-    description: meta.pages.about.description,
-    path: "/about",
-  });
-}
-
-export default async function AboutPage({ params }: AboutPageProps) {
-  const locale = parseLocale((await params).locale);
-  const dictionary = getDictionary(locale);
-  const { aboutPage } = dictionary;
-  const experienceItems = resolveExperience(
-    experience,
-    dictionary.content.experience,
-  );
+export default function AboutPage() {
+  const { aboutPage } = siteContent;
 
   return (
     <Section>
@@ -89,13 +70,13 @@ export default async function AboutPage({ params }: AboutPageProps) {
       </section>
 
       <section className="mt-16">
-        <SectionTitle title={dictionary.sections.experience} />
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {experienceItems.map((item) => (
+        <SectionTitle title={siteContent.sections.experience} />
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
+          {experience.map((item) => (
             <ExperienceCard
               key={item.id}
               item={item}
-              currentLabel={dictionary.experiencePreview.currentLabel}
+              currentLabel={siteContent.experiencePreview.currentLabel}
             />
           ))}
         </div>

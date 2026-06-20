@@ -2,16 +2,16 @@ export const meta = {
   title: "Manuel Quistial — Software Engineer",
   description:
     "Full-stack software engineer at Anthology/Blackboard. React, TypeScript, Java, Spring Boot, PostgreSQL, applied ML, and EEG/BCI research at Universidad de Antioquia.",
-  pages: {
+    pages: {
     about: {
       title: "About",
       description:
-        "Enterprise full-stack engineering at Anthology/Blackboard and neuroengineering research at Universidad de Antioquia.",
+        "Enterprise full-stack engineering, institutional systems at UdeA FCF, and neuroengineering research.",
     },
     projects: {
       title: "Projects",
       description:
-        "Enterprise platforms, microfrontend architectures, AI assistants, and EEG motor imagery pipelines.",
+        "Institutional ecosystems, publishing platforms, research pipelines, and production WordPress websites.",
     },
     research: {
       title: "Research",
@@ -57,10 +57,16 @@ export const sections = {
   experience: "Experience",
   skills: "Skills",
   projects: "Projects",
+  engineeringProjects: "Engineering Projects",
+  researchProjects: "Research Projects",
+  agencyWebProjects: "Agency Web Projects",
   research: "Research",
   contact: "Contact",
   viewAll: "View all",
 };
+
+export const agencyWebProjectsIntro =
+  "Selected production websites delivered through Sal & Picciotto, focused on WordPress implementation, Elementor Pro layouts, custom fields, code snippets, responsive design, multilingual content with Polylang and business-oriented web experiences.";
 
 export const footer = {
   rights: "All rights reserved.",
@@ -75,12 +81,16 @@ export const projectStatus = {
   planned: "Planned",
   inProgress: "In progress",
   completed: "Completed",
+  live: "Live",
+  comingSoon: "Coming soon",
 };
 
 export const projectCard = {
   github: "GitHub",
   liveDemo: "Live Demo",
-  unavailable: "Not available yet",
+  liveSite: "Live Site",
+  caseStudy: "Case Study",
+  deliveredThrough: "Delivered through",
 };
 
 export const contactCta = {
@@ -95,3 +105,9 @@ export const notFound = {
   description: "The page you are looking for does not exist or has been moved.",
   backHome: "Back to home",
 };
+
+export const projectCategories = {
+  engineering: "Engineering Projects",
+  research: "Research Projects",
+  "agency-web": "Agency Web Projects",
+} as const;

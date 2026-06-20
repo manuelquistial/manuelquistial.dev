@@ -1,25 +1,20 @@
-import type { Locale } from "@/i18n/config";
-import type { Dictionary } from "@/i18n/types";
+import type { SiteContent } from "@/content";
 import { profile, getCvDownloadName, getCvUrl } from "@/data/profile";
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/Button";
-import { localizedPath } from "@/lib/utils";
 
 interface HeroProps {
-  locale: Locale;
-  content: Dictionary["hero"];
+  content: SiteContent["hero"];
 }
 
-export function Hero({ locale, content }: HeroProps) {
+export function Hero({ content }: HeroProps) {
   return (
     <section className="border-b border-border bg-[radial-gradient(ellipse_at_top,_var(--accent-muted)_0%,_transparent_55%)]">
       <Container as="section" className="py-20 sm:py-28 lg:py-32">
         <p className="text-sm font-medium uppercase tracking-[0.2em] text-accent">
           {profile.name}
         </p>
-        <p className="mt-3 text-sm text-muted">
-          {profile.location}
-        </p>
+        <p className="mt-3 text-sm text-muted">{profile.location}</p>
         <h1 className="mt-5 max-w-4xl text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl lg:text-[2.75rem] lg:leading-[1.15]">
           {content.title}
         </h1>
@@ -31,12 +26,10 @@ export function Hero({ locale, content }: HeroProps) {
         </p>
 
         <div className="mt-10 flex flex-wrap gap-3">
-          <Button href={localizedPath(locale, "/projects")}>
-            {content.viewProjects}
-          </Button>
+          <Button href="/projects">{content.viewProjects}</Button>
           <Button
-            href={getCvUrl(locale)}
-            download={getCvDownloadName(locale)}
+            href={getCvUrl()}
+            download={getCvDownloadName()}
             variant="secondary"
           >
             {content.downloadCv}

@@ -1,49 +1,97 @@
 export const skillCategories = [
   {
     id: "frontend",
+    name: "Frontend",
     skills: [
       "React",
-      "TypeScript",
       "Next.js",
-      "Vite",
-      "Redux",
-      "Angular",
+      "TypeScript",
+      "Material-UI",
       "Tailwind CSS",
-      "MUI",
+      "shadcn/ui",
+      "TanStack Query",
+      "Angular",
+      "Vite",
       "Microfrontends",
     ],
   },
   {
     id: "backend",
+    name: "Backend",
     skills: [
       "Java",
       "Spring Boot",
-      "Python",
-      "FastAPI",
-      "Node.js",
       "Laravel",
+      "Symfony",
+      "FastAPI",
+      "Flask",
+      "Python",
       "REST APIs",
-      "Authentication",
-      "Authorization",
+      "JWT",
+      "Laravel Sanctum",
     ],
   },
   {
     id: "databases",
-    skills: ["PostgreSQL", "MySQL", "MongoDB", "SQLite"],
+    name: "Databases",
+    skills: ["PostgreSQL", "MySQL", "SQLite"],
+  },
+  {
+    id: "authentication-iam",
+    name: "Authentication & IAM",
+    skills: [
+      "Keycloak",
+      "OIDC",
+      "PKCE",
+      "JWT",
+      "Laravel Sanctum",
+      "Federated Authentication",
+    ],
+  },
+  {
+    id: "data-reporting",
+    name: "Data & Reporting",
+    skills: [
+      "Pandas",
+      "openpyxl",
+      "Excel Reports",
+      "ETL Workflows",
+      "Async SQLAlchemy",
+    ],
+  },
+  {
+    id: "cms-web-platforms",
+    name: "CMS & Web Platforms",
+    skills: [
+      "WordPress",
+      "WooCommerce",
+      "Elementor Pro",
+      "Polylang",
+      "WPML",
+      "ACF",
+      "WordPress Code Snippets",
+      "Custom CSS",
+      "JavaScript",
+      "Content Management",
+      "Responsive Websites",
+    ],
   },
   {
     id: "cloud-devops",
+    name: "Cloud & DevOps",
     skills: [
       "AWS",
       "Azure",
       "Docker",
+      "Docker Compose",
       "GitHub Actions",
-      "Jenkins",
       "CI/CD",
+      "Validation Scripts",
     ],
   },
   {
     id: "ai-ml",
+    name: "AI / ML",
     skills: [
       "OpenAI",
       "Azure OpenAI",
@@ -57,6 +105,7 @@ export const skillCategories = [
   },
   {
     id: "research",
+    name: "Research",
     skills: [
       "EEG",
       "BCI",
@@ -71,6 +120,7 @@ export const skillCategories = [
   },
   {
     id: "testing",
+    name: "Testing",
     skills: [
       "Jest",
       "React Testing Library",
@@ -85,5 +135,6 @@ export type SkillCategoryId = (typeof skillCategories)[number]["id"];
 
 export type SkillCategory = {
   id: SkillCategoryId;
+  name: string;
   skills: readonly string[];
 };

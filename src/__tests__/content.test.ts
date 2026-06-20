@@ -2,82 +2,84 @@ import { describe, expect, it } from "vitest";
 import { projects } from "@/data/projects";
 import { experience } from "@/data/experience";
 import { skillCategories } from "@/data/skills";
-import { dictionary as en } from "@/i18n/dictionaries/en";
-import { dictionary as es } from "@/i18n/dictionaries/es";
 import {
-  resolveExperience,
-  resolveProjects,
-  resolveSkillCategories,
-} from "@/lib/content";
+  getFeaturedProjects,
+  getProjectsByCategory,
+} from "@/data/projects";
+import { getProjectStatusLabel, hasProjectLiveLink } from "@/lib/projects";
+import { siteContent } from "@/content";
 
-describe("resolve content helpers", () => {
-  it("resolves projects with name and description", () => {
-    const resolved = resolveProjects(projects, en.content.projects);
+describe("project data helpers", () => {
+  it("returns projects grouped by category", () => {
+    const engineering = getProjectsByCategory("engineering");
+    const agency = getProjectsByCategory("agency-web");
 
-    expect(resolved).toHaveLength(projects.length);
-    resolved.forEach((project) => {
-      expect(project.name).toBeTruthy();
+    expect(engineering.every((project) => project.category === "engineering")).toBe(
+      true,
+    );
+    expect(agency.every((project) => project.category === "agency-web")).toBe(
+      true,
+    );
+    expect(projects.length).toBe(
+      engineering.length + agency.length + getProjectsByCategory("research").length,
+    );
+  });
+
+  it("returns featured engineering projects with UDEA FCF first", () => {
+    const featured = getFeaturedProjects("engineering", 4);
+
+    expect(featured[0]?.id).toBe("udea-fcf-digital-ecosystem");
+    expect(featured[1]?.id).toBe("babel-scores");
+    expect(featured.every((project) => project.category === "engineering")).toBe(
+      true,
+    );
+  });
+
+  it("returns featured agency projects for the home preview", () => {
+    const featured = getFeaturedProjects("agency-web", 3);
+
+    expect(featured.length).toBeLessThanOrEqual(3);
+    expect(featured.every((project) => project.category === "agency-web")).toBe(
+      true,
+    );
+  });
+
+  it("maps project status labels", () => {
+    expect(
+      getProjectStatusLabel("coming-soon", siteContent.projectStatus),
+    ).toBe("Coming soon");
+    expect(getProjectStatusLabel("live", siteContent.projectStatus)).toBe(
+      "Live",
+    );
+  });
+
+  it("hides live links for coming soon projects", () => {
+    expect(hasProjectLiveLink("https://example.com", "coming-soon")).toBe(false);
+    expect(hasProjectLiveLink("", "live")).toBe(false);
+    expect(hasProjectLiveLink("https://example.com", "live")).toBe(true);
+  });
+});
+
+describe("portfolio data completeness", () => {
+  it("includes required project fields", () => {
+    projects.forEach((project) => {
+      expect(project.title).toBeTruthy();
       expect(project.description).toBeTruthy();
+      expect(project.tags.length).toBeGreaterThan(0);
     });
   });
 
-  it("resolves experience with role and description", () => {
-    const resolved = resolveExperience(experience, en.content.experience);
-
-    expect(resolved).toHaveLength(experience.length);
-    resolved.forEach((item) => {
+  it("includes required experience fields", () => {
+    experience.forEach((item) => {
       expect(item.role).toBeTruthy();
       expect(item.description).toBeTruthy();
     });
   });
 
-  it("resolves skill categories with names", () => {
-    const resolved = resolveSkillCategories(
-      skillCategories,
-      en.content.skills,
-    );
-
-    expect(resolved).toHaveLength(skillCategories.length);
-    resolved.forEach((category) => {
+  it("includes skill category names", () => {
+    skillCategories.forEach((category) => {
       expect(category.name).toBeTruthy();
+      expect(category.skills.length).toBeGreaterThan(0);
     });
-  });
-
-  it("throws when content entry is missing", () => {
-    const brokenContent = { ...en.content.projects };
-    delete (brokenContent as Record<string, unknown>)["enterprise-access-platform"];
-
-    expect(() => resolveProjects(projects, brokenContent)).toThrow(
-      /Missing project content/,
-    );
-  });
-});
-
-describe("i18n dictionary parity", () => {
-  function collectKeys(value: unknown, prefix = ""): string[] {
-    if (value === null || typeof value !== "object") {
-      return prefix ? [prefix] : [];
-    }
-
-    if (Array.isArray(value)) {
-      return value.flatMap((item, index) =>
-        collectKeys(item, `${prefix}[${index}]`),
-      );
-    }
-
-    return Object.keys(value).flatMap((key) => {
-      const nextPrefix = prefix ? `${prefix}.${key}` : key;
-      return collectKeys(
-        (value as Record<string, unknown>)[key],
-        nextPrefix,
-      );
-    });
-  }
-
-  it("en and es share the same dictionary structure", () => {
-    const enKeys = collectKeys(en).sort();
-    const esKeys = collectKeys(es).sort();
-
-    expect(esKeys).toEqual(enKeys);
   });
 });

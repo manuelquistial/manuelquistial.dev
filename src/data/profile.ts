@@ -1,5 +1,3 @@
-import type { Locale } from "@/i18n/config";
-
 export const profile = {
   name: "Manuel Alejandro Quistial Jurado",
   shortName: "Manuel Quistial",
@@ -9,18 +7,13 @@ export const profile = {
   email: "manuel.quistialj@gmail.com",
   linkedin: "https://www.linkedin.com/in/manuelquistial",
   github: "https://github.com/manuelquistial",
-  cv: {
-    en: "/cv/manuel-quistial-cv-en.pdf",
-    es: "/cv/manuel-quistial-cv-es.pdf",
-  },
+  cv: "/cv/manuel-quistial-cv-en.pdf",
 } as const;
 
-export function getCvUrl(locale: Locale): string {
-  return profile.cv[locale];
+export function getCvUrl(): string {
+  return profile.cv;
 }
 
-export function getCvDownloadName(locale: Locale): string {
-  return locale === "es"
-    ? "Manuel_Quistial_CV_es.pdf"
-    : "Manuel_Quistial_CV.pdf";
+export function getCvDownloadName(): string {
+  return "Manuel_Quistial_CV.pdf";
 }

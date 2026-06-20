@@ -1,19 +1,15 @@
-import type { Locale } from "@/i18n/config";
-import type { Dictionary } from "@/i18n/types";
+import type { SiteContent } from "@/content";
 import { Section } from "@/components/layout/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { ViewAllLink } from "@/components/ui/ViewAllLink";
-import { localizedPath } from "@/lib/utils";
 
 interface AboutPreviewProps {
-  locale: Locale;
-  content: Dictionary["about"];
+  content: SiteContent["about"];
   sectionLabel: string;
   viewAllLabel: string;
 }
 
 export function AboutPreview({
-  locale,
   content,
   sectionLabel,
   viewAllLabel,
@@ -32,9 +28,7 @@ export function AboutPreview({
               {paragraph}
             </p>
           ))}
-          <ViewAllLink href={localizedPath(locale, "/about")}>
-            {viewAllLabel}
-          </ViewAllLink>
+          <ViewAllLink href="/about">{viewAllLabel}</ViewAllLink>
         </div>
 
         <ul className="space-y-3">

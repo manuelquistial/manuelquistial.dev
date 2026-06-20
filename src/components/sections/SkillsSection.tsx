@@ -1,10 +1,10 @@
-import type { SkillCategoryWithCopy } from "@/lib/content";
+import type { SkillCategory } from "@/data/skills";
 import { Section } from "@/components/layout/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { SkillBadge } from "@/components/ui/SkillBadge";
 
 interface SkillsSectionProps {
-  categories: SkillCategoryWithCopy[];
+  categories: readonly SkillCategory[];
   sectionLabel: string;
 }
 

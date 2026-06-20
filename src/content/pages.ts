@@ -2,11 +2,12 @@ export const about = {
   title: "About",
   paragraphs: [
     "I am a software engineer from Colombia with nearly a decade of experience shipping production systems. At Anthology/Blackboard I work on enterprise edtech platforms — React and TypeScript frontends, Java and Spring Boot APIs, PostgreSQL, and CI/CD pipelines that serve institutions at scale.",
-    "In parallel, I pursue a master's in neuroengineering at Universidad de Antioquia, where I design EEG pipelines for motor imagery classification. I bring the same discipline to both worlds: clear architecture, reproducible workflows, and honest evaluation.",
+    "At Universidad de Antioquia I contribute to the FCF Digital Ecosystem — a multi-service institutional environment spanning legacy Laravel and Symfony applications, modern React and Next.js frontends, Python reporting services and centralized Keycloak authentication for faculty administrative workflows.",
+    "In parallel, I pursue a master's in neuroengineering at the same university, where I design EEG pipelines for motor imagery classification. I bring the same discipline to both worlds: clear architecture, reproducible workflows, and honest evaluation.",
   ],
   highlights: [
     "Enterprise React & TypeScript at Anthology/Blackboard",
-    "Java, Spring Boot & PostgreSQL backend services",
+    "Institutional multi-service systems at UdeA FCF",
     "EEG/BCI research — FBCSP, LDA, subject-disjoint ML",
   ],
 };
@@ -14,12 +15,14 @@ export const about = {
 export const aboutPage = {
   title: "About Me",
   intro:
-    "Manuel Alejandro Quistial Jurado — full-stack engineer building reliable enterprise software by day, and EEG-based machine learning pipelines for BCI research by night.",
+    "Manuel Alejandro Quistial Jurado — full-stack engineer building reliable enterprise and institutional software, and EEG-based machine learning pipelines for BCI research.",
   engineering: {
     title: "Software Engineering",
     paragraphs: [
       "At Anthology/Blackboard I contribute to enterprise learning platforms used by institutions worldwide. My day-to-day spans React and TypeScript interfaces, Java and Spring Boot microservices, PostgreSQL schemas, Keycloak-based auth, and automated testing in CI/CD pipelines.",
-      "Before that, I delivered full-stack features for clients as a freelancer — from WordPress integrations to custom APIs. Across roles, I prioritize maintainable frontend architecture, pragmatic API design, and code that teams can extend without friction.",
+      "At Universidad de Antioquia — Facultad de Comunicaciones y Filología — I work on the FCF Digital Ecosystem: legacy modernization, Laravel and Symfony applications, React and Next.js frontends, Python reporting services with FastAPI and Flask, Docker environments, validation scripts and centralized authentication with Keycloak/OIDC for classroom reservations, institutional requests, financial workflows and reporting.",
+      "On Babel Scores, I engineer a custom publishing and e-commerce platform with WooCommerce, React, Fabric.js, PDF.js, S3, WPML, custom plugins, async jobs, multivendor flows, Shibboleth and IP-based institutional login.",
+      "Delivered WordPress and Elementor Pro-based websites through Sal & Picciotto for corporate, healthcare, real estate, nonprofit and campaign-oriented clients, using Polylang, ACF, WordPress Code Snippets, custom CSS and JavaScript.",
     ],
   },
   research: {
@@ -32,11 +35,11 @@ export const aboutPage = {
   focus: {
     title: "Current Focus",
     items: [
+      "Institutional ecosystems — legacy modernization, Keycloak/OIDC, multi-service architecture",
       "Frontend architecture — React, TypeScript, Next.js, microfrontends",
-      "Backend systems — Java, Spring Boot, Python, FastAPI",
+      "Backend systems — Java, Spring Boot, Laravel, Python, FastAPI",
       "AI-assisted development and RAG-based knowledge tools",
       "EEG signal processing and BCI classification pipelines",
-      "Cloud deployment, Docker, GitHub Actions, and CI/CD",
     ],
   },
 };

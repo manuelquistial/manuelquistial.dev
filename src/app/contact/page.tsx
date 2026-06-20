@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { getDictionary } from "@/i18n/getDictionary";
-import { parseLocale } from "@/i18n/parseLocale";
+import { siteContent } from "@/content";
 import { profile, getCvDownloadName, getCvUrl } from "@/data/profile";
 import { buildPageMetadata } from "@/lib/metadata";
 import { getUrlHost, getUrlPath } from "@/lib/utils";
@@ -8,27 +7,14 @@ import { Section } from "@/components/layout/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { Button } from "@/components/ui/Button";
 
-interface ContactPageProps {
-  params: Promise<{ locale: string }>;
-}
+export const metadata: Metadata = buildPageMetadata({
+  title: siteContent.meta.pages.contact.title,
+  description: siteContent.meta.pages.contact.description,
+  path: "/contact",
+});
 
-export async function generateMetadata({
-  params,
-}: ContactPageProps): Promise<Metadata> {
-  const locale = parseLocale((await params).locale);
-  const { meta } = getDictionary(locale);
-
-  return buildPageMetadata(locale, {
-    title: meta.pages.contact.title,
-    description: meta.pages.contact.description,
-    path: "/contact",
-  });
-}
-
-export default async function ContactPage({ params }: ContactPageProps) {
-  const locale = parseLocale((await params).locale);
-  const dictionary = getDictionary(locale);
-  const { contactPage } = dictionary;
+export default function ContactPage() {
+  const { contactPage } = siteContent;
 
   const contactLinks = [
     {
@@ -82,10 +68,7 @@ export default async function ContactPage({ params }: ContactPageProps) {
             {contactPage.availability}
           </p>
           <div className="mt-6">
-            <Button
-              href={getCvUrl(locale)}
-              download={getCvDownloadName(locale)}
-            >
+            <Button href={getCvUrl()} download={getCvDownloadName()}>
               {contactPage.cv}
             </Button>
           </div>

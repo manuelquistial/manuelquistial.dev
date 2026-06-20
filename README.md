@@ -6,9 +6,9 @@ Professional portfolio of **Manuel Alejandro Quistial Jurado** — Software Engi
 
 ## About this project
 
-A statically generated, bilingual (EN/ES) portfolio built with Next.js App Router. It presents professional experience at Anthology/Blackboard, research at Universidad de Antioquia, technical skills, and selected projects — without a backend, CMS, or database.
+A statically generated English portfolio built with Next.js App Router. It presents professional experience at Anthology/Blackboard, research at Universidad de Antioquia, production WordPress work through Sal & Picciotto, and selected engineering projects — without a backend, CMS, or database.
 
-Structural data (IDs, tags, URLs, companies) lives in `src/data/`. All translatable copy lives in `src/i18n/dictionaries/`. Pages merge both via helpers in `src/lib/content.ts`.
+Structural data lives in `src/data/`. Site copy lives in `src/content/`.
 
 ## Stack
 
@@ -17,7 +17,6 @@ Structural data (IDs, tags, URLs, companies) lives in `src/data/`. All translata
 | Framework | Next.js 16 (App Router, SSG) |
 | Language | TypeScript |
 | Styling | Tailwind CSS v4 |
-| i18n | Custom dictionaries (EN / ES) |
 | Quality | ESLint, Vitest, GitHub Actions CI |
 | Tooling | pnpm, Node.js 24 (nvm) |
 | Hosting | Vercel |
@@ -36,7 +35,7 @@ pnpm install
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). Middleware redirects to `/en` or `/es` based on `Accept-Language` and stores preference in a `NEXT_LOCALE` cookie.
+Open [http://localhost:3000](http://localhost:3000).
 
 ### Scripts
 
@@ -50,17 +49,11 @@ Open [http://localhost:3000](http://localhost:3000). Middleware redirects to `/e
 | `pnpm test` | Vitest unit tests |
 | `pnpm validate` | typecheck + lint + test + build |
 
-`npm run build` also works if you prefer npm, but pnpm is the project default.
-
 ## Project structure
 
 ```
 src/
-├── app/
-│   ├── [locale]/              # Localized pages (en, es)
-│   ├── sitemap.ts
-│   ├── robots.ts
-│   └── opengraph-image.tsx
+├── app/                       # App Router pages
 ├── components/
 │   ├── layout/                # Header, Footer, Section, Container
 │   ├── sections/              # Home page sections
@@ -68,65 +61,49 @@ src/
 ├── config/
 │   ├── site.ts                # Site URL, static routes
 │   └── navigation.ts
+├── content/                   # English site copy
 ├── data/                      # Structural data only
-│   ├── profile.ts             # Contact, CV paths, tagline
-│   ├── projects.ts            # Project IDs, tags, status, URLs
-│   ├── experience.ts          # Experience IDs, companies
-│   └── skills.ts              # Skill categories and lists
-├── i18n/
-│   ├── dictionaries/en|es/    # UI copy, page content, labels
-│   ├── getDictionary.ts
-│   └── parseLocale.ts
-├── lib/
-│   ├── content.ts             # Merges data + i18n
-│   └── metadata.ts            # SEO helpers
-└── middleware.ts
+│   ├── profile.ts
+│   ├── projects.ts            # Projects by category
+│   ├── experience.ts
+│   └── skills.ts
+└── lib/
+    ├── metadata.ts
+    └── projects.ts
 public/
-└── cv/                        # Locale-specific CV PDFs
+└── cv/                        # CV PDF
 ```
 
 ## Customize content
 
 | File | What to edit |
 |------|--------------|
-| `src/data/profile.ts` | Name, email, LinkedIn, GitHub, CV paths, tagline |
-| `src/data/projects.ts` | Project IDs, tags, status, `githubUrl`, `liveUrl` |
-| `src/data/experience.ts` | Experience IDs, company names, `current` flag |
-| `src/data/skills.ts` | Skill categories and skill lists |
-| `src/i18n/dictionaries/en/` | English copy |
-| `src/i18n/dictionaries/es/` | Spanish copy |
-| `public/cv/*.pdf` | CV files (EN and ES) |
+| `src/data/profile.ts` | Name, email, LinkedIn, GitHub, CV path, tagline |
+| `src/data/projects.ts` | Project titles, categories, tags, status, URLs |
+| `src/data/experience.ts` | Roles, companies, descriptions, technologies |
+| `src/data/skills.ts` | Skill categories and lists |
+| `src/content/` | Page copy, section labels, intros |
 
-**Rule:** IDs in `src/data/` must match keys in `dictionary.content` for projects, experience, and skills.
+Project categories: `engineering`, `research`, `agency-web`.
 
 ## Deploy on Vercel
 
 1. Push the repository to GitHub.
 2. Import the project at [vercel.com](https://vercel.com).
-3. Framework preset: **Next.js** (auto-detected).
-4. Recommended settings:
+3. Recommended settings:
    - **Install Command:** `pnpm install`
    - **Build Command:** `pnpm build`
    - **Node.js Version:** 24.x
-5. Add custom domain `manuelquistial.dev` under Project Settings → Domains.
-6. Run `pnpm validate` locally before each release.
-
-## Pre-deploy checklist
-
-- [ ] Update CV PDFs in `public/cv/`
-- [ ] Verify email, LinkedIn, and GitHub in `profile.ts`
-- [ ] Add `githubUrl` / `liveUrl` to projects when available
-- [ ] Confirm `site.url` in `src/config/site.ts`
-- [ ] Run `pnpm validate`
+4. Add custom domain `manuelquistial.dev`.
+5. Run `pnpm validate` locally before each release.
 
 ## Next steps
 
-- Add GitHub and live demo URLs to projects as they become public
-- Publish a blog or case studies section for deep dives on enterprise and research work
-- Add project screenshots or diagrams to `public/projects/`
-- Set up Vercel Analytics or Plausible for privacy-friendly traffic insights
-- Connect a custom email alias (e.g. `hello@manuelquistial.dev`)
-- Expand Vitest coverage for component snapshots if the UI grows
+- Add GitHub and case study URLs to engineering projects when public
+- Publish PDC Colombia when the site goes live
+- Add project screenshots to `public/projects/`
+- Set up Vercel Analytics or Plausible for traffic insights
+- Expand Vitest coverage if the UI grows
 
 ## License
 

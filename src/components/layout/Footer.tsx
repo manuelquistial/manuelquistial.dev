@@ -1,18 +1,15 @@
 import Link from "next/link";
-import type { Locale } from "@/i18n/config";
-import type { Dictionary } from "@/i18n/types";
+import type { SiteContent } from "@/content";
 import { profile } from "@/data/profile";
 import { Container } from "@/components/layout/Container";
-import { localizedPath } from "@/lib/utils";
 
 interface FooterProps {
-  locale: Locale;
-  dictionary: Dictionary;
+  content: Pick<SiteContent, "footer" | "nav" | "contactPage">;
 }
 
-export function Footer({ locale, dictionary }: FooterProps) {
+export function Footer({ content }: FooterProps) {
   const year = new Date().getFullYear();
-  const { footer, nav } = dictionary;
+  const { footer, nav, contactPage } = content;
 
   return (
     <footer className="mt-auto border-t border-border bg-surface/80">
@@ -31,7 +28,7 @@ export function Footer({ locale, dictionary }: FooterProps) {
           <p className="text-xs text-muted">{footer.builtWith}</p>
           <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm">
             <Link
-              href={localizedPath(locale, "/contact")}
+              href="/contact"
               className="text-muted transition-colors hover:text-accent"
             >
               {nav.contact}
@@ -42,7 +39,7 @@ export function Footer({ locale, dictionary }: FooterProps) {
               rel="noopener noreferrer"
               className="text-muted transition-colors hover:text-accent"
             >
-              {dictionary.contactPage.github}
+              {contactPage.github}
             </a>
             <a
               href={profile.linkedin}
@@ -50,7 +47,7 @@ export function Footer({ locale, dictionary }: FooterProps) {
               rel="noopener noreferrer"
               className="text-muted transition-colors hover:text-accent"
             >
-              {dictionary.contactPage.linkedin}
+              {contactPage.linkedin}
             </a>
           </div>
         </div>

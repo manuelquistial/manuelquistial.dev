@@ -24,6 +24,11 @@
 .DS_Store
 *.pem
 
+# cursor — track project rules only
+.cursor/*
+!.cursor/rules/
+!.cursor/rules/**
+
 # debug
 npm-debug.log*
 yarn-debug.log*

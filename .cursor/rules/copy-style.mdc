@@ -1,0 +1,20 @@
+---
+description: Portfolio copy style constraints for public-facing text
+globs: src/content/**,src/data/**,README.md
+alwaysApply: false
+---
+
+# Portfolio copy style
+
+## No em dashes
+
+Never use the em dash character (`—`, U+2014) in public-facing copy: UI strings, page content, project titles, experience descriptions, case studies, metadata, or README prose.
+
+Use instead:
+- Commas for appositives and name-to-role introductions
+- Colons for titles with a subtitle segment (e.g. `Digital Ecosystem: Facultad de Comunicaciones y Filología, Universidad de Antioquia`)
+- Periods to split sentences
+
+Date ranges may use an en dash (`–`) between dates (e.g. `Nov 2021 – May 2026`).
+
+When editing copy, grep for `\u2014` or `—` before finishing.

@@ -6,6 +6,8 @@ import { buildPageMetadata } from "@/lib/metadata";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { SkipLink } from "@/components/layout/SkipLink";
+import { PersonJsonLd } from "@/components/seo/PersonJsonLd";
+import { SiteAnalytics } from "@/components/analytics/SiteAnalytics";
 import "./globals.css";
 
 const inter = Inter({
@@ -33,6 +35,8 @@ export default function RootLayout({
       <body
         className={`${inter.variable} min-h-full flex flex-col antialiased`}
       >
+        <PersonJsonLd />
+        <SiteAnalytics />
         <SkipLink label={siteContent.a11y.skipToContent} />
         <Header content={siteContent} />
         <main id="main-content" className="flex-1">

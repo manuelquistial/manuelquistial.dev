@@ -138,3 +138,12 @@ export type SkillCategory = {
   name: string;
   skills: readonly string[];
 };
+
+export function getSkillCategoriesByIds(
+  ids: readonly SkillCategoryId[],
+): SkillCategory[] {
+  return ids.flatMap((id) => {
+    const category = skillCategories.find((item) => item.id === id);
+    return category ? [category] : [];
+  });
+}

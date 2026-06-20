@@ -2,8 +2,12 @@ import { siteContent } from "@/content";
 import { experience } from "@/data/experience";
 import {
   getFeaturedProjects,
+  getProjectsByCategory,
 } from "@/data/projects";
-import { skillCategories } from "@/data/skills";
+import {
+  getSkillCategoriesByIds,
+  skillCategories,
+} from "@/data/skills";
 import { Hero } from "@/components/sections/Hero";
 import { AboutPreview } from "@/components/sections/AboutPreview";
 import { SkillsSection } from "@/components/sections/SkillsSection";
@@ -17,8 +21,11 @@ export default function HomePage() {
     (item) => item.title,
   );
 
-  const engineeringProjects = getFeaturedProjects("engineering", 4);
+  const engineeringProjects = getFeaturedProjects("engineering", 2);
+  const researchProjects = getProjectsByCategory("research").slice(0, 1);
   const agencyProjects = getFeaturedProjects("agency-web", 3);
+  const homeSkills = getSkillCategoriesByIds(siteContent.homeSkillCategoryIds);
+  const experiencePreview = experience.slice(0, 4);
 
   return (
     <>
@@ -27,10 +34,6 @@ export default function HomePage() {
         content={siteContent.about}
         sectionLabel={siteContent.sections.about}
         viewAllLabel={siteContent.sections.viewAll}
-      />
-      <SkillsSection
-        categories={skillCategories}
-        sectionLabel={siteContent.sections.skills}
       />
       <CategoryProjectsSection
         title={siteContent.sections.engineeringProjects}
@@ -49,6 +52,19 @@ export default function HomePage() {
         topics={researchTopics}
       />
       <CategoryProjectsSection
+        title={siteContent.sections.researchProjects}
+        projects={researchProjects}
+        viewAllHref="/projects"
+        viewAllLabel={siteContent.sections.viewAll}
+        projectCard={siteContent.projectCard}
+        projectStatus={siteContent.projectStatus}
+        variant="muted"
+      />
+      <SkillsSection
+        categories={homeSkills.length ? homeSkills : skillCategories}
+        sectionLabel={siteContent.sections.skills}
+      />
+      <CategoryProjectsSection
         title={siteContent.sections.agencyWebProjects}
         subtitle={siteContent.agencyWebProjectsIntro}
         projects={agencyProjects}
@@ -59,7 +75,7 @@ export default function HomePage() {
         variant="muted"
       />
       <ExperiencePreview
-        items={experience}
+        items={experiencePreview}
         sectionLabel={siteContent.sections.experience}
         viewAllLabel={siteContent.sections.viewAll}
         currentLabel={siteContent.experiencePreview.currentLabel}

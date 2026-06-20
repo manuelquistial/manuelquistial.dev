@@ -1,4 +1,3 @@
-import { udeaFcfCaseStudy } from "./case-studies/udea-fcf";
 import {
   a11y,
   agencyWebProjectsIntro,
@@ -6,6 +5,7 @@ import {
   experiencePreview,
   footer,
   hero,
+  homeSkillCategoryIds,
   meta,
   nav,
   notFound,
@@ -34,7 +34,7 @@ export const siteContent = {
   projectCard,
   projectCategories,
   footer,
-  udeaFcfCaseStudy,
+  homeSkillCategoryIds,
 };
 
 export type SiteContent = typeof siteContent;

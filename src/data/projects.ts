@@ -56,7 +56,7 @@ export const projects = [
     description:
       "Custom digital publishing and e-commerce platform combining WooCommerce, React tooling, Fabric.js score editing, PDF.js rendering, S3 asset storage, WPML multilingual support, custom plugins, async job processing, multivendor workflows, Shibboleth federation and IP-based institutional access.",
     longDescription:
-      "A complex WordPress and WooCommerce engineering project for contemporary music publishing — extending the platform with custom plugins, React-based tooling, canvas editing with Fabric.js, in-browser score preview with PDF.js, cloud storage on S3, multilingual content with WPML, asynchronous background jobs, multivendor commerce flows and federated login through Shibboleth alongside IP-based institutional access.",
+      "A complex WordPress and WooCommerce engineering project for contemporary music publishing: extending the platform with custom plugins, React-based tooling, canvas editing with Fabric.js, in-browser score preview with PDF.js, cloud storage on S3, multilingual content with WPML, asynchronous background jobs, multivendor commerce flows and federated login through Shibboleth alongside IP-based institutional access.",
     tags: [
       "WordPress",
       "WooCommerce",
@@ -73,13 +73,14 @@ export const projects = [
     ],
     status: "in-progress",
     featured: true,
+    caseStudyUrl: "/projects/babel-scores",
   },
   {
     id: "enterprise-access-platform",
     title: "Enterprise Access Platform",
     category: "engineering",
     description:
-      "Role-based access management for institutional users — React/TypeScript SPA, Spring Boot REST APIs, PostgreSQL, and Keycloak SSO. Designed for multi-tenant edtech deployments.",
+      "Role-based access management for institutional users: React/TypeScript SPA, Spring Boot REST APIs, PostgreSQL, and Keycloak SSO. Designed for multi-tenant edtech deployments.",
     tags: [
       "React",
       "TypeScript",
@@ -89,6 +90,7 @@ export const projects = [
       "Docker",
     ],
     status: "planned",
+    published: false,
   },
   {
     id: "microfrontend-learning-dashboard",
@@ -104,6 +106,7 @@ export const projects = [
       "Microfrontends",
     ],
     status: "planned",
+    published: false,
   },
   {
     id: "ai-knowledge-assistant",
@@ -113,6 +116,7 @@ export const projects = [
       "Document-grounded Q&A with FastAPI, RAG over institutional PDFs, PostgreSQL + pgvector embeddings, and Azure OpenAI. Built for internal knowledge retrieval at scale.",
     tags: ["Python", "FastAPI", "RAG", "PostgreSQL", "pgvector", "LLMs"],
     status: "planned",
+    published: false,
   },
   {
     id: "eeg-motor-imagery-pipeline",
@@ -260,7 +264,13 @@ export type Project = {
   githubUrl?: string;
   caseStudyUrl?: string;
   featured?: boolean;
+  published?: boolean;
+  thumbnailUrl?: string;
 };
+
+export function isPublishedProject(project: Project): boolean {
+  return project.published !== false;
+}
 
 function sortProjects(items: readonly Project[]): readonly Project[] {
   const featured = items.filter((project) => project.featured);
@@ -269,14 +279,26 @@ function sortProjects(items: readonly Project[]): readonly Project[] {
 }
 
 export function getProjectById(id: ProjectId): Project | undefined {
-  return projects.find((project) => project.id === id);
+  const project = projects.find((item) => item.id === id);
+  if (!project || !isPublishedProject(project)) {
+    return undefined;
+  }
+  return project;
+}
+
+export function getProjectBySlug(slug: string): Project | undefined {
+  return getProjectById(slug as ProjectId);
+}
+
+export function getPublishedProjects(): readonly Project[] {
+  return projects.filter(isPublishedProject);
 }
 
 export function getProjectsByCategory(
   category: ProjectCategory,
 ): readonly Project[] {
   return sortProjects(
-    projects.filter((project) => project.category === category),
+    getPublishedProjects().filter((project) => project.category === category),
   );
 }
 
@@ -285,4 +307,8 @@ export function getFeaturedProjects(
   limit = 3,
 ): readonly Project[] {
   return getProjectsByCategory(category).slice(0, limit);
+}
+
+export function getPublishedCaseStudyProjects(): readonly Project[] {
+  return getPublishedProjects().filter((project) => project.caseStudyUrl);
 }

@@ -52,7 +52,7 @@ export default function OgImage() {
             lineHeight: 1.4,
           }}
         >
-          Full-Stack · AI · Neuroengineering
+          Full-Stack | AI | Neuroengineering
         </div>
       </div>
     ),

@@ -4,12 +4,14 @@ export const experience = [
     company: "Anthology / Blackboard",
     role: "Software Engineer",
     description:
-      "Enterprise edtech at scale — React/TypeScript frontends, Java/Spring Boot services, PostgreSQL, Angular legacy modules, Jenkins/GitHub Actions CI, and Jest/JUnit test suites.",
+      "Enterprise edtech at scale: React/TypeScript frontends, Java/Spring Boot services, PostgreSQL, Angular legacy modules, Jenkins/GitHub Actions CI, and Jest/JUnit test suites.",
+    period: "2019 - Present",
+    location: "Remote",
     current: true,
   },
   {
     id: "udea-fcf",
-    company: "Universidad de Antioquia — Facultad de Comunicaciones y Filología",
+    company: "Universidad de Antioquia, Facultad de Comunicaciones y Filología",
     role: "Software Engineer",
     type: "Institutional Software Ecosystem",
     description:
@@ -29,6 +31,8 @@ export const experience = [
       "OIDC",
       "Docker",
     ],
+    period: "2023 - Present",
+    location: "Medellín, Colombia",
     current: true,
   },
   {
@@ -37,6 +41,8 @@ export const experience = [
     role: "Neuroengineering Researcher · Master's Student",
     description:
       "EEG motor imagery classification with FBCSP, LDA, and SVM. Subject-disjoint cross-validation, signal preprocessing with MNE, and reproducible Python research pipelines.",
+    period: "2022 - Present",
+    location: "Medellín, Colombia",
     current: true,
   },
   {
@@ -55,6 +61,8 @@ export const experience = [
       "Custom CSS",
       "JavaScript",
     ],
+    period: "2021 - Present",
+    location: "Remote",
   },
   {
     id: "freelance",
@@ -62,6 +70,8 @@ export const experience = [
     role: "Full-Stack Developer",
     description:
       "Custom web apps, WordPress sites, Laravel/PHP backends, and React frontends for small businesses and startups across Colombia.",
+    period: "2016 - 2020",
+    location: "Colombia",
   },
 ] as const;
 
@@ -74,5 +84,7 @@ export type Experience = {
   description: string;
   type?: string;
   technologies?: readonly string[];
+  period: string;
+  location?: string;
   current?: boolean;
 };

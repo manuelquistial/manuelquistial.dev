@@ -20,14 +20,16 @@ export function AboutPreview({
 
       <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:gap-12">
         <div className="space-y-4">
-          {content.paragraphs.map((paragraph, index) => (
-            <p
-              key={`about-preview-p-${index}`}
-              className="leading-relaxed text-muted"
-            >
-              {paragraph}
-            </p>
-          ))}
+          {(content.previewParagraphs ?? content.paragraphs).map(
+            (paragraph, index) => (
+              <p
+                key={`about-preview-p-${index}`}
+                className="leading-relaxed text-muted"
+              >
+                {paragraph}
+              </p>
+            ),
+          )}
           <ViewAllLink href="/about">{viewAllLabel}</ViewAllLink>
         </div>
 

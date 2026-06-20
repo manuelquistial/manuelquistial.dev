@@ -1,20 +1,26 @@
-export const udeaFcfCaseStudy = {
+import type { CaseStudyContent } from "./types";
+
+export const udeaFcfCaseStudy: CaseStudyContent = {
   title: "UDEA FCF Digital Ecosystem",
   subtitle:
     "Institutional software modernization for the Facultad de Comunicaciones y Filología at Universidad de Antioquia.",
   backLabel: "Back to projects",
+  architectureDiagram: {
+    src: "/projects/udea-fcf-architecture.svg",
+    alt: "Diagram of the UDEA FCF digital ecosystem showing legacy apps, modern APIs, frontends, reporting services, Keycloak authentication, and databases",
+  },
   overview: {
     title: "Institutional Context",
     paragraphs: [
       "The Facultad de Comunicaciones y Filología at Universidad de Antioquia operates multiple administrative, academic and financial processes that evolved over years of incremental development. Rather than a single application, the faculty relies on an interconnected ecosystem of services supporting classroom reservations, institutional requests, financial reconciliation, reporting and identity management.",
-      "The engineering challenge is not building one greenfield product — it is coordinating legacy modernization, shared authentication, consistent data workflows and new interfaces while keeping critical processes available to staff and students.",
+      "The engineering challenge is not building one greenfield product: it is coordinating legacy modernization, shared authentication, consistent data workflows and new interfaces while keeping critical processes available to staff and students.",
     ],
   },
   legacy: {
     title: "Legacy Systems",
     paragraphs: [
       "Several production systems were built on older Laravel and Symfony codebases with long-lived business rules, custom database schemas and tightly coupled UI flows. These applications remain essential for day-to-day faculty operations and cannot be replaced overnight.",
-      "Work on the legacy layer focuses on stabilizing behavior, improving maintainability, documenting critical paths and preparing modules for gradual extraction into APIs or modern frontends — without disrupting institutional users.",
+      "Work on the legacy layer focuses on stabilizing behavior, improving maintainability, documenting critical paths and preparing modules for gradual extraction into APIs or modern frontends, without disrupting institutional users.",
     ],
     items: [
       "Laravel applications with established administrative workflows",
@@ -27,7 +33,7 @@ export const udeaFcfCaseStudy = {
     title: "Modern Systems",
     paragraphs: [
       "Newer components introduce clearer separation between frontend and backend, typed interfaces and containerized development environments. React and Next.js applications consume Laravel APIs, while Python services handle specialized reporting workloads.",
-      "The modern layer is designed to grow alongside legacy systems — sharing authentication, reusing validated data models where possible and exposing capabilities through documented APIs rather than monolithic screens.",
+      "The modern layer is designed to grow alongside legacy systems, sharing authentication, reusing validated data models where possible and exposing capabilities through documented APIs rather than monolithic screens.",
     ],
     items: [
       "React and Next.js frontends for administrative interfaces",
@@ -41,7 +47,7 @@ export const udeaFcfCaseStudy = {
     title: "Centralized Authentication with Keycloak",
     paragraphs: [
       "Identity management is centralized through Keycloak with OIDC, allowing multiple applications to share a single sign-on experience without duplicating user stores or session logic in every codebase.",
-      "Integration work spans legacy PHP applications, modern JavaScript frontends and service-to-service flows — with careful attention to token lifecycles, role mapping and federated access patterns appropriate for an institutional environment.",
+      "Integration work spans legacy PHP applications, modern JavaScript frontends and service-to-service flows, with careful attention to token lifecycles, role mapping and federated access patterns appropriate for an institutional environment.",
     ],
     items: [
       "Keycloak realm configuration and OIDC client integration",
@@ -54,7 +60,7 @@ export const udeaFcfCaseStudy = {
     title: "Reporting Services",
     paragraphs: [
       "Faculty operations generate structured and semi-structured data that must be exported, reconciled and reviewed by administrative teams. Python reporting services handle Excel generation, data aggregation and asynchronous processing without blocking interactive applications.",
-      "Reporting pipelines emphasize traceable transformations, validation scripts and repeatable outputs — treating reports as production artifacts, not ad hoc scripts.",
+      "Reporting pipelines emphasize traceable transformations, validation scripts and repeatable outputs, treating reports as production artifacts, not ad hoc scripts.",
     ],
     items: [
       "FastAPI and Flask endpoints for report generation",
@@ -67,7 +73,7 @@ export const udeaFcfCaseStudy = {
     title: "Progressive Modernization",
     paragraphs: [
       "The ecosystem is modernized incrementally: identify bounded modules, expose them through APIs, replace UI surfaces one at a time and validate each step before moving dependencies. This reduces risk compared to a full rewrite while still moving toward maintainable architecture.",
-      "Documentation, validation scripts and Docker environments support teams working across PHP, Python and TypeScript — making onboarding and regression checks part of the standard workflow.",
+      "Documentation, validation scripts and Docker environments support teams working across PHP, Python and TypeScript, making onboarding and regression checks part of the standard workflow.",
     ],
     items: [
       "Strangler-fig approach to legacy replacement",

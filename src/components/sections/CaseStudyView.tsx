@@ -1,35 +1,13 @@
-import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
-import { siteContent } from "@/content";
-import { getProjectById } from "@/data/projects";
-import { buildPageMetadata } from "@/lib/metadata";
+import type { CaseStudyContent } from "@/content/case-studies";
+import { getCaseStudySections } from "@/content/case-studies";
+import type { Project } from "@/data/projects";
+import type { SiteContent } from "@/content";
 import { getProjectStatusLabel } from "@/lib/projects";
 import { Section } from "@/components/layout/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { SkillBadge } from "@/components/ui/SkillBadge";
 import { ViewAllLink } from "@/components/ui/ViewAllLink";
-
-const PROJECT_ID = "udea-fcf-digital-ecosystem" as const;
-
-export function generateMetadata(): Metadata {
-  const project = getProjectById(PROJECT_ID);
-  const { udeaFcfCaseStudy } = siteContent;
-
-  if (!project) {
-    return buildPageMetadata({
-      title: udeaFcfCaseStudy.title,
-      description: udeaFcfCaseStudy.subtitle,
-      path: "/projects/udea-fcf-digital-ecosystem",
-    });
-  }
-
-  return buildPageMetadata({
-    title: `${project.title} — Case Study`,
-    description: project.description,
-    path: "/projects/udea-fcf-digital-ecosystem",
-  });
-}
 
 function CaseStudyBlock({
   title,
@@ -71,18 +49,19 @@ function CaseStudyBlock({
   );
 }
 
-export default function UdeaFcfCaseStudyPage() {
-  const project = getProjectById(PROJECT_ID);
-  const caseStudy = siteContent.udeaFcfCaseStudy;
+interface CaseStudyViewProps {
+  project: Project;
+  caseStudy: CaseStudyContent;
+  projectStatus: SiteContent["projectStatus"];
+}
 
-  if (!project) {
-    notFound();
-  }
-
-  const statusLabel = getProjectStatusLabel(
-    project.status,
-    siteContent.projectStatus,
-  );
+export function CaseStudyView({
+  project,
+  caseStudy,
+  projectStatus,
+}: CaseStudyViewProps) {
+  const statusLabel = getProjectStatusLabel(project.status, projectStatus);
+  const sections = getCaseStudySections(caseStudy);
 
   return (
     <Section containerClassName="py-16 sm:py-20 lg:py-24">
@@ -116,44 +95,25 @@ export default function UdeaFcfCaseStudyPage() {
         ))}
       </div>
 
+      {caseStudy.architectureDiagram ? (
+        <figure className="card-surface mb-10 overflow-hidden p-4 sm:p-6">
+          <img
+            src={caseStudy.architectureDiagram.src}
+            alt={caseStudy.architectureDiagram.alt}
+            className="w-full rounded-lg"
+          />
+        </figure>
+      ) : null}
+
       <div className="space-y-8">
-        <CaseStudyBlock
-          title={caseStudy.overview.title}
-          paragraphs={caseStudy.overview.paragraphs}
-        />
-        <CaseStudyBlock
-          title={caseStudy.legacy.title}
-          paragraphs={caseStudy.legacy.paragraphs}
-          items={caseStudy.legacy.items}
-        />
-        <CaseStudyBlock
-          title={caseStudy.modern.title}
-          paragraphs={caseStudy.modern.paragraphs}
-          items={caseStudy.modern.items}
-        />
-        <CaseStudyBlock
-          title={caseStudy.authentication.title}
-          paragraphs={caseStudy.authentication.paragraphs}
-          items={caseStudy.authentication.items}
-        />
-        <CaseStudyBlock
-          title={caseStudy.reporting.title}
-          paragraphs={caseStudy.reporting.paragraphs}
-          items={caseStudy.reporting.items}
-        />
-        <CaseStudyBlock
-          title={caseStudy.modernization.title}
-          paragraphs={caseStudy.modernization.paragraphs}
-          items={caseStudy.modernization.items}
-        />
-        <CaseStudyBlock
-          title={caseStudy.responsibilities.title}
-          items={caseStudy.responsibilities.items}
-        />
-        <CaseStudyBlock
-          title={caseStudy.learnings.title}
-          items={caseStudy.learnings.items}
-        />
+        {sections.map(({ key, section }) => (
+          <CaseStudyBlock
+            key={key}
+            title={section.title}
+            paragraphs={section.paragraphs}
+            items={section.items}
+          />
+        ))}
       </div>
 
       <div className="mt-12">

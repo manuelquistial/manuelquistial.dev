@@ -25,7 +25,7 @@ export default function ContactPage() {
     },
     {
       label: contactPage.linkedin,
-      value: getUrlHost(profile.linkedin),
+      value: profile.linkedin,
       href: profile.linkedin,
       external: true,
     },
@@ -52,7 +52,7 @@ export default function ContactPage() {
                 href={link.href}
                 target={link.external ? "_blank" : undefined}
                 rel={link.external ? "noopener noreferrer" : undefined}
-                className="mt-2 inline-block text-base font-medium text-accent transition-colors hover:text-accent-hover"
+                className="mt-2 inline-block break-all text-base font-medium text-accent transition-colors hover:text-accent-hover"
               >
                 {link.value}
               </a>

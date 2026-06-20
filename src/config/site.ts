@@ -10,7 +10,6 @@ export const staticRoutes = [
   "",
   "/about",
   "/projects",
-  "/projects/udea-fcf-digital-ecosystem",
   "/research",
   "/contact",
 ] as const;

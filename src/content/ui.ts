@@ -1,7 +1,7 @@
 export const meta = {
-  title: "Manuel Quistial — Software Engineer",
+  title: "Manuel Quistial | Software Engineer",
   description:
-    "Full-stack software engineer at Anthology/Blackboard. React, TypeScript, Java, Spring Boot, PostgreSQL, applied ML, and EEG/BCI research at Universidad de Antioquia.",
+    "Full-stack software engineer at Anthology/Blackboard, institutional systems at UdeA FCF, publishing platform engineering on Babel Scores, and EEG/BCI research at Universidad de Antioquia.",
     pages: {
     about: {
       title: "About",
@@ -43,9 +43,9 @@ export const a11y = {
 export const hero = {
   title: "Software Engineer | Full-Stack, AI & Neuroengineering",
   subtitle:
-    "I ship enterprise web platforms at Anthology/Blackboard and build EEG-based machine learning pipelines for brain–computer interface research.",
+    "Enterprise platforms at Anthology/Blackboard, the UdeA FCF institutional ecosystem, Babel Scores publishing engineering, and EEG-based BCI research at Universidad de Antioquia.",
   secondary:
-    "Nearly ten years across React, TypeScript, Java, Spring Boot, and PostgreSQL — from frontend architecture and CI/CD to applied ML with FBCSP, LDA, and rigorous subject-disjoint evaluation.",
+    "Nearly ten years across React, TypeScript, Java, Spring Boot, Laravel, WordPress, Keycloak, and Python: from legacy modernization and CI/CD to applied ML with FBCSP, LDA, and subject-disjoint evaluation.",
   viewProjects: "View Projects",
   downloadCv: "Download CV",
   linkedin: "LinkedIn",
@@ -111,3 +111,14 @@ export const projectCategories = {
   research: "Research Projects",
   "agency-web": "Agency Web Projects",
 } as const;
+
+export const homeSkillCategoryIds = [
+  "frontend",
+  "backend",
+  "authentication-iam",
+  "data-reporting",
+  "ai-ml",
+  "research",
+  "cloud-devops",
+  "cms-web-platforms",
+] as const;

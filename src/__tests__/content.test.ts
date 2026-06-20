@@ -1,18 +1,23 @@
 import { describe, expect, it } from "vitest";
-import { projects } from "@/data/projects";
-import { experience } from "@/data/experience";
-import { skillCategories } from "@/data/skills";
+import { caseStudies } from "@/content/case-studies";
 import {
   getFeaturedProjects,
   getProjectsByCategory,
+  getPublishedProjects,
+  isPublishedProject,
+  projects,
 } from "@/data/projects";
+import { experience } from "@/data/experience";
+import { skillCategories } from "@/data/skills";
 import { getProjectStatusLabel, hasProjectLiveLink } from "@/lib/projects";
 import { siteContent } from "@/content";
 
 describe("project data helpers", () => {
-  it("returns projects grouped by category", () => {
+  it("returns published projects grouped by category", () => {
     const engineering = getProjectsByCategory("engineering");
     const agency = getProjectsByCategory("agency-web");
+    const research = getProjectsByCategory("research");
+    const publishedCount = getPublishedProjects().length;
 
     expect(engineering.every((project) => project.category === "engineering")).toBe(
       true,
@@ -20,9 +25,23 @@ describe("project data helpers", () => {
     expect(agency.every((project) => project.category === "agency-web")).toBe(
       true,
     );
-    expect(projects.length).toBe(
-      engineering.length + agency.length + getProjectsByCategory("research").length,
-    );
+    expect(publishedCount).toBe(engineering.length + agency.length + research.length);
+  });
+
+  it("hides planned engineering projects from public helpers", () => {
+    const engineering = getProjectsByCategory("engineering");
+    const plannedIds = [
+      "enterprise-access-platform",
+      "microfrontend-learning-dashboard",
+      "ai-knowledge-assistant",
+    ] as const;
+
+    plannedIds.forEach((id) => {
+      expect(engineering.some((project) => project.id === id)).toBe(false);
+      expect(isPublishedProject(projects.find((project) => project.id === id)!)).toBe(
+        false,
+      );
+    });
   });
 
   it("returns featured engineering projects with UDEA FCF first", () => {
@@ -33,6 +52,7 @@ describe("project data helpers", () => {
     expect(featured.every((project) => project.category === "engineering")).toBe(
       true,
     );
+    expect(featured.length).toBe(2);
   });
 
   it("returns featured agency projects for the home preview", () => {
@@ -69,8 +89,9 @@ describe("portfolio data completeness", () => {
     });
   });
 
-  it("includes required experience fields", () => {
+  it("includes period on every experience entry", () => {
     experience.forEach((item) => {
+      expect(item.period).toBeTruthy();
       expect(item.role).toBeTruthy();
       expect(item.description).toBeTruthy();
     });
@@ -81,5 +102,13 @@ describe("portfolio data completeness", () => {
       expect(category.name).toBeTruthy();
       expect(category.skills.length).toBeGreaterThan(0);
     });
+  });
+
+  it("keeps case study registry aligned with published case study URLs", () => {
+    getProjectsByCategory("engineering")
+      .filter((project) => project.caseStudyUrl)
+      .forEach((project) => {
+        expect(caseStudies[project.id as keyof typeof caseStudies]).toBeDefined();
+      });
   });
 });

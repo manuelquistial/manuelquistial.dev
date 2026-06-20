@@ -21,6 +21,10 @@ export function ExperienceCard({
             {item.company}
           </h3>
           <p className="mt-1.5 text-sm font-medium text-accent">{item.role}</p>
+          <p className="mt-1 text-xs text-muted">
+            {item.period}
+            {item.location ? ` · ${item.location}` : ""}
+          </p>
           {item.type ? (
             <p className="mt-1 text-xs text-muted">{item.type}</p>
           ) : null}

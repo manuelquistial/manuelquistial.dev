@@ -1,7 +1,7 @@
-import Link from "next/link";
 import type { Locale } from "@/i18n/config";
-import { Container } from "@/components/layout/Container";
+import { Section } from "@/components/layout/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
+import { ViewAllLink } from "@/components/ui/ViewAllLink";
 import { localizedPath } from "@/lib/utils";
 
 interface ResearchPreviewProps {
@@ -24,34 +24,31 @@ export function ResearchPreview({
   topics,
 }: ResearchPreviewProps) {
   return (
-    <section className="bg-surface/40">
-      <Container className="py-16 sm:py-20">
-        <SectionTitle title={sectionLabel} subtitle={tagline} />
+    <Section>
+      <SectionTitle title={sectionLabel} subtitle={tagline} />
 
-        <div className="grid gap-6 lg:grid-cols-[1.2fr_1fr]">
-          <div>
-            <h3 className="text-xl font-semibold text-foreground">{title}</h3>
-            <p className="mt-4 leading-relaxed text-muted">{overview}</p>
-            <Link
-              href={localizedPath(locale, "/research")}
-              className="mt-6 inline-flex text-sm font-medium text-accent transition-colors hover:text-accent-hover"
-            >
-              {viewAllLabel} →
-            </Link>
+      <div className="grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:gap-12">
+        <div>
+          <h3 className="text-xl font-semibold text-foreground">{title}</h3>
+          <p className="mt-4 leading-relaxed text-muted">{overview}</p>
+          <div className="mt-8">
+            <ViewAllLink href={localizedPath(locale, "/research")}>
+              {viewAllLabel}
+            </ViewAllLink>
           </div>
-
-          <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-1">
-            {topics.map((topic) => (
-              <li
-                key={topic}
-                className="rounded-lg border border-border bg-surface px-4 py-3 text-sm text-foreground"
-              >
-                {topic}
-              </li>
-            ))}
-          </ul>
         </div>
-      </Container>
-    </section>
+
+        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+          {topics.map((topic) => (
+            <li
+              key={topic}
+              className="card-surface border-l-2 border-l-accent/40 px-4 py-3.5 text-sm text-foreground"
+            >
+              {topic}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </Section>
   );
 }

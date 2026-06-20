@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { getDictionary } from "@/i18n/getDictionary";
 import { parseLocale } from "@/i18n/parseLocale";
-import { profile } from "@/data/profile";
+import { profile, getCvDownloadName, getCvUrl } from "@/data/profile";
 import { buildPageMetadata } from "@/lib/metadata";
 import { getUrlHost, getUrlPath } from "@/lib/utils";
-import { Container } from "@/components/layout/Container";
+import { Section } from "@/components/layout/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { Button } from "@/components/ui/Button";
 
@@ -28,7 +28,7 @@ export async function generateMetadata({
 export default async function ContactPage({ params }: ContactPageProps) {
   const locale = parseLocale((await params).locale);
   const dictionary = getDictionary(locale);
-  const { contactPage, projectCard } = dictionary;
+  const { contactPage } = dictionary;
 
   const contactLinks = [
     {
@@ -52,17 +52,14 @@ export default async function ContactPage({ params }: ContactPageProps) {
   ];
 
   return (
-    <Container as="section" className="py-16 sm:py-20">
+    <Section>
       <SectionTitle title={contactPage.title} subtitle={contactPage.subtitle} />
 
-      <div className="grid gap-6 lg:grid-cols-[1.2fr_1fr]">
+      <div className="grid gap-6 lg:grid-cols-[1.2fr_1fr] lg:gap-8">
         <div className="space-y-4">
           {contactLinks.map((link) => (
-            <div
-              key={link.label}
-              className="rounded-xl border border-border bg-surface p-5"
-            >
-              <p className="text-xs font-medium uppercase tracking-wide text-muted">
+            <div key={link.label} className="card-surface p-5 sm:p-6">
+              <p className="text-xs font-semibold uppercase tracking-[0.15em] text-muted">
                 {link.label}
               </p>
               <a
@@ -77,25 +74,23 @@ export default async function ContactPage({ params }: ContactPageProps) {
           ))}
         </div>
 
-        <div className="rounded-xl border border-border bg-surface p-6">
+        <div className="card-surface p-6 sm:p-8">
           <h2 className="text-lg font-semibold text-foreground">
             {contactPage.cv}
           </h2>
-          <p className="mt-3 text-sm leading-relaxed text-muted">
+          <p className="mt-4 text-sm leading-relaxed text-muted">
             {contactPage.availability}
           </p>
           <div className="mt-6">
             <Button
-              href={profile.cvUrl || undefined}
-              external={profile.cvUrl.startsWith("http")}
-              disabled={!profile.cvUrl}
-              disabledTitle={projectCard.unavailable}
+              href={getCvUrl(locale)}
+              download={getCvDownloadName(locale)}
             >
               {contactPage.cv}
             </Button>
           </div>
         </div>
       </div>
-    </Container>
+    </Section>
   );
 }

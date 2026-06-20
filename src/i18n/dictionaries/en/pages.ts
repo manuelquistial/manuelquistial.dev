@@ -1,42 +1,42 @@
 export const about = {
   title: "About",
   paragraphs: [
-    "I am a software engineer from Colombia with nearly a decade of experience building and maintaining production systems across the full stack. My work spans enterprise web platforms, API design, frontend architecture, and applied research in brain–computer interfaces.",
-    "I combine strong engineering fundamentals with a growing focus on AI-assisted development, backend systems, and machine learning pipelines grounded in real research problems.",
+    "I am a software engineer from Colombia with nearly a decade of experience shipping production systems. At Anthology/Blackboard I work on enterprise edtech platforms — React and TypeScript frontends, Java and Spring Boot APIs, PostgreSQL, and CI/CD pipelines that serve institutions at scale.",
+    "In parallel, I pursue a master's in neuroengineering at Universidad de Antioquia, where I design EEG pipelines for motor imagery classification. I bring the same discipline to both worlds: clear architecture, reproducible workflows, and honest evaluation.",
   ],
   highlights: [
-    "Enterprise React & TypeScript frontends",
-    "Java & Spring Boot backend services",
-    "Applied ML & EEG/BCI research",
+    "Enterprise React & TypeScript at Anthology/Blackboard",
+    "Java, Spring Boot & PostgreSQL backend services",
+    "EEG/BCI research — FBCSP, LDA, subject-disjoint ML",
   ],
 };
 
 export const aboutPage = {
   title: "About Me",
   intro:
-    "I am Manuel Alejandro Quistial Jurado, a software engineer focused on building reliable software systems and exploring how intelligent tools can extend human capability.",
+    "Manuel Alejandro Quistial Jurado — full-stack engineer building reliable enterprise software by day, and EEG-based machine learning pipelines for BCI research by night.",
   engineering: {
     title: "Software Engineering",
     paragraphs: [
-      "Over the past ten years, I have worked primarily as a full-stack engineer on enterprise applications. I have delivered features end to end — from React and TypeScript interfaces to Java and Spring Boot services backed by PostgreSQL.",
-      "My experience includes CI/CD pipelines, automated testing, API design, and collaboration across product and engineering teams. I care about maintainable code, clear architecture, and systems that scale without unnecessary complexity.",
+      "At Anthology/Blackboard I contribute to enterprise learning platforms used by institutions worldwide. My day-to-day spans React and TypeScript interfaces, Java and Spring Boot microservices, PostgreSQL schemas, Keycloak-based auth, and automated testing in CI/CD pipelines.",
+      "Before that, I delivered full-stack features for clients as a freelancer — from WordPress integrations to custom APIs. Across roles, I prioritize maintainable frontend architecture, pragmatic API design, and code that teams can extend without friction.",
     ],
   },
   research: {
     title: "Neuroengineering & Research",
     paragraphs: [
-      "I am currently pursuing a master's degree related to neuroengineering and brain–computer interfaces. My research focuses on EEG-based motor imagery classification, signal processing, and rigorous machine learning evaluation.",
-      "This work connects software engineering with applied science: designing reproducible pipelines, evaluating models with subject-disjoint protocols, and interpreting results with scientific discipline.",
+      "As a master's student at Universidad de Antioquia, I research EEG-based motor imagery classification — decoding imagined hand movements from scalp recordings. My pipeline applies band-pass filtering, FBCSP feature extraction, and classifiers such as LDA and SVM.",
+      "Evaluation follows subject-disjoint cross-validation so results reflect generalization across participants, not within-subject overfitting. I treat research code like production software: versioned experiments, traceable preprocessing, and reproducible notebooks.",
     ],
   },
   focus: {
     title: "Current Focus",
     items: [
-      "Frontend architecture with React, TypeScript, and Next.js",
-      "Backend systems with Java, Spring Boot, and Python",
-      "AI-assisted development and LLM-powered tools",
-      "EEG signal processing and BCI research pipelines",
-      "Cloud deployment, CI/CD, and production reliability",
+      "Frontend architecture — React, TypeScript, Next.js, microfrontends",
+      "Backend systems — Java, Spring Boot, Python, FastAPI",
+      "AI-assisted development and RAG-based knowledge tools",
+      "EEG signal processing and BCI classification pipelines",
+      "Cloud deployment, Docker, GitHub Actions, and CI/CD",
     ],
   },
 };
@@ -44,14 +44,14 @@ export const aboutPage = {
 export const researchPage = {
   title: "Research",
   subtitle:
-    "Applied machine learning and neuroengineering focused on EEG-based brain–computer interfaces.",
+    "EEG-based motor imagery classification at Universidad de Antioquia — bridging signal processing, classical ML, and software engineering.",
   previewTagline:
-    "Exploring motor imagery classification, signal processing, and rigorous ML evaluation for BCI systems.",
+    "Motor imagery decoding, FBCSP feature extraction, and subject-disjoint evaluation for non-invasive BCI systems.",
   overview: {
     title: "Overview",
     paragraphs: [
-      "My master's research explores motor imagery classification from EEG signals — a foundational problem in non-invasive brain–computer interface systems. The goal is to build reproducible pipelines that translate noisy physiological data into reliable, interpretable models.",
-      "This work sits at the intersection of signal processing, classical machine learning, and software engineering. I approach research with the same rigor I apply to production systems: clear data flows, versioned experiments, and honest evaluation.",
+      "My master's research tackles motor imagery classification from EEG — distinguishing imagined left-hand vs. right-hand movements from noisy scalp recordings. This is a foundational building block for non-invasive brain–computer interfaces that could assist motor rehabilitation or device control.",
+      "The work combines MNE-based preprocessing, Filter Bank Common Spatial Patterns (FBCSP), and linear classifiers evaluated with leave-one-subject-out cross-validation. I document every step so experiments can be reproduced and compared fairly.",
     ],
   },
   topics: {
@@ -60,41 +60,41 @@ export const researchPage = {
       {
         title: "Motor Imagery Classification",
         description:
-          "Decoding imagined hand or limb movements from EEG recordings to support BCI applications.",
+          "Binary and multi-class decoding of imagined limb movements from multi-channel EEG recordings.",
       },
       {
-        title: "Feature Extraction",
+        title: "FBCSP Feature Extraction",
         description:
-          "Applying FBCSP, CSP, and related spatial filtering techniques to improve signal discriminability.",
+          "Spatial filtering across frequency bands to maximize class separability before classification.",
       },
       {
-        title: "Model Evaluation",
+        title: "Subject-Disjoint Evaluation",
         description:
-          "Subject-disjoint cross-validation, confusion matrices, and performance analysis across participants.",
+          "Leave-one-subject-out cross-validation, confusion matrices, and per-participant performance analysis.",
       },
       {
         title: "Reproducible Pipelines",
         description:
-          "End-to-end workflows from raw EEG data to trained classifiers with traceable preprocessing steps.",
+          "Python workflows from raw .edf files to trained models with versioned preprocessing and logging.",
       },
     ],
   },
   methods: {
     title: "Methods & Tools",
     items: [
-      "EEG signal acquisition and preprocessing",
-      "FBCSP and CSP feature extraction",
-      "LDA, SVM, and clustering classifiers",
-      "scikit-learn, pandas, and NumPy",
-      "Cross-subject validation protocols",
-      "Statistical analysis of classification results",
+      "EEG acquisition and band-pass / notch filtering",
+      "FBCSP and CSP spatial feature extraction",
+      "LDA, SVM, and k-means clustering classifiers",
+      "scikit-learn, pandas, NumPy, and MNE-Python",
+      "Leave-one-subject-out cross-validation",
+      "Confusion matrices and statistical performance reporting",
     ],
   },
   goals: {
     title: "Research Goals",
     paragraphs: [
-      "I aim to contribute practical, well-evaluated approaches to EEG-based BCI research while maintaining scientific transparency. Short-term goals include refining motor imagery pipelines and comparing feature extraction strategies under consistent evaluation protocols.",
-      "Longer term, I am interested in bridging research prototypes with software systems that make neurotechnology more accessible, interpretable, and useful in real-world contexts.",
+      "Short term: refine the motor imagery pipeline, compare FBCSP configurations, and publish reproducible benchmarks under consistent evaluation protocols.",
+      "Long term: connect research prototypes with production-grade software that makes neurotechnology more accessible — interpretable models, clean APIs, and tools researchers can actually deploy.",
     ],
   },
 };
@@ -102,11 +102,11 @@ export const researchPage = {
 export const contactPage = {
   title: "Contact",
   subtitle:
-    "Open to senior engineering roles, research collaborations, and technically challenging projects.",
+    "Open to senior full-stack engineering roles, AI/ML collaborations, and neuroengineering research partnerships.",
   email: "Email",
   linkedin: "LinkedIn",
   github: "GitHub",
   cv: "Download CV",
   availability:
-    "Based in Colombia. Available for remote and hybrid opportunities across time zones.",
+    "Based in Colombia (COT). Available for remote and hybrid opportunities across time zones.",
 };

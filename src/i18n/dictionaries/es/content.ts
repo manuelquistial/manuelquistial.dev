@@ -7,39 +7,39 @@ export const content = {
     "enterprise-access-platform": {
       name: "Plataforma de Acceso Empresarial",
       description:
-        "Aplicación empresarial full-stack con React, TypeScript, Spring Boot, PostgreSQL y Keycloak.",
+        "Gestión de acceso basada en roles para usuarios institucionales — SPA React/TypeScript, APIs REST Spring Boot, PostgreSQL y SSO con Keycloak. Diseñada para despliegues edtech multi-tenant.",
     },
     "microfrontend-learning-dashboard": {
       name: "Dashboard de Aprendizaje con Microfrontends",
       description:
-        "Arquitectura frontend modular con React, TypeScript, Vite, Module Federation y paquetes UI compartidos.",
+        "UI modular de analítica de aprendizaje con Vite, Module Federation y paquetes compartidos de design system. Permite despliegues independientes por equipo sin romper el shell host.",
     },
     "ai-knowledge-assistant": {
       name: "Asistente de Conocimiento con IA",
       description:
-        "Asistente de IA basado en documentos con FastAPI, RAG, PostgreSQL, pgvector y LLMs.",
+        "Q&A basado en documentos con FastAPI, RAG sobre PDFs institucionales, embeddings PostgreSQL + pgvector y Azure OpenAI. Construido para recuperación de conocimiento interno a escala.",
     },
     "eeg-motor-imagery-pipeline": {
       name: "Pipeline de Imaginación Motora EEG",
       description:
-        "Pipeline de machine learning para clasificación de imaginación motora basada en EEG usando FBCSP, LDA, SVM y evaluación subject-disjoint.",
+        "Pipeline de investigación BCI de extremo a extremo: preprocesamiento MNE, características FBCSP, clasificadores LDA/SVM y evaluación leave-one-subject-out en datasets de imaginación motora.",
     },
   } satisfies Record<ProjectId, { name: string; description: string }>,
   experience: {
     "anthology-blackboard": {
-      role: "Ingeniero de Software / Full-Stack Engineer",
+      role: "Ingeniero de Software",
       description:
-        "Desarrollo de software empresarial con React, TypeScript, Java, Spring Boot, PostgreSQL, Angular, CI/CD y pruebas automatizadas.",
+        "Edtech empresarial a escala — frontends React/TypeScript, servicios Java/Spring Boot, PostgreSQL, módulos legacy Angular, CI con Jenkins/GitHub Actions y suites de pruebas Jest/JUnit.",
     },
     "universidad-antioquia-research": {
-      role: "Investigador en Neuroingeniería / Estudiante de Maestría",
+      role: "Investigador en Neuroingeniería · Estudiante de Maestría",
       description:
-        "Clasificación de imaginación motora basada en EEG, investigación BCI, pipelines de machine learning y procesamiento de señales.",
+        "Clasificación de imaginación motora EEG con FBCSP, LDA y SVM. Validación cruzada subject-disjoint, preprocesamiento de señales con MNE y pipelines de investigación reproducibles en Python.",
     },
     freelance: {
       role: "Desarrollador Full-Stack",
       description:
-        "Aplicaciones web, WordPress, integraciones personalizadas, servicios backend y desarrollo frontend.",
+        "Aplicaciones web personalizadas, sitios WordPress, backends Laravel/PHP y frontends React para pequeñas empresas y startups en Colombia.",
     },
   } satisfies Record<ExperienceId, { role: string; description: string }>,
   skills: {

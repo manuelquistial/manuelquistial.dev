@@ -14,8 +14,8 @@ interface HeaderProps {
 
 export function Header({ locale, dictionary }: HeaderProps) {
   return (
-    <header className="sticky top-0 z-50 border-b border-border/80 bg-background/80 backdrop-blur-md">
-      <Container className="flex h-16 items-center justify-between gap-4">
+    <header className="sticky top-0 z-50 border-b border-border/80 bg-background/90 backdrop-blur-md supports-[backdrop-filter]:bg-background/75">
+      <Container className="flex h-16 items-center justify-between gap-4 lg:h-[4.25rem]">
         <Link
           href={localizedPath(locale)}
           className="text-sm font-semibold tracking-tight text-foreground transition-colors hover:text-accent"
@@ -28,14 +28,14 @@ export function Header({ locale, dictionary }: HeaderProps) {
           locale={locale}
           nav={dictionary.nav}
           ariaLabel={dictionary.a11y.mainNav}
-          className="hidden items-center gap-1 md:flex"
+          className="hidden items-center gap-0.5 md:flex"
           linkClassName="rounded-md px-3 py-2 text-sm font-medium transition-colors"
         />
 
         <LocaleSwitcher locale={locale} />
       </Container>
 
-      <Container className="border-t border-border/60 pb-3 pt-2 md:hidden">
+      <Container className="border-t border-border/60 pb-3 pt-2.5 md:hidden">
         <NavLinks
           locale={locale}
           nav={dictionary.nav}

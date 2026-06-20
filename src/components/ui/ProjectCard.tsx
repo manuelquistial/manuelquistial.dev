@@ -27,16 +27,19 @@ export function ProjectCard({
     statusLabels[
       project.status === "in-progress" ? "inProgress" : project.status
     ];
+  const hasLinks = Boolean(project.githubUrl || project.liveUrl);
 
   return (
     <article
       className={cn(
-        "flex h-full flex-col rounded-xl border border-border bg-surface p-6 transition-colors hover:border-border-strong",
+        "card-surface flex h-full flex-col p-6 sm:p-7",
         className,
       )}
     >
       <div className="flex items-start justify-between gap-3">
-        <h3 className="text-lg font-semibold text-foreground">{project.name}</h3>
+        <h3 className="text-lg font-semibold leading-snug text-foreground">
+          {project.name}
+        </h3>
         <span
           className={cn(
             "shrink-0 rounded-full border px-2.5 py-0.5 text-xs font-medium",
@@ -51,34 +54,26 @@ export function ProjectCard({
         {project.description}
       </p>
 
-      <div className="mt-4 flex flex-wrap gap-2">
+      <div className="mt-5 flex flex-wrap gap-2">
         {project.tags.map((tag) => (
           <SkillBadge key={tag} label={tag} />
         ))}
       </div>
 
-      <div className="mt-6 flex flex-wrap gap-2">
-        <Button
-          href={project.githubUrl}
-          external
-          variant="outline"
-          size="sm"
-          disabled={!project.githubUrl}
-          disabledTitle={labels.unavailable}
-        >
-          {labels.github}
-        </Button>
-        <Button
-          href={project.liveUrl}
-          external
-          variant="secondary"
-          size="sm"
-          disabled={!project.liveUrl}
-          disabledTitle={labels.unavailable}
-        >
-          {labels.liveDemo}
-        </Button>
-      </div>
+      {hasLinks ? (
+        <div className="mt-6 flex flex-wrap gap-2 border-t border-border pt-5">
+          {project.githubUrl ? (
+            <Button href={project.githubUrl} external variant="outline" size="sm">
+              {labels.github}
+            </Button>
+          ) : null}
+          {project.liveUrl ? (
+            <Button href={project.liveUrl} external variant="secondary" size="sm">
+              {labels.liveDemo}
+            </Button>
+          ) : null}
+        </div>
+      ) : null}
     </article>
   );
 }

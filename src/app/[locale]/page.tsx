@@ -29,11 +29,7 @@ export default async function HomePage({ params }: HomePageProps) {
 
   return (
     <>
-      <Hero
-        locale={locale}
-        content={dictionary.hero}
-        unavailableLabel={dictionary.projectCard.unavailable}
-      />
+      <Hero locale={locale} content={dictionary.hero} />
       <AboutPreview
         locale={locale}
         content={dictionary.about}
@@ -44,8 +40,21 @@ export default async function HomePage({ params }: HomePageProps) {
         categories={skills}
         sectionLabel={dictionary.sections.skills}
       />
-      <ExperiencePreview locale={locale} dictionary={dictionary} />
-      <ProjectsPreview locale={locale} dictionary={dictionary} />
+      <ExperiencePreview
+        locale={locale}
+        sectionLabel={dictionary.sections.experience}
+        viewAllLabel={dictionary.sections.viewAll}
+        currentLabel={dictionary.experiencePreview.currentLabel}
+        experienceCopy={dictionary.content.experience}
+      />
+      <ProjectsPreview
+        locale={locale}
+        sectionLabel={dictionary.sections.projects}
+        viewAllLabel={dictionary.sections.viewAll}
+        projectCopy={dictionary.content.projects}
+        projectCard={dictionary.projectCard}
+        projectStatus={dictionary.projectStatus}
+      />
       <ResearchPreview
         locale={locale}
         sectionLabel={dictionary.sections.research}

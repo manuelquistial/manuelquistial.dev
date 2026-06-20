@@ -3,7 +3,7 @@ import { getDictionary } from "@/i18n/getDictionary";
 import { parseLocale } from "@/i18n/parseLocale";
 import { experience } from "@/data/experience";
 import { buildPageMetadata } from "@/lib/metadata";
-import { Container } from "@/components/layout/Container";
+import { Section } from "@/components/layout/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { ExperienceCard } from "@/components/ui/ExperienceCard";
 import { resolveExperience } from "@/lib/content";
@@ -35,15 +35,15 @@ export default async function AboutPage({ params }: AboutPageProps) {
   );
 
   return (
-    <Container as="section" className="py-16 sm:py-20">
+    <Section>
       <SectionTitle title={aboutPage.title} subtitle={aboutPage.intro} />
 
-      <div className="grid gap-10 lg:grid-cols-2">
-        <article className="rounded-xl border border-border bg-surface p-6 sm:p-8">
+      <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
+        <article className="card-surface p-6 sm:p-8">
           <h2 className="text-xl font-semibold text-foreground">
             {aboutPage.engineering.title}
           </h2>
-          <div className="mt-4 space-y-4">
+          <div className="mt-5 space-y-4">
             {aboutPage.engineering.paragraphs.map((paragraph, index) => (
               <p
                 key={`engineering-p-${index}`}
@@ -55,11 +55,11 @@ export default async function AboutPage({ params }: AboutPageProps) {
           </div>
         </article>
 
-        <article className="rounded-xl border border-border bg-surface p-6 sm:p-8">
+        <article className="card-surface p-6 sm:p-8">
           <h2 className="text-xl font-semibold text-foreground">
             {aboutPage.research.title}
           </h2>
-          <div className="mt-4 space-y-4">
+          <div className="mt-5 space-y-4">
             {aboutPage.research.paragraphs.map((paragraph, index) => (
               <p
                 key={`research-p-${index}`}
@@ -72,7 +72,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
         </article>
       </div>
 
-      <section className="mt-12">
+      <section className="mt-14">
         <h2 className="text-xl font-semibold text-foreground">
           {aboutPage.focus.title}
         </h2>
@@ -80,7 +80,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
           {aboutPage.focus.items.map((item) => (
             <li
               key={item}
-              className="rounded-lg border border-border bg-surface-elevated px-4 py-3 text-sm text-foreground"
+              className="card-surface border-l-2 border-l-accent/40 px-4 py-3.5 text-sm text-foreground"
             >
               {item}
             </li>
@@ -90,7 +90,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
 
       <section className="mt-16">
         <SectionTitle title={dictionary.sections.experience} />
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {experienceItems.map((item) => (
             <ExperienceCard
               key={item.id}
@@ -100,6 +100,6 @@ export default async function AboutPage({ params }: AboutPageProps) {
           ))}
         </div>
       </section>
-    </Container>
+    </Section>
   );
 }

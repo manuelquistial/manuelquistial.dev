@@ -12,6 +12,7 @@ interface ButtonProps {
   size?: ButtonSize;
   disabled?: boolean;
   disabledTitle?: string;
+  download?: boolean | string;
   className?: string;
   type?: "button" | "submit";
   onClick?: () => void;
@@ -44,6 +45,7 @@ export function Button({
   size = "md",
   disabled,
   disabledTitle,
+  download,
   className,
   type = "button",
   onClick,
@@ -62,6 +64,18 @@ export function Button({
           href={href}
           target="_blank"
           rel="noopener noreferrer"
+          className={styles}
+        >
+          {children}
+        </a>
+      );
+    }
+
+    if (download) {
+      return (
+        <a
+          href={href}
+          download={typeof download === "string" ? download : true}
           className={styles}
         >
           {children}

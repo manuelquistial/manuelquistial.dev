@@ -1,24 +1,31 @@
 # manuelquistial.dev
 
-Professional portfolio of **Manuel Alejandro Quistial Jurado** — Software Engineer with experience in full-stack development, applied machine learning, and neuroengineering research.
+Professional portfolio of **Manuel Alejandro Quistial Jurado** — Software Engineer specializing in full-stack enterprise development, applied machine learning, and EEG/BCI neuroengineering research.
 
-## Description
+**Live site:** [manuelquistial.dev](https://manuelquistial.dev)
 
-A modern, responsive portfolio built with Next.js App Router. It showcases professional experience, technical skills, projects, and research work in EEG/BCI. Structural data lives in TypeScript files; all translatable copy is centralized in i18n dictionaries (English and Spanish).
+## About this project
+
+A statically generated, bilingual (EN/ES) portfolio built with Next.js App Router. It presents professional experience at Anthology/Blackboard, research at Universidad de Antioquia, technical skills, and selected projects — without a backend, CMS, or database.
+
+Structural data (IDs, tags, URLs, companies) lives in `src/data/`. All translatable copy lives in `src/i18n/dictionaries/`. Pages merge both via helpers in `src/lib/content.ts`.
 
 ## Stack
 
-- **Next.js 16** (App Router)
-- **TypeScript**
-- **Tailwind CSS v4**
-- **ESLint** + **Vitest**
-- **pnpm** (package manager)
-- **Node.js 24** (via nvm)
+| Layer | Technology |
+|-------|------------|
+| Framework | Next.js 16 (App Router, SSG) |
+| Language | TypeScript |
+| Styling | Tailwind CSS v4 |
+| i18n | Custom dictionaries (EN / ES) |
+| Quality | ESLint, Vitest, GitHub Actions CI |
+| Tooling | pnpm, Node.js 24 (nvm) |
+| Hosting | Vercel |
 
 ## Requirements
 
 - [nvm](https://github.com/nvm-sh/nvm)
-- Node.js 24 (`.nvmrc` is included — run `nvm use`)
+- Node.js 24 (`.nvmrc` included — run `nvm use`)
 - pnpm 11+
 
 ## Run locally
@@ -31,81 +38,95 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000). Middleware redirects to `/en` or `/es` based on `Accept-Language` and stores preference in a `NEXT_LOCALE` cookie.
 
-## Scripts
+### Scripts
 
-| Command            | Description                              |
-|--------------------|------------------------------------------|
-| `pnpm dev`         | Start development server                 |
-| `pnpm build`       | Production build                         |
-| `pnpm start`       | Start production server                  |
-| `pnpm lint`        | Run ESLint                               |
-| `pnpm typecheck`   | Run TypeScript without emit              |
-| `pnpm test`        | Run Vitest tests                         |
-| `pnpm validate`    | typecheck + lint + test + build          |
+| Command | Description |
+|---------|-------------|
+| `pnpm dev` | Development server |
+| `pnpm build` | Production build |
+| `pnpm start` | Production server |
+| `pnpm lint` | ESLint |
+| `pnpm typecheck` | TypeScript check |
+| `pnpm test` | Vitest unit tests |
+| `pnpm validate` | typecheck + lint + test + build |
+
+`npm run build` also works if you prefer npm, but pnpm is the project default.
 
 ## Project structure
 
 ```
 src/
 ├── app/
-│   ├── [locale]/          # Localized routes (en, es)
+│   ├── [locale]/              # Localized pages (en, es)
 │   ├── sitemap.ts
 │   ├── robots.ts
 │   └── opengraph-image.tsx
 ├── components/
-│   ├── layout/            # Header, Footer, NavLinks, LocaleSwitcher
-│   ├── sections/
-│   └── ui/
-├── config/site.ts         # site URL, static routes
-├── data/                  # Structural data (IDs derived from arrays)
-│   ├── profile.ts
-│   ├── projects.ts
-│   ├── experience.ts
-│   └── skills.ts
+│   ├── layout/                # Header, Footer, Section, Container
+│   ├── sections/              # Home page sections
+│   └── ui/                    # Button, cards, badges
+├── config/
+│   ├── site.ts                # Site URL, static routes
+│   └── navigation.ts
+├── data/                      # Structural data only
+│   ├── profile.ts             # Contact, CV paths, tagline
+│   ├── projects.ts            # Project IDs, tags, status, URLs
+│   ├── experience.ts          # Experience IDs, companies
+│   └── skills.ts              # Skill categories and lists
 ├── i18n/
-│   ├── dictionaries/
-│   │   ├── en/            # Modular English copy
-│   │   └── es/            # Modular Spanish copy
-│   ├── parseLocale.ts
-│   └── getDictionary.ts
+│   ├── dictionaries/en|es/    # UI copy, page content, labels
+│   ├── getDictionary.ts
+│   └── parseLocale.ts
 ├── lib/
-│   ├── content.ts         # Merges data + i18n copy
-│   └── metadata.ts        # SEO metadata helper
+│   ├── content.ts             # Merges data + i18n
+│   └── metadata.ts            # SEO helpers
 └── middleware.ts
+public/
+└── cv/                        # Locale-specific CV PDFs
 ```
 
 ## Customize content
 
-| File | Purpose |
-|------|---------|
-| `src/data/profile.ts` | Name, email, LinkedIn, GitHub, CV URL, site URL |
-| `src/data/projects.ts` | Project IDs, tags, status, URLs |
-| `src/data/experience.ts` | Experience IDs, company names |
-| `src/data/skills.ts` | Skill category IDs and skill lists |
-| `src/i18n/dictionaries/en/` | English UI copy |
-| `src/i18n/dictionaries/es/` | Spanish UI copy |
-| `public/cv.pdf` | Replace with your real CV before deploy |
+| File | What to edit |
+|------|--------------|
+| `src/data/profile.ts` | Name, email, LinkedIn, GitHub, CV paths, tagline |
+| `src/data/projects.ts` | Project IDs, tags, status, `githubUrl`, `liveUrl` |
+| `src/data/experience.ts` | Experience IDs, company names, `current` flag |
+| `src/data/skills.ts` | Skill categories and skill lists |
+| `src/i18n/dictionaries/en/` | English copy |
+| `src/i18n/dictionaries/es/` | Spanish copy |
+| `public/cv/*.pdf` | CV files (EN and ES) |
 
-**Separation of concerns:** `src/data/` holds structural data only. All translatable text lives in `src/i18n/dictionaries/`. Pages merge both via helpers in `src/lib/content.ts`. Project, experience, and skill IDs are defined in their respective data files and must match keys in dictionary `content` sections.
-
-## Pre-deploy checklist
-
-- [ ] Replace `public/cv.pdf` with your real CV
-- [ ] Update email, LinkedIn, and GitHub in `profile.ts`
-- [ ] Add GitHub and live demo URLs to projects
-- [ ] Verify `site.url` in `src/config/site.ts`
-- [ ] Run `pnpm validate`
-- [ ] Configure custom domain on Vercel
+**Rule:** IDs in `src/data/` must match keys in `dictionary.content` for projects, experience, and skills.
 
 ## Deploy on Vercel
 
 1. Push the repository to GitHub.
-2. Import the project on [vercel.com](https://vercel.com).
-3. Settings:
+2. Import the project at [vercel.com](https://vercel.com).
+3. Framework preset: **Next.js** (auto-detected).
+4. Recommended settings:
    - **Install Command:** `pnpm install`
    - **Build Command:** `pnpm build`
    - **Node.js Version:** 24.x
-4. Add domain `manuelquistial.dev` in Project Settings → Domains.
+5. Add custom domain `manuelquistial.dev` under Project Settings → Domains.
+6. Run `pnpm validate` locally before each release.
+
+## Pre-deploy checklist
+
+- [ ] Update CV PDFs in `public/cv/`
+- [ ] Verify email, LinkedIn, and GitHub in `profile.ts`
+- [ ] Add `githubUrl` / `liveUrl` to projects when available
+- [ ] Confirm `site.url` in `src/config/site.ts`
+- [ ] Run `pnpm validate`
+
+## Next steps
+
+- Add GitHub and live demo URLs to projects as they become public
+- Publish a blog or case studies section for deep dives on enterprise and research work
+- Add project screenshots or diagrams to `public/projects/`
+- Set up Vercel Analytics or Plausible for privacy-friendly traffic insights
+- Connect a custom email alias (e.g. `hello@manuelquistial.dev`)
+- Expand Vitest coverage for component snapshots if the UI grows
 
 ## License
 

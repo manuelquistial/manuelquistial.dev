@@ -3,7 +3,7 @@ import { getDictionary } from "@/i18n/getDictionary";
 import { parseLocale } from "@/i18n/parseLocale";
 import { projects } from "@/data/projects";
 import { buildPageMetadata } from "@/lib/metadata";
-import { Container } from "@/components/layout/Container";
+import { Section } from "@/components/layout/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { resolveProjects } from "@/lib/content";
@@ -31,13 +31,13 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
   const projectItems = resolveProjects(projects, dictionary.content.projects);
 
   return (
-    <Container as="section" className="py-16 sm:py-20">
+    <Section>
       <SectionTitle
         title={dictionary.sections.projects}
-        subtitle={dictionary.hero.subtitle}
+        subtitle={dictionary.meta.pages.projects.description}
       />
 
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid gap-5 md:grid-cols-2">
         {projectItems.map((project) => (
           <ProjectCard
             key={project.id}
@@ -47,6 +47,6 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
           />
         ))}
       </div>
-    </Container>
+    </Section>
   );
 }

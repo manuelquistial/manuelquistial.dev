@@ -15,20 +15,21 @@ export function Footer({ locale, dictionary }: FooterProps) {
   const { footer, nav } = dictionary;
 
   return (
-    <footer className="mt-auto border-t border-border bg-surface">
-      <Container className="flex flex-col gap-4 py-8 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <p className="text-sm font-medium text-foreground">
+    <footer className="mt-auto border-t border-border bg-surface/80">
+      <Container className="flex flex-col gap-6 py-10 sm:flex-row sm:items-start sm:justify-between">
+        <div className="max-w-sm">
+          <p className="text-sm font-semibold text-foreground">
             {profile.shortName}
           </p>
-          <p className="mt-1 text-xs text-muted">
+          <p className="mt-2 text-sm text-muted">{profile.tagline}</p>
+          <p className="mt-3 text-xs text-muted">
             © {year} {profile.shortName}. {footer.rights}
           </p>
         </div>
 
-        <div className="flex flex-col gap-2 sm:items-end">
+        <div className="flex flex-col gap-3 sm:items-end">
           <p className="text-xs text-muted">{footer.builtWith}</p>
-          <div className="flex gap-4 text-xs">
+          <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm">
             <Link
               href={localizedPath(locale, "/contact")}
               className="text-muted transition-colors hover:text-accent"

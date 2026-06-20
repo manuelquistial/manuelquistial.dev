@@ -1,6 +1,6 @@
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/types";
-import { profile } from "@/data/profile";
+import { profile, getCvDownloadName, getCvUrl } from "@/data/profile";
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/Button";
 import { localizedPath } from "@/lib/utils";
@@ -8,20 +8,19 @@ import { localizedPath } from "@/lib/utils";
 interface HeroProps {
   locale: Locale;
   content: Dictionary["hero"];
-  unavailableLabel: string;
 }
 
-export function Hero({ locale, content, unavailableLabel }: HeroProps) {
+export function Hero({ locale, content }: HeroProps) {
   return (
-    <section className="border-b border-border bg-surface/40">
-      <Container as="section" className="py-20 sm:py-28">
-        <p className="text-sm font-medium uppercase tracking-widest text-accent">
+    <section className="border-b border-border bg-[radial-gradient(ellipse_at_top,_var(--accent-muted)_0%,_transparent_55%)]">
+      <Container as="section" className="py-20 sm:py-28 lg:py-32">
+        <p className="text-sm font-medium uppercase tracking-[0.2em] text-accent">
           {profile.name}
         </p>
-        <p className="mt-2 text-sm text-muted">
-          {profile.role} · {profile.location}
+        <p className="mt-3 text-sm text-muted">
+          {profile.location}
         </p>
-        <h1 className="mt-4 max-w-4xl text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+        <h1 className="mt-5 max-w-4xl text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl lg:text-[2.75rem] lg:leading-[1.15]">
           {content.title}
         </h1>
         <p className="mt-6 max-w-3xl text-lg leading-relaxed text-foreground/90">
@@ -36,11 +35,9 @@ export function Hero({ locale, content, unavailableLabel }: HeroProps) {
             {content.viewProjects}
           </Button>
           <Button
-            href={profile.cvUrl || undefined}
-            external={profile.cvUrl.startsWith("http")}
+            href={getCvUrl(locale)}
+            download={getCvDownloadName(locale)}
             variant="secondary"
-            disabled={!profile.cvUrl}
-            disabledTitle={unavailableLabel}
           >
             {content.downloadCv}
           </Button>

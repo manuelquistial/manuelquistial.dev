@@ -1,8 +1,8 @@
-import Link from "next/link";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/types";
-import { Container } from "@/components/layout/Container";
+import { Section } from "@/components/layout/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
+import { ViewAllLink } from "@/components/ui/ViewAllLink";
 import { localizedPath } from "@/lib/utils";
 
 interface AboutPreviewProps {
@@ -19,40 +19,35 @@ export function AboutPreview({
   viewAllLabel,
 }: AboutPreviewProps) {
   return (
-    <section>
-      <Container className="py-16 sm:py-20">
-        <SectionTitle title={sectionLabel} />
+    <Section>
+      <SectionTitle title={sectionLabel} />
 
-        <div className="grid gap-8 lg:grid-cols-[1.4fr_1fr]">
-          <div className="space-y-4">
-            {content.paragraphs.map((paragraph, index) => (
-              <p
-                key={`about-preview-p-${index}`}
-                className="leading-relaxed text-muted"
-              >
-                {paragraph}
-              </p>
-            ))}
-            <Link
-              href={localizedPath(locale, "/about")}
-              className="inline-flex text-sm font-medium text-accent transition-colors hover:text-accent-hover"
+      <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:gap-12">
+        <div className="space-y-4">
+          {content.paragraphs.map((paragraph, index) => (
+            <p
+              key={`about-preview-p-${index}`}
+              className="leading-relaxed text-muted"
             >
-              {viewAllLabel} →
-            </Link>
-          </div>
-
-          <ul className="space-y-3">
-            {content.highlights.map((item) => (
-              <li
-                key={item}
-                className="rounded-lg border border-border bg-surface px-4 py-3 text-sm text-foreground"
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
+              {paragraph}
+            </p>
+          ))}
+          <ViewAllLink href={localizedPath(locale, "/about")}>
+            {viewAllLabel}
+          </ViewAllLink>
         </div>
-      </Container>
-    </section>
+
+        <ul className="space-y-3">
+          {content.highlights.map((item) => (
+            <li
+              key={item}
+              className="card-surface border-l-2 border-l-accent/50 px-4 py-3.5 text-sm text-foreground"
+            >
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </Section>
   );
 }

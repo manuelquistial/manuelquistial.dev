@@ -13,18 +13,13 @@ export function ExperienceCard({
   className,
 }: ExperienceCardProps) {
   return (
-    <article
-      className={cn(
-        "rounded-xl border border-border bg-surface p-6 transition-colors hover:border-border-strong",
-        className,
-      )}
-    >
-      <div className="flex flex-wrap items-start justify-between gap-2">
+    <article className={cn("card-surface p-6 sm:p-7", className)}>
+      <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <h3 className="text-lg font-semibold text-foreground">
             {item.company}
           </h3>
-          <p className="mt-1 text-sm font-medium text-accent">{item.role}</p>
+          <p className="mt-1.5 text-sm font-medium text-accent">{item.role}</p>
         </div>
         {item.current && currentLabel ? (
           <span className="rounded-full border border-accent/30 bg-accent/10 px-2.5 py-0.5 text-xs font-medium text-accent">

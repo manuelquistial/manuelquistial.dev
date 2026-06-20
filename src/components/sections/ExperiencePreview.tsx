@@ -1,48 +1,49 @@
-import Link from "next/link";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/types";
 import { experience } from "@/data/experience";
-import { Container } from "@/components/layout/Container";
+import { Section } from "@/components/layout/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { ExperienceCard } from "@/components/ui/ExperienceCard";
+import { ViewAllLink } from "@/components/ui/ViewAllLink";
 import { resolveExperience } from "@/lib/content";
 import { localizedPath } from "@/lib/utils";
 
 interface ExperiencePreviewProps {
   locale: Locale;
-  dictionary: Dictionary;
+  sectionLabel: string;
+  viewAllLabel: string;
+  currentLabel: string;
+  experienceCopy: Dictionary["content"]["experience"];
 }
 
 export function ExperiencePreview({
   locale,
-  dictionary,
+  sectionLabel,
+  viewAllLabel,
+  currentLabel,
+  experienceCopy,
 }: ExperiencePreviewProps) {
-  const items = resolveExperience(experience, dictionary.content.experience);
+  const items = resolveExperience(experience, experienceCopy);
 
   return (
-    <section className="bg-surface/40">
-      <Container className="py-16 sm:py-20">
-        <SectionTitle title={dictionary.sections.experience} />
+    <Section>
+      <SectionTitle title={sectionLabel} />
 
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {items.map((item) => (
-            <ExperienceCard
-              key={item.id}
-              item={item}
-              currentLabel={dictionary.experiencePreview.currentLabel}
-            />
-          ))}
-        </div>
+      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {items.map((item) => (
+          <ExperienceCard
+            key={item.id}
+            item={item}
+            currentLabel={currentLabel}
+          />
+        ))}
+      </div>
 
-        <div className="mt-8">
-          <Link
-            href={localizedPath(locale, "/about")}
-            className="text-sm font-medium text-accent transition-colors hover:text-accent-hover"
-          >
-            {dictionary.sections.viewAll} →
-          </Link>
-        </div>
-      </Container>
-    </section>
+      <div className="mt-10">
+        <ViewAllLink href={localizedPath(locale, "/about")}>
+          {viewAllLabel}
+        </ViewAllLink>
+      </div>
+    </Section>
   );
 }

@@ -1,27 +1,27 @@
 export const meta = {
   title: "Manuel Quistial — Software Engineer",
   description:
-    "Full-stack software engineer specializing in React, TypeScript, Java, applied machine learning, and neuroengineering research.",
+    "Full-stack software engineer at Anthology/Blackboard. React, TypeScript, Java, Spring Boot, PostgreSQL, applied ML, and EEG/BCI research at Universidad de Antioquia.",
   pages: {
     about: {
       title: "About",
       description:
-        "Background in full-stack engineering, enterprise software, and neuroengineering research.",
+        "Enterprise full-stack engineering at Anthology/Blackboard and neuroengineering research at Universidad de Antioquia.",
     },
     projects: {
       title: "Projects",
       description:
-        "Selected software and research projects across full-stack development and applied machine learning.",
+        "Enterprise platforms, microfrontend architectures, AI assistants, and EEG motor imagery pipelines.",
     },
     research: {
       title: "Research",
       description:
-        "EEG-based brain–computer interface research, signal processing, and machine learning evaluation.",
+        "EEG-based motor imagery classification, FBCSP feature extraction, and subject-disjoint ML evaluation for BCI systems.",
     },
     contact: {
       title: "Contact",
       description:
-        "Get in touch for engineering roles, collaborations, and research opportunities.",
+        "Reach out for senior engineering roles, research collaborations, or AI and neuroengineering projects.",
     },
   },
 };
@@ -43,9 +43,9 @@ export const a11y = {
 export const hero = {
   title: "Software Engineer | Full-Stack, AI & Neuroengineering",
   subtitle:
-    "I build scalable web platforms, intelligent systems, and research-driven machine learning pipelines.",
+    "I ship enterprise web platforms at Anthology/Blackboard and build EEG-based machine learning pipelines for brain–computer interface research.",
   secondary:
-    "Full-stack engineer with experience in enterprise applications, frontend architectures, backend services, cloud-based systems, and applied machine learning research.",
+    "Nearly ten years across React, TypeScript, Java, Spring Boot, and PostgreSQL — from frontend architecture and CI/CD to applied ML with FBCSP, LDA, and rigorous subject-disjoint evaluation.",
   viewProjects: "View Projects",
   downloadCv: "Download CV",
   linkedin: "LinkedIn",
@@ -86,7 +86,7 @@ export const projectCard = {
 export const contactCta = {
   title: "Let's connect",
   description:
-    "Interested in working together on engineering, AI, or research-driven projects? Reach out — I'd be glad to hear from you.",
+    "Open to senior full-stack roles, AI engineering work, and research collaborations at the intersection of software and neurotechnology.",
   button: "Get in touch",
 };
 

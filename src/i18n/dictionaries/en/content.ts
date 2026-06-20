@@ -7,39 +7,39 @@ export const content = {
     "enterprise-access-platform": {
       name: "Enterprise Access Platform",
       description:
-        "Full-stack enterprise application with React, TypeScript, Spring Boot, PostgreSQL and Keycloak.",
+        "Role-based access management for institutional users — React/TypeScript SPA, Spring Boot REST APIs, PostgreSQL, and Keycloak SSO. Designed for multi-tenant edtech deployments.",
     },
     "microfrontend-learning-dashboard": {
       name: "Microfrontend Learning Dashboard",
       description:
-        "Modular frontend architecture using React, TypeScript, Vite, Module Federation and shared UI packages.",
+        "Modular learning analytics UI with Vite, Module Federation, and shared design-system packages. Enables independent team deployments without breaking the host shell.",
     },
     "ai-knowledge-assistant": {
       name: "AI Knowledge Assistant",
       description:
-        "Document-based AI assistant using FastAPI, RAG, PostgreSQL, pgvector and LLMs.",
+        "Document-grounded Q&A with FastAPI, RAG over institutional PDFs, PostgreSQL + pgvector embeddings, and Azure OpenAI. Built for internal knowledge retrieval at scale.",
     },
     "eeg-motor-imagery-pipeline": {
       name: "EEG Motor Imagery Pipeline",
       description:
-        "Machine learning pipeline for EEG-based motor imagery classification using FBCSP, LDA, SVM and subject-disjoint evaluation.",
+        "End-to-end BCI research pipeline: MNE preprocessing, FBCSP features, LDA/SVM classifiers, and leave-one-subject-out evaluation on motor imagery datasets.",
     },
   } satisfies Record<ProjectId, { name: string; description: string }>,
   experience: {
     "anthology-blackboard": {
-      role: "Software Engineer / Full-Stack Engineer",
+      role: "Software Engineer",
       description:
-        "Enterprise software development using React, TypeScript, Java, Spring Boot, PostgreSQL, Angular, CI/CD and automated testing.",
+        "Enterprise edtech at scale — React/TypeScript frontends, Java/Spring Boot services, PostgreSQL, Angular legacy modules, Jenkins/GitHub Actions CI, and Jest/JUnit test suites.",
     },
     "universidad-antioquia-research": {
-      role: "Neuroengineering Researcher / Master's Student",
+      role: "Neuroengineering Researcher · Master's Student",
       description:
-        "EEG-based motor imagery classification, BCI research, machine learning pipelines and signal processing.",
+        "EEG motor imagery classification with FBCSP, LDA, and SVM. Subject-disjoint cross-validation, signal preprocessing with MNE, and reproducible Python research pipelines.",
     },
     freelance: {
       role: "Full-Stack Developer",
       description:
-        "Web applications, WordPress, custom integrations, backend services and frontend development.",
+        "Custom web apps, WordPress sites, Laravel/PHP backends, and React frontends for small businesses and startups across Colombia.",
     },
   } satisfies Record<ExperienceId, { role: string; description: string }>,
   skills: {

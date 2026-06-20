@@ -1,27 +1,27 @@
 export const meta = {
   title: "Manuel Quistial — Ingeniero de Software",
   description:
-    "Ingeniero de software full-stack especializado en React, TypeScript, Java, machine learning aplicado e investigación en neuroingeniería.",
+    "Ingeniero full-stack en Anthology/Blackboard. React, TypeScript, Java, Spring Boot, PostgreSQL, ML aplicado e investigación EEG/BCI en la Universidad de Antioquia.",
   pages: {
     about: {
       title: "Sobre mí",
       description:
-        "Trayectoria en ingeniería full-stack, software empresarial e investigación en neuroingeniería.",
+        "Ingeniería full-stack empresarial en Anthology/Blackboard e investigación en neuroingeniería en la Universidad de Antioquia.",
     },
     projects: {
       title: "Proyectos",
       description:
-        "Proyectos seleccionados de desarrollo full-stack y machine learning aplicado.",
+        "Plataformas empresariales, arquitecturas microfrontend, asistentes con IA y pipelines de imaginación motora EEG.",
     },
     research: {
       title: "Investigación",
       description:
-        "Investigación en interfaces cerebro–computadora basadas en EEG, procesamiento de señales y evaluación de ML.",
+        "Clasificación de imaginación motora con EEG, extracción FBCSP y evaluación ML subject-disjoint para sistemas BCI.",
     },
     contact: {
       title: "Contacto",
       description:
-        "Ponte en contacto para roles de ingeniería, colaboraciones e investigación.",
+        "Escríbeme para roles senior de ingeniería, colaboraciones de investigación o proyectos de IA y neuroingeniería.",
     },
   },
 };
@@ -43,9 +43,9 @@ export const a11y = {
 export const hero = {
   title: "Ingeniero de Software | Full-Stack, IA y Neuroingeniería",
   subtitle:
-    "Construyo plataformas web escalables, sistemas inteligentes y pipelines de machine learning orientados a investigación.",
+    "Desarrollo plataformas web empresariales en Anthology/Blackboard y construyo pipelines de machine learning basados en EEG para investigación en interfaces cerebro–computadora.",
   secondary:
-    "Ingeniero full-stack con experiencia en aplicaciones empresariales, arquitecturas frontend, servicios backend, sistemas en la nube e investigación aplicada en machine learning.",
+    "Casi una década con React, TypeScript, Java, Spring Boot y PostgreSQL — desde arquitectura frontend y CI/CD hasta ML aplicado con FBCSP, LDA y evaluación rigurosa subject-disjoint.",
   viewProjects: "Ver proyectos",
   downloadCv: "Descargar CV",
   linkedin: "LinkedIn",
@@ -86,7 +86,7 @@ export const projectCard = {
 export const contactCta = {
   title: "Conectemos",
   description:
-    "¿Te interesa trabajar juntos en ingeniería, IA o proyectos orientados a investigación? Escríbeme — me encantaría saber de ti.",
+    "Abierto a roles senior full-stack, ingeniería con IA y colaboraciones de investigación en la intersección del software y la neurotecnología.",
   button: "Contactar",
 };
 

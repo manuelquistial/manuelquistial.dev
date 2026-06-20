@@ -44,7 +44,7 @@ export function CategoryProjectsSection({
       </div>
 
       {viewAllHref && viewAllLabel ? (
-        <div className="mt-10">
+        <div className="mt-6">
           <ViewAllLink href={viewAllHref}>{viewAllLabel}</ViewAllLink>
         </div>
       ) : null}

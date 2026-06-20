@@ -1,23 +1,51 @@
 import { describe, expect, it } from "vitest";
-import { caseStudies } from "@/content/case-studies";
+import { getCaseStudies } from "@/content/getCaseStudy";
+import { getSiteContent } from "@/content/getSiteContent";
+import { about, aboutPage } from "@/content/en/pages";
+import { hero, meta } from "@/content/en/ui";
+import { udeaFcfCaseStudy } from "@/content/en/case-studies/udea-fcf";
+import { babelScoresCaseStudy } from "@/content/en/case-studies/babel-scores";
+import { udeaFcfCaseStudy as udeaFcfCaseStudyEs } from "@/content/es/case-studies/udea-fcf";
 import {
   getFeaturedProjects,
   getProjectsByCategory,
-  getPublishedProjects,
-  isPublishedProject,
+  getCaseStudyProjects,
   projects,
 } from "@/data/projects";
 import { experience } from "@/data/experience";
 import { skillCategories } from "@/data/skills";
 import { getProjectStatusLabel, hasProjectLiveLink } from "@/lib/projects";
-import { siteContent } from "@/content";
+import { localizeProject } from "@/lib/localize";
+
+const REMOVED_PROJECT_IDS = [
+  "enterprise-access-platform",
+  "microfrontend-learning-dashboard",
+  "ai-knowledge-assistant",
+] as const;
+
+const FORBIDDEN_PUBLIC_STRINGS = [
+  "Shibboleth",
+  "IP-based",
+  "financial reconciliation",
+  "classroom reservation",
+  "classroom reservations",
+] as const;
+
+const PUBLIC_CONTENT_SOURCES = [
+  JSON.stringify(projects),
+  JSON.stringify({ about, aboutPage }),
+  JSON.stringify({ meta, hero }),
+  JSON.stringify(udeaFcfCaseStudy),
+  JSON.stringify(babelScoresCaseStudy),
+  JSON.stringify(udeaFcfCaseStudyEs),
+  JSON.stringify(experience),
+];
 
 describe("project data helpers", () => {
-  it("returns published projects grouped by category", () => {
+  it("returns projects grouped by category", () => {
     const engineering = getProjectsByCategory("engineering");
     const agency = getProjectsByCategory("agency-web");
     const research = getProjectsByCategory("research");
-    const publishedCount = getPublishedProjects().length;
 
     expect(engineering.every((project) => project.category === "engineering")).toBe(
       true,
@@ -25,23 +53,17 @@ describe("project data helpers", () => {
     expect(agency.every((project) => project.category === "agency-web")).toBe(
       true,
     );
-    expect(publishedCount).toBe(engineering.length + agency.length + research.length);
+    expect(projects.length).toBe(
+      engineering.length + agency.length + research.length,
+    );
   });
 
-  it("hides planned engineering projects from public helpers", () => {
-    const engineering = getProjectsByCategory("engineering");
-    const plannedIds = [
-      "enterprise-access-platform",
-      "microfrontend-learning-dashboard",
-      "ai-knowledge-assistant",
-    ] as const;
-
-    plannedIds.forEach((id) => {
-      expect(engineering.some((project) => project.id === id)).toBe(false);
-      expect(isPublishedProject(projects.find((project) => project.id === id)!)).toBe(
+  it("does not include removed planned project IDs", () => {
+    for (const id of REMOVED_PROJECT_IDS) {
+      expect(projects.some((project) => project.id === (id as string))).toBe(
         false,
       );
-    });
+    }
   });
 
   it("returns featured engineering projects with UDEA FCF first", () => {
@@ -49,9 +71,6 @@ describe("project data helpers", () => {
 
     expect(featured[0]?.id).toBe("udea-fcf-digital-ecosystem");
     expect(featured[1]?.id).toBe("babel-scores");
-    expect(featured.every((project) => project.category === "engineering")).toBe(
-      true,
-    );
     expect(featured.length).toBe(2);
   });
 
@@ -64,12 +83,23 @@ describe("project data helpers", () => {
     );
   });
 
+  it("configures Babel Scores as a live engineering project", () => {
+    const babel = projects.find((project) => project.id === "babel-scores");
+
+    expect(babel?.status).toBe("live");
+    expect(babel?.liveUrl).toBe("https://babelscores.com/");
+    expect(babel?.clientType).toBe("Direct Client Project");
+  });
+
   it("maps project status labels", () => {
+    const enContent = getSiteContent("en");
+    const esContent = getSiteContent("es");
+
     expect(
-      getProjectStatusLabel("coming-soon", siteContent.projectStatus),
+      getProjectStatusLabel("coming-soon", enContent.projectStatus),
     ).toBe("Coming soon");
-    expect(getProjectStatusLabel("live", siteContent.projectStatus)).toBe(
-      "Live",
+    expect(getProjectStatusLabel("live", esContent.projectStatus)).toBe(
+      "En vivo",
     );
   });
 
@@ -89,6 +119,18 @@ describe("portfolio data completeness", () => {
     });
   });
 
+  it("includes CV-aligned experience periods", () => {
+    const anthology = experience.find((item) => item.id === "anthology-blackboard");
+    const udea = experience.find((item) => item.id === "udea-fcf");
+    const digitalAmericas = experience.find(
+      (item) => item.id === "digital-americas-pipeline",
+    );
+
+    expect(anthology?.period).toBe("Nov 2021 – May 2026");
+    expect(udea?.period).toBe("May 2022 – Present");
+    expect(digitalAmericas?.company).toContain("Digital Americas");
+  });
+
   it("includes period on every experience entry", () => {
     experience.forEach((item) => {
       expect(item.period).toBeTruthy();
@@ -104,11 +146,24 @@ describe("portfolio data completeness", () => {
     });
   });
 
-  it("keeps case study registry aligned with published case study URLs", () => {
-    getProjectsByCategory("engineering")
-      .filter((project) => project.caseStudyUrl)
-      .forEach((project) => {
-        expect(caseStudies[project.id as keyof typeof caseStudies]).toBeDefined();
-      });
+  it("keeps case study registry aligned with case study URLs", () => {
+    getCaseStudyProjects().forEach((project) => {
+      expect(getCaseStudies("en")[project.id as keyof ReturnType<typeof getCaseStudies>]).toBeDefined();
+      expect(getCaseStudies("es")[project.id as keyof ReturnType<typeof getCaseStudies>]).toBeDefined();
+    });
+  });
+
+  it("localizes Spanish project titles", () => {
+    const udea = projects.find((project) => project.id === "udea-fcf-digital-ecosystem");
+    expect(udea).toBeDefined();
+    expect(localizeProject(udea!, "es").title).toBe("Ecosistema Digital UdeA FCF");
+  });
+
+  it("keeps public content free of forbidden sensitive strings", () => {
+    const publicContent = PUBLIC_CONTENT_SOURCES.join("\n");
+
+    FORBIDDEN_PUBLIC_STRINGS.forEach((term) => {
+      expect(publicContent.includes(term)).toBe(false);
+    });
   });
 });

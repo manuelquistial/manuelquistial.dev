@@ -45,7 +45,7 @@ export const hero = {
   subtitle:
     "Enterprise platforms at Anthology/Blackboard, the UdeA FCF institutional ecosystem, Babel Scores publishing engineering, and EEG-based BCI research at Universidad de Antioquia.",
   secondary:
-    "Nearly ten years across React, TypeScript, Java, Spring Boot, Laravel, WordPress, Keycloak, and Python: from legacy modernization and CI/CD to applied ML with FBCSP, LDA, and subject-disjoint evaluation.",
+    "10 years across React, TypeScript, Java, Spring Boot, Laravel, WordPress, Keycloak, and Python: from legacy modernization and CI/CD to applied ML with FBCSP, LDA, and subject-disjoint evaluation.",
   viewProjects: "View Projects",
   downloadCv: "Download CV",
   linkedin: "LinkedIn",
@@ -122,3 +122,9 @@ export const homeSkillCategoryIds = [
   "cloud-devops",
   "cms-web-platforms",
 ] as const;
+
+export const languageSwitcher = {
+  label: "Language",
+  en: "English",
+  es: "Español",
+};

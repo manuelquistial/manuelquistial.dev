@@ -1,37 +1,44 @@
 import Link from "next/link";
+import type { Locale } from "@/i18n/config";
 import type { SiteContent } from "@/content";
 import { profile } from "@/data/profile";
+import { localizedPath } from "@/lib/localizedPath";
 import { Container } from "@/components/layout/Container";
 import { NavLinks } from "@/components/layout/NavLinks";
+import { LocaleSwitcher } from "@/components/layout/LocaleSwitcher";
 
 interface HeaderProps {
-  content: Pick<SiteContent, "nav" | "a11y">;
+  locale: Locale;
+  content: Pick<SiteContent, "nav" | "a11y" | "languageSwitcher">;
 }
 
-export function Header({ content }: HeaderProps) {
+export function Header({ locale, content }: HeaderProps) {
   return (
     <header className="sticky top-0 z-50 border-b border-border/80 bg-background/90 backdrop-blur-md supports-[backdrop-filter]:bg-background/75">
       <Container className="flex h-16 items-center justify-between gap-4 lg:h-[4.25rem]">
         <Link
-          href="/"
+          href={localizedPath(locale)}
           className="text-sm font-semibold tracking-tight text-foreground transition-colors hover:text-accent"
         >
           {profile.shortName}
           <span className="text-muted">.dev</span>
         </Link>
 
-        <NavLinks
-          nav={content.nav}
-          ariaLabel={content.a11y.mainNav}
-          className="hidden items-center gap-0.5 md:flex"
-          linkClassName="rounded-md px-3 py-2 text-sm font-medium transition-colors"
-        />
-
-        <div className="md:hidden" aria-hidden="true" />
+        <div className="flex items-center gap-3">
+          <NavLinks
+            locale={locale}
+            nav={content.nav}
+            ariaLabel={content.a11y.mainNav}
+            className="hidden items-center gap-0.5 md:flex"
+            linkClassName="rounded-md px-3 py-2 text-sm font-medium transition-colors"
+          />
+          <LocaleSwitcher locale={locale} labels={content.languageSwitcher} />
+        </div>
       </Container>
 
       <Container className="border-t border-border/60 pb-3 pt-2.5 md:hidden">
         <NavLinks
+          locale={locale}
           nav={content.nav}
           ariaLabel={content.a11y.mobileNav}
           className="flex flex-wrap gap-1"

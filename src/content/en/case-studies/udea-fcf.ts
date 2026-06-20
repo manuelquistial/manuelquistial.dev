@@ -1,18 +1,14 @@
-import type { CaseStudyContent } from "./types";
+import type { CaseStudyContent } from "@/content/case-study-types";
 
 export const udeaFcfCaseStudy: CaseStudyContent = {
   title: "UDEA FCF Digital Ecosystem",
   subtitle:
     "Institutional software modernization for the Facultad de Comunicaciones y Filología at Universidad de Antioquia.",
   backLabel: "Back to projects",
-  architectureDiagram: {
-    src: "/projects/udea-fcf-architecture.svg",
-    alt: "Diagram of the UDEA FCF digital ecosystem showing legacy apps, modern APIs, frontends, reporting services, Keycloak authentication, and databases",
-  },
   overview: {
     title: "Institutional Context",
     paragraphs: [
-      "The Facultad de Comunicaciones y Filología at Universidad de Antioquia operates multiple administrative, academic and financial processes that evolved over years of incremental development. Rather than a single application, the faculty relies on an interconnected ecosystem of services supporting classroom reservations, institutional requests, financial reconciliation, reporting and identity management.",
+      "The Facultad de Comunicaciones y Filología at Universidad de Antioquia operates multiple administrative and academic processes that evolved over years of incremental development. Rather than a single application, the faculty relies on an interconnected ecosystem of services supporting administrative and academic workflows, institutional reporting and identity management.",
       "The engineering challenge is not building one greenfield product: it is coordinating legacy modernization, shared authentication, consistent data workflows and new interfaces while keeping critical processes available to staff and students.",
     ],
   },
@@ -59,7 +55,7 @@ export const udeaFcfCaseStudy: CaseStudyContent = {
   reporting: {
     title: "Reporting Services",
     paragraphs: [
-      "Faculty operations generate structured and semi-structured data that must be exported, reconciled and reviewed by administrative teams. Python reporting services handle Excel generation, data aggregation and asynchronous processing without blocking interactive applications.",
+      "Faculty operations generate structured and semi-structured data that must be exported, reviewed and delivered to administrative teams. Python reporting services handle Excel generation, data aggregation and asynchronous processing without blocking interactive applications.",
       "Reporting pipelines emphasize traceable transformations, validation scripts and repeatable outputs, treating reports as production artifacts, not ad hoc scripts.",
     ],
     items: [

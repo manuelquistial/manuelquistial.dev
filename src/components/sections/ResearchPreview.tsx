@@ -1,8 +1,11 @@
+import type { Locale } from "@/i18n/config";
+import { localizedPath } from "@/lib/localizedPath";
 import { Section } from "@/components/layout/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { ViewAllLink } from "@/components/ui/ViewAllLink";
 
 interface ResearchPreviewProps {
+  locale: Locale;
   sectionLabel: string;
   viewAllLabel: string;
   title: string;
@@ -12,6 +15,7 @@ interface ResearchPreviewProps {
 }
 
 export function ResearchPreview({
+  locale,
   sectionLabel,
   viewAllLabel,
   title,
@@ -28,7 +32,7 @@ export function ResearchPreview({
           <h3 className="text-xl font-semibold text-foreground">{title}</h3>
           <p className="mt-4 leading-relaxed text-muted">{overview}</p>
           <div className="mt-8">
-            <ViewAllLink href="/research">{viewAllLabel}</ViewAllLink>
+            <ViewAllLink href={localizedPath(locale, "/research")}>{viewAllLabel}</ViewAllLink>
           </div>
         </div>
 

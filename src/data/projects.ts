@@ -23,9 +23,9 @@ export const projects = [
     category: "engineering",
     clientType: "Institutional Project",
     description:
-      "Institutional software ecosystem for the Facultad de Comunicaciones y Filología at Universidad de Antioquia, including legacy modernization, administrative systems, classroom reservations, financial workflows, reporting services and centralized identity management with Keycloak.",
+      "Institutional software ecosystem for the Facultad de Comunicaciones y Filología at Universidad de Antioquia, including legacy modernization, administrative and academic workflows, institutional reporting services and centralized identity management with Keycloak/OIDC.",
     longDescription:
-      "A multi-application institutional ecosystem combining legacy systems, modernized applications and shared infrastructure. The work includes Laravel and Symfony legacy applications, modern Laravel APIs, React and Next.js frontends, Python reporting services with FastAPI and Flask, database workflows with MySQL and PostgreSQL, Docker-based local environments, documentation, validation scripts and centralized authentication with Keycloak/OIDC. The ecosystem supports administrative processes such as classroom reservations, institutional requests, financial reconciliation, reporting and identity management.",
+      "A multi-application institutional ecosystem combining legacy systems, modernized applications and shared infrastructure. The work includes Laravel and Symfony legacy applications, modern Laravel APIs, React and Next.js frontends, Python reporting services with FastAPI and Flask, database workflows with MySQL and PostgreSQL, Docker-based local environments, documentation, validation scripts and centralized authentication with Keycloak/OIDC.",
     tags: [
       "Laravel",
       "Symfony",
@@ -52,71 +52,32 @@ export const projects = [
     id: "babel-scores",
     title: "Babel Scores",
     category: "engineering",
-    clientType: "Publishing Platform",
+    clientType: "Direct Client Project",
     description:
-      "Custom digital publishing and e-commerce platform combining WooCommerce, React tooling, Fabric.js score editing, PDF.js rendering, S3 asset storage, WPML multilingual support, custom plugins, async job processing, multivendor workflows, Shibboleth federation and IP-based institutional access.",
+      "Custom e-commerce platform for digital music scores, built on WordPress and WooCommerce with advanced custom development, including a responsive React-based flipbook, custom plugins, multilingual support, asynchronous jobs, S3 integration, multivendor workflows and federated institutional access.",
     longDescription:
-      "A complex WordPress and WooCommerce engineering project for contemporary music publishing: extending the platform with custom plugins, React-based tooling, canvas editing with Fabric.js, in-browser score preview with PDF.js, cloud storage on S3, multilingual content with WPML, asynchronous background jobs, multivendor commerce flows and federated login through Shibboleth alongside IP-based institutional access.",
+      "Babel Scores is a custom e-commerce platform developed directly for the client, combining WordPress and WooCommerce with advanced custom functionality. The project included a dedicated flipbook experience built with React.js, Fabric.js, PDF.js and React PageFlip for mobile and desktop users, custom WordPress plugins for WooCommerce and internal workflows, AWS S3 integration, WPML multilingual support, database migration, asynchronous jobs, multivendor workflow support and federated institutional access.",
     tags: [
       "WordPress",
       "WooCommerce",
-      "React",
+      "React.js",
       "Fabric.js",
       "PDF.js",
+      "React PageFlip",
       "AWS S3",
+      "Custom WordPress Plugins",
       "WPML",
-      "Custom Plugins",
+      "Database Migration",
       "Async Jobs",
-      "Multivendor",
-      "Shibboleth",
-      "PHP",
+      "Multivendor Workflows",
+      "Federated Access",
+      "Institutional Access",
+      "Custom Authentication Flows",
     ],
-    status: "in-progress",
+    status: "live",
+    liveUrl: "https://babelscores.com/",
     featured: true,
     caseStudyUrl: "/projects/babel-scores",
-  },
-  {
-    id: "enterprise-access-platform",
-    title: "Enterprise Access Platform",
-    category: "engineering",
-    description:
-      "Role-based access management for institutional users: React/TypeScript SPA, Spring Boot REST APIs, PostgreSQL, and Keycloak SSO. Designed for multi-tenant edtech deployments.",
-    tags: [
-      "React",
-      "TypeScript",
-      "Spring Boot",
-      "PostgreSQL",
-      "Keycloak",
-      "Docker",
-    ],
-    status: "planned",
-    published: false,
-  },
-  {
-    id: "microfrontend-learning-dashboard",
-    title: "Microfrontend Learning Dashboard",
-    category: "engineering",
-    description:
-      "Modular learning analytics UI with Vite, Module Federation, and shared design-system packages. Enables independent team deployments without breaking the host shell.",
-    tags: [
-      "React",
-      "TypeScript",
-      "Vite",
-      "Module Federation",
-      "Microfrontends",
-    ],
-    status: "planned",
-    published: false,
-  },
-  {
-    id: "ai-knowledge-assistant",
-    title: "AI Knowledge Assistant",
-    category: "engineering",
-    description:
-      "Document-grounded Q&A with FastAPI, RAG over institutional PDFs, PostgreSQL + pgvector embeddings, and Azure OpenAI. Built for internal knowledge retrieval at scale.",
-    tags: ["Python", "FastAPI", "RAG", "PostgreSQL", "pgvector", "LLMs"],
-    status: "planned",
-    published: false,
   },
   {
     id: "eeg-motor-imagery-pipeline",
@@ -264,13 +225,7 @@ export type Project = {
   githubUrl?: string;
   caseStudyUrl?: string;
   featured?: boolean;
-  published?: boolean;
-  thumbnailUrl?: string;
 };
-
-export function isPublishedProject(project: Project): boolean {
-  return project.published !== false;
-}
 
 function sortProjects(items: readonly Project[]): readonly Project[] {
   const featured = items.filter((project) => project.featured);
@@ -279,26 +234,18 @@ function sortProjects(items: readonly Project[]): readonly Project[] {
 }
 
 export function getProjectById(id: ProjectId): Project | undefined {
-  const project = projects.find((item) => item.id === id);
-  if (!project || !isPublishedProject(project)) {
-    return undefined;
-  }
-  return project;
+  return projects.find((item) => item.id === id);
 }
 
 export function getProjectBySlug(slug: string): Project | undefined {
   return getProjectById(slug as ProjectId);
 }
 
-export function getPublishedProjects(): readonly Project[] {
-  return projects.filter(isPublishedProject);
-}
-
 export function getProjectsByCategory(
   category: ProjectCategory,
 ): readonly Project[] {
   return sortProjects(
-    getPublishedProjects().filter((project) => project.category === category),
+    projects.filter((project) => project.category === category),
   );
 }
 
@@ -309,6 +256,8 @@ export function getFeaturedProjects(
   return getProjectsByCategory(category).slice(0, limit);
 }
 
-export function getPublishedCaseStudyProjects(): readonly Project[] {
-  return getPublishedProjects().filter((project) => project.caseStudyUrl);
+export function getCaseStudyProjects(): readonly Project[] {
+  return projects.filter(
+    (project) => "caseStudyUrl" in project && Boolean(project.caseStudyUrl),
+  ) as Project[];
 }

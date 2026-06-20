@@ -1,11 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { siteContent } from "@/content";
 import { site } from "@/config/site";
-import { buildPageMetadata } from "@/lib/metadata";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
-import { SkipLink } from "@/components/layout/SkipLink";
 import { PersonJsonLd } from "@/components/seo/PersonJsonLd";
 import { SiteAnalytics } from "@/components/analytics/SiteAnalytics";
 import "./globals.css";
@@ -17,12 +12,6 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  ...buildPageMetadata({
-    title: siteContent.meta.title,
-    description: siteContent.meta.description,
-    path: "",
-    fullTitle: true,
-  }),
 };
 
 export default function RootLayout({
@@ -31,18 +20,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
+    <html lang="en" className="h-full" suppressHydrationWarning>
       <body
         className={`${inter.variable} min-h-full flex flex-col antialiased`}
       >
         <PersonJsonLd />
         <SiteAnalytics />
-        <SkipLink label={siteContent.a11y.skipToContent} />
-        <Header content={siteContent} />
-        <main id="main-content" className="flex-1">
-          {children}
-        </main>
-        <Footer content={siteContent} />
+        {children}
       </body>
     </html>
   );

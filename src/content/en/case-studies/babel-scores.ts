@@ -1,14 +1,14 @@
-import type { CaseStudyContent } from "./types";
+import type { CaseStudyContent } from "@/content/case-study-types";
 
 export const babelScoresCaseStudy: CaseStudyContent = {
   title: "Babel Scores",
   subtitle:
-    "Custom publishing and e-commerce engineering for a contemporary music platform built on WordPress and WooCommerce.",
+    "Custom e-commerce engineering for a digital music scores platform built on WordPress and WooCommerce.",
   backLabel: "Back to projects",
   overview: {
     title: "Platform Context",
     paragraphs: [
-      "Babel Scores is a digital publishing platform for contemporary music, combining catalog browsing, score sales and institutional access workflows. The product extends far beyond a standard WordPress theme: it requires custom commerce logic, in-browser score tooling, multilingual content and federated authentication for libraries and institutions.",
+      "Babel Scores is a custom e-commerce platform for digital music scores, combining catalog browsing, score sales and institutional access workflows. The product extends far beyond a standard WordPress theme: it requires custom commerce logic, a responsive React-based flipbook, multilingual content and federated institutional access for libraries and institutions.",
       "The engineering work spans WooCommerce customization, React-based tooling, background job processing and integration with cloud storage, all while keeping editorial and commerce workflows maintainable for non-technical stakeholders.",
     ],
   },
@@ -37,26 +37,26 @@ export const babelScoresCaseStudy: CaseStudyContent = {
     ],
   },
   frontend: {
-    title: "React Tooling and In-Browser Score UX",
+    title: "React Tooling and Flipbook UX",
     paragraphs: [
-      "Score editing and preview require specialized browser tooling beyond typical CMS widgets. React components integrate with Fabric.js for canvas-based editing and PDF.js for in-browser preview, giving content teams visual control without leaving the admin workflow.",
+      "Score browsing and preview require specialized browser tooling beyond typical CMS widgets. React components integrate with Fabric.js, PDF.js and React PageFlip for canvas-based editing and responsive flipbook preview, giving content teams visual control without leaving the admin workflow.",
     ],
     items: [
       "React tooling embedded in WordPress admin workflows",
       "Fabric.js canvas editing for score layout adjustments",
       "PDF.js rendering for in-browser preview",
-      "Custom CSS and JavaScript for responsive catalog experiences",
+      "React PageFlip for responsive flipbook experiences",
     ],
   },
   access: {
     title: "Multilingual Content and Institutional Access",
     paragraphs: [
-      "The platform serves international audiences through WPML-managed multilingual content. Institutional customers access the catalog through Shibboleth federation and IP-based login patterns, requiring careful session handling and entitlement mapping without exposing internal infrastructure details.",
+      "The platform serves international audiences through WPML-managed multilingual content. Institutional customers access the catalog through federated institutional access and entitlement mapping, requiring careful session handling without exposing internal infrastructure details.",
     ],
     items: [
       "WPML for multilingual pages, products and editorial content",
-      "Shibboleth federation for institutional single sign-on",
-      "IP-based access patterns for library and campus networks",
+      "Federated institutional access for library and campus users",
+      "Institutional access workflows for entitled catalog users",
       "Role and entitlement mapping for institutional vs. retail users",
     ],
   },
@@ -64,7 +64,7 @@ export const babelScoresCaseStudy: CaseStudyContent = {
     title: "Responsibilities",
     items: [
       "Design and implement custom WooCommerce and WordPress plugin functionality",
-      "Build React-based admin tooling for score editing and preview",
+      "Build React-based admin tooling for score editing, preview and flipbook UX",
       "Integrate S3 asset storage and async background job processing",
       "Implement WPML workflows and institutional access patterns",
       "Maintain responsive front-end experiences across catalog and checkout flows",
@@ -76,7 +76,7 @@ export const babelScoresCaseStudy: CaseStudyContent = {
     items: [
       "Publishing platforms need clear boundaries between CMS, commerce and asset pipelines",
       "Async jobs are essential when digital products involve file generation and delivery",
-      "Institutional auth (Shibboleth, IP login) requires explicit session and entitlement design",
+      "Institutional access requires explicit session and entitlement design",
       "React tooling inside WordPress admin works best with isolated, well-documented bundles",
       "Multivendor and multilingual requirements compound early unless modeled explicitly",
     ],

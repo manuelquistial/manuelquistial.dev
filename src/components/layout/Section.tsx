@@ -32,7 +32,7 @@ export function Section({
         className,
       )}
     >
-      <Container className={cn("py-16 sm:py-20 lg:py-24", containerClassName)}>
+      <Container className={cn("py-8 sm:py-10 lg:py-12", containerClassName)}>
         {children}
       </Container>
     </section>

@@ -1,8 +1,10 @@
 import Link from "next/link";
-import type { CaseStudyContent } from "@/content/case-studies";
-import { getCaseStudySections } from "@/content/case-studies";
+import type { Locale } from "@/i18n/config";
+import type { CaseStudyContent } from "@/content";
+import { getCaseStudySections } from "@/content";
 import type { Project } from "@/data/projects";
 import type { SiteContent } from "@/content";
+import { localizedPath } from "@/lib/localizedPath";
 import { getProjectStatusLabel } from "@/lib/projects";
 import { Section } from "@/components/layout/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
@@ -50,12 +52,14 @@ function CaseStudyBlock({
 }
 
 interface CaseStudyViewProps {
+  locale: Locale;
   project: Project;
   caseStudy: CaseStudyContent;
   projectStatus: SiteContent["projectStatus"];
 }
 
 export function CaseStudyView({
+  locale,
   project,
   caseStudy,
   projectStatus,
@@ -64,9 +68,9 @@ export function CaseStudyView({
   const sections = getCaseStudySections(caseStudy);
 
   return (
-    <Section containerClassName="py-16 sm:py-20 lg:py-24">
+    <Section>
       <Link
-        href="/projects"
+        href={localizedPath(locale, "/projects")}
         className="text-sm font-medium text-accent transition-colors hover:text-accent-hover"
       >
         ← {caseStudy.backLabel}
@@ -95,16 +99,6 @@ export function CaseStudyView({
         ))}
       </div>
 
-      {caseStudy.architectureDiagram ? (
-        <figure className="card-surface mb-10 overflow-hidden p-4 sm:p-6">
-          <img
-            src={caseStudy.architectureDiagram.src}
-            alt={caseStudy.architectureDiagram.alt}
-            className="w-full rounded-lg"
-          />
-        </figure>
-      ) : null}
-
       <div className="space-y-8">
         {sections.map(({ key, section }) => (
           <CaseStudyBlock
@@ -117,7 +111,7 @@ export function CaseStudyView({
       </div>
 
       <div className="mt-12">
-        <ViewAllLink href="/projects">{caseStudy.backLabel}</ViewAllLink>
+        <ViewAllLink href={localizedPath(locale, "/projects")}>{caseStudy.backLabel}</ViewAllLink>
       </div>
     </Section>
   );

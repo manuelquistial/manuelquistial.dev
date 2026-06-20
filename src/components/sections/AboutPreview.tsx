@@ -1,15 +1,19 @@
+import type { Locale } from "@/i18n/config";
 import type { SiteContent } from "@/content";
+import { localizedPath } from "@/lib/localizedPath";
 import { Section } from "@/components/layout/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { ViewAllLink } from "@/components/ui/ViewAllLink";
 
 interface AboutPreviewProps {
+  locale: Locale;
   content: SiteContent["about"];
   sectionLabel: string;
   viewAllLabel: string;
 }
 
 export function AboutPreview({
+  locale,
   content,
   sectionLabel,
   viewAllLabel,
@@ -20,17 +24,15 @@ export function AboutPreview({
 
       <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:gap-12">
         <div className="space-y-4">
-          {(content.previewParagraphs ?? content.paragraphs).map(
-            (paragraph, index) => (
-              <p
-                key={`about-preview-p-${index}`}
-                className="leading-relaxed text-muted"
-              >
-                {paragraph}
-              </p>
-            ),
-          )}
-          <ViewAllLink href="/about">{viewAllLabel}</ViewAllLink>
+          {content.previewParagraphs.map((paragraph, index) => (
+            <p
+              key={`about-preview-p-${index}`}
+              className="leading-relaxed text-muted"
+            >
+              {paragraph}
+            </p>
+          ))}
+          <ViewAllLink href={localizedPath(locale, "/about")}>{viewAllLabel}</ViewAllLink>
         </div>
 
         <ul className="space-y-3">

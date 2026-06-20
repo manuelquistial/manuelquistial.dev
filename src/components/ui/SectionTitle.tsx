@@ -18,7 +18,7 @@ export function SectionTitle({
   return (
     <header
       className={cn(
-        "mb-10 sm:mb-12",
+        "mb-6 sm:mb-8",
         align === "center" && "text-center",
         className,
       )}

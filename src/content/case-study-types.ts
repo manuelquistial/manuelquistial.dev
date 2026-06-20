@@ -8,10 +8,6 @@ export type CaseStudyContent = {
   title: string;
   subtitle: string;
   backLabel: string;
-  architectureDiagram?: {
-    src: string;
-    alt: string;
-  };
   overview: CaseStudySection;
   legacy?: CaseStudySection;
   modern?: CaseStudySection;

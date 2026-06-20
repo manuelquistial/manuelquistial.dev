@@ -1,13 +1,16 @@
+import type { Locale } from "@/i18n/config";
 import type { SiteContent } from "@/content";
 import { profile, getCvDownloadName, getCvUrl } from "@/data/profile";
+import { localizedPath } from "@/lib/localizedPath";
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/Button";
 
 interface HeroProps {
+  locale: Locale;
   content: SiteContent["hero"];
 }
 
-export function Hero({ content }: HeroProps) {
+export function Hero({ locale, content }: HeroProps) {
   return (
     <section className="border-b border-border bg-[radial-gradient(ellipse_at_top,_var(--accent-muted)_0%,_transparent_55%)]">
       <Container as="section" className="py-20 sm:py-28 lg:py-32">
@@ -26,10 +29,10 @@ export function Hero({ content }: HeroProps) {
         </p>
 
         <div className="mt-10 flex flex-wrap gap-3">
-          <Button href="/projects">{content.viewProjects}</Button>
+          <Button href={localizedPath(locale, "/projects")}>{content.viewProjects}</Button>
           <Button
-            href={getCvUrl()}
-            download={getCvDownloadName()}
+            href={getCvUrl(locale)}
+            download={getCvDownloadName(locale)}
             variant="secondary"
           >
             {content.downloadCv}

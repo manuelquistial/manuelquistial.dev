@@ -6,9 +6,7 @@ Professional portfolio of **Manuel Alejandro Quistial Jurado**: Software Enginee
 
 ## About this project
 
-A statically generated English portfolio built with Next.js App Router. It presents professional experience at Anthology/Blackboard, the UdeA FCF institutional ecosystem, Babel Scores publishing engineering, research at Universidad de Antioquia, and production WordPress work through Sal & Picciotto: without a backend, CMS, or database.
-
-Structural data lives in `src/data/`. Site copy lives in `src/content/`. Case study narratives live in `src/content/case-studies/`.
+A statically generated bilingual portfolio (English and Spanish) built with Next.js App Router. Routes are locale-prefixed (`/en`, `/es`) with automatic locale detection via `src/proxy.ts`.
 
 ## Stack
 
@@ -54,7 +52,9 @@ Open [http://localhost:3000](http://localhost:3000).
 ```
 src/
 ├── app/
-│   ├── projects/[slug]/       # Dynamic case study pages
+│   ├── [locale]/              # Localized routes (/en, /es)
+│   │   ├── projects/[slug]/   # Dynamic case study pages
+│   │   └── ...
 │   └── ...
 ├── components/
 │   ├── analytics/             # Env-gated Plausible script
@@ -66,20 +66,20 @@ src/
 │   ├── site.ts                # Site URL, static routes
 │   └── navigation.ts
 ├── content/
-│   ├── case-studies/          # Case study registry + content
-│   ├── pages.ts
-│   └── ui.ts
+│   ├── en/                    # English UI, pages, data overlays, case studies
+│   ├── es/                    # Spanish translations
+│   ├── getSiteContent.ts
+│   └── getCaseStudy.ts
 ├── data/                      # Structural data only
 │   ├── profile.ts
-│   ├── projects.ts            # Projects, published flag, caseStudyUrl
+│   ├── projects.ts            # Projects, caseStudyUrl, status
 │   ├── experience.ts
 │   └── skills.ts
 └── lib/
     ├── metadata.ts
     └── projects.ts
 public/
-├── cv/                        # CV PDF
-└── projects/                  # Case study diagrams, optional thumbnails
+└── cv/                        # CV PDF
 ```
 
 ## Customize content
@@ -87,15 +87,17 @@ public/
 | File | What to edit |
 |------|--------------|
 | `src/data/profile.ts` | Name, email, LinkedIn, GitHub, CV path, tagline |
-| `src/data/projects.ts` | Project titles, categories, tags, status, URLs, `published` |
+| `src/data/projects.ts` | Project titles, categories, tags, status, URLs |
 | `src/data/experience.ts` | Roles, companies, descriptions, `period`, technologies |
 | `src/data/skills.ts` | Skill categories and lists |
-| `src/content/case-studies/` | Case study sections per engineering project |
-| `src/content/` | Page copy, section labels, hero, meta |
+| `src/content/en/` or `src/content/es/` | Page copy, section labels, hero, meta, localized overlays |
+| `src/content/*/case-studies/` | Case study sections per engineering project |
 
 Project categories: `engineering`, `research`, `agency-web`.
 
-Projects with `published: false` remain in data but are hidden from the public site. Case studies are served at `/projects/[slug]` when a project has `caseStudyUrl` and a registry entry in `src/content/case-studies/index.ts`.
+Case studies are served at `/[locale]/projects/[slug]` when a project has `caseStudyUrl` and a registry entry in `src/content/[locale]/case-studies/index.ts`.
+
+Spanish CV path is configured as `/cv/manuel-quistial-cv-es.pdf` (add the PDF to `public/cv/` when available).
 
 ## Analytics
 
@@ -111,8 +113,7 @@ When unset, no analytics script is loaded.
 
 - [ ] Experience `period` values verified against your CV
 - [ ] CV PDF in `public/cv/` aligned with site content
-- [ ] Copy review: no em dashes, no internal URLs, no credentials
-- [ ] Planned projects (`published: false`) not visible in UI
+- [ ] Copy review: no em dashes, no internal URLs, no credentials, no phone number on site
 - [ ] Case studies (UDEA FCF, Babel Scores) reviewed for sensitive details
 - [ ] `pnpm validate` passes locally
 

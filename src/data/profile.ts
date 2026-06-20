@@ -7,13 +7,18 @@ export const profile = {
   email: "manuel.quistialj@gmail.com",
   linkedin: "https://www.linkedin.com/in/manuelquistial",
   github: "https://github.com/manuelquistial",
-  cv: "/cv/manuel-quistial-cv-en.pdf",
+  cv: {
+    en: "/cv/manuel-quistial-cv-en.pdf",
+    es: "/cv/manuel-quistial-cv-es.pdf",
+  },
 } as const;
 
-export function getCvUrl(): string {
-  return profile.cv;
+export function getCvUrl(locale: "en" | "es" = "en"): string {
+  return profile.cv[locale];
 }
 
-export function getCvDownloadName(): string {
-  return "Manuel_Quistial_CV.pdf";
+export function getCvDownloadName(locale: "en" | "es" = "en"): string {
+  return locale === "es"
+    ? "Manuel_Quistial_CV_es.pdf"
+    : "Manuel_Quistial_CV.pdf";
 }

@@ -1,19 +1,39 @@
 import type { Metadata } from "next";
-import { siteContent } from "@/content";
+import { getSiteContent } from "@/content/getSiteContent";
 import { experience } from "@/data/experience";
+import { parseLocale } from "@/i18n/parseLocale";
+import { localizeExperienceList } from "@/lib/localize";
+import { localizedPath } from "@/lib/localizedPath";
 import { buildPageMetadata } from "@/lib/metadata";
 import { Section } from "@/components/layout/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { ExperienceCard } from "@/components/ui/ExperienceCard";
 
-export const metadata: Metadata = buildPageMetadata({
-  title: siteContent.meta.pages.about.title,
-  description: siteContent.meta.pages.about.description,
-  path: "/about",
-});
+interface AboutPageProps {
+  params: Promise<{ locale: string }>;
+}
 
-export default function AboutPage() {
-  const { aboutPage } = siteContent;
+export async function generateMetadata({
+  params,
+}: AboutPageProps): Promise<Metadata> {
+  const locale = parseLocale((await params).locale);
+  const content = getSiteContent(locale);
+
+  return buildPageMetadata({
+    title: content.meta.pages.about.title,
+    description: content.meta.pages.about.description,
+    path: "/about",
+    locale,
+  });
+}
+
+export default async function AboutPage({ params }: AboutPageProps) {
+  const locale = parseLocale((await params).locale);
+  const content = getSiteContent(locale);
+  const { aboutPage } = content;
+  const localizedExperience = localizeExperienceList(experience, locale);
+  const researchLinkLabel =
+    locale === "es" ? "Ver investigación →" : "View research →";
 
   return (
     <Section>
@@ -59,19 +79,39 @@ export default function AboutPage() {
         </h2>
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
           {aboutPage.education.items.map((item) => (
-            <article key={item.program} className="card-surface p-6 sm:p-8">
+            <article key={item.degree} className="card-surface p-6 sm:p-8">
               <h3 className="text-lg font-semibold text-foreground">
-                {item.program}
+                {item.degree}
               </h3>
               <p className="mt-2 text-sm font-medium text-accent">
                 {item.institution}
               </p>
-              <p className="mt-4 text-sm leading-relaxed text-muted">
-                {item.focus}
-              </p>
+              <p className="mt-2 text-xs text-muted">{item.period}</p>
+              {"focus" in item && item.focus ? (
+                <p className="mt-4 text-sm leading-relaxed text-muted">
+                  {item.focus}
+                </p>
+              ) : null}
             </article>
           ))}
         </div>
+      </section>
+
+      <section className="mt-14">
+        <h2 className="text-xl font-semibold text-foreground">
+          {aboutPage.languages.title}
+        </h2>
+        <ul className="mt-6 grid gap-3 sm:grid-cols-3">
+          {aboutPage.languages.items.map((item) => (
+            <li
+              key={item.language}
+              className="card-surface px-4 py-3.5 text-sm text-foreground"
+            >
+              <span className="font-medium">{item.language}</span>
+              <span className="text-muted"> · {item.level}</span>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <section className="mt-14">
@@ -89,10 +129,10 @@ export default function AboutPage() {
               </p>
               {item.href ? (
                 <a
-                  href={item.href}
+                  href={localizedPath(locale, item.href)}
                   className="mt-4 inline-block text-sm font-medium text-accent transition-colors hover:text-accent-hover"
                 >
-                  View research →
+                  {researchLinkLabel}
                 </a>
               ) : null}
             </li>
@@ -117,13 +157,13 @@ export default function AboutPage() {
       </section>
 
       <section className="mt-16">
-        <SectionTitle title={siteContent.sections.experience} />
+        <SectionTitle title={content.sections.experience} />
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
-          {experience.map((item) => (
+          {localizedExperience.map((item) => (
             <ExperienceCard
               key={item.id}
               item={item}
-              currentLabel={siteContent.experiencePreview.currentLabel}
+              currentLabel={content.experiencePreview.currentLabel}
             />
           ))}
         </div>

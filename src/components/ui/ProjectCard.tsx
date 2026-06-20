@@ -38,22 +38,13 @@ export function ProjectCard({
   return (
     <article
       className={cn(
-        "card-surface flex h-full flex-col overflow-hidden p-6 sm:p-7",
+        "card-surface flex h-full flex-col p-6 sm:p-7",
         project.featured && project.category === "engineering" && detailed
           ? "lg:p-8"
           : null,
         className,
       )}
     >
-      {project.thumbnailUrl ? (
-        <div className="-mx-6 -mt-6 mb-5 overflow-hidden sm:-mx-7 sm:-mt-7">
-          <img
-            src={project.thumbnailUrl}
-            alt=""
-            className="aspect-[16/9] w-full object-cover"
-          />
-        </div>
-      ) : null}
       <div className="flex items-start justify-between gap-3">
         <div>
           <h3

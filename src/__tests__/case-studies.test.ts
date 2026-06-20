@@ -1,28 +1,26 @@
 import { describe, expect, it } from "vitest";
-import { caseStudies } from "@/content/case-studies";
-import {
-  getPublishedCaseStudyProjects,
-  getPublishedProjects,
-} from "@/data/projects";
+import { getCaseStudies } from "@/content/getCaseStudy";
+import { getCaseStudyProjects, projects } from "@/data/projects";
 
 describe("case study registry parity", () => {
-  it("maps every published case study URL to registry content", () => {
-    const caseStudyProjects = getPublishedCaseStudyProjects();
+  it("maps every case study URL to registry content in both locales", () => {
+    const caseStudyProjects = getCaseStudyProjects();
 
     caseStudyProjects.forEach((project) => {
       expect(project.caseStudyUrl).toBe(`/projects/${project.id}`);
-      expect(caseStudies[project.id as keyof typeof caseStudies]).toBeDefined();
+      expect(getCaseStudies("en")[project.id as keyof ReturnType<typeof getCaseStudies>]).toBeDefined();
+      expect(getCaseStudies("es")[project.id as keyof ReturnType<typeof getCaseStudies>]).toBeDefined();
     });
   });
 
   it("uses project id as case study slug", () => {
-    Object.keys(caseStudies).forEach((projectId) => {
-      const project = getPublishedProjects().find(
-        (item) => item.id === projectId,
-      );
+    Object.keys(getCaseStudies("en")).forEach((projectId) => {
+      const project = projects.find((item) => item.id === projectId);
 
       expect(project).toBeDefined();
-      expect(project?.caseStudyUrl).toBe(`/projects/${projectId}`);
+      expect(
+        "caseStudyUrl" in project! ? project.caseStudyUrl : undefined,
+      ).toBe(`/projects/${projectId}`);
     });
   });
 });

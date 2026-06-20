@@ -1,10 +1,13 @@
+import type { Locale } from "@/i18n/config";
 import type { Experience } from "@/data/experience";
+import { localizedPath } from "@/lib/localizedPath";
 import { Section } from "@/components/layout/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { ExperienceCard } from "@/components/ui/ExperienceCard";
 import { ViewAllLink } from "@/components/ui/ViewAllLink";
 
 interface ExperiencePreviewProps {
+  locale: Locale;
   items: readonly Experience[];
   sectionLabel: string;
   viewAllLabel: string;
@@ -12,6 +15,7 @@ interface ExperiencePreviewProps {
 }
 
 export function ExperiencePreview({
+  locale,
   items,
   sectionLabel,
   viewAllLabel,
@@ -31,8 +35,8 @@ export function ExperiencePreview({
         ))}
       </div>
 
-      <div className="mt-10">
-        <ViewAllLink href="/about">{viewAllLabel}</ViewAllLink>
+      <div className="mt-6">
+        <ViewAllLink href={localizedPath(locale, "/about")}>{viewAllLabel}</ViewAllLink>
       </div>
     </Section>
   );

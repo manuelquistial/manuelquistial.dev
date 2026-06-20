@@ -2,11 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import type { Locale } from "@/i18n/config";
 import type { SiteContent } from "@/content";
 import { navItems } from "@/config/navigation";
+import { localizedPath } from "@/lib/localizedPath";
 import { cn } from "@/lib/utils";
 
 interface NavLinksProps {
+  locale: Locale;
   nav: SiteContent["nav"];
   ariaLabel: string;
   className?: string;
@@ -14,6 +17,7 @@ interface NavLinksProps {
 }
 
 export function NavLinks({
+  locale,
   nav,
   ariaLabel,
   className,
@@ -24,10 +28,10 @@ export function NavLinks({
   return (
     <nav className={className} aria-label={ariaLabel}>
       {navItems.map((item) => {
-        const href = item.path === "" ? "/" : item.path;
+        const href = localizedPath(locale, item.path);
         const isActive =
           pathname === href ||
-          (item.path !== "" && pathname.startsWith(href));
+          (item.path !== "" && pathname.startsWith(`${href}/`));
 
         return (
           <Link

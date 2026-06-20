@@ -1,12 +1,15 @@
+import type { Locale } from "@/i18n/config";
 import type { SiteContent } from "@/content";
+import { localizedPath } from "@/lib/localizedPath";
 import { Section } from "@/components/layout/Section";
 import { Button } from "@/components/ui/Button";
 
 interface ContactCTAProps {
+  locale: Locale;
   content: SiteContent["contactCta"];
 }
 
-export function ContactCTA({ content }: ContactCTAProps) {
+export function ContactCTA({ locale, content }: ContactCTAProps) {
   return (
     <Section border>
       <div className="card-surface rounded-2xl p-8 sm:p-10 lg:flex lg:items-center lg:justify-between lg:gap-10">
@@ -17,7 +20,7 @@ export function ContactCTA({ content }: ContactCTAProps) {
           <p className="mt-4 leading-relaxed text-muted">{content.description}</p>
         </div>
         <div className="mt-8 shrink-0 lg:mt-0">
-          <Button href="/contact" size="lg">
+          <Button href={localizedPath(locale, "/contact")} size="lg">
             {content.button}
           </Button>
         </div>

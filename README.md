@@ -16,13 +16,13 @@ A statically generated bilingual portfolio (English and Spanish) built with Next
 | Language | TypeScript |
 | Styling | Tailwind CSS v4 |
 | Quality | ESLint, Vitest, GitHub Actions CI |
-| Tooling | pnpm, Node.js 24 (nvm) |
+| Tooling | pnpm, Node.js 24.x (nvm) |
 | Hosting | Vercel |
 
 ## Requirements
 
 - [nvm](https://github.com/nvm-sh/nvm)
-- Node.js 24 (`.nvmrc` included: run `nvm use`)
+- Node.js 24.x (pinned in `package.json` `engines`, `.nvmrc`, and `.node-version`; run `nvm use`)
 - pnpm 11+
 
 ## Run locally
@@ -124,7 +124,7 @@ When unset, no analytics script is loaded.
 3. Recommended settings:
    - **Install Command:** `pnpm install`
    - **Build Command:** `pnpm build`
-   - **Node.js Version:** 24.x
+   - **Node.js Version:** 24.x (from `package.json` `engines`; do not use `>=24`)
 4. Add custom domain `manuelquistial.dev`.
 5. Optionally set `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` in project environment variables.
 6. Run `pnpm validate` locally before each release.

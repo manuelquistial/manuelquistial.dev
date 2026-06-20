@@ -1,12 +1,12 @@
 export const meta = {
   title: "Manuel Quistial | Software Engineer",
   description:
-    "Full-stack software engineer at Anthology/Blackboard, institutional systems at UdeA FCF, publishing platform engineering on Babel Scores, and EEG/BCI research at Universidad de Antioquia.",
+    "Enterprise full-stack engineer at Anthology/Blackboard, with backend and cloud experience from Digital Americas, freelance WordPress delivery, the Facultad de Comunicaciones y Filología, Universidad de Antioquia digital ecosystem and BCI research.",
     pages: {
     about: {
       title: "About",
       description:
-        "Enterprise full-stack engineering, institutional systems at UdeA FCF, and neuroengineering research.",
+        "Enterprise full-stack at Anthology/Blackboard, backend and cloud at Digital Americas, and selective freelance delivery.",
     },
     projects: {
       title: "Projects",
@@ -43,9 +43,9 @@ export const a11y = {
 export const hero = {
   title: "Software Engineer | Full-Stack, AI & Neuroengineering",
   subtitle:
-    "Enterprise platforms at Anthology/Blackboard, the UdeA FCF institutional ecosystem, Babel Scores publishing engineering, and EEG-based BCI research at Universidad de Antioquia.",
+    "Enterprise full-stack engineer at Anthology/Blackboard, with backend and cloud foundations from Digital Americas, direct-client work on Babel Scores, WordPress freelance via Sal & Picciotto and institutional software at Facultad de Comunicaciones y Filología, Universidad de Antioquia.",
   secondary:
-    "10 years across React, TypeScript, Java, Spring Boot, Laravel, WordPress, Keycloak, and Python: from legacy modernization and CI/CD to applied ML with FBCSP, LDA, and subject-disjoint evaluation.",
+    "~4 years on enterprise edtech at Anthology/Blackboard (React, TypeScript, Java, Spring Boot), with prior backend and AWS work at Digital Americas. Babel Scores, Sal & Picciotto, Facultad de Comunicaciones y Filología, Universidad de Antioquia and master's research continue in parallel.",
   viewProjects: "View Projects",
   downloadCv: "Download CV",
   linkedin: "LinkedIn",
@@ -66,7 +66,7 @@ export const sections = {
 };
 
 export const agencyWebProjectsIntro =
-  "Selected production websites delivered through Sal & Picciotto, focused on WordPress implementation, Elementor Pro layouts, custom fields, code snippets, responsive design, multilingual content with Polylang and business-oriented web experiences.";
+  "Selected production websites built through Sal & Picciotto, focused on WordPress implementation, Elementor Pro layouts, custom fields, code snippets, responsive design, multilingual content with Polylang and business-oriented web experiences.";
 
 export const footer = {
   rights: "All rights reserved.",
@@ -90,7 +90,7 @@ export const projectCard = {
   liveDemo: "Live Demo",
   liveSite: "Live Site",
   caseStudy: "Case Study",
-  deliveredThrough: "Delivered through",
+  deliveredThrough: "Via",
 };
 
 export const contactCta = {

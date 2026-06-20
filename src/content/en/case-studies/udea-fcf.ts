@@ -1,14 +1,14 @@
 import type { CaseStudyContent } from "@/content/case-study-types";
 
 export const udeaFcfCaseStudy: CaseStudyContent = {
-  title: "UDEA FCF Digital Ecosystem",
+  title: "Digital Ecosystem: Facultad de Comunicaciones y Filología, Universidad de Antioquia",
   subtitle:
-    "Institutional software modernization for the Facultad de Comunicaciones y Filología at Universidad de Antioquia.",
+    "Institutional software modernization for Facultad de Comunicaciones y Filología, Universidad de Antioquia.",
   backLabel: "Back to projects",
   overview: {
     title: "Institutional Context",
     paragraphs: [
-      "The Facultad de Comunicaciones y Filología at Universidad de Antioquia operates multiple administrative and academic processes that evolved over years of incremental development. Rather than a single application, the faculty relies on an interconnected ecosystem of services supporting administrative and academic workflows, institutional reporting and identity management.",
+      "Facultad de Comunicaciones y Filología, Universidad de Antioquia operates multiple administrative and academic processes that evolved over years of incremental development. Rather than a single application, the faculty relies on an interconnected ecosystem of services supporting administrative and academic workflows, institutional reporting and identity management.",
       "The engineering challenge is not building one greenfield product: it is coordinating legacy modernization, shared authentication, consistent data workflows and new interfaces while keeping critical processes available to staff and students.",
     ],
   },

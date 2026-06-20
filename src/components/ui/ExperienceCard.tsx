@@ -15,24 +15,24 @@ export function ExperienceCard({
 }: ExperienceCardProps) {
   return (
     <article className={cn("card-surface p-6 sm:p-7", className)}>
-      <div className="flex flex-wrap items-start justify-between gap-3">
-        <div>
-          <h3 className="text-lg font-semibold text-foreground">
+      <div>
+        <div className="flex flex-wrap items-start justify-between gap-x-3 gap-y-2">
+          <h3 className="min-w-0 flex-1 text-lg font-semibold text-foreground">
             {item.company}
           </h3>
-          <p className="mt-1.5 text-sm font-medium text-accent">{item.role}</p>
-          <p className="mt-1 text-xs text-muted">
-            {item.period}
-            {item.location ? ` · ${item.location}` : ""}
-          </p>
-          {item.type ? (
-            <p className="mt-1 text-xs text-muted">{item.type}</p>
+          {item.current && currentLabel ? (
+            <span className="shrink-0 rounded-full border border-accent/30 bg-accent/10 px-2.5 py-0.5 text-xs font-medium text-accent">
+              {currentLabel}
+            </span>
           ) : null}
         </div>
-        {item.current && currentLabel ? (
-          <span className="rounded-full border border-accent/30 bg-accent/10 px-2.5 py-0.5 text-xs font-medium text-accent">
-            {currentLabel}
-          </span>
+        <p className="mt-1.5 text-sm font-medium text-accent">{item.role}</p>
+        <p className="mt-1 text-xs text-muted">
+          {item.period}
+          {item.location ? ` · ${item.location}` : ""}
+        </p>
+        {item.type ? (
+          <p className="mt-1 text-xs text-muted">{item.type}</p>
         ) : null}
       </div>
       <p className="mt-4 text-sm leading-relaxed text-muted">

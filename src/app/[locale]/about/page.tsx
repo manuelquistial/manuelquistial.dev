@@ -4,6 +4,7 @@ import { experience } from "@/data/experience";
 import { parseLocale } from "@/i18n/parseLocale";
 import { localizeExperienceList } from "@/lib/localize";
 import { localizedPath } from "@/lib/localizedPath";
+import { pageSections } from "@/lib/pageSections";
 import { buildPageMetadata } from "@/lib/metadata";
 import { Section } from "@/components/layout/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
@@ -37,7 +38,9 @@ export default async function AboutPage({ params }: AboutPageProps) {
 
   return (
     <Section>
-      <SectionTitle title={aboutPage.title} subtitle={aboutPage.intro} />
+      <div id={pageSections.about}>
+        <SectionTitle title={aboutPage.title} subtitle={aboutPage.intro} />
+      </div>
 
       <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
         <article className="card-surface p-6 sm:p-8">
@@ -156,9 +159,9 @@ export default async function AboutPage({ params }: AboutPageProps) {
         </ul>
       </section>
 
-      <section className="mt-16">
+      <section id={pageSections.experience} className="mt-16">
         <SectionTitle title={content.sections.experience} />
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-5 md:grid-cols-2">
           {localizedExperience.map((item) => (
             <ExperienceCard
               key={item.id}

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getSiteContent } from "@/content/getSiteContent";
 import { parseLocale } from "@/i18n/parseLocale";
 import { buildPageMetadata } from "@/lib/metadata";
+import { pageSections } from "@/lib/pageSections";
 import { Section } from "@/components/layout/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 
@@ -34,7 +35,7 @@ export default async function ResearchPage({ params }: ResearchPageProps) {
         subtitle={researchPage.subtitle}
       />
 
-      <section className="card-surface mb-10 p-6 sm:p-8">
+      <section id={pageSections.researchOverview} className="card-surface mb-10 p-6 sm:p-8">
         <h2 className="text-xl font-semibold text-foreground">
           {researchPage.overview.title}
         </h2>

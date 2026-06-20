@@ -1,12 +1,12 @@
 export const meta = {
   title: "Manuel Quistial | Ingeniero de Software",
   description:
-    "Ingeniero full-stack en Anthology/Blackboard, sistemas institucionales en UdeA FCF, ingeniería de plataformas editoriales en Babel Scores e investigación EEG/BCI en la Universidad de Antioquia.",
+    "Ingeniero full-stack empresarial en Anthology/Blackboard, con experiencia previa en backend y cloud en Digital Americas, entrega freelance WordPress, ecosistema digital de Facultad de Comunicaciones y Filología, Universidad de Antioquia e investigación BCI.",
   pages: {
     about: {
       title: "Sobre mí",
       description:
-        "Ingeniería full-stack empresarial, sistemas institucionales en UdeA FCF e investigación en neuroingeniería.",
+        "Full-stack empresarial en Anthology/Blackboard, backend y cloud en Digital Americas y freelance selectivo.",
     },
     projects: {
       title: "Proyectos",
@@ -16,7 +16,7 @@ export const meta = {
     research: {
       title: "Investigación",
       description:
-        "Clasificación de imaginación motora con EEG, extracción FBCSP y evaluación ML subject-disjoint para sistemas BCI.",
+        "Clasificación de imaginación motora con EEG, extracción FBCSP y evaluación de ML entre sujetos para sistemas BCI.",
     },
     contact: {
       title: "Contacto",
@@ -43,9 +43,9 @@ export const a11y = {
 export const hero = {
   title: "Software Engineer | Full-Stack, AI & Neuroengineering",
   subtitle:
-    "Plataformas empresariales en Anthology/Blackboard, el ecosistema institucional UdeA FCF, ingeniería editorial en Babel Scores e investigación BCI con EEG en la Universidad de Antioquia.",
+    "Ingeniero full-stack empresarial en Anthology/Blackboard, con base en backend y cloud en Digital Americas, trabajo directo con Babel Scores, freelance WordPress con Sal & Picciotto y software institucional en Facultad de Comunicaciones y Filología, Universidad de Antioquia.",
   secondary:
-    "10 años con React, TypeScript, Java, Spring Boot, Laravel, WordPress, Keycloak y Python: desde modernización legacy y CI/CD hasta ML aplicado con FBCSP, LDA y evaluación subject-disjoint.",
+    "~4 años en edtech empresarial en Anthology/Blackboard (React, TypeScript, Java, Spring Boot), con trabajo previo en backend y AWS en Digital Americas. Babel Scores, Sal & Picciotto, Facultad de Comunicaciones y Filología, Universidad de Antioquia y la investigación de maestría continúan en paralelo.",
   viewProjects: "Ver proyectos",
   downloadCv: "Descargar CV",
   linkedin: "LinkedIn",
@@ -66,7 +66,7 @@ export const sections = {
 };
 
 export const agencyWebProjectsIntro =
-  "Sitios web en producción entregados con Sal & Picciotto, enfocados en WordPress, layouts con Elementor Pro, campos personalizados, snippets de código, diseño responsive, contenido multilingüe con Polylang y experiencias web orientadas al negocio.";
+  "Selección de sitios web en producción desarrollados con Sal & Picciotto, con implementación en WordPress, layouts en Elementor Pro, campos personalizados, snippets de código, diseño responsive, contenido multilingüe con Polylang y experiencias web orientadas al negocio.";
 
 export const footer = {
   rights: "Todos los derechos reservados.",
@@ -81,7 +81,7 @@ export const projectStatus = {
   planned: "Planificado",
   inProgress: "En progreso",
   completed: "Completado",
-  live: "En vivo",
+  live: "Publicado",
   comingSoon: "Próximamente",
 };
 
@@ -89,8 +89,8 @@ export const projectCard = {
   github: "GitHub",
   liveDemo: "Demo en vivo",
   liveSite: "Sitio en vivo",
-  caseStudy: "Case study",
-  deliveredThrough: "Entregado con",
+  caseStudy: "Estudio de caso",
+  deliveredThrough: "Vía",
 };
 
 export const contactCta = {

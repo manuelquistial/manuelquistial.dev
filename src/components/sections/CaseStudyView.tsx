@@ -4,7 +4,8 @@ import type { CaseStudyContent } from "@/content";
 import { getCaseStudySections } from "@/content";
 import type { Project } from "@/data/projects";
 import type { SiteContent } from "@/content";
-import { localizedPath } from "@/lib/localizedPath";
+import { localizedPath, localizedSectionPath } from "@/lib/localizedPath";
+import { pageSections } from "@/lib/pageSections";
 import { getProjectStatusLabel } from "@/lib/projects";
 import { Section } from "@/components/layout/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
@@ -111,7 +112,15 @@ export function CaseStudyView({
       </div>
 
       <div className="mt-12">
-        <ViewAllLink href={localizedPath(locale, "/projects")}>{caseStudy.backLabel}</ViewAllLink>
+        <ViewAllLink
+          href={localizedSectionPath(
+            locale,
+            "/projects",
+            pageSections.engineering,
+          )}
+        >
+          {caseStudy.backLabel}
+        </ViewAllLink>
       </div>
     </Section>
   );

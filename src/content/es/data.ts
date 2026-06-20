@@ -3,10 +3,10 @@ import type { LocaleData } from "@/content/locale-data-types";
 export const data: LocaleData = {
   projects: {
     "udea-fcf-digital-ecosystem": {
-      title: "Ecosistema Digital UdeA FCF",
+      title: "Ecosistema Digital: Facultad de Comunicaciones y Filología, Universidad de Antioquia",
       clientType: "Proyecto institucional",
       description:
-        "Ecosistema de software institucional para la Facultad de Comunicaciones y Filología de la Universidad de Antioquia, incluyendo modernización legacy, flujos administrativos y académicos, servicios de reportes institucionales y gestión centralizada de identidad con Keycloak/OIDC.",
+        "Ecosistema de software institucional para Facultad de Comunicaciones y Filología, Universidad de Antioquia, incluyendo modernización legacy, flujos administrativos y académicos, servicios de reportes institucionales y gestión centralizada de identidad con Keycloak/OIDC.",
       longDescription:
         "Ecosistema multi-aplicación que combina sistemas legacy, aplicaciones modernizadas e infraestructura compartida. El trabajo incluye aplicaciones legacy en Laravel y Symfony, APIs Laravel modernas, frontends React y Next.js, servicios de reportes en Python con FastAPI y Flask, flujos de datos con MySQL y PostgreSQL, entornos Docker, documentación, scripts de validación y autenticación centralizada con Keycloak/OIDC.",
     },
@@ -29,7 +29,7 @@ export const data: LocaleData = {
         "Sitio web de agencia implementado con WordPress y Elementor Pro, enfocado en layouts responsive, estructura de contenido, consistencia visual y secciones mantenibles.",
     },
     "trapatsa-eye-center": {
-      title: "TrapatSa Eye Center",
+      title: "Trapatsas Eye Center",
       description:
         "Sitio web de salud desarrollado con WordPress y Elementor Pro, incluyendo páginas responsive, secciones orientadas a servicios y actualizaciones en producción.",
     },
@@ -59,31 +59,37 @@ export const data: LocaleData = {
       role: "Ingeniero de Software / Full-Stack",
       type: "Software empresarial",
       description:
-        "Trabajé en software de educación empresarial usando React, TypeScript, Redux, migración Angular a React, Java, Spring Boot, PostgreSQL, feature flags con AWS Lambda, pipelines CI/CD, pruebas automatizadas y pruebas end-to-end de UI.",
-    },
-    "udea-fcf": {
-      role: "Ingeniero de Software",
-      type: "Ecosistema de software institucional",
-      description:
-        "Trabajé en sistemas de software institucional con modernización legacy, aplicaciones Laravel y Symfony, frontends React y Next.js, servicios de reportes en Python, flujos de datos, entornos Docker, documentación, scripts de validación y autenticación centralizada con Keycloak/OIDC.",
-    },
-    "universidad-antioquia-research": {
-      role: "Investigador en Neuroingeniería / Estudiante de Maestría",
-      type: "Investigación",
-      description:
-        "Trabajé en software orientado a investigación y proyectos de neuroingeniería, incluyendo aplicaciones de rehabilitación cognitiva y un enfoque actual de maestría en clasificación de imaginación motora con EEG, sistemas BCI, procesamiento de señales y evaluación de machine learning.",
-    },
-    "sal-picciotto": {
-      role: "Desarrollador WordPress / Frontend",
-      type: "Proyectos de agencia",
-      description:
-        "Entregué sitios web con WordPress y Elementor Pro a través de Sal & Picciotto para clientes corporativos, de salud, inmobiliarios, sin fines de lucro y campañas. Trabajé en layouts responsive, estructura de contenido, campos ACF, WordPress Code Snippets, CSS personalizado, JavaScript, secciones multilingües con Polylang y actualizaciones en producción.",
+        "Software educativo empresarial a escala: frontends en React y TypeScript, servicios en Java y Spring Boot, PostgreSQL, migración de Angular a React, feature flags con AWS Lambda, pipelines CI/CD y pruebas automatizadas.",
     },
     "digital-americas-pipeline": {
       role: "Desarrollador Backend",
       type: "Backend / Cloud",
       description:
-        "Trabajé en sistemas backend y cloud usando Node.js, Express, AWS Lambda, SNS/SQS, EC2, API Gateway y herramientas basadas en Electron.",
+        "Desarrollo backend en sistemas cloud con Node.js, Express, AWS Lambda, SNS/SQS, EC2, API Gateway y herramientas basadas en Electron.",
+    },
+    "sal-picciotto": {
+      role: "Desarrollador WordPress / Frontend",
+      type: "Freelance / Agencia",
+      description:
+        "Proyectos freelance de WordPress y Elementor Pro con Sal & Picciotto para clientes corporativos, del sector salud, inmobiliarios, organizaciones sin fines de lucro y campañas. Layouts responsive, ACF, Polylang, CSS y JavaScript personalizados y actualizaciones en producción.",
+    },
+    "babel-scores": {
+      role: "Ingeniero de Software / Full-Stack",
+      type: "Cliente directo / Plataforma editorial",
+      description:
+        "Plataforma editorial y de e-commerce para cliente directo sobre WordPress y WooCommerce: plugins personalizados, herramientas flipbook en React con Fabric.js y PDF.js, AWS S3, WPML, tareas asíncronas, flujos multivendor y acceso institucional federado.",
+    },
+    "udea-fcf": {
+      role: "Ingeniero de Software",
+      type: "Ecosistema de software institucional",
+      description:
+        "Software institucional para el ecosistema digital de Facultad de Comunicaciones y Filología, Universidad de Antioquia: modernización legacy, aplicaciones Laravel y Symfony, frontends React y Next.js, servicios de reportes en Python, entornos Docker, scripts de validación y autenticación centralizada con Keycloak/OIDC.",
+    },
+    "universidad-antioquia-research": {
+      role: "Investigador en Neuroingeniería / Estudiante de Maestría",
+      type: "Investigación",
+      description:
+        "Investigación de maestría en clasificación de imaginación motora con EEG, sistemas BCI, procesamiento de señales y evaluación con machine learning, con base en trabajo previo en rehabilitación cognitiva.",
     },
   },
   skills: {

@@ -1,5 +1,5 @@
 import { getSiteContent } from "@/content/getSiteContent";
-import { experience } from "@/data/experience";
+import { getFeaturedExperience } from "@/data/experience";
 import {
   getFeaturedProjects,
   getProjectsByCategory,
@@ -14,7 +14,8 @@ import {
   localizeProjects,
   localizeSkillCategories,
 } from "@/lib/localize";
-import { localizedPath } from "@/lib/localizedPath";
+import { localizedSectionPath } from "@/lib/localizedPath";
+import { pageSections } from "@/lib/pageSections";
 import { Hero } from "@/components/sections/Hero";
 import { AboutPreview } from "@/components/sections/AboutPreview";
 import { SkillsSection } from "@/components/sections/SkillsSection";
@@ -51,10 +52,7 @@ export default async function HomePage({ params }: HomePageProps) {
     getSkillCategoriesByIds(content.homeSkillCategoryIds),
     locale,
   );
-  const experiencePreview = localizeExperienceList(
-    experience.slice(0, 4),
-    locale,
-  );
+  const experiencePreview = localizeExperienceList(getFeaturedExperience(), locale);
 
   return (
     <>
@@ -68,7 +66,11 @@ export default async function HomePage({ params }: HomePageProps) {
       <CategoryProjectsSection
         title={content.sections.engineeringProjects}
         projects={engineeringProjects}
-        viewAllHref={localizedPath(locale, "/projects")}
+        viewAllHref={localizedSectionPath(
+          locale,
+          "/projects",
+          pageSections.engineering,
+        )}
         viewAllLabel={content.sections.viewAll}
         projectCard={content.projectCard}
         projectStatus={content.projectStatus}
@@ -85,7 +87,11 @@ export default async function HomePage({ params }: HomePageProps) {
       <CategoryProjectsSection
         title={content.sections.researchProjects}
         projects={researchProjects}
-        viewAllHref={localizedPath(locale, "/projects")}
+        viewAllHref={localizedSectionPath(
+          locale,
+          "/projects",
+          pageSections.research,
+        )}
         viewAllLabel={content.sections.viewAll}
         projectCard={content.projectCard}
         projectStatus={content.projectStatus}
@@ -99,7 +105,11 @@ export default async function HomePage({ params }: HomePageProps) {
         title={content.sections.agencyWebProjects}
         subtitle={content.agencyWebProjectsIntro}
         projects={agencyProjects}
-        viewAllHref={localizedPath(locale, "/projects")}
+        viewAllHref={localizedSectionPath(
+          locale,
+          "/projects",
+          pageSections.agencyWeb,
+        )}
         viewAllLabel={content.sections.viewAll}
         projectCard={content.projectCard}
         projectStatus={content.projectStatus}

@@ -9,13 +9,13 @@ export const babelScoresCaseStudy: CaseStudyContent = {
     title: "Contexto de la plataforma",
     paragraphs: [
       "Babel Scores es una plataforma de e-commerce personalizada para partituras musicales digitales, que combina navegación de catálogo, venta de partituras y flujos de acceso institucional. El producto va mucho más allá de un tema WordPress estándar: requiere lógica de comercio personalizada, un flipbook responsive basado en React, contenido multilingüe y acceso institucional federado para bibliotecas e instituciones.",
-      "El trabajo de ingeniería abarca personalización de WooCommerce, herramientas basadas en React, procesamiento de jobs en background e integración con almacenamiento en la nube, manteniendo flujos editoriales y de comercio mantenibles para stakeholders no técnicos.",
+      "El trabajo de ingeniería abarca personalización de WooCommerce, herramientas basadas en React, procesamiento de tareas en segundo plano e integración con almacenamiento en la nube, manteniendo flujos editoriales y de comercio mantenibles para equipos no técnicos.",
     ],
   },
   platform: {
     title: "Base WordPress y WooCommerce",
     paragraphs: [
-      "La plataforma se construye sobre WordPress con flujos WooCommerce fuertemente personalizados. Los patrones estándar de checkout y catálogo se extendieron para soportar reglas de negocio específicas de editoriales, variaciones de producto ligadas a activos digitales y flujos operativos que una tienda vanilla no puede ofrecer.",
+      "La plataforma se construye sobre WordPress con flujos WooCommerce fuertemente personalizados. Los patrones estándar de checkout y catálogo se extendieron para soportar reglas de negocio específicas de editoriales, variaciones de producto ligadas a activos digitales y flujos operativos que una tienda estándar no puede ofrecer.",
     ],
     items: [
       "Extensiones WooCommerce personalizadas y comportamiento de checkout",
@@ -25,14 +25,14 @@ export const babelScoresCaseStudy: CaseStudyContent = {
     ],
   },
   commerce: {
-    title: "Comercio y procesamiento async",
+    title: "Comercio y procesamiento asíncrono",
     paragraphs: [
-      "Los productos de partituras digitales implican preparación de activos, verificación de derechos y entrega post-compra. Las tareas de larga duración se manejan mediante procesamiento asíncrono de jobs para que las peticiones interactivas sigan siendo responsivas mientras generación de archivos, notificaciones y tareas de sincronización corren en background.",
+      "Los productos de partituras digitales implican preparación de activos, verificación de derechos y distribución post-compra. Las tareas de larga duración se manejan con procesamiento asíncrono para que las peticiones interactivas sigan siendo ágiles mientras la generación de archivos, las notificaciones y la sincronización corren en segundo plano.",
     ],
     items: [
-      "Colas de jobs async para procesamiento de activos y notificaciones",
+      "Colas de tareas asíncronas para procesamiento de activos y notificaciones",
       "Almacenamiento respaldado por S3 para archivos de partituras y activos derivados",
-      "Hooks del ciclo de vida de pedidos para fulfillment de productos digitales",
+      "Hooks del ciclo de vida de pedidos para la entrega de productos digitales",
       "Herramientas operativas para equipos de soporte y contenido",
     ],
   },
@@ -65,17 +65,17 @@ export const babelScoresCaseStudy: CaseStudyContent = {
     items: [
       "Diseñar e implementar funcionalidad personalizada de plugins WooCommerce y WordPress",
       "Construir herramientas de admin basadas en React para edición, vista previa y UX de flipbook",
-      "Integrar almacenamiento de activos S3 y procesamiento async de jobs en background",
+      "Integrar almacenamiento de activos S3 y procesamiento asíncrono de tareas en segundo plano",
       "Implementar flujos WPML y patrones de acceso institucional",
       "Mantener experiencias frontend responsive en flujos de catálogo y checkout",
-      "Apoyar releases en producción y mejoras iterativas de la plataforma",
+      "Apoyar despliegues en producción y mejoras iterativas de la plataforma",
     ],
   },
   learnings: {
     title: "Aprendizajes técnicos",
     items: [
       "Las plataformas editoriales necesitan límites claros entre CMS, comercio y pipelines de activos",
-      "Los jobs async son esenciales cuando productos digitales implican generación y entrega de archivos",
+      "Las tareas asíncronas son esenciales cuando productos digitales implican generación y distribución de archivos",
       "El acceso institucional requiere diseño explícito de sesiones y derechos",
       "Las herramientas React dentro del admin de WordPress funcionan mejor con bundles aislados y bien documentados",
       "Los requisitos multivendor y multilingües se complican pronto si no se modelan explícitamente desde el inicio",

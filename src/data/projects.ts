@@ -19,11 +19,11 @@ export type ProjectStatus = (typeof projectStatuses)[number];
 export const projects = [
   {
     id: "udea-fcf-digital-ecosystem",
-    title: "UDEA FCF Digital Ecosystem",
+    title: "Digital Ecosystem: Facultad de Comunicaciones y Filología, Universidad de Antioquia",
     category: "engineering",
     clientType: "Institutional Project",
     description:
-      "Institutional software ecosystem for the Facultad de Comunicaciones y Filología at Universidad de Antioquia, including legacy modernization, administrative and academic workflows, institutional reporting services and centralized identity management with Keycloak/OIDC.",
+      "Institutional software ecosystem for Facultad de Comunicaciones y Filología, Universidad de Antioquia, including legacy modernization, administrative and academic workflows, institutional reporting services and centralized identity management with Keycloak/OIDC.",
     longDescription:
       "A multi-application institutional ecosystem combining legacy systems, modernized applications and shared infrastructure. The work includes Laravel and Symfony legacy applications, modern Laravel APIs, React and Next.js frontends, Python reporting services with FastAPI and Flask, database workflows with MySQL and PostgreSQL, Docker-based local environments, documentation, validation scripts and centralized authentication with Keycloak/OIDC.",
     tags: [
@@ -118,7 +118,7 @@ export const projects = [
   },
   {
     id: "trapatsa-eye-center",
-    title: "TrapatSa Eye Center",
+    title: "Trapatsas Eye Center",
     category: "agency-web",
     agency: "Sal & Picciotto",
     description:

@@ -1,14 +1,14 @@
 import type { CaseStudyContent } from "@/content/case-study-types";
 
 export const udeaFcfCaseStudy: CaseStudyContent = {
-  title: "Ecosistema Digital UdeA FCF",
+  title: "Ecosistema Digital: Facultad de Comunicaciones y Filología, Universidad de Antioquia",
   subtitle:
-    "Modernización de software institucional para la Facultad de Comunicaciones y Filología de la Universidad de Antioquia.",
+    "Modernización de software institucional para Facultad de Comunicaciones y Filología, Universidad de Antioquia.",
   backLabel: "Volver a proyectos",
   overview: {
     title: "Contexto institucional",
     paragraphs: [
-      "La Facultad de Comunicaciones y Filología de la Universidad de Antioquia opera múltiples procesos administrativos y académicos que evolucionaron durante años de desarrollo incremental. En lugar de una sola aplicación, la facultad depende de un ecosistema interconectado de servicios que soportan flujos administrativos y académicos, reportes institucionales y gestión de identidad.",
+      "Facultad de Comunicaciones y Filología, Universidad de Antioquia opera múltiples procesos administrativos y académicos que evolucionaron durante años de desarrollo incremental. En lugar de una sola aplicación, la facultad depende de un ecosistema interconectado de servicios que soportan flujos administrativos y académicos, reportes institucionales y gestión de identidad.",
       "El desafío de ingeniería no es construir un producto greenfield: es coordinar la modernización legacy, autenticación compartida, flujos de datos consistentes e interfaces nuevas mientras los procesos críticos siguen disponibles para personal y estudiantes.",
     ],
   },
@@ -68,7 +68,7 @@ export const udeaFcfCaseStudy: CaseStudyContent = {
   modernization: {
     title: "Modernización progresiva",
     paragraphs: [
-      "El ecosistema se moderniza de forma incremental: identificar módulos acotados, exponerlos a través de APIs, reemplazar superficies de UI una a la vez y validar cada paso antes de mover dependencias. Esto reduce el riesgo frente a un reescritura completa y aun así avanza hacia una arquitectura mantenible.",
+      "El ecosistema se moderniza de forma incremental: identificar módulos acotados, exponerlos a través de APIs, reemplazar superficies de UI una a la vez y validar cada paso antes de mover dependencias. Esto reduce el riesgo frente a una reescritura integral y aun así avanza hacia una arquitectura mantenible.",
       "La documentación, scripts de validación y entornos Docker apoyan equipos que trabajan en PHP, Python y TypeScript, haciendo del onboarding y las verificaciones de regresión parte del flujo de trabajo estándar.",
     ],
     items: [

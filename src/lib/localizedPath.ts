@@ -6,6 +6,14 @@ export function localizedPath(locale: Locale, path = ""): string {
   return `/${locale}${normalized}`;
 }
 
+export function localizedSectionPath(
+  locale: Locale,
+  path: string,
+  sectionId: string,
+): string {
+  return `${localizedPath(locale, path)}#${sectionId}`;
+}
+
 export function stripLocale(pathname: string): string {
   const segments = pathname.split("/").filter(Boolean);
   if (segments.length > 0 && locales.includes(segments[0] as Locale)) {

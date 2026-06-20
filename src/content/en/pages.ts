@@ -7,27 +7,29 @@ import type {
 
 export const about = {
   previewParagraphs: [
-    "I am a software and electronic engineer from Colombia with 10 years of experience shipping production systems. At Anthology/Blackboard I work on enterprise edtech platforms: React and TypeScript frontends, Java and Spring Boot APIs, PostgreSQL, and CI/CD pipelines that serve institutions at scale.",
-    "At Universidad de Antioquia I contribute to the FCF Digital Ecosystem and Babel Scores publishing platform, while pursuing a master's in neuroengineering with EEG pipelines for motor imagery classification.",
+    "I spent ~4 years at Anthology/Blackboard on enterprise edtech: React and TypeScript frontends, Java and Spring Boot APIs, PostgreSQL and CI/CD pipelines for institutions at scale.",
+    "Before that, I worked on backend and cloud systems at Digital Americas Pipeline Initiative. I also take on selected freelance WordPress projects through Sal & Picciotto, contribute to the digital ecosystem at Facultad de Comunicaciones y Filología, Universidad de Antioquia and to Babel Scores, while pursuing neuroengineering research aligned with my master's program.",
   ],
   highlights: [
-    "Enterprise React & TypeScript at Anthology/Blackboard",
-    "Institutional multi-service systems at UdeA FCF",
-    "EEG/BCI research: FBCSP, LDA, subject-disjoint ML",
+    "~4 years enterprise full-stack at Anthology/Blackboard",
+    "Backend and cloud at Digital Americas (2020–2021)",
+    "Direct-client platform engineering on Babel Scores",
+    "WordPress freelance delivery via Sal & Picciotto",
   ],
 } satisfies AboutPreviewContent;
 
 export const aboutPage = {
   title: "About Me",
   intro:
-    "Manuel Alejandro Quistial Jurado, software and electronic engineer building reliable enterprise and institutional software, and EEG-based machine learning pipelines for BCI research.",
+    "Manuel Alejandro Quistial Jurado, software and electronic engineer focused on enterprise full-stack work at Anthology/Blackboard, with backend and cloud experience from Digital Americas, selective freelance delivery and parallel institutional and neuroengineering projects.",
   engineering: {
     title: "Software Engineering",
     paragraphs: [
-      "At Anthology/Blackboard I contribute to enterprise learning platforms used by institutions worldwide. My day-to-day spans React and TypeScript interfaces, Java and Spring Boot microservices, PostgreSQL schemas, Keycloak-based auth, and automated testing in CI/CD pipelines.",
-      "At Universidad de Antioquia, Facultad de Comunicaciones y Filología, I work on the FCF Digital Ecosystem with legacy modernization, Laravel and Symfony applications, React and Next.js frontends, Python reporting services with FastAPI and Flask, Docker environments, validation scripts and centralized authentication with Keycloak/OIDC for administrative and academic workflows and institutional reporting.",
-      "On Babel Scores, I engineer a custom publishing and e-commerce platform with WooCommerce, React, Fabric.js, PDF.js, S3, WPML, custom plugins, async jobs, multivendor flows and federated institutional access.",
-      "Delivered WordPress and Elementor Pro-based websites through Sal & Picciotto for corporate, healthcare, real estate, nonprofit and campaign-oriented clients, using Polylang, ACF, WordPress Code Snippets, custom CSS and JavaScript.",
+      "At Anthology/Blackboard I worked on enterprise learning platforms used by institutions worldwide: React and TypeScript interfaces, Java and Spring Boot microservices, PostgreSQL, Angular-to-React migration, AWS Lambda feature flags and automated testing in CI/CD pipelines.",
+      "At Digital Americas Pipeline Initiative I worked as a backend developer on Node.js, Express, AWS Lambda, SNS/SQS, EC2, API Gateway and Electron-based tooling.",
+      "On Babel Scores I build a direct-client publishing and e-commerce platform with WooCommerce, React, Fabric.js, PDF.js, S3, WPML, custom plugins, async jobs, multivendor flows and federated institutional access.",
+      "I contribute to the institutional digital ecosystem at Facultad de Comunicaciones y Filología, Universidad de Antioquia (Laravel, Symfony, React, Next.js, Python, Keycloak/OIDC).",
+      "Through Sal & Picciotto I deliver freelance WordPress and Elementor Pro projects for corporate, healthcare, real estate, nonprofit and campaign clients, using Polylang, ACF, WordPress Code Snippets, custom CSS and JavaScript.",
     ],
   },
   research: {
@@ -40,10 +42,11 @@ export const aboutPage = {
   focus: {
     title: "Current Focus",
     items: [
-      "Institutional ecosystems: legacy modernization, Keycloak/OIDC, multi-service architecture",
-      "Frontend architecture: React, TypeScript, Next.js, microfrontends",
-      "Backend systems: Java, Spring Boot, Laravel, Python, FastAPI",
-      "AI-assisted development and RAG-based knowledge tools",
+      "Enterprise full-stack at Anthology/Blackboard: React, TypeScript, Java, Spring Boot, CI/CD",
+      "Backend and cloud foundations from Digital Americas: Node.js, AWS Lambda, SNS/SQS",
+      "Direct-client platform engineering on Babel Scores",
+      "WordPress freelance delivery via Sal & Picciotto",
+      "Institutional systems at Facultad de Comunicaciones y Filología, Universidad de Antioquia: Laravel, Keycloak/OIDC, Python reporting",
       "EEG signal processing and BCI classification pipelines",
     ],
   },

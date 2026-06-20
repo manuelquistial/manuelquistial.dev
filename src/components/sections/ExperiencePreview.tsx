@@ -1,6 +1,7 @@
 import type { Locale } from "@/i18n/config";
 import type { Experience } from "@/data/experience";
-import { localizedPath } from "@/lib/localizedPath";
+import { localizedSectionPath } from "@/lib/localizedPath";
+import { pageSections } from "@/lib/pageSections";
 import { Section } from "@/components/layout/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { ExperienceCard } from "@/components/ui/ExperienceCard";
@@ -25,7 +26,7 @@ export function ExperiencePreview({
     <Section variant="muted">
       <SectionTitle title={sectionLabel} />
 
-      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-5 md:grid-cols-2">
         {items.map((item) => (
           <ExperienceCard
             key={item.id}
@@ -36,7 +37,11 @@ export function ExperiencePreview({
       </div>
 
       <div className="mt-6">
-        <ViewAllLink href={localizedPath(locale, "/about")}>{viewAllLabel}</ViewAllLink>
+        <ViewAllLink
+          href={localizedSectionPath(locale, "/about", pageSections.experience)}
+        >
+          {viewAllLabel}
+        </ViewAllLink>
       </div>
     </Section>
   );

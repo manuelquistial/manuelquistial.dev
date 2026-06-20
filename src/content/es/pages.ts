@@ -7,43 +7,46 @@ import type {
 
 export const about = {
   previewParagraphs: [
-    "Soy ingeniero de software y electrónico de Colombia con 10 años de experiencia entregando sistemas en producción. En Anthology/Blackboard trabajo en plataformas edtech empresariales: frontends en React y TypeScript, APIs en Java y Spring Boot, PostgreSQL y pipelines de CI/CD que sirven instituciones a escala.",
-    "En la Universidad de Antioquia contribuyo al Ecosistema Digital FCF y a la plataforma editorial Babel Scores, mientras curso una maestría en neuroingeniería con pipelines EEG para clasificación de imaginación motora.",
+    "Mi experiencia principal fueron ~4 años en Anthology/Blackboard en edtech empresarial: frontends en React y TypeScript, APIs en Java y Spring Boot, PostgreSQL y pipelines de CI/CD para instituciones a escala.",
+    "Antes trabajé en backend y cloud en Digital Americas Pipeline Initiative. También tomo proyectos freelance selectos de WordPress con Sal & Picciotto, contribuyo al ecosistema digital de Facultad de Comunicaciones y Filología, Universidad de Antioquia y a Babel Scores, mientras desarrollo investigación en neuroingeniería en el marco de la maestría.",
   ],
   highlights: [
-    "React y TypeScript empresarial en Anthology/Blackboard",
-    "Sistemas institucionales multi-servicio en UdeA FCF",
-    "Investigación EEG/BCI: FBCSP, LDA, ML subject-disjoint",
+    "~4 años full-stack empresarial en Anthology/Blackboard",
+    "Backend y cloud en Digital Americas (2020–2021)",
+    "Ingeniería de plataforma en Babel Scores (cliente directo)",
+    "Entrega freelance WordPress con Sal & Picciotto",
   ],
 } satisfies AboutPreviewContent;
 
 export const aboutPage = {
   title: "Sobre mí",
   intro:
-    "Manuel Alejandro Quistial Jurado, ingeniero de software y electrónico que construye software empresarial e institucional confiable, y pipelines de machine learning basados en EEG para investigación BCI.",
+    "Manuel Alejandro Quistial Jurado, ingeniero de software y electrónico con foco en full-stack empresarial en Anthology/Blackboard, experiencia previa en backend y cloud en Digital Americas, entrega freelance selectiva y proyectos institucionales y de neuroingeniería en paralelo.",
   engineering: {
     title: "Ingeniería de Software",
     paragraphs: [
-      "En Anthology/Blackboard contribuyo a plataformas de aprendizaje empresariales usadas por instituciones en todo el mundo. Mi día a día abarca interfaces en React y TypeScript, microservicios en Java y Spring Boot, esquemas PostgreSQL, autenticación con Keycloak y pruebas automatizadas en pipelines de CI/CD.",
-      "En la Universidad de Antioquia, Facultad de Comunicaciones y Filología, trabajo en el Ecosistema Digital FCF con modernización legacy, aplicaciones Laravel y Symfony, frontends React y Next.js, servicios de reportes en Python con FastAPI y Flask, entornos Docker, scripts de validación y autenticación centralizada con Keycloak/OIDC para flujos administrativos y académicos y reportes institucionales.",
-      "En Babel Scores, desarrollo una plataforma editorial y de e-commerce personalizada con WooCommerce, React, Fabric.js, PDF.js, S3, WPML, plugins personalizados, jobs asíncronos, flujos multivendor y acceso institucional federado.",
-      "Entregué sitios WordPress con Elementor Pro a través de Sal & Picciotto para clientes corporativos, de salud, inmobiliarios, sin fines de lucro y campañas, usando Polylang, ACF, WordPress Code Snippets, CSS y JavaScript personalizados.",
+      "En Anthology/Blackboard trabajé en plataformas de aprendizaje empresariales usadas por instituciones en todo el mundo: interfaces en React y TypeScript, microservicios en Java y Spring Boot, PostgreSQL, migración de Angular a React, feature flags con AWS Lambda y pruebas automatizadas en pipelines de CI/CD.",
+      "En Digital Americas Pipeline Initiative trabajé como desarrollador backend con Node.js, Express, AWS Lambda, SNS/SQS, EC2, API Gateway y herramientas basadas en Electron.",
+      "En Babel Scores construyo una plataforma editorial y de e-commerce para cliente directo con WooCommerce, React, Fabric.js, PDF.js, S3, WPML, plugins personalizados, tareas asíncronas, flujos multivendor y acceso institucional federado.",
+      "Contribuyo al ecosistema digital institucional de Facultad de Comunicaciones y Filología, Universidad de Antioquia (Laravel, Symfony, React, Next.js, Python, Keycloak/OIDC).",
+      "Con Sal & Picciotto desarrollo proyectos freelance de WordPress y Elementor Pro para clientes corporativos, del sector salud, inmobiliarios, organizaciones sin fines de lucro y campañas, con Polylang, ACF, WordPress Code Snippets, CSS y JavaScript personalizados.",
     ],
   },
   research: {
     title: "Neuroingeniería e Investigación",
     paragraphs: [
       "Como estudiante de maestría en la Universidad de Antioquia, investigo la clasificación de imaginación motora a partir de EEG: decodificar movimientos imaginados de mano a partir de registros en el cuero cabelludo. Mi pipeline aplica filtrado pasabanda, extracción de características FBCSP y clasificadores como LDA y SVM.",
-      "La evaluación sigue validación cruzada subject-disjoint para reflejar generalización entre participantes, no sobreajuste intra-sujeto. Trato el código de investigación como software en producción: experimentos versionados, preprocesamiento trazable y notebooks reproducibles.",
+      "La evaluación usa validación cruzada entre sujetos (leave-one-subject-out) para medir generalización entre participantes, no sobreajuste dentro del mismo sujeto. Trato el código de investigación como software en producción: experimentos versionados, preprocesamiento trazable y notebooks reproducibles.",
     ],
   },
   focus: {
     title: "Enfoque actual",
     items: [
-      "Ecosistemas institucionales: modernización legacy, Keycloak/OIDC, arquitectura multi-servicio",
-      "Arquitectura frontend: React, TypeScript, Next.js, microfrontends",
-      "Sistemas backend: Java, Spring Boot, Laravel, Python, FastAPI",
-      "Desarrollo asistido por IA y herramientas RAG de conocimiento",
+      "Full-stack empresarial en Anthology/Blackboard: React, TypeScript, Java, Spring Boot, CI/CD",
+      "Base en backend y cloud desde Digital Americas: Node.js, AWS Lambda, SNS/SQS",
+      "Ingeniería de plataforma en Babel Scores (cliente directo)",
+      "Entrega freelance WordPress con Sal & Picciotto",
+      "Sistemas institucionales en Facultad de Comunicaciones y Filología, Universidad de Antioquia: Laravel, Keycloak/OIDC, reportes en Python",
       "Procesamiento de señales EEG y pipelines de clasificación BCI",
     ],
   },
@@ -55,7 +58,7 @@ export const aboutPage = {
         institution: "Universidad de Antioquia",
         period: "Feb 2025 – Dic 2026 (previsto)",
         focus:
-          "Clasificación de imaginación motora con EEG, extracción FBCSP y evaluación ML subject-disjoint para sistemas BCI.",
+          "Clasificación de imaginación motora con EEG, extracción FBCSP y evaluación de ML entre sujetos para sistemas BCI.",
       },
       {
         degree: "Especialización en Desarrollo de Software",
@@ -95,7 +98,7 @@ export const researchPage = {
   subtitle:
     "Clasificación de imaginación motora con EEG en la Universidad de Antioquia: uniendo procesamiento de señales, ML clásico e ingeniería de software.",
   previewTagline:
-    "Decodificación de imaginación motora, extracción FBCSP y evaluación subject-disjoint para sistemas BCI no invasivos.",
+    "Decodificación de imaginación motora, extracción FBCSP y evaluación entre sujetos para sistemas BCI no invasivos.",
   overview: {
     title: "Resumen",
     paragraphs: [
@@ -117,7 +120,7 @@ export const researchPage = {
           "Filtrado espacial en bandas de frecuencia para maximizar la separabilidad de clases antes de la clasificación.",
       },
       {
-        title: "Evaluación Subject-Disjoint",
+        title: "Evaluación entre sujetos",
         description:
           "Validación cruzada leave-one-subject-out, matrices de confusión y análisis de rendimiento por participante.",
       },

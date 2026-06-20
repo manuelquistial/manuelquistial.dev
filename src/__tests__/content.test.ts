@@ -29,6 +29,7 @@ const FORBIDDEN_PUBLIC_STRINGS = [
   "financial reconciliation",
   "classroom reservation",
   "classroom reservations",
+  "\u2014",
 ] as const;
 
 const PUBLIC_CONTENT_SOURCES = [
@@ -99,7 +100,7 @@ describe("project data helpers", () => {
       getProjectStatusLabel("coming-soon", enContent.projectStatus),
     ).toBe("Coming soon");
     expect(getProjectStatusLabel("live", esContent.projectStatus)).toBe(
-      "En vivo",
+      "Publicado",
     );
   });
 
@@ -122,12 +123,17 @@ describe("portfolio data completeness", () => {
   it("includes CV-aligned experience periods", () => {
     const anthology = experience.find((item) => item.id === "anthology-blackboard");
     const udea = experience.find((item) => item.id === "udea-fcf");
+    const research = experience.find(
+      (item) => item.id === "universidad-antioquia-research",
+    );
     const digitalAmericas = experience.find(
       (item) => item.id === "digital-americas-pipeline",
     );
 
     expect(anthology?.period).toBe("Nov 2021 – May 2026");
+    expect(anthology).not.toHaveProperty("current");
     expect(udea?.period).toBe("May 2022 – Present");
+    expect(research?.period).toBe("Feb 2025 – Present");
     expect(digitalAmericas?.company).toContain("Digital Americas");
   });
 
@@ -156,7 +162,9 @@ describe("portfolio data completeness", () => {
   it("localizes Spanish project titles", () => {
     const udea = projects.find((project) => project.id === "udea-fcf-digital-ecosystem");
     expect(udea).toBeDefined();
-    expect(localizeProject(udea!, "es").title).toBe("Ecosistema Digital UdeA FCF");
+    expect(localizeProject(udea!, "es").title).toBe(
+      "Ecosistema Digital: Facultad de Comunicaciones y Filología, Universidad de Antioquia",
+    );
   });
 
   it("keeps public content free of forbidden sensitive strings", () => {

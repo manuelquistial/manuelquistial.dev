@@ -7,6 +7,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { SkipLink } from "@/components/layout/SkipLink";
 import { SetHtmlLang } from "@/components/layout/SetHtmlLang";
+import { HashScroll } from "@/components/layout/HashScroll";
 
 interface LocaleLayoutProps {
   children: React.ReactNode;
@@ -44,6 +45,7 @@ export default async function LocaleLayout({
   return (
     <>
       <SetHtmlLang locale={locale} />
+      <HashScroll />
       <SkipLink label={content.a11y.skipToContent} />
       <Header locale={locale} content={content} />
       <main id="main-content" className="flex-1">

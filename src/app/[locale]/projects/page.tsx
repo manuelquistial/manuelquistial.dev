@@ -56,7 +56,7 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
           if (items.length === 0) return null;
 
           return (
-            <section key={category}>
+            <section key={category} id={category}>
               <SectionTitle
                 title={content.projectCategories[category]}
                 subtitle={categorySubtitles[category]}

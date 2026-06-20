@@ -1,6 +1,7 @@
 import type { Locale } from "@/i18n/config";
 import type { SiteContent } from "@/content";
-import { localizedPath } from "@/lib/localizedPath";
+import { localizedSectionPath } from "@/lib/localizedPath";
+import { pageSections } from "@/lib/pageSections";
 import { Section } from "@/components/layout/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { ViewAllLink } from "@/components/ui/ViewAllLink";
@@ -32,7 +33,11 @@ export function AboutPreview({
               {paragraph}
             </p>
           ))}
-          <ViewAllLink href={localizedPath(locale, "/about")}>{viewAllLabel}</ViewAllLink>
+          <ViewAllLink
+            href={localizedSectionPath(locale, "/about", pageSections.about)}
+          >
+            {viewAllLabel}
+          </ViewAllLink>
         </div>
 
         <ul className="space-y-3">

@@ -2,7 +2,7 @@
 
 Professional portfolio site for **Manuel Alejandro Quistial Jurado**, Software Engineer focused on full-stack enterprise work, institutional platforms, publishing systems, and EEG/BCI neuroengineering research.
 
-**Live:** [manuelquistial.dev](https://manuelquistial-dev.vercel.app/)
+**Live:** [manuelquistial.dev](https://manuelquistial.dev)
 
 ## Features
 

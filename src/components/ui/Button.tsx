@@ -20,22 +20,22 @@ interface ButtonProps {
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
-    "bg-accent text-white hover:bg-accent-hover border border-accent shadow-sm",
+    "bg-accent text-white hover:bg-accent-hover border border-accent",
   secondary:
     "bg-surface-elevated text-foreground border border-border hover:border-accent/40",
   ghost: "text-muted hover:text-foreground hover:bg-surface-elevated",
   outline:
-    "border border-border text-foreground hover:border-accent/50 hover:text-accent",
+    "border border-border text-foreground hover:border-accent/50 hover:text-accent bg-transparent",
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
   sm: "px-3 py-1.5 text-sm",
-  md: "px-4 py-2 text-sm",
-  lg: "px-5 py-2.5 text-base",
+  md: "px-4 py-2.5 text-sm",
+  lg: "px-5 py-3 text-base",
 };
 
 const baseStyles =
-  "inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 disabled:pointer-events-none disabled:opacity-50";
+  "inline-flex items-center justify-center gap-2 rounded-none font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 disabled:pointer-events-none disabled:opacity-50";
 
 export function Button({
   children,

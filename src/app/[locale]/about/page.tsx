@@ -161,15 +161,23 @@ export default async function AboutPage({ params }: AboutPageProps) {
 
       <section id={pageSections.experience} className="mt-16">
         <SectionTitle title={content.sections.experience} />
-        <div className="grid gap-5 md:grid-cols-2">
+        <ol className="space-y-0">
           {localizedExperience.map((item) => (
-            <ExperienceCard
+            <li
               key={item.id}
-              item={item}
-              currentLabel={content.experiencePreview.currentLabel}
-            />
+              className="relative border-l border-zinc-800 pb-10 pl-8 last:pb-0"
+            >
+              <span
+                aria-hidden
+                className="absolute left-0 top-1.5 h-3 w-3 -translate-x-1/2 rounded-none bg-zinc-700"
+              />
+              <ExperienceCard
+                item={item}
+                currentLabel={content.experiencePreview.currentLabel}
+              />
+            </li>
           ))}
-        </div>
+        </ol>
       </section>
     </Section>
   );

@@ -60,48 +60,71 @@ export const data: LocaleData = {
       type: "Software empresarial",
       description:
         "Software educativo empresarial a escala: frontends en React y TypeScript, servicios en Java y Spring Boot, PostgreSQL, migración de Angular a React, feature flags con AWS Lambda, pipelines CI/CD y pruebas automatizadas.",
+      highlights: [
+        "Entregué features full-stack en plataformas edtech usadas por instituciones a escala global",
+        "Migré superficies Angular a React/TypeScript sin romper el ritmo de releases",
+        "Fortalecí CI/CD y pruebas automatizadas en servicios Java y clientes React",
+      ],
     },
     "digital-americas-pipeline": {
       role: "Desarrollador Backend",
       type: "Backend / Cloud",
       description:
         "Desarrollo backend en sistemas cloud con Node.js, Express, AWS Lambda, SNS/SQS, EC2, API Gateway y herramientas basadas en Electron.",
+      highlights: [
+        "Construí backends event-driven con AWS Lambda, SNS/SQS y API Gateway",
+        "Entregué servicios Node.js/Express para flujos de datos en la nube",
+        "Soporté tooling en Electron para operaciones cloud",
+      ],
     },
     "sal-picciotto": {
       role: "Desarrollador WordPress / Frontend",
       type: "Freelance / Agencia",
       description:
         "Proyectos freelance de WordPress y Elementor Pro con Sal & Picciotto para clientes corporativos, del sector salud, inmobiliarios, organizaciones sin fines de lucro y campañas. Layouts responsive, ACF, Polylang, CSS y JavaScript personalizados y actualizaciones en producción.",
+      highlights: [
+        "Lancé sitios WordPress en producción para salud, inmobiliario y nonprofit",
+        "Entregué layouts multilingües con Polylang, ACF y Elementor Pro",
+        "Mantuve frontends responsive y actualizaciones de contenido en producción",
+      ],
     },
     "babel-scores": {
       role: "Ingeniero de Software / Full-Stack",
       type: "Cliente directo / Plataforma editorial",
       description:
         "Plataforma editorial y de e-commerce para cliente directo sobre WordPress y WooCommerce: plugins personalizados, herramientas flipbook en React con Fabric.js y PDF.js, AWS S3, WPML, tareas asíncronas, flujos multivendor y acceso institucional federado.",
+      highlights: [
+        "Lideré la ingeniería end-to-end de un marketplace vivo de partituras digitales",
+        "Construí un lector flipbook en React con Fabric.js, PDF.js y flujos asíncronos en S3",
+        "Habilité acceso institucional federado y flujos de publicación multivendor",
+      ],
     },
     "udea-fcf": {
       role: "Ingeniero de Software",
       type: "Ecosistema de software institucional",
       description:
         "Software institucional para el ecosistema digital de Facultad de Comunicaciones y Filología, Universidad de Antioquia: modernización legacy, aplicaciones Laravel y Symfony, frontends React y Next.js, servicios de reportes en Python, entornos Docker, scripts de validación y autenticación centralizada con Keycloak/OIDC.",
+      highlights: [
+        "Modernicé aplicaciones institucionales legacy hacia un ecosistema compartido",
+        "Centralicé identidad con Keycloak/OIDC en superficies Laravel y React",
+        "Construí servicios de reportes en Python y flujos de entrega con Docker",
+      ],
     },
     "universidad-antioquia-research": {
       role: "Investigador en Neuroingeniería / Estudiante de Maestría",
       type: "Investigación",
       description:
         "Investigación de maestría en clasificación de imaginación motora con EEG, sistemas BCI, procesamiento de señales y evaluación con machine learning, con base en trabajo previo en rehabilitación cognitiva.",
+      highlights: [
+        "Diseñé un pipeline end-to-end de clasificación de imaginación motora con EEG",
+        "Apliqué características FBCSP con LDA/SVM bajo evaluación entre sujetos",
+        "Traté el código de investigación como software de producción: versionado y reproducible",
+      ],
     },
   },
   skills: {
-    frontend: { name: "Frontend" },
-    backend: { name: "Backend" },
-    databases: { name: "Bases de datos" },
-    "authentication-iam": { name: "Autenticación e IAM" },
-    "data-reporting": { name: "Datos y reportes" },
-    "ai-ml": { name: "IA / ML" },
-    research: { name: "Investigación" },
-    "cloud-devops": { name: "Cloud y DevOps" },
-    "cms-web-platforms": { name: "CMS y plataformas web" },
-    testing: { name: "Testing" },
+    "core-engineering": { name: "Core Engineering" },
+    "ai-neuroengineering": { name: "AI & Neuroengineering" },
+    "cloud-auth": { name: "Cloud & Auth" },
   },
 };

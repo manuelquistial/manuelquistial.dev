@@ -7,14 +7,13 @@ import type {
 
 export const about = {
   previewParagraphs: [
-    "Mi experiencia principal fueron ~4 años en Anthology/Blackboard en edtech empresarial: frontends en React y TypeScript, APIs en Java y Spring Boot, PostgreSQL y pipelines de CI/CD para instituciones a escala.",
-    "Antes trabajé en backend y cloud en Digital Americas Pipeline Initiative. También tomo proyectos freelance selectos de WordPress con Sal & Picciotto, contribuyo al ecosistema digital de Facultad de Comunicaciones y Filología, Universidad de Antioquia y a Babel Scores, mientras desarrollo investigación en neuroingeniería en el marco de la maestría.",
+    "Construyo sistemas full-stack empresariales y trato el código de investigación con el mismo rigor: experimentos versionados, APIs claras y evaluación reproducible.",
+    "Mi trabajo está en la intersección entre ingeniería de producto escalable y neuroingeniería EEG/BCI, yendo del impacto de alto nivel a los detalles técnicos que hacen confiables los sistemas.",
   ],
   highlights: [
-    "~4 años full-stack empresarial en Anthology/Blackboard",
-    "Backend y cloud en Digital Americas (2020–2021)",
-    "Ingeniería de plataforma en Babel Scores (cliente directo)",
-    "Entrega freelance WordPress con Sal & Picciotto",
+    "Impacto primero: plataformas institucionales y sistemas de producto en producción",
+    "Investigación con disciplina de producción: pipelines EEG y evaluación entre sujetos",
+    "Identidad, cloud y entrega como preocupaciones de ingeniería de primer nivel",
   ],
 } satisfies AboutPreviewContent;
 

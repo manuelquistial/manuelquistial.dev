@@ -41,7 +41,7 @@ function CaseStudyBlock({
           {items.map((item) => (
             <li
               key={item}
-              className="rounded-lg border border-border bg-surface-elevated px-4 py-3 text-sm text-foreground"
+              className="rounded-none border border-border bg-surface-elevated px-4 py-3 font-mono text-sm text-foreground"
             >
               {item}
             </li>
@@ -89,7 +89,7 @@ export function CaseStudyView({
             {project.clientType}
           </span>
         ) : null}
-        <span className="rounded-full border border-accent/30 bg-accent/10 px-2.5 py-0.5 text-xs font-medium text-accent">
+        <span className="rounded-none border border-accent/30 bg-accent/10 px-2.5 py-0.5 font-mono text-xs font-medium text-accent">
           {statusLabel}
         </span>
       </div>

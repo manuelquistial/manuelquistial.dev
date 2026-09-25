@@ -21,6 +21,11 @@ const categoryOrder: ProjectCategory[] = [
   "agency-web",
 ];
 
+const featuredByCategory: Partial<Record<ProjectCategory, readonly string[]>> = {
+  engineering: ["babel-scores", "udea-fcf-digital-ecosystem"],
+  research: ["eeg-motor-imagery-pipeline"],
+};
+
 export async function generateMetadata({
   params,
 }: ProjectsPageProps): Promise<Metadata> {
@@ -55,6 +60,16 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
           const items = localizeProjects(getProjectsByCategory(category), locale);
           if (items.length === 0) return null;
 
+          const featuredIds = featuredByCategory[category] ?? [];
+          const featuredSet = new Set(featuredIds);
+          const stars = featuredIds
+            .map((id) => items.find((project) => project.id === id))
+            .filter((project): project is NonNullable<typeof project> =>
+              Boolean(project),
+            );
+          const rest = items.filter((project) => !featuredSet.has(project.id));
+          const isAgency = category === "agency-web";
+
           return (
             <section key={category} id={category}>
               <SectionTitle
@@ -62,26 +77,41 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
                 subtitle={categorySubtitles[category]}
                 className="mb-8 sm:mb-10"
               />
-              <div className="grid gap-5 md:grid-cols-2">
-                {items.map((project) => (
-                  <ProjectCard
-                    key={project.id}
-                    project={project}
-                    labels={content.projectCard}
-                    statusLabels={content.projectStatus}
-                    detailed={Boolean(
-                      project.featured &&
-                        project.category === "engineering" &&
-                        project.longDescription,
-                    )}
-                    className={
-                      project.featured && project.category === "engineering"
-                        ? "md:col-span-2"
-                        : undefined
-                    }
-                  />
-                ))}
-              </div>
+
+              {stars.length > 0 ? (
+                <div className="space-y-5">
+                  {stars.map((project) => (
+                    <ProjectCard
+                      key={project.id}
+                      project={project}
+                      labels={content.projectCard}
+                      statusLabels={content.projectStatus}
+                      featuredLayout
+                      detailed={Boolean(project.longDescription)}
+                    />
+                  ))}
+                </div>
+              ) : null}
+
+              {rest.length > 0 ? (
+                <div
+                  className={
+                    stars.length > 0
+                      ? "mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+                      : "grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+                  }
+                >
+                  {rest.map((project) => (
+                    <ProjectCard
+                      key={project.id}
+                      project={project}
+                      labels={content.projectCard}
+                      statusLabels={content.projectStatus}
+                      minimal={isAgency}
+                    />
+                  ))}
+                </div>
+              ) : null}
             </section>
           );
         })}

@@ -52,7 +52,10 @@ export default async function HomePage({ params }: HomePageProps) {
     getSkillCategoriesByIds(content.homeSkillCategoryIds),
     locale,
   );
-  const experiencePreview = localizeExperienceList(getFeaturedExperience(), locale);
+  const experiencePreview = localizeExperienceList(
+    getFeaturedExperience(),
+    locale,
+  );
 
   return (
     <>
@@ -66,6 +69,7 @@ export default async function HomePage({ params }: HomePageProps) {
       <CategoryProjectsSection
         title={content.sections.engineeringProjects}
         projects={engineeringProjects}
+        featuredIds={["babel-scores", "udea-fcf-digital-ecosystem"]}
         viewAllHref={localizedSectionPath(
           locale,
           "/projects",
@@ -83,28 +87,23 @@ export default async function HomePage({ params }: HomePageProps) {
         tagline={content.researchPage.previewTagline}
         overview={content.researchPage.overview.paragraphs[0]}
         topics={researchTopics}
-      />
-      <CategoryProjectsSection
-        title={content.sections.researchProjects}
         projects={researchProjects}
-        viewAllHref={localizedSectionPath(
-          locale,
-          "/projects",
-          pageSections.research,
-        )}
-        viewAllLabel={content.sections.viewAll}
         projectCard={content.projectCard}
         projectStatus={content.projectStatus}
-        variant="muted"
       />
       <SkillsSection
-        categories={homeSkills.length ? homeSkills : localizeSkillCategories(skillCategories, locale)}
+        categories={
+          homeSkills.length
+            ? homeSkills
+            : localizeSkillCategories(skillCategories, locale)
+        }
         sectionLabel={content.sections.skills}
       />
       <CategoryProjectsSection
         title={content.sections.agencyWebProjects}
         subtitle={content.agencyWebProjectsIntro}
         projects={agencyProjects}
+        layout="minimal"
         viewAllHref={localizedSectionPath(
           locale,
           "/projects",

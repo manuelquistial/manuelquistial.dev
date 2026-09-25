@@ -28,7 +28,7 @@ export function AboutPreview({
           {content.previewParagraphs.map((paragraph, index) => (
             <p
               key={`about-preview-p-${index}`}
-              className="leading-relaxed text-muted"
+              className="leading-relaxed text-zinc-400"
             >
               {paragraph}
             </p>
@@ -44,7 +44,7 @@ export function AboutPreview({
           {content.highlights.map((item) => (
             <li
               key={item}
-              className="card-surface border-l-2 border-l-accent/50 px-4 py-3.5 text-sm text-foreground"
+              className="card-surface border-l-2 border-l-accent/50 px-4 py-3.5 text-sm text-zinc-50 hover:border-zinc-500"
             >
               {item}
             </li>

@@ -49,7 +49,7 @@ export function SectionTitle({
       ) : null}
       <div
         className={cn(
-          "mt-5 h-0.5 w-10 rounded-full bg-accent",
+          "mt-5 h-0.5 w-10 rounded-none bg-accent",
           align === "center" && "mx-auto",
         )}
       />

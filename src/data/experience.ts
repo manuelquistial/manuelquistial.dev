@@ -6,6 +6,11 @@ export const experience = [
     type: "Enterprise Software",
     description:
       "Enterprise education software at scale: React and TypeScript frontends, Java and Spring Boot services, PostgreSQL, Angular-to-React migration, AWS Lambda feature flags, CI/CD pipelines and automated testing.",
+    highlights: [
+      "Shipped full-stack features on edtech platforms used by institutions worldwide",
+      "Migrated Angular surfaces to React/TypeScript while keeping release cadence",
+      "Hardened CI/CD and automated tests across Java services and React clients",
+    ],
     technologies: [
       "React",
       "TypeScript",
@@ -29,6 +34,11 @@ export const experience = [
     type: "Backend / Cloud",
     description:
       "Backend development on cloud systems with Node.js, Express, AWS Lambda, SNS/SQS, EC2, API Gateway and Electron-based tooling.",
+    highlights: [
+      "Built event-driven backends on AWS Lambda, SNS/SQS and API Gateway",
+      "Delivered Node.js/Express services for cloud data workflows",
+      "Supported Electron tooling for operational cloud workflows",
+    ],
     technologies: [
       "Node.js",
       "Express",
@@ -49,6 +59,11 @@ export const experience = [
     type: "Direct Client / Publishing Platform",
     description:
       "Direct-client publishing and e-commerce platform on WordPress and WooCommerce: custom plugins, React flipbook tooling with Fabric.js and PDF.js, AWS S3, WPML, async jobs, multivendor flows and federated institutional access.",
+    highlights: [
+      "Owned end-to-end platform engineering for a live digital scores marketplace",
+      "Built a React flipbook reader with Fabric.js, PDF.js and async S3 workflows",
+      "Enabled federated institutional access and multivendor publishing flows",
+    ],
     technologies: [
       "WordPress",
       "WooCommerce",
@@ -71,6 +86,11 @@ export const experience = [
     type: "Freelance / Agency",
     description:
       "Freelance WordPress and Elementor Pro projects through Sal & Picciotto for corporate, healthcare, real estate, nonprofit and campaign clients. Responsive layouts, ACF, Polylang, custom CSS, JavaScript and production updates.",
+    highlights: [
+      "Shipped production WordPress sites across healthcare, real estate and nonprofit",
+      "Delivered multilingual layouts with Polylang, ACF and Elementor Pro",
+      "Maintained responsive frontends and production content updates",
+    ],
     technologies: [
       "WordPress",
       "Elementor Pro",
@@ -92,6 +112,11 @@ export const experience = [
     type: "Institutional Software Ecosystem",
     description:
       "Institutional software for the digital ecosystem at Facultad de Comunicaciones y Filología, Universidad de Antioquia: legacy modernization, Laravel and Symfony applications, React and Next.js frontends, Python reporting services, Docker environments, validation scripts and centralized authentication with Keycloak/OIDC.",
+    highlights: [
+      "Modernized legacy institutional apps into a shared digital ecosystem",
+      "Centralized identity with Keycloak/OIDC across Laravel and React surfaces",
+      "Built Python reporting services and Docker-based delivery workflows",
+    ],
     technologies: [
       "Laravel",
       "Symfony",
@@ -118,6 +143,11 @@ export const experience = [
     type: "Research",
     description:
       "Master's research on EEG-based motor imagery classification, BCI systems, signal processing and machine learning evaluation, building on prior neuroengineering work in cognitive rehabilitation applications.",
+    highlights: [
+      "Designed an end-to-end EEG motor imagery classification pipeline",
+      "Applied FBCSP features with LDA/SVM under subject-disjoint evaluation",
+      "Treated research code as production software: versioned and reproducible",
+    ],
     technologies: [
       "Python",
       "EEG",
@@ -144,6 +174,7 @@ export type Experience = {
   company: string;
   role: string;
   description: string;
+  highlights?: readonly string[];
   type?: string;
   technologies?: readonly string[];
   period: string;

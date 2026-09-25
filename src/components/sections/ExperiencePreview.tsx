@@ -26,17 +26,22 @@ export function ExperiencePreview({
     <Section variant="muted">
       <SectionTitle title={sectionLabel} />
 
-      <div className="grid gap-5 md:grid-cols-2">
+      <ol className="space-y-0">
         {items.map((item) => (
-          <ExperienceCard
+          <li
             key={item.id}
-            item={item}
-            currentLabel={currentLabel}
-          />
+            className="relative border-l border-zinc-800 pb-10 pl-8 last:pb-0"
+          >
+            <span
+              aria-hidden
+              className="absolute left-0 top-1.5 h-3 w-3 -translate-x-1/2 rounded-none bg-zinc-700"
+            />
+            <ExperienceCard item={item} currentLabel={currentLabel} />
+          </li>
         ))}
-      </div>
+      </ol>
 
-      <div className="mt-6">
+      <div className="mt-8">
         <ViewAllLink
           href={localizedSectionPath(locale, "/about", pageSections.experience)}
         >

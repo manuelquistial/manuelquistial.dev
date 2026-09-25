@@ -21,6 +21,7 @@ export type LocaleData = {
         role?: string;
         description?: string;
         type?: string;
+        highlights?: readonly string[];
       }
     >
   >;

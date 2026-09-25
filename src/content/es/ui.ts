@@ -41,15 +41,23 @@ export const a11y = {
 };
 
 export const hero = {
-  title: "Software Engineer | Full-Stack, AI & Neuroengineering",
+  title: "Ingeniero de Software e Investigador BCI",
   subtitle:
-    "Ingeniero full-stack empresarial en Anthology/Blackboard, con base en backend y cloud en Digital Americas, trabajo directo con Babel Scores, freelance WordPress con Sal & Picciotto y software institucional en Facultad de Comunicaciones y Filología, Universidad de Antioquia.",
+    "Traduciendo datos neuronales complejos en soluciones de software empresariales y escalables.",
   secondary:
-    "~4 años en edtech empresarial en Anthology/Blackboard (React, TypeScript, Java, Spring Boot), con trabajo previo en backend y AWS en Digital Americas. Babel Scores, Sal & Picciotto, Facultad de Comunicaciones y Filología, Universidad de Antioquia y la investigación de maestría continúan en paralelo.",
-  viewProjects: "Ver proyectos",
+    "Ingeniería full-stack a escala institucional y de producto, junto a pipelines de investigación EEG/BCI tratados como software en producción.",
+  exploreResearch: "Explorar Investigación",
+  viewEngineering: "Ver Proyectos de Ingeniería",
   downloadCv: "Descargar CV",
   linkedin: "LinkedIn",
   github: "GitHub",
+  contact: "Contacto",
+  focusLabel: "Enfoque",
+  focusItems: [
+    "Sistemas full-stack empresariales",
+    "Pipelines de investigación EEG / BCI",
+    "Identidad, cloud y plataformas institucionales",
+  ],
 };
 
 export const sections = {
@@ -113,14 +121,9 @@ export const projectCategories = {
 } as const;
 
 export const homeSkillCategoryIds = [
-  "frontend",
-  "backend",
-  "authentication-iam",
-  "data-reporting",
-  "ai-ml",
-  "research",
-  "cloud-devops",
-  "cms-web-platforms",
+  "core-engineering",
+  "ai-neuroengineering",
+  "cloud-auth",
 ] as const;
 
 export const languageSwitcher = {

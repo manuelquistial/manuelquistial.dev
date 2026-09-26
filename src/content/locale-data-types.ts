@@ -22,6 +22,8 @@ export type LocaleData = {
         description?: string;
         type?: string;
         highlights?: readonly string[];
+        period?: string;
+        location?: string;
       }
     >
   >;

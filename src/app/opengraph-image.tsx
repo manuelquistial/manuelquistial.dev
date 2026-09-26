@@ -17,26 +17,15 @@ export default function OgImage() {
           flexDirection: "column",
           alignItems: "flex-start",
           justifyContent: "center",
-          backgroundColor: "#0b0d12",
+          backgroundColor: "#F7F5F0",
           padding: "80px",
         }}
       >
         <div
           style={{
-            fontSize: 28,
-            color: "#5b8def",
-            marginBottom: 16,
-            letterSpacing: "0.1em",
-            textTransform: "uppercase",
-          }}
-        >
-          Software Engineer
-        </div>
-        <div
-          style={{
             fontSize: 64,
             fontWeight: 600,
-            color: "#e8eaed",
+            color: "#20201E",
             lineHeight: 1.1,
             maxWidth: 900,
           }}
@@ -45,14 +34,14 @@ export default function OgImage() {
         </div>
         <div
           style={{
-            fontSize: 28,
-            color: "#9aa3b2",
-            marginTop: 24,
-            maxWidth: 800,
-            lineHeight: 1.4,
+            fontSize: 30,
+            color: "#5F5C56",
+            marginTop: 28,
+            maxWidth: 820,
+            lineHeight: 1.35,
           }}
         >
-          Full-Stack | AI | Neuroengineering
+          Software engineering for web applications and connected systems
         </div>
       </div>
     ),

@@ -16,26 +16,28 @@ interface ButtonProps {
   className?: string;
   type?: "button" | "submit";
   onClick?: () => void;
+  "aria-expanded"?: boolean;
+  "aria-controls"?: string;
 }
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
     "bg-accent text-white hover:bg-accent-hover border border-accent",
   secondary:
-    "bg-surface-elevated text-foreground border border-border hover:border-accent/40",
-  ghost: "text-muted hover:text-foreground hover:bg-surface-elevated",
+    "bg-surface text-foreground border border-border hover:border-foreground/30",
+  ghost: "text-muted hover:text-foreground hover:bg-surface-soft",
   outline:
-    "border border-border text-foreground hover:border-accent/50 hover:text-accent bg-transparent",
+    "border border-border text-foreground hover:border-foreground/40 hover:text-foreground bg-transparent",
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
-  sm: "px-3 py-1.5 text-sm",
-  md: "px-4 py-2.5 text-sm",
-  lg: "px-5 py-3 text-base",
+  sm: "min-h-11 px-4 py-2 text-base",
+  md: "min-h-12 px-5 py-2.5 text-base",
+  lg: "min-h-12 px-6 py-3 text-base",
 };
 
 const baseStyles =
-  "inline-flex items-center justify-center gap-2 rounded-none font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 disabled:pointer-events-none disabled:opacity-50";
+  "inline-flex items-center justify-center rounded-[6px] font-semibold transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50";
 
 export function Button({
   children,
@@ -49,6 +51,8 @@ export function Button({
   className,
   type = "button",
   onClick,
+  "aria-expanded": ariaExpanded,
+  "aria-controls": ariaControls,
 }: ButtonProps) {
   const styles = cn(
     baseStyles,
@@ -97,6 +101,8 @@ export function Button({
       onClick={onClick}
       className={styles}
       aria-disabled={disabled}
+      aria-expanded={ariaExpanded}
+      aria-controls={ariaControls}
       title={disabled ? disabledTitle : undefined}
     >
       {children}

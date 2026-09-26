@@ -1,7 +1,6 @@
 import type { Locale } from "@/i18n/config";
 import type { SiteContent } from "@/content";
-import { localizedSectionPath } from "@/lib/localizedPath";
-import { pageSections } from "@/lib/pageSections";
+import { localizedPath } from "@/lib/localizedPath";
 import { Section } from "@/components/layout/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { ViewAllLink } from "@/components/ui/ViewAllLink";
@@ -22,34 +21,17 @@ export function AboutPreview({
   return (
     <Section>
       <SectionTitle title={sectionLabel} />
-
-      <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:gap-12">
-        <div className="space-y-4">
-          {content.previewParagraphs.map((paragraph, index) => (
-            <p
-              key={`about-preview-p-${index}`}
-              className="leading-relaxed text-zinc-400"
-            >
-              {paragraph}
-            </p>
-          ))}
-          <ViewAllLink
-            href={localizedSectionPath(locale, "/about", pageSections.about)}
-          >
-            {viewAllLabel}
-          </ViewAllLink>
-        </div>
-
-        <ul className="space-y-3">
-          {content.highlights.map((item) => (
-            <li
-              key={item}
-              className="card-surface border-l-2 border-l-accent/50 px-4 py-3.5 text-sm text-zinc-50 hover:border-zinc-500"
-            >
-              {item}
-            </li>
-          ))}
-        </ul>
+      <div className="max-w-[65ch] space-y-4">
+        {content.previewParagraphs.map((paragraph) => (
+          <p key={paragraph} className="leading-relaxed text-muted">
+            {paragraph}
+          </p>
+        ))}
+      </div>
+      <div className="mt-8">
+        <ViewAllLink href={localizedPath(locale, "/about")}>
+          {viewAllLabel}
+        </ViewAllLink>
       </div>
     </Section>
   );

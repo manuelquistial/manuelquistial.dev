@@ -7,57 +7,52 @@ import type {
 
 export const about = {
   previewParagraphs: [
-    "Construyo sistemas full-stack empresariales y trato el código de investigación con el mismo rigor: experimentos versionados, APIs claras y evaluación reproducible.",
-    "Mi trabajo está en la intersección entre ingeniería de producto escalable y neuroingeniería EEG/BCI, yendo del impacto de alto nivel a los detalles técnicos que hacen confiables los sistemas.",
+    "Desarrollo aplicaciones web, integro sistemas y modernizo plataformas en trabajo de producto, entornos institucionales y proyectos para clientes.",
   ],
-  highlights: [
-    "Impacto primero: plataformas institucionales y sistemas de producto en producción",
-    "Investigación con disciplina de producción: pipelines EEG y evaluación entre sujetos",
-    "Identidad, cloud y entrega como preocupaciones de ingeniería de primer nivel",
-  ],
+  highlights: [],
 } satisfies AboutPreviewContent;
 
 export const aboutPage = {
-  title: "Sobre mí",
+  title: "Trayectoria",
   intro:
-    "Manuel Alejandro Quistial Jurado, ingeniero de software y electrónico con foco en full-stack empresarial en Anthology/Blackboard, experiencia previa en backend y cloud en Digital Americas, entrega freelance selectiva y proyectos institucionales y de neuroingeniería en paralelo.",
+    "Manuel Alejandro Quistial Jurado, ingeniero de software y electrónico. Desarrollo aplicaciones web, integro sistemas y modernizo plataformas en productos digitales, software institucional y sitios para clientes. La investigación en neuroingeniería es una línea paralela.",
   engineering: {
-    title: "Ingeniería de Software",
+    title: "Ingeniería de software",
     paragraphs: [
-      "En Anthology/Blackboard trabajé en plataformas de aprendizaje empresariales usadas por instituciones en todo el mundo: interfaces en React y TypeScript, microservicios en Java y Spring Boot, PostgreSQL, migración de Angular a React, feature flags con AWS Lambda y pruebas automatizadas en pipelines de CI/CD.",
+      "En Anthology/Blackboard trabajé en plataformas de aprendizaje empresariales: interfaces en React y TypeScript, servicios en Java y Spring Boot, PostgreSQL, migración de Angular a React, feature flags con AWS Lambda y pruebas automatizadas en pipelines de CI/CD.",
       "En Digital Americas Pipeline Initiative trabajé como desarrollador backend con Node.js, Express, AWS Lambda, SNS/SQS, EC2, API Gateway y herramientas basadas en Electron.",
-      "En Babel Scores construyo una plataforma editorial y de e-commerce para cliente directo con WooCommerce, React, Fabric.js, PDF.js, S3, WPML, plugins personalizados, tareas asíncronas, flujos multivendor y acceso institucional federado.",
-      "Contribuyo al ecosistema digital institucional de Facultad de Comunicaciones y Filología, Universidad de Antioquia (Laravel, Symfony, React, Next.js, Python, Keycloak/OIDC).",
-      "Con Sal & Picciotto desarrollo proyectos freelance de WordPress y Elementor Pro para clientes corporativos, del sector salud, inmobiliarios, organizaciones sin fines de lucro y campañas, con Polylang, ACF, WordPress Code Snippets, CSS y JavaScript personalizados.",
+      "En Babel Scores contribuyo a una plataforma editorial y de e-commerce con WooCommerce, un lector de partituras en React, plugins personalizados, S3, WPML, tareas asíncronas, flujos multivendor y acceso institucional federado.",
+      "Contribuyo a aplicaciones institucionales en Facultad de Comunicaciones y Filología, Universidad de Antioquia, con modernización, reportes e integración de acceso con Keycloak/OIDC.",
+      "Con Sal & Picciotto implemento sitios WordPress y Elementor Pro para clientes corporativos, del sector salud, inmobiliarios, organizaciones sin fines de lucro y campañas.",
     ],
   },
   research: {
-    title: "Neuroingeniería e Investigación",
+    title: "Investigación",
     paragraphs: [
-      "Como estudiante de maestría en la Universidad de Antioquia, investigo la clasificación de imaginación motora a partir de EEG: decodificar movimientos imaginados de mano a partir de registros en el cuero cabelludo. Mi pipeline aplica filtrado pasabanda, extracción de características FBCSP y clasificadores como LDA y SVM.",
-      "La evaluación usa validación cruzada entre sujetos (leave-one-subject-out) para medir generalización entre participantes, no sobreajuste dentro del mismo sujeto. Trato el código de investigación como software en producción: experimentos versionados, preprocesamiento trazable y notebooks reproducibles.",
+      "Como estudiante de maestría en la Universidad de Antioquia, mi investigación se centra en interfaces cerebro-computador e imaginación motora. El trabajo reúne procesamiento de señales y desarrollo de software para estudiar la interacción entre una persona y un sistema.",
+      "Trato el código de investigación con la misma disciplina que el software de producto: estructura clara, pasos documentados y evaluación reproducible cuando hay materiales disponibles.",
     ],
   },
   focus: {
-    title: "Enfoque actual",
+    title: "Áreas de trabajo",
     items: [
-      "Full-stack empresarial en Anthology/Blackboard: React, TypeScript, Java, Spring Boot, CI/CD",
-      "Base en backend y cloud desde Digital Americas: Node.js, AWS Lambda, SNS/SQS",
-      "Ingeniería de plataforma en Babel Scores (cliente directo)",
-      "Entrega freelance WordPress con Sal & Picciotto",
-      "Sistemas institucionales en Facultad de Comunicaciones y Filología, Universidad de Antioquia: Laravel, Keycloak/OIDC, reportes en Python",
-      "Procesamiento de señales EEG y pipelines de clasificación BCI",
+      "Sistemas full-stack empresariales: React, TypeScript, Java, Spring Boot, CI/CD",
+      "Servicios backend y cloud: Node.js, AWS Lambda, mensajería y APIs",
+      "Plataformas editoriales y de e-commerce para clientes directos",
+      "Entrega WordPress con Sal & Picciotto",
+      "Sistemas institucionales: modernización, reportes e identidad compartida",
+      "Investigación en neuroingeniería en paralelo a la práctica de software",
     ],
   },
   education: {
-    title: "Educación",
+    title: "Formación",
     items: [
       {
         degree: "Maestría en Ingeniería (enfoque en neuroingeniería)",
         institution: "Universidad de Antioquia",
         period: "Feb 2025 – Dic 2026 (previsto)",
         focus:
-          "Clasificación de imaginación motora con EEG, extracción FBCSP y evaluación de ML entre sujetos para sistemas BCI.",
+          "Interfaces cerebro-computador, imaginación motora y software para flujos de investigación orientados a señales.",
       },
       {
         degree: "Especialización en Desarrollo de Software",
@@ -80,12 +75,12 @@ export const aboutPage = {
     ],
   },
   researchOutputs: {
-    title: "Resultados de investigación",
+    title: "Línea de investigación",
     items: [
       {
-        title: "Pipeline de Imaginación Motora EEG",
+        title: "Interfaces cerebro-computador e imaginación motora",
         description:
-          "Pipeline de investigación reproducible en Python con preprocesamiento MNE, características FBCSP y evaluación leave-one-subject-out.",
+          "Investigación de maestría que combina procesamiento de señales y desarrollo de software. El detalle se mantiene general hasta que los materiales actuales estén listos para publicación.",
         href: "/research",
       },
     ],
@@ -95,57 +90,57 @@ export const aboutPage = {
 export const researchPage = {
   title: "Investigación",
   subtitle:
-    "Clasificación de imaginación motora con EEG en la Universidad de Antioquia: uniendo procesamiento de señales, ML clásico e ingeniería de software.",
+    "Investigación de maestría en interfaces cerebro-computador e imaginación motora en la Universidad de Antioquia.",
   previewTagline:
-    "Decodificación de imaginación motora, extracción FBCSP y evaluación entre sujetos para sistemas BCI no invasivos.",
+    "Mi investigación de maestría se centra en interfaces cerebro-computador e imaginación motora. Esta línea reúne procesamiento de señales y desarrollo de software para estudiar la interacción entre una persona y un sistema.",
   overview: {
     title: "Resumen",
     paragraphs: [
-      "Mi investigación de maestría aborda la clasificación de imaginación motora a partir de EEG: distinguir movimientos imaginados de mano izquierda vs. derecha a partir de registros ruidosos en el cuero cabelludo. Es un bloque fundamental para interfaces cerebro–computadora no invasivas que podrían apoyar rehabilitación motora o control de dispositivos.",
-      "El trabajo combina preprocesamiento con MNE, Filter Bank Common Spatial Patterns (FBCSP) y clasificadores lineales evaluados con validación cruzada leave-one-subject-out. Documento cada paso para que los experimentos sean reproducibles y comparables.",
+      "Mi investigación de maestría se centra en interfaces cerebro-computador e imaginación motora. El objetivo es estudiar cómo el procesamiento de señales y el software pueden apoyar la interacción entre una persona y un sistema.",
+      "Esta página describe la línea de investigación de forma general. Métodos, datasets y detalles de evaluación se incluyen solo cuando siguen siendo exactos y están autorizados para publicación.",
     ],
   },
   topics: {
-    title: "Temas de investigación",
+    title: "Áreas de trabajo",
     items: [
       {
-        title: "Clasificación de Imaginación Motora",
+        title: "Interfaces cerebro-computador",
         description:
-          "Decodificación binaria y multiclase de movimientos imaginados de extremidades a partir de registros EEG multicanal.",
+          "Trabajo de software y señales relacionado con investigación BCI no invasiva.",
       },
       {
-        title: "Extracción de Características FBCSP",
+        title: "Imaginación motora",
         description:
-          "Filtrado espacial en bandas de frecuencia para maximizar la separabilidad de clases antes de la clasificación.",
+          "Estudio del movimiento imaginado como base de interacción con sistemas computacionales.",
       },
       {
-        title: "Evaluación entre sujetos",
+        title: "Procesamiento de señales y software",
         description:
-          "Validación cruzada leave-one-subject-out, matrices de confusión y análisis de rendimiento por participante.",
+          "Combinación de flujos de análisis con prácticas de ingeniería que mantienen los experimentos trazables.",
       },
       {
-        title: "Pipelines Reproducibles",
+        title: "Práctica de investigación reproducible",
         description:
-          "Flujos en Python desde archivos .edf en bruto hasta modelos entrenados con preprocesamiento versionado y logging.",
+          "Organización de código, documentación y evaluación para poder revisar y retomar resultados.",
       },
     ],
   },
   methods: {
-    title: "Métodos y herramientas",
+    title: "Enfoque de trabajo",
     items: [
-      "Adquisición EEG y filtrado pasabanda / notch",
-      "Extracción de características FBCSP y CSP",
-      "Clasificadores LDA, SVM y k-means",
-      "scikit-learn, pandas, NumPy y MNE-Python",
-      "Validación cruzada leave-one-subject-out",
-      "Matrices de confusión y reportes estadísticos de rendimiento",
+      "Procesamiento de señales para flujos de investigación orientados a EEG",
+      "Estructura de software para experimentos y evaluación",
+      "Documentación de supuestos y pasos",
+      "Herramientas en Python para análisis y código de investigación",
+      "Separación clara entre objetivos y hallazgos confirmados",
+      "Publicación de materiales solo cuando esté autorizada",
     ],
   },
   goals: {
-    title: "Objetivos de investigación",
+    title: "Objetivos",
     paragraphs: [
-      "Corto plazo: refinar el pipeline de imaginación motora, comparar configuraciones FBCSP y publicar benchmarks reproducibles bajo protocolos de evaluación consistentes.",
-      "Largo plazo: conectar prototipos de investigación con software de calidad productiva que haga la neurotecnología más accesible: modelos interpretables, APIs limpias y herramientas que los investigadores puedan desplegar.",
+      "Corto plazo: continuar la investigación de maestría con métodos claros, evaluación cuidadosa y software que sostenga el trabajo.",
+      "Largo plazo: mantener los prototipos de investigación alineados con una ingeniería sólida, sin atribuir resultados clínicos que el trabajo no demuestre.",
     ],
   },
 } satisfies ResearchPageContent;
@@ -153,11 +148,10 @@ export const researchPage = {
 export const contactPage = {
   title: "Contacto",
   subtitle:
-    "Abierto a roles senior full-stack, colaboraciones de IA/ML y alianzas de investigación en neuroingeniería.",
-  email: "Correo",
+    "Si quieres hablar sobre una oportunidad de trabajo, un proyecto de software o una colaboración de investigación, escríbeme por LinkedIn.",
   linkedin: "LinkedIn",
   github: "GitHub",
   cv: "Descargar CV",
   availability:
-    "Basado en Colombia (COT). Disponible para oportunidades remotas e híbridas en distintos husos horarios.",
+    "Basado en Colombia. Abierto a conversaciones remotas e híbridas.",
 } satisfies ContactPageContent;

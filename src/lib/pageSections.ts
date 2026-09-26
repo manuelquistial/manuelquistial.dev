@@ -1,6 +1,7 @@
 export const pageSections = {
   about: "about",
   experience: "experience",
+  selectedProjects: "projects",
   engineering: "engineering",
   research: "research",
   agencyWeb: "agency-web",

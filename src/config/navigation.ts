@@ -1,7 +1,6 @@
 export const navItems = [
-  { key: "home", path: "" },
-  { key: "about", path: "/about" },
   { key: "projects", path: "/projects" },
+  { key: "about", path: "/about" },
   { key: "research", path: "/research" },
   { key: "contact", path: "/contact" },
 ] as const;

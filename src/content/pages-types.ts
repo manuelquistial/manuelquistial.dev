@@ -61,7 +61,6 @@ export type ResearchPageContent = {
 export type ContactPageContent = {
   title: string;
   subtitle: string;
-  email: string;
   linkedin: string;
   github: string;
   cv: string;

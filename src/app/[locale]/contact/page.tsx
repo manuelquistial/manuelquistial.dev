@@ -30,62 +30,55 @@ export default async function ContactPage({ params }: ContactPageProps) {
   const locale = parseLocale((await params).locale);
   const { contactPage } = getSiteContent(locale);
 
-  const contactLinks = [
-    {
-      label: contactPage.email,
-      value: profile.email,
-      href: `mailto:${profile.email}`,
-      external: false,
-    },
-    {
-      label: contactPage.linkedin,
-      value: profile.linkedin,
-      href: profile.linkedin,
-      external: true,
-    },
-    {
-      label: contactPage.github,
-      value: `${getUrlHost(profile.github)}/${getUrlPath(profile.github)}`,
-      href: profile.github,
-      external: true,
-    },
-  ];
-
   return (
     <Section>
-      <SectionTitle title={contactPage.title} subtitle={contactPage.subtitle} />
+      <SectionTitle
+        as="h1"
+        title={contactPage.title}
+        subtitle={contactPage.subtitle}
+      />
 
-      <div className="grid gap-6 lg:grid-cols-[1.2fr_1fr] lg:gap-8">
-        <div className="space-y-4">
-          {contactLinks.map((link) => (
-            <div key={link.label} className="card-surface p-5 sm:p-6">
-              <p className="text-xs font-semibold uppercase tracking-[0.15em] text-muted">
-                {link.label}
-              </p>
-              <a
-                href={link.href}
-                target={link.external ? "_blank" : undefined}
-                rel={link.external ? "noopener noreferrer" : undefined}
-                className="mt-2 inline-block break-all text-base font-medium text-accent transition-colors hover:text-accent-hover"
-              >
-                {link.value}
-              </a>
-            </div>
-          ))}
+      <div className="mt-2 max-w-[40rem] space-y-10">
+        <div>
+          <p className="text-sm text-muted">{contactPage.linkedin}</p>
+          <a
+            href={profile.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-2 inline-block break-all text-lg font-semibold text-accent transition-colors duration-150 hover:text-accent-hover"
+          >
+            {profile.linkedin.replace("https://www.", "")}
+          </a>
+          <div className="mt-5">
+            <Button href={profile.linkedin} external size="lg">
+              {contactPage.linkedin}
+            </Button>
+          </div>
         </div>
 
-        <div className="card-surface p-6 sm:p-8">
-          <h2 className="text-lg font-semibold text-foreground">
-            {contactPage.cv}
-          </h2>
-          <p className="mt-4 text-sm leading-relaxed text-muted">
-            {contactPage.availability}
-          </p>
-          <div className="mt-6">
-            <Button href={getCvUrl(locale)} download={getCvDownloadName(locale)}>
+        <div>
+          <p className="text-sm text-muted">{contactPage.cv}</p>
+          <div className="mt-4">
+            <Button
+              href={getCvUrl(locale)}
+              download={getCvDownloadName(locale)}
+              variant="outline"
+            >
               {contactPage.cv}
             </Button>
           </div>
+        </div>
+
+        <div>
+          <p className="text-sm text-muted">{contactPage.github}</p>
+          <a
+            href={profile.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-2 inline-block break-all text-base text-muted transition-colors duration-150 hover:text-accent"
+          >
+            {`${getUrlHost(profile.github)}/${getUrlPath(profile.github)}`}
+          </a>
         </div>
       </div>
     </Section>

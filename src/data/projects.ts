@@ -19,11 +19,11 @@ export type ProjectStatus = (typeof projectStatuses)[number];
 export const projects = [
   {
     id: "udea-fcf-digital-ecosystem",
-    title: "Digital Ecosystem: Facultad de Comunicaciones y Filología, Universidad de Antioquia",
+    title: "Digital ecosystem, Universidad de Antioquia",
     category: "engineering",
-    clientType: "Institutional Project",
+    clientType: "Facultad de Comunicaciones y Filología, Universidad de Antioquia",
     description:
-      "Institutional software ecosystem for Facultad de Comunicaciones y Filología, Universidad de Antioquia, including legacy modernization, administrative and academic workflows, institutional reporting services and centralized identity management with Keycloak/OIDC.",
+      "Institutional applications for Universidad de Antioquia. Work includes system modernization, reporting, and integrating access across applications.",
     longDescription:
       "A multi-application institutional ecosystem combining legacy systems, modernized applications and shared infrastructure. The work includes Laravel and Symfony legacy applications, modern Laravel APIs, React and Next.js frontends, Python reporting services with FastAPI and Flask, database workflows with MySQL and PostgreSQL, Docker-based local environments, documentation, validation scripts and centralized authentication with Keycloak/OIDC.",
     tags: [
@@ -54,7 +54,7 @@ export const projects = [
     category: "engineering",
     clientType: "Direct Client Project",
     description:
-      "Custom e-commerce platform for digital music scores, built on WordPress and WooCommerce with advanced custom development, including a responsive React-based flipbook, custom plugins, multilingual support, asynchronous jobs, S3 integration, multivendor workflows and federated institutional access.",
+      "Platform for selling and reading digital music scores. My work includes the web reader, e-commerce functionality, and integrations for institutional access.",
     longDescription:
       "Babel Scores is a custom e-commerce platform developed directly for the client, combining WordPress and WooCommerce with advanced custom functionality. The project included a dedicated flipbook experience built with React.js, Fabric.js, PDF.js and React PageFlip for mobile and desktop users, custom WordPress plugins for WooCommerce and internal workflows, AWS S3 integration, WPML multilingual support, database migration, asynchronous jobs, multivendor workflow support and federated institutional access.",
     tags: [
@@ -103,7 +103,7 @@ export const projects = [
     category: "agency-web",
     agency: "Sal & Picciotto",
     description:
-      "Agency website implemented with WordPress and Elementor Pro, focused on responsive layouts, content structure, visual consistency and maintainable page sections.",
+      "Website development and implementation with Sal & Picciotto, including responsive interfaces, content management, and project-specific functionality.",
     tags: [
       "WordPress",
       "Elementor Pro",

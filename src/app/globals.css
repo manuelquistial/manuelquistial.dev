@@ -1,16 +1,28 @@
 @import "tailwindcss";
 
 :root {
-  --background: #09090b;
-  --foreground: #fafafa;
-  --muted: #a1a1aa;
-  --surface: #18181b;
-  --surface-elevated: #27272a;
-  --border: #27272a;
-  --border-strong: #52525b;
-  --accent: #5b8def;
-  --accent-hover: #7aa3f5;
-  --accent-muted: color-mix(in srgb, var(--accent) 12%, transparent);
+  --background: #f7f5f0;
+  --foreground: #20201e;
+  --muted: #5f5c56;
+  --surface: #ffffff;
+  --surface-soft: #eee9e1;
+  --border: #d8d2c8;
+  --accent: #9e3b2d;
+  --accent-hover: #7f2f24;
+  --focus-ring: #20201e;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+  --radius-button: 6px;
+  --radius-image: 8px;
+  --container-max: 1200px;
+  --text-body-max: 65ch;
 }
 
 @theme inline {
@@ -18,14 +30,14 @@
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-surface: var(--surface);
-  --color-surface-elevated: var(--surface-elevated);
+  --color-surface-soft: var(--surface-soft);
   --color-border: var(--border);
-  --color-border-strong: var(--border-strong);
   --color-accent: var(--accent);
   --color-accent-hover: var(--accent-hover);
-  --color-accent-muted: var(--accent-muted);
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-manrope);
   --font-mono: var(--font-jetbrains-mono);
+  --radius-button: var(--radius-button);
+  --radius-image: var(--radius-image);
 }
 
 .sr-only {
@@ -44,43 +56,59 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-inter), system-ui, sans-serif;
+  font-family: var(--font-manrope), system-ui, sans-serif;
+  font-size: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
+  line-height: 1.55;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--accent) 35%, transparent);
+  background: color-mix(in srgb, var(--accent) 28%, transparent);
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
 }
 
 [id] {
   scroll-margin-top: 5.5rem;
 }
 
-.card-surface {
-  border: 1px solid var(--border);
-  background: var(--surface);
-  border-radius: 0;
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease,
-    background-color 0.2s ease;
+.text-balance-body {
+  max-width: var(--text-body-max);
 }
 
-.card-surface:hover {
-  border-color: var(--border-strong);
-  box-shadow: 0 0 15px color-mix(in srgb, var(--accent) 10%, transparent);
+.prose-link {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition: color 150ms ease;
+}
+
+.prose-link:hover {
+  color: var(--accent-hover);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

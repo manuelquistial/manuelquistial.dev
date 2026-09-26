@@ -17,14 +17,9 @@ interface ProjectsPageProps {
 
 const categoryOrder: ProjectCategory[] = [
   "engineering",
-  "research",
   "agency-web",
+  "research",
 ];
-
-const featuredByCategory: Partial<Record<ProjectCategory, readonly string[]>> = {
-  engineering: ["babel-scores", "udea-fcf-digital-ecosystem"],
-  research: ["eeg-motor-imagery-pipeline"],
-};
 
 export async function generateMetadata({
   params,
@@ -51,24 +46,19 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
   return (
     <Section>
       <SectionTitle
+        as="h1"
         title={content.sections.projects}
         subtitle={content.meta.pages.projects.description}
       />
 
-      <div className="space-y-16">
+      <div className="space-y-16 lg:space-y-24">
         {categoryOrder.map((category) => {
-          const items = localizeProjects(getProjectsByCategory(category), locale);
-          if (items.length === 0) return null;
+          const items = localizeProjects(
+            getProjectsByCategory(category),
+            locale,
+          ).filter((project) => project.status !== "coming-soon");
 
-          const featuredIds = featuredByCategory[category] ?? [];
-          const featuredSet = new Set(featuredIds);
-          const stars = featuredIds
-            .map((id) => items.find((project) => project.id === id))
-            .filter((project): project is NonNullable<typeof project> =>
-              Boolean(project),
-            );
-          const rest = items.filter((project) => !featuredSet.has(project.id));
-          const isAgency = category === "agency-web";
+          if (items.length === 0) return null;
 
           return (
             <section key={category} id={category}>
@@ -78,40 +68,31 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
                 className="mb-8 sm:mb-10"
               />
 
-              {stars.length > 0 ? (
-                <div className="space-y-5">
-                  {stars.map((project) => (
-                    <ProjectCard
-                      key={project.id}
-                      project={project}
-                      labels={content.projectCard}
-                      statusLabels={content.projectStatus}
-                      featuredLayout
-                      detailed={Boolean(project.longDescription)}
-                    />
-                  ))}
-                </div>
-              ) : null}
-
-              {rest.length > 0 ? (
-                <div
-                  className={
-                    stars.length > 0
-                      ? "mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
-                      : "grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
-                  }
-                >
-                  {rest.map((project) => (
-                    <ProjectCard
-                      key={project.id}
-                      project={project}
-                      labels={content.projectCard}
-                      statusLabels={content.projectStatus}
-                      minimal={isAgency}
-                    />
-                  ))}
-                </div>
-              ) : null}
+              <div
+                className={
+                  category === "engineering"
+                    ? "grid gap-10 md:grid-cols-2 md:gap-8"
+                    : "grid gap-10 sm:grid-cols-2 lg:grid-cols-3 md:gap-8"
+                }
+              >
+                {items.map((project) => (
+                  <ProjectCard
+                    key={project.id}
+                    project={project}
+                    labels={content.projectCard}
+                    featuredLayout={
+                      category === "engineering" &&
+                      project.id === "babel-scores"
+                    }
+                    className={
+                      category === "engineering" &&
+                      project.id === "babel-scores"
+                        ? "md:col-span-2"
+                        : undefined
+                    }
+                  />
+                ))}
+              </div>
             </section>
           );
         })}

@@ -6,6 +6,7 @@ interface SectionTitleProps {
   eyebrow?: string;
   className?: string;
   align?: "left" | "center";
+  as?: "h1" | "h2";
 }
 
 export function SectionTitle({
@@ -14,6 +15,7 @@ export function SectionTitle({
   eyebrow,
   className,
   align = "left",
+  as: Heading = "h2",
 }: SectionTitleProps) {
   return (
     <header
@@ -24,35 +26,30 @@ export function SectionTitle({
       )}
     >
       {eyebrow ? (
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
-          {eyebrow}
-        </p>
+        <p className="text-sm font-medium text-muted">{eyebrow}</p>
       ) : null}
-      <h2
+      <Heading
         className={cn(
           "font-semibold tracking-tight text-foreground",
-          eyebrow ? "mt-2 text-2xl sm:text-3xl" : "text-2xl sm:text-3xl",
+          Heading === "h1"
+            ? "text-[clamp(2.375rem,4vw,3.75rem)] leading-[1.1]"
+            : "text-[clamp(1.75rem,3vw,2.25rem)] leading-[1.2]",
+          eyebrow && "mt-2",
           align === "center" && "mx-auto",
         )}
       >
         {title}
-      </h2>
+      </Heading>
       {subtitle ? (
         <p
           className={cn(
-            "mt-4 max-w-2xl text-base leading-relaxed text-muted",
+            "mt-4 max-w-[65ch] text-[clamp(1.125rem,1.5vw,1.25rem)] leading-[1.5] text-muted",
             align === "center" && "mx-auto",
           )}
         >
           {subtitle}
         </p>
       ) : null}
-      <div
-        className={cn(
-          "mt-5 h-0.5 w-10 rounded-none bg-accent",
-          align === "center" && "mx-auto",
-        )}
-      />
     </header>
   );
 }

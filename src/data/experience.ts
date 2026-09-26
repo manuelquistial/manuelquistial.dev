@@ -8,7 +8,7 @@ export const experience = [
       "Enterprise education software at scale: React and TypeScript frontends, Java and Spring Boot services, PostgreSQL, Angular-to-React migration, AWS Lambda feature flags, CI/CD pipelines and automated testing.",
     highlights: [
       "Shipped full-stack features on edtech platforms used by institutions worldwide",
-      "Migrated Angular surfaces to React/TypeScript while keeping release cadence",
+      "Migrated Angular interfaces to React/TypeScript while keeping release cadence",
       "Hardened CI/CD and automated tests across Java services and React clients",
     ],
     technologies: [
@@ -60,7 +60,7 @@ export const experience = [
     description:
       "Direct-client publishing and e-commerce platform on WordPress and WooCommerce: custom plugins, React flipbook tooling with Fabric.js and PDF.js, AWS S3, WPML, async jobs, multivendor flows and federated institutional access.",
     highlights: [
-      "Owned end-to-end platform engineering for a live digital scores marketplace",
+      "Owned end-to-end platform engineering for a digital scores product in production",
       "Built a React flipbook reader with Fabric.js, PDF.js and async S3 workflows",
       "Enabled federated institutional access and multivendor publishing flows",
     ],

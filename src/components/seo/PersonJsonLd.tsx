@@ -13,7 +13,6 @@ export function PersonJsonLd() {
     name: profile.name,
     jobTitle: profile.role,
     url: site.url,
-    email: profile.email,
     sameAs: [profile.linkedin, profile.github],
     knowsAbout,
   };

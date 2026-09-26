@@ -28,7 +28,7 @@ export function NotFoundView({
       <p className="mt-4 max-w-md text-muted">{notFound.description}</p>
       <Link
         href={localizedPath(locale)}
-        className="mt-8 inline-flex rounded-none bg-accent px-5 py-2.5 text-sm font-medium text-white transition-colors duration-200 hover:bg-accent-hover"
+        className="mt-8 inline-flex min-h-12 items-center rounded-[6px] bg-accent px-5 py-2.5 text-base font-semibold text-white transition-colors duration-150 hover:bg-accent-hover"
       >
         {notFound.backHome}
       </Link>

@@ -31,12 +31,16 @@ export default async function ResearchPage({ params }: ResearchPageProps) {
   return (
     <Section>
       <SectionTitle
+        as="h1"
         title={researchPage.title}
         subtitle={researchPage.subtitle}
       />
 
-      <section id={pageSections.researchOverview} className="card-surface mb-10 p-6 sm:p-8">
-        <h2 className="text-xl font-semibold text-foreground">
+      <section
+        id={pageSections.researchOverview}
+        className="mb-14 max-w-[65ch]"
+      >
+        <h2 className="text-[clamp(1.5rem,2.5vw,1.75rem)] font-semibold text-foreground">
           {researchPage.overview.title}
         </h2>
         <div className="mt-5 space-y-4">
@@ -51,15 +55,15 @@ export default async function ResearchPage({ params }: ResearchPageProps) {
         </div>
       </section>
 
-      <section className="mb-10">
-        <h2 className="text-xl font-semibold text-foreground">
+      <section className="mb-14">
+        <h2 className="text-[clamp(1.5rem,2.5vw,1.75rem)] font-semibold text-foreground">
           {researchPage.topics.title}
         </h2>
-        <div className="mt-6 grid gap-5 sm:grid-cols-2">
+        <div className="mt-6 grid gap-8 sm:grid-cols-2">
           {researchPage.topics.items.map((topic) => (
-            <article key={topic.title} className="card-surface p-5 sm:p-6">
-              <h3 className="font-medium text-foreground">{topic.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted">
+            <article key={topic.title}>
+              <h3 className="font-semibold text-foreground">{topic.title}</h3>
+              <p className="mt-2 max-w-[45ch] text-base leading-relaxed text-muted">
                 {topic.description}
               </p>
             </article>
@@ -67,24 +71,21 @@ export default async function ResearchPage({ params }: ResearchPageProps) {
         </div>
       </section>
 
-      <section className="mb-10">
-        <h2 className="text-xl font-semibold text-foreground">
+      <section className="mb-14 max-w-[65ch]">
+        <h2 className="text-[clamp(1.5rem,2.5vw,1.75rem)] font-semibold text-foreground">
           {researchPage.methods.title}
         </h2>
-        <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+        <ul className="mt-6 space-y-3">
           {researchPage.methods.items.map((item) => (
-            <li
-              key={item}
-              className="card-surface border-l-2 border-l-accent/40 px-4 py-3.5 text-sm text-foreground"
-            >
+            <li key={item} className="text-base leading-relaxed text-muted">
               {item}
             </li>
           ))}
         </ul>
       </section>
 
-      <section className="card-surface p-6 sm:p-8">
-        <h2 className="text-xl font-semibold text-foreground">
+      <section className="max-w-[65ch]">
+        <h2 className="text-[clamp(1.5rem,2.5vw,1.75rem)] font-semibold text-foreground">
           {researchPage.goals.title}
         </h2>
         <div className="mt-5 space-y-4">

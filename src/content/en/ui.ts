@@ -1,34 +1,34 @@
 export const meta = {
-  title: "Manuel Quistial | Software Engineer",
+  title: "Manuel Quistial | Software engineering",
   description:
-    "Enterprise full-stack engineer at Anthology/Blackboard, with backend and cloud experience from Digital Americas, freelance WordPress delivery, the Facultad de Comunicaciones y Filología, Universidad de Antioquia digital ecosystem and BCI research.",
-    pages: {
+    "Software engineer building web applications, integrating systems, and modernizing platforms across digital products, institutional software, and client websites.",
+  pages: {
     about: {
-      title: "About",
+      title: "Background",
       description:
-        "Enterprise full-stack at Anthology/Blackboard, backend and cloud at Digital Americas, and selective freelance delivery.",
+        "Experience, education, and skills across enterprise software, institutional systems, and research.",
     },
     projects: {
       title: "Projects",
       description:
-        "Institutional ecosystems, publishing platforms, research pipelines, and production WordPress websites.",
+        "Selected software projects and web development work, with clear notes on contribution and collaboration.",
     },
     research: {
       title: "Research",
       description:
-        "EEG-based motor imagery classification, FBCSP feature extraction, and subject-disjoint ML evaluation for BCI systems.",
+        "Master's research on brain-computer interfaces and motor imagery, combining signal processing and software development.",
     },
     contact: {
       title: "Contact",
       description:
-        "Reach out for senior engineering roles, research collaborations, or AI and neuroengineering projects.",
+        "Reach out on LinkedIn about software roles, projects, or research collaboration.",
     },
   },
 };
 
 export const nav = {
   home: "Home",
-  about: "About",
+  about: "Background",
   projects: "Projects",
   research: "Research",
   contact: "Contact",
@@ -38,51 +38,43 @@ export const a11y = {
   skipToContent: "Skip to main content",
   mainNav: "Main navigation",
   mobileNav: "Mobile navigation",
+  menu: "Menu",
+  openMenu: "Open menu",
+  closeMenu: "Close menu",
 };
 
 export const hero = {
-  title: "Software Engineer & BCI Researcher",
+  title: "Software engineering for web applications and connected systems",
   subtitle:
-    "Translating complex neural data into enterprise-grade, scalable software solutions.",
-  secondary:
-    "Full-stack engineering at institutional and product scale, paired with EEG/BCI research pipelines built like production systems.",
-  exploreResearch: "Explore Research",
-  viewEngineering: "View Engineering Projects",
-  downloadCv: "Download CV",
-  linkedin: "LinkedIn",
-  github: "GitHub",
+    "I'm Manuel Quistial. I build web applications, integrate systems, and modernize platforms. My experience spans digital products, institutional software, and client websites.",
+  viewProjects: "View projects",
   contact: "Contact",
-  focusLabel: "Focus",
-  focusItems: [
-    "Enterprise full-stack systems",
-    "EEG / BCI research pipelines",
-    "Identity, cloud and institutional platforms",
-  ],
 };
 
 export const sections = {
   about: "About",
-  experience: "Experience",
+  experience: "Background",
   skills: "Skills",
-  projects: "Projects",
-  engineeringProjects: "Engineering Projects",
-  researchProjects: "Research Projects",
-  agencyWebProjects: "Agency Web Projects",
+  projects: "Selected projects",
+  engineeringProjects: "Software projects",
+  researchProjects: "Research projects",
+  agencyWebProjects: "Web development",
   research: "Research",
   contact: "Contact",
-  viewAll: "View all",
+  viewAll: "All projects",
+  viewAllExperience: "Full background",
+  viewResearch: "Research details",
 };
 
 export const agencyWebProjectsIntro =
-  "Selected production websites built through Sal & Picciotto, focused on WordPress implementation, Elementor Pro layouts, custom fields, code snippets, responsive design, multilingual content with Polylang and business-oriented web experiences.";
+  "Websites implemented with Sal & Picciotto, with work on responsive interfaces, content structure, and project-specific functionality.";
 
 export const footer = {
   rights: "All rights reserved.",
-  builtWith: "Built with Next.js, TypeScript & Tailwind CSS",
 };
 
 export const experiencePreview = {
-  currentLabel: "Current",
+  currentLabel: "Present",
 };
 
 export const projectStatus = {
@@ -95,17 +87,19 @@ export const projectStatus = {
 
 export const projectCard = {
   github: "GitHub",
-  liveDemo: "Live Demo",
-  liveSite: "Live Site",
-  caseStudy: "Case Study",
-  deliveredThrough: "Via",
+  viewProject: "Project details",
+  viewSite: "Open site",
+  deliveredThrough: "With",
+  softwareLabel: "Software",
+  webSelection: "Web development",
+  researchLabel: "Research",
 };
 
 export const contactCta = {
-  title: "Let's connect",
+  title: "Contact",
   description:
-    "Open to senior full-stack roles, AI engineering work, and research collaborations at the intersection of software and neurotechnology.",
-  button: "Get in touch",
+    "If you want to talk about a job opportunity, a software project, or a research collaboration, write to me on LinkedIn.",
+  button: "LinkedIn",
 };
 
 export const notFound = {
@@ -115,9 +109,9 @@ export const notFound = {
 };
 
 export const projectCategories = {
-  engineering: "Engineering Projects",
-  research: "Research Projects",
-  "agency-web": "Agency Web Projects",
+  engineering: "Software projects",
+  research: "Research",
+  "agency-web": "Web development",
 } as const;
 
 export const homeSkillCategoryIds = [

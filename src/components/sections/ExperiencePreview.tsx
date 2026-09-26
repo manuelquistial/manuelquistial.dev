@@ -12,7 +12,6 @@ interface ExperiencePreviewProps {
   items: readonly Experience[];
   sectionLabel: string;
   viewAllLabel: string;
-  currentLabel: string;
 }
 
 export function ExperiencePreview({
@@ -20,23 +19,15 @@ export function ExperiencePreview({
   items,
   sectionLabel,
   viewAllLabel,
-  currentLabel,
 }: ExperiencePreviewProps) {
   return (
     <Section variant="muted">
       <SectionTitle title={sectionLabel} />
 
-      <ol className="space-y-0">
+      <ol className="divide-y divide-border border-y border-border">
         {items.map((item) => (
-          <li
-            key={item.id}
-            className="relative border-l border-zinc-800 pb-10 pl-8 last:pb-0"
-          >
-            <span
-              aria-hidden
-              className="absolute left-0 top-1.5 h-3 w-3 -translate-x-1/2 rounded-none bg-zinc-700"
-            />
-            <ExperienceCard item={item} currentLabel={currentLabel} />
+          <li key={item.id} className="py-6 first:pt-0 last:pb-0 sm:py-8">
+            <ExperienceCard item={item} compact />
           </li>
         ))}
       </ol>

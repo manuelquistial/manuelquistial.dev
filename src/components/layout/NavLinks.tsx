@@ -14,6 +14,7 @@ interface NavLinksProps {
   ariaLabel: string;
   className?: string;
   linkClassName?: string;
+  onNavigate?: () => void;
 }
 
 export function NavLinks({
@@ -22,6 +23,7 @@ export function NavLinks({
   ariaLabel,
   className,
   linkClassName,
+  onNavigate,
 }: NavLinksProps) {
   const pathname = usePathname();
 
@@ -30,14 +32,14 @@ export function NavLinks({
       {navItems.map((item) => {
         const href = localizedPath(locale, item.path);
         const isActive =
-          pathname === href ||
-          (item.path !== "" && pathname.startsWith(`${href}/`));
+          pathname === href || pathname.startsWith(`${href}/`);
 
         return (
           <Link
             key={item.key}
             href={href}
             aria-current={isActive ? "page" : undefined}
+            onClick={onNavigate}
             className={cn(
               linkClassName,
               isActive

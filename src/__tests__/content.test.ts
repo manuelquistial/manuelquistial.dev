@@ -163,7 +163,7 @@ describe("portfolio data completeness", () => {
     const udea = projects.find((project) => project.id === "udea-fcf-digital-ecosystem");
     expect(udea).toBeDefined();
     expect(localizeProject(udea!, "es").title).toBe(
-      "Ecosistema Digital: Facultad de Comunicaciones y Filología, Universidad de Antioquia",
+      "Ecosistema digital, Universidad de Antioquia",
     );
   });
 

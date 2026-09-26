@@ -1,25 +1,14 @@
 import { getSiteContent } from "@/content/getSiteContent";
 import { getFeaturedExperience } from "@/data/experience";
-import {
-  getFeaturedProjects,
-  getProjectsByCategory,
-} from "@/data/projects";
-import {
-  getSkillCategoriesByIds,
-  skillCategories,
-} from "@/data/skills";
+import { getProjectById } from "@/data/projects";
 import { parseLocale } from "@/i18n/parseLocale";
 import {
   localizeExperienceList,
-  localizeProjects,
-  localizeSkillCategories,
+  localizeProject,
 } from "@/lib/localize";
-import { localizedSectionPath } from "@/lib/localizedPath";
-import { pageSections } from "@/lib/pageSections";
+import { localizedPath } from "@/lib/localizedPath";
 import { Hero } from "@/components/sections/Hero";
-import { AboutPreview } from "@/components/sections/AboutPreview";
-import { SkillsSection } from "@/components/sections/SkillsSection";
-import { CategoryProjectsSection } from "@/components/sections/CategoryProjectsSection";
+import { SelectedProjects } from "@/components/sections/SelectedProjects";
 import { ExperiencePreview } from "@/components/sections/ExperiencePreview";
 import { ResearchPreview } from "@/components/sections/ResearchPreview";
 import { ContactCTA } from "@/components/sections/ContactCTA";
@@ -32,94 +21,41 @@ export default async function HomePage({ params }: HomePageProps) {
   const locale = parseLocale((await params).locale);
   const content = getSiteContent(locale);
 
-  const researchTopics = content.researchPage.topics.items.map(
-    (item) => item.title,
-  );
+  const babel = getProjectById("babel-scores");
+  const udea = getProjectById("udea-fcf-digital-ecosystem");
+  const sal = getProjectById("sal-picciotto-website");
 
-  const engineeringProjects = localizeProjects(
-    getFeaturedProjects("engineering", 2),
-    locale,
-  );
-  const researchProjects = localizeProjects(
-    getProjectsByCategory("research").slice(0, 1),
-    locale,
-  );
-  const agencyProjects = localizeProjects(
-    getFeaturedProjects("agency-web", 3),
-    locale,
-  );
-  const homeSkills = localizeSkillCategories(
-    getSkillCategoriesByIds(content.homeSkillCategoryIds),
-    locale,
-  );
+  const featured = babel ? localizeProject(babel, locale) : undefined;
+  const secondary = [udea, sal]
+    .filter((project): project is NonNullable<typeof project> => Boolean(project))
+    .map((project) => localizeProject(project, locale));
+
   const experiencePreview = localizeExperienceList(
-    getFeaturedExperience(),
+    getFeaturedExperience(4),
     locale,
   );
 
   return (
     <>
       <Hero locale={locale} content={content.hero} />
-      <AboutPreview
-        locale={locale}
-        content={content.about}
-        sectionLabel={content.sections.about}
-        viewAllLabel={content.sections.viewAll}
-      />
-      <CategoryProjectsSection
-        title={content.sections.engineeringProjects}
-        projects={engineeringProjects}
-        featuredIds={["babel-scores", "udea-fcf-digital-ecosystem"]}
-        viewAllHref={localizedSectionPath(
-          locale,
-          "/projects",
-          pageSections.engineering,
-        )}
-        viewAllLabel={content.sections.viewAll}
+      <SelectedProjects
+        title={content.sections.projects}
+        projects={{ featured, secondary }}
         projectCard={content.projectCard}
-        projectStatus={content.projectStatus}
-      />
-      <ResearchPreview
-        locale={locale}
-        sectionLabel={content.sections.research}
+        viewAllHref={localizedPath(locale, "/projects")}
         viewAllLabel={content.sections.viewAll}
-        title={content.researchPage.subtitle}
-        tagline={content.researchPage.previewTagline}
-        overview={content.researchPage.overview.paragraphs[0]}
-        topics={researchTopics}
-        projects={researchProjects}
-        projectCard={content.projectCard}
-        projectStatus={content.projectStatus}
-      />
-      <SkillsSection
-        categories={
-          homeSkills.length
-            ? homeSkills
-            : localizeSkillCategories(skillCategories, locale)
-        }
-        sectionLabel={content.sections.skills}
-      />
-      <CategoryProjectsSection
-        title={content.sections.agencyWebProjects}
-        subtitle={content.agencyWebProjectsIntro}
-        projects={agencyProjects}
-        layout="minimal"
-        viewAllHref={localizedSectionPath(
-          locale,
-          "/projects",
-          pageSections.agencyWeb,
-        )}
-        viewAllLabel={content.sections.viewAll}
-        projectCard={content.projectCard}
-        projectStatus={content.projectStatus}
-        variant="muted"
       />
       <ExperiencePreview
         locale={locale}
         items={experiencePreview}
         sectionLabel={content.sections.experience}
-        viewAllLabel={content.sections.viewAll}
-        currentLabel={content.experiencePreview.currentLabel}
+        viewAllLabel={content.sections.viewAllExperience}
+      />
+      <ResearchPreview
+        locale={locale}
+        sectionLabel={content.sections.research}
+        viewAllLabel={content.sections.viewResearch}
+        summary={content.researchPage.previewTagline}
       />
       <ContactCTA locale={locale} content={content.contactCta} />
     </>

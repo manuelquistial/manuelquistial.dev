@@ -7,57 +7,52 @@ import type {
 
 export const about = {
   previewParagraphs: [
-    "I build enterprise full-stack systems and treat research code with the same rigor: versioned experiments, clear APIs and reproducible evaluation.",
-    "My work sits at the intersection of scalable product engineering and EEG/BCI neuroengineering, moving from high-level impact to the technical details that make systems reliable.",
+    "I build web applications, integrate systems, and modernize platforms across product, institutional, and client work.",
   ],
-  highlights: [
-    "Impact first: institutional platforms and live product systems",
-    "Research with production discipline: EEG pipelines and subject-disjoint evaluation",
-    "Identity, cloud and delivery as first-class engineering concerns",
-  ],
+  highlights: [],
 } satisfies AboutPreviewContent;
 
 export const aboutPage = {
-  title: "About Me",
+  title: "Background",
   intro:
-    "Manuel Alejandro Quistial Jurado, software and electronic engineer focused on enterprise full-stack work at Anthology/Blackboard, with backend and cloud experience from Digital Americas, selective freelance delivery and parallel institutional and neuroengineering projects.",
+    "Manuel Alejandro Quistial Jurado, software and electronic engineer. I develop web applications, integrate systems, and modernize platforms across digital products, institutional software, and client websites. Research in neuroengineering is a parallel line of work.",
   engineering: {
-    title: "Software Engineering",
+    title: "Software engineering",
     paragraphs: [
-      "At Anthology/Blackboard I worked on enterprise learning platforms used by institutions worldwide: React and TypeScript interfaces, Java and Spring Boot microservices, PostgreSQL, Angular-to-React migration, AWS Lambda feature flags and automated testing in CI/CD pipelines.",
-      "At Digital Americas Pipeline Initiative I worked as a backend developer on Node.js, Express, AWS Lambda, SNS/SQS, EC2, API Gateway and Electron-based tooling.",
-      "On Babel Scores I build a direct-client publishing and e-commerce platform with WooCommerce, React, Fabric.js, PDF.js, S3, WPML, custom plugins, async jobs, multivendor flows and federated institutional access.",
-      "I contribute to the institutional digital ecosystem at Facultad de Comunicaciones y Filología, Universidad de Antioquia (Laravel, Symfony, React, Next.js, Python, Keycloak/OIDC).",
-      "Through Sal & Picciotto I deliver freelance WordPress and Elementor Pro projects for corporate, healthcare, real estate, nonprofit and campaign clients, using Polylang, ACF, WordPress Code Snippets, custom CSS and JavaScript.",
+      "At Anthology/Blackboard I worked on enterprise learning platforms: React and TypeScript interfaces, Java and Spring Boot services, PostgreSQL, migration from Angular to React, AWS Lambda feature flags, and automated testing in CI/CD pipelines.",
+      "At Digital Americas Pipeline Initiative I worked as a backend developer with Node.js, Express, AWS Lambda, SNS/SQS, EC2, API Gateway, and Electron-based tooling.",
+      "On Babel Scores I contribute to a publishing and e-commerce platform with WooCommerce, a React-based score reader, custom plugins, S3, WPML, async jobs, multivendor flows, and federated institutional access.",
+      "I contribute to institutional applications at Facultad de Comunicaciones y Filología, Universidad de Antioquia, including modernization work, reporting, and shared access with Keycloak/OIDC.",
+      "Through Sal & Picciotto I implement WordPress and Elementor Pro websites for corporate, healthcare, real estate, nonprofit, and campaign clients.",
     ],
   },
   research: {
-    title: "Neuroengineering & Research",
+    title: "Research",
     paragraphs: [
-      "As a master's student at Universidad de Antioquia, I research EEG-based motor imagery classification: decoding imagined hand movements from scalp recordings. My pipeline applies band-pass filtering, FBCSP feature extraction, and classifiers such as LDA and SVM.",
-      "Evaluation follows subject-disjoint cross-validation so results reflect generalization across participants, not within-subject overfitting. I treat research code like production software: versioned experiments, traceable preprocessing, and reproducible notebooks.",
+      "As a master's student at Universidad de Antioquia, my research focuses on brain-computer interfaces and motor imagery. The work combines signal processing and software development to study how a person interacts with a system.",
+      "I treat research code with the same discipline as product software: clear structure, documented steps, and reproducible evaluation when materials are available.",
     ],
   },
   focus: {
-    title: "Current Focus",
+    title: "Areas of work",
     items: [
-      "Enterprise full-stack at Anthology/Blackboard: React, TypeScript, Java, Spring Boot, CI/CD",
-      "Backend and cloud foundations from Digital Americas: Node.js, AWS Lambda, SNS/SQS",
-      "Direct-client platform engineering on Babel Scores",
-      "WordPress freelance delivery via Sal & Picciotto",
-      "Institutional systems at Facultad de Comunicaciones y Filología, Universidad de Antioquia: Laravel, Keycloak/OIDC, Python reporting",
-      "EEG signal processing and BCI classification pipelines",
+      "Enterprise full-stack systems: React, TypeScript, Java, Spring Boot, CI/CD",
+      "Backend and cloud services: Node.js, AWS Lambda, messaging and APIs",
+      "Publishing and e-commerce platforms for direct clients",
+      "WordPress delivery with Sal & Picciotto",
+      "Institutional systems: modernization, reporting, and shared identity",
+      "Neuroengineering research alongside software practice",
     ],
   },
   education: {
     title: "Education",
     items: [
       {
-        degree: "Master's in Engineering (Neuroengineering focus)",
+        degree: "Master's in Engineering (neuroengineering focus)",
         institution: "Universidad de Antioquia",
         period: "Feb 2025 – Dec 2026 (expected)",
         focus:
-          "EEG-based motor imagery classification, FBCSP feature extraction, and subject-disjoint ML evaluation for BCI systems.",
+          "Brain-computer interfaces, motor imagery, and software for signal-oriented research workflows.",
       },
       {
         degree: "Specialization in Software Development",
@@ -80,12 +75,12 @@ export const aboutPage = {
     ],
   },
   researchOutputs: {
-    title: "Research Outputs",
+    title: "Research line",
     items: [
       {
-        title: "EEG Motor Imagery Pipeline",
+        title: "Brain-computer interfaces and motor imagery",
         description:
-          "Reproducible Python research pipeline with MNE preprocessing, FBCSP features, and leave-one-subject-out evaluation.",
+          "Master's research combining signal processing and software development. Details are kept at a general level until current materials are ready for publication.",
         href: "/research",
       },
     ],
@@ -95,57 +90,57 @@ export const aboutPage = {
 export const researchPage = {
   title: "Research",
   subtitle:
-    "EEG-based motor imagery classification at Universidad de Antioquia: bridging signal processing, classical ML, and software engineering.",
+    "Master's research on brain-computer interfaces and motor imagery at Universidad de Antioquia.",
   previewTagline:
-    "Motor imagery decoding, FBCSP feature extraction, and subject-disjoint evaluation for non-invasive BCI systems.",
+    "My master's research focuses on brain-computer interfaces and motor imagery. This line brings together signal processing and software development to study interaction between a person and a system.",
   overview: {
     title: "Overview",
     paragraphs: [
-      "My master's research tackles motor imagery classification from EEG: distinguishing imagined left-hand vs. right-hand movements from noisy scalp recordings. This is a foundational building block for non-invasive brain-computer interfaces that could assist motor rehabilitation or device control.",
-      "The work combines MNE-based preprocessing, Filter Bank Common Spatial Patterns (FBCSP), and linear classifiers evaluated with leave-one-subject-out cross-validation. I document every step so experiments can be reproduced and compared fairly.",
+      "My master's research focuses on brain-computer interfaces and motor imagery. The aim is to study how signal processing and software can support interaction between a person and a system.",
+      "This page describes the research line at a general level. Specific methods, datasets, and evaluation details are included only when they remain accurate and authorized for publication.",
     ],
   },
   topics: {
-    title: "Research Topics",
+    title: "Focus areas",
     items: [
       {
-        title: "Motor Imagery Classification",
+        title: "Brain-computer interfaces",
         description:
-          "Binary and multi-class decoding of imagined limb movements from multi-channel EEG recordings.",
+          "Software and signal-oriented work related to non-invasive BCI research.",
       },
       {
-        title: "FBCSP Feature Extraction",
+        title: "Motor imagery",
         description:
-          "Spatial filtering across frequency bands to maximize class separability before classification.",
+          "Studying imagined movement as a basis for interaction with computational systems.",
       },
       {
-        title: "Subject-Disjoint Evaluation",
+        title: "Signal processing and software",
         description:
-          "Leave-one-subject-out cross-validation, confusion matrices, and per-participant performance analysis.",
+          "Combining analysis workflows with engineering practices that keep experiments traceable.",
       },
       {
-        title: "Reproducible Pipelines",
+        title: "Reproducible research practice",
         description:
-          "Python workflows from raw .edf files to trained models with versioned preprocessing and logging.",
+          "Organizing code, documentation, and evaluation so results can be inspected and revisited.",
       },
     ],
   },
   methods: {
-    title: "Methods & Tools",
+    title: "Working approach",
     items: [
-      "EEG acquisition and band-pass / notch filtering",
-      "FBCSP and CSP spatial feature extraction",
-      "LDA, SVM, and k-means clustering classifiers",
-      "scikit-learn, pandas, NumPy, and MNE-Python",
-      "Leave-one-subject-out cross-validation",
-      "Confusion matrices and statistical performance reporting",
+      "Signal processing for EEG-oriented research workflows",
+      "Software structure for experiments and evaluation",
+      "Documentation of assumptions and steps",
+      "Python tooling for analysis and research code",
+      "Clear separation between goals and confirmed findings",
+      "Publication of materials only when authorized",
     ],
   },
   goals: {
-    title: "Research Goals",
+    title: "Goals",
     paragraphs: [
-      "Short term: refine the motor imagery pipeline, compare FBCSP configurations, and publish reproducible benchmarks under consistent evaluation protocols.",
-      "Long term: connect research prototypes with production-grade software that makes neurotechnology more accessible: interpretable models, clean APIs, and tools researchers can actually deploy.",
+      "Near term: continue the master's research with clear methods, careful evaluation, and software that supports the work.",
+      "Longer term: keep research prototypes aligned with solid engineering practice without claiming clinical outcomes that the work does not demonstrate.",
     ],
   },
 } satisfies ResearchPageContent;
@@ -153,11 +148,9 @@ export const researchPage = {
 export const contactPage = {
   title: "Contact",
   subtitle:
-    "Open to senior full-stack engineering roles, AI/ML collaborations, and neuroengineering research partnerships.",
-  email: "Email",
+    "If you want to talk about a job opportunity, a software project, or a research collaboration, write to me on LinkedIn.",
   linkedin: "LinkedIn",
   github: "GitHub",
   cv: "Download CV",
-  availability:
-    "Based in Colombia (COT). Available for remote and hybrid opportunities across time zones.",
+  availability: "Based in Colombia. Open to remote and hybrid conversations.",
 } satisfies ContactPageContent;

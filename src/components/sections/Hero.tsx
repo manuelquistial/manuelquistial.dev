@@ -1,6 +1,6 @@
 import type { Locale } from "@/i18n/config";
 import type { SiteContent } from "@/content";
-import { profile, getCvDownloadName, getCvUrl } from "@/data/profile";
+import { profile } from "@/data/profile";
 import { localizedPath, localizedSectionPath } from "@/lib/localizedPath";
 import { pageSections } from "@/lib/pageSections";
 import { Container } from "@/components/layout/Container";
@@ -13,96 +13,37 @@ interface HeroProps {
 
 export function Hero({ locale, content }: HeroProps) {
   return (
-    <section className="border-b border-zinc-800 bg-zinc-950">
-      <Container as="section" className="py-0">
-        <div className="grid lg:grid-cols-[3fr_2fr]">
-          <div className="border-b border-zinc-800 py-16 sm:py-20 lg:border-b-0 lg:border-r lg:py-24 lg:pr-12">
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
-              {profile.name}
-            </p>
-            <p className="mt-3 font-mono text-xs text-zinc-400">
-              {profile.location}
-            </p>
-            <h1 className="mt-6 max-w-xl text-3xl font-semibold leading-tight tracking-tight text-zinc-50 sm:text-4xl lg:text-[2.65rem] lg:leading-[1.12]">
-              {content.title}
-            </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-zinc-50">
-              {content.subtitle}
-            </p>
-            <p className="mt-4 max-w-xl text-base leading-relaxed text-zinc-400">
-              {content.secondary}
-            </p>
-
-            <div className="mt-10 flex flex-wrap gap-3">
-              <Button
-                href={localizedSectionPath(
-                  locale,
-                  "/research",
-                  pageSections.researchOverview,
-                )}
-                size="lg"
-              >
-                {content.exploreResearch}
-              </Button>
-              <Button
-                href={localizedSectionPath(
-                  locale,
-                  "/projects",
-                  pageSections.engineering,
-                )}
-                variant="outline"
-                size="lg"
-              >
-                {content.viewEngineering}
-              </Button>
-            </div>
-          </div>
-
-          <aside className="flex flex-col justify-between gap-10 bg-zinc-900/40 py-16 sm:py-20 lg:py-24 lg:pl-12">
-            <div className="space-y-4 border border-zinc-800 bg-zinc-900 p-6">
-              <p className="font-mono text-xs uppercase tracking-[0.18em] text-zinc-400">
-                {content.focusLabel}
-              </p>
-              <ul className="space-y-3 text-sm leading-relaxed text-zinc-400">
-                {content.focusItems.map((item, index) => (
-                  <li
-                    key={item}
-                    className={
-                      index === 0
-                        ? "border-l-2 border-accent/50 pl-3 text-zinc-50"
-                        : "border-l-2 border-zinc-700 pl-3"
-                    }
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="flex flex-wrap gap-2">
-              <Button
-                href={getCvUrl(locale)}
-                download={getCvDownloadName(locale)}
-                variant="secondary"
-                size="sm"
-              >
-                {content.downloadCv}
-              </Button>
-              <Button href={profile.linkedin} external variant="ghost" size="sm">
-                {content.linkedin}
-              </Button>
-              <Button href={profile.github} external variant="ghost" size="sm">
-                {content.github}
-              </Button>
-              <Button
-                href={localizedPath(locale, "/contact")}
-                variant="ghost"
-                size="sm"
-              >
-                {content.contact}
-              </Button>
-            </div>
-          </aside>
+    <section className="bg-background">
+      <Container className="pb-10 pt-14 md:pb-12 md:pt-16 lg:pb-16 lg:pt-20">
+        <p className="text-base font-semibold text-foreground">
+          {profile.shortName}
+        </p>
+        <div className="mt-6 grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:items-end lg:gap-12">
+          <h1 className="max-w-[18ch] text-[clamp(2.375rem,5vw,3.75rem)] font-semibold leading-[1.1] tracking-tight text-foreground">
+            {content.title}
+          </h1>
+          <p className="max-w-[40ch] text-[clamp(1.125rem,1.6vw,1.25rem)] leading-[1.5] text-muted lg:justify-self-end">
+            {content.subtitle}
+          </p>
+        </div>
+        <div className="mt-10 flex flex-wrap gap-3">
+          <Button
+            href={localizedSectionPath(
+              locale,
+              "",
+              pageSections.selectedProjects,
+            )}
+            size="lg"
+          >
+            {content.viewProjects}
+          </Button>
+          <Button
+            href={localizedPath(locale, "/contact")}
+            variant="outline"
+            size="lg"
+          >
+            {content.contact}
+          </Button>
         </div>
       </Container>
     </section>

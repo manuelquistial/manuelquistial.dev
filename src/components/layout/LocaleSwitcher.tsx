@@ -26,7 +26,7 @@ export function LocaleSwitcher({
       role="group"
       aria-label={labels.label}
       className={cn(
-        "inline-flex shrink-0 items-center rounded-none border border-border bg-surface-elevated p-0.5",
+        "inline-flex shrink-0 items-center rounded-[6px] border border-border bg-surface p-0.5",
         className,
       )}
     >
@@ -42,9 +42,9 @@ export function LocaleSwitcher({
             aria-label={localeLabels[item]}
             aria-current={isActive ? "true" : undefined}
             className={cn(
-              "rounded-none px-2.5 py-1 text-xs font-semibold uppercase tracking-wide transition-colors duration-200",
+              "rounded-[6px] px-2.5 py-1.5 text-sm font-semibold uppercase tracking-wide transition-colors duration-150",
               isActive
-                ? "bg-accent/15 text-accent"
+                ? "bg-surface-soft text-foreground"
                 : "text-muted hover:text-foreground",
             )}
           >

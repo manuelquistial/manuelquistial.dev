@@ -39,7 +39,7 @@ export async function generateMetadata({
 
   if (!project || !caseStudy) {
     return buildPageMetadata({
-      title: locale === "es" ? "Case study" : "Case Study",
+      title: content.meta.pages.projects.title,
       description: content.meta.pages.projects.description,
       path: `/projects/${slug}`,
       locale,
@@ -49,7 +49,7 @@ export async function generateMetadata({
   const localizedProject = localizeProject(project, locale);
 
   return buildPageMetadata({
-    title: `${localizedProject.title} | Case Study`,
+    title: localizedProject.title,
     description: localizedProject.description,
     path: `/projects/${slug}`,
     locale,
@@ -59,7 +59,6 @@ export async function generateMetadata({
 export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
   const { locale: localeParam, slug } = await params;
   const locale = parseLocale(localeParam);
-  const content = getSiteContent(locale);
   const project = getProjectBySlug(slug);
 
   if (!project?.caseStudyUrl) {
@@ -77,7 +76,6 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
       locale={locale}
       project={localizeProject(project, locale)}
       caseStudy={caseStudy}
-      projectStatus={content.projectStatus}
     />
   );
 }

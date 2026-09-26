@@ -1,34 +1,34 @@
 export const meta = {
-  title: "Manuel Quistial | Ingeniero de Software",
+  title: "Manuel Quistial | Ingeniería de software",
   description:
-    "Ingeniero full-stack empresarial en Anthology/Blackboard, con experiencia previa en backend y cloud en Digital Americas, entrega freelance WordPress, ecosistema digital de Facultad de Comunicaciones y Filología, Universidad de Antioquia e investigación BCI.",
+    "Ingeniero de software: aplicaciones web, integración de sistemas y modernización de plataformas en productos digitales, software institucional y sitios para clientes.",
   pages: {
     about: {
-      title: "Sobre mí",
+      title: "Trayectoria",
       description:
-        "Full-stack empresarial en Anthology/Blackboard, backend y cloud en Digital Americas y freelance selectivo.",
+        "Experiencia, formación y competencias en software empresarial, sistemas institucionales e investigación.",
     },
     projects: {
       title: "Proyectos",
       description:
-        "Ecosistemas institucionales, plataformas editoriales, pipelines de investigación y sitios WordPress en producción.",
+        "Proyectos de software y desarrollo web seleccionados, con la contribución y la colaboración claramente identificadas.",
     },
     research: {
       title: "Investigación",
       description:
-        "Clasificación de imaginación motora con EEG, extracción FBCSP y evaluación de ML entre sujetos para sistemas BCI.",
+        "Investigación de maestría en interfaces cerebro-computador e imaginación motora, con procesamiento de señales y desarrollo de software.",
     },
     contact: {
       title: "Contacto",
       description:
-        "Escríbeme para roles senior de ingeniería, colaboraciones de investigación o proyectos de IA y neuroingeniería.",
+        "Escríbeme por LinkedIn sobre una oportunidad de trabajo, un proyecto de software o una colaboración de investigación.",
     },
   },
 };
 
 export const nav = {
   home: "Inicio",
-  about: "Sobre mí",
+  about: "Trayectoria",
   projects: "Proyectos",
   research: "Investigación",
   contact: "Contacto",
@@ -38,51 +38,43 @@ export const a11y = {
   skipToContent: "Saltar al contenido principal",
   mainNav: "Navegación principal",
   mobileNav: "Navegación móvil",
+  menu: "Menú",
+  openMenu: "Abrir menú",
+  closeMenu: "Cerrar menú",
 };
 
 export const hero = {
-  title: "Ingeniero de Software e Investigador BCI",
+  title: "Ingeniería de software para aplicaciones web y sistemas conectados",
   subtitle:
-    "Traduciendo datos neuronales complejos en soluciones de software empresariales y escalables.",
-  secondary:
-    "Ingeniería full-stack a escala institucional y de producto, junto a pipelines de investigación EEG/BCI tratados como software en producción.",
-  exploreResearch: "Explorar Investigación",
-  viewEngineering: "Ver Proyectos de Ingeniería",
-  downloadCv: "Descargar CV",
-  linkedin: "LinkedIn",
-  github: "GitHub",
-  contact: "Contacto",
-  focusLabel: "Enfoque",
-  focusItems: [
-    "Sistemas full-stack empresariales",
-    "Pipelines de investigación EEG / BCI",
-    "Identidad, cloud y plataformas institucionales",
-  ],
+    "Soy Manuel Quistial. Desarrollo aplicaciones web, integro sistemas y modernizo plataformas. Mi experiencia incluye productos digitales, software institucional y desarrollo web para clientes.",
+  viewProjects: "Ver proyectos",
+  contact: "Contactar",
 };
 
 export const sections = {
   about: "Sobre mí",
-  experience: "Experiencia",
-  skills: "Habilidades",
-  projects: "Proyectos",
-  engineeringProjects: "Proyectos de Ingeniería",
-  researchProjects: "Proyectos de Investigación",
-  agencyWebProjects: "Proyectos Web de Agencia",
+  experience: "Trayectoria",
+  skills: "Competencias",
+  projects: "Proyectos seleccionados",
+  engineeringProjects: "Proyectos de software",
+  researchProjects: "Proyectos de investigación",
+  agencyWebProjects: "Desarrollo web",
   research: "Investigación",
   contact: "Contacto",
-  viewAll: "Ver todo",
+  viewAll: "Todos los proyectos",
+  viewAllExperience: "Trayectoria completa",
+  viewResearch: "Detalle de investigación",
 };
 
 export const agencyWebProjectsIntro =
-  "Selección de sitios web en producción desarrollados con Sal & Picciotto, con implementación en WordPress, layouts en Elementor Pro, campos personalizados, snippets de código, diseño responsive, contenido multilingüe con Polylang y experiencias web orientadas al negocio.";
+  "Sitios web implementados con Sal & Picciotto, con trabajo en interfaces adaptables, estructura de contenido y funcionalidades propias de cada proyecto.";
 
 export const footer = {
   rights: "Todos los derechos reservados.",
-  builtWith: "Construido con Next.js, TypeScript y Tailwind CSS",
 };
 
 export const experiencePreview = {
-  currentLabel: "Actual",
+  currentLabel: "Presente",
 };
 
 export const projectStatus = {
@@ -95,17 +87,19 @@ export const projectStatus = {
 
 export const projectCard = {
   github: "GitHub",
-  liveDemo: "Demo en vivo",
-  liveSite: "Sitio en vivo",
-  caseStudy: "Estudio de caso",
-  deliveredThrough: "Vía",
+  viewProject: "Detalle del proyecto",
+  viewSite: "Abrir sitio",
+  deliveredThrough: "Con",
+  softwareLabel: "Software",
+  webSelection: "Desarrollo web",
+  researchLabel: "Investigación",
 };
 
 export const contactCta = {
-  title: "Conectemos",
+  title: "Contacto",
   description:
-    "Abierto a roles senior full-stack, ingeniería de IA y colaboraciones de investigación en la intersección entre software y neurotecnología.",
-  button: "Contactar",
+    "Si quieres hablar sobre una oportunidad de trabajo, un proyecto de software o una colaboración de investigación, escríbeme por LinkedIn.",
+  button: "LinkedIn",
 };
 
 export const notFound = {
@@ -115,9 +109,9 @@ export const notFound = {
 };
 
 export const projectCategories = {
-  engineering: "Proyectos de Ingeniería",
-  research: "Proyectos de Investigación",
-  "agency-web": "Proyectos Web de Agencia",
+  engineering: "Proyectos de software",
+  research: "Investigación",
+  "agency-web": "Desarrollo web",
 } as const;
 
 export const homeSkillCategoryIds = [

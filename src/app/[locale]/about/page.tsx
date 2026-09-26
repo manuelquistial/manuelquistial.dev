@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { getSiteContent } from "@/content/getSiteContent";
-import { experience } from "@/data/experience";
+import {
+  getProfessionalExperience,
+  getTeachingExperience,
+} from "@/data/experience";
 import { skillCategories } from "@/data/skills";
-import { profile, getCvDownloadName, getCvUrl } from "@/data/profile";
+import { getCvDownloadName, getCvUrl } from "@/data/profile";
 import { parseLocale } from "@/i18n/parseLocale";
 import {
   localizeExperienceList,
@@ -38,7 +41,11 @@ export default async function AboutPage({ params }: AboutPageProps) {
   const locale = parseLocale((await params).locale);
   const content = getSiteContent(locale);
   const { aboutPage } = content;
-  const localizedExperience = localizeExperienceList(experience, locale);
+  const professional = localizeExperienceList(
+    getProfessionalExperience(),
+    locale,
+  );
+  const teaching = localizeExperienceList(getTeachingExperience(), locale);
   const skills = localizeSkillCategories(skillCategories, locale);
   const researchLinkLabel =
     locale === "es" ? "Ver investigación" : "View research";
@@ -59,50 +66,29 @@ export default async function AboutPage({ params }: AboutPageProps) {
         </Button>
       </div>
 
-      <section className="mt-14 max-w-[65ch] space-y-10">
-        <div>
-          <h2 className="text-[clamp(1.5rem,2.5vw,1.75rem)] font-semibold text-foreground">
-            {aboutPage.engineering.title}
-          </h2>
-          <div className="mt-5 space-y-4">
-            {aboutPage.engineering.paragraphs.map((paragraph, index) => (
-              <p
-                key={`engineering-p-${index}`}
-                className="leading-relaxed text-muted"
-              >
-                {paragraph}
-              </p>
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <h2 className="text-[clamp(1.5rem,2.5vw,1.75rem)] font-semibold text-foreground">
-            {aboutPage.research.title}
-          </h2>
-          <div className="mt-5 space-y-4">
-            {aboutPage.research.paragraphs.map((paragraph, index) => (
-              <p
-                key={`research-p-${index}`}
-                className="leading-relaxed text-muted"
-              >
-                {paragraph}
-              </p>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section id={pageSections.experience} className="mt-16">
         <SectionTitle title={content.sections.experience} />
-        <ol className="divide-y divide-border border-y border-border">
-          {localizedExperience.map((item) => (
+        <ul className="divide-y divide-border border-y border-border">
+          {professional.map((item) => (
             <li key={item.id} className="py-8">
               <ExperienceCard item={item} />
             </li>
           ))}
-        </ol>
+        </ul>
       </section>
+
+      {teaching.length > 0 ? (
+        <section className="mt-16">
+          <SectionTitle title={content.sections.teaching} />
+          <ul className="divide-y divide-border border-y border-border">
+            {teaching.map((item) => (
+              <li key={item.id} className="py-8">
+                <ExperienceCard item={item} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
 
       <section className="mt-16">
         <h2 className="text-[clamp(1.5rem,2.5vw,1.75rem)] font-semibold text-foreground">
@@ -116,11 +102,6 @@ export default async function AboutPage({ params }: AboutPageProps) {
               </h3>
               <p className="mt-2 text-base text-muted">{item.institution}</p>
               <p className="mt-1 text-sm text-muted">{item.period}</p>
-              {"focus" in item && item.focus ? (
-                <p className="mt-3 max-w-[65ch] text-base leading-relaxed text-muted">
-                  {item.focus}
-                </p>
-              ) : null}
             </article>
           ))}
         </div>
@@ -146,23 +127,6 @@ export default async function AboutPage({ params }: AboutPageProps) {
             </div>
           ))}
         </div>
-      </section>
-
-      <section className="mt-16">
-        <h2 className="text-[clamp(1.5rem,2.5vw,1.75rem)] font-semibold text-foreground">
-          {aboutPage.languages.title}
-        </h2>
-        <ul className="mt-6 space-y-2">
-          {aboutPage.languages.items.map((item) => (
-            <li key={item.language} className="text-base text-muted">
-              <span className="font-medium text-foreground">
-                {item.language}
-              </span>
-              {" · "}
-              {item.level}
-            </li>
-          ))}
-        </ul>
       </section>
 
       <section className="mt-16 max-w-[65ch]">
@@ -191,7 +155,22 @@ export default async function AboutPage({ params }: AboutPageProps) {
         </ul>
       </section>
 
-      <p className="mt-16 text-sm text-muted">{profile.location}</p>
+      <section className="mt-16">
+        <h2 className="text-[clamp(1.5rem,2.5vw,1.75rem)] font-semibold text-foreground">
+          {aboutPage.languages.title}
+        </h2>
+        <ul className="mt-6 space-y-2">
+          {aboutPage.languages.items.map((item) => (
+            <li key={item.language} className="text-base text-muted">
+              <span className="font-medium text-foreground">
+                {item.language}
+              </span>
+              {" · "}
+              {item.level}
+            </li>
+          ))}
+        </ul>
+      </section>
     </Section>
   );
 }

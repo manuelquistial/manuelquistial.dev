@@ -19,13 +19,13 @@ export type ProjectStatus = (typeof projectStatuses)[number];
 export const projects = [
   {
     id: "udea-fcf-digital-ecosystem",
-    title: "Digital ecosystem, Universidad de Antioquia",
+    title: "Applications for Facultad de Comunicaciones y Filología",
     category: "engineering",
-    clientType: "Facultad de Comunicaciones y Filología, Universidad de Antioquia",
+    clientType: "Universidad de Antioquia",
     description:
-      "Institutional applications for Universidad de Antioquia. Work includes system modernization, reporting, and integrating access across applications.",
+      "I contributed to developing, updating, and managing faculty applications, and advised on related data analysis.",
     longDescription:
-      "A multi-application institutional ecosystem combining legacy systems, modernized applications and shared infrastructure. The work includes Laravel and Symfony legacy applications, modern Laravel APIs, React and Next.js frontends, Python reporting services with FastAPI and Flask, database workflows with MySQL and PostgreSQL, Docker-based local environments, documentation, validation scripts and centralized authentication with Keycloak/OIDC.",
+      "Advisory and development work for Facultad de Comunicaciones y Filología applications: design and launch of an information system, updates to existing applications, support, training, and advice on data management and analysis.",
     tags: [
       "Laravel",
       "Symfony",
@@ -52,28 +52,12 @@ export const projects = [
     id: "babel-scores",
     title: "Babel Scores",
     category: "engineering",
-    clientType: "Direct Client Project",
+    clientType: "Digital sheet music platform",
     description:
-      "Platform for selling and reading digital music scores. My work includes the web reader, e-commerce functionality, and integrations for institutional access.",
+      "Web reader and features for a digital sheet music platform.",
     longDescription:
-      "Babel Scores is a custom e-commerce platform developed directly for the client, combining WordPress and WooCommerce with advanced custom functionality. The project included a dedicated flipbook experience built with React.js, Fabric.js, PDF.js and React PageFlip for mobile and desktop users, custom WordPress plugins for WooCommerce and internal workflows, AWS S3 integration, WPML multilingual support, database migration, asynchronous jobs, multivendor workflow support and federated institutional access.",
-    tags: [
-      "WordPress",
-      "WooCommerce",
-      "React.js",
-      "Fabric.js",
-      "PDF.js",
-      "React PageFlip",
-      "AWS S3",
-      "Custom WordPress Plugins",
-      "WPML",
-      "Database Migration",
-      "Async Jobs",
-      "Multivendor Workflows",
-      "Federated Access",
-      "Institutional Access",
-      "Custom Authentication Flows",
-    ],
+      "Babel Scores is a platform for consulting and publishing digital sheet music. My contribution includes the web reader, e-commerce functionality, and institutional access integrations.",
+    tags: ["WordPress", "WooCommerce", "React"],
     status: "live",
     liveUrl: "https://babelscores.com/",
     featured: true,
@@ -81,21 +65,13 @@ export const projects = [
   },
   {
     id: "eeg-motor-imagery-pipeline",
-    title: "EEG Motor Imagery Pipeline",
+    title: "Brain-computer interfaces and motor imagery",
     category: "research",
     description:
-      "End-to-end BCI research pipeline: MNE preprocessing, FBCSP features, LDA/SVM classifiers, and leave-one-subject-out evaluation on motor imagery datasets.",
-    tags: [
-      "Python",
-      "EEG",
-      "BCI",
-      "FBCSP",
-      "LDA",
-      "SVM",
-      "Machine Learning",
-    ],
+      "I research brain-computer interfaces based on EEG signals and motor imagery at Universidad de Antioquia. My work combines signal processing and software development.",
+    tags: ["Python", "EEG", "BCI", "Signal processing"],
     status: "in-progress",
-    featured: true,
+    featured: false,
   },
   {
     id: "sal-picciotto-website",
@@ -103,7 +79,7 @@ export const projects = [
     category: "agency-web",
     agency: "Sal & Picciotto",
     description:
-      "Website development and implementation with Sal & Picciotto, including responsive interfaces, content management, and project-specific functionality.",
+      "Implementation of the agency website from its design proposal, with responsive pages and a manageable content structure.",
     tags: [
       "WordPress",
       "Elementor Pro",
@@ -122,7 +98,7 @@ export const projects = [
     category: "agency-web",
     agency: "Sal & Picciotto",
     description:
-      "Healthcare website developed with WordPress and Elementor Pro, including responsive pages, service-oriented content sections and production updates.",
+      "Web implementation from the agency design, with responsive pages and content sections for the center.",
     tags: [
       "WordPress",
       "Elementor Pro",
@@ -141,7 +117,7 @@ export const projects = [
     category: "agency-web",
     agency: "Sal & Picciotto",
     description:
-      "Campaign and nonprofit website implemented with WordPress and Elementor Pro, focused on clear content structure, responsive design and call-to-action sections.",
+      "Web implementation for the campaign, with a clear content structure and responsive pages.",
     tags: [
       "WordPress",
       "Elementor Pro",
@@ -160,7 +136,7 @@ export const projects = [
     category: "agency-web",
     agency: "Sal & Picciotto",
     description:
-      "Real estate website built with WordPress, Elementor Pro and Polylang, including multilingual sections, property-focused layouts and responsive page implementation.",
+      "Web implementation with multilingual sections and property-oriented layouts.",
     tags: [
       "WordPress",
       "Elementor Pro",
@@ -178,7 +154,7 @@ export const projects = [
     category: "agency-web",
     agency: "Sal & Picciotto",
     description:
-      "Business landing page implemented with WordPress and Elementor Pro, focused on structured content blocks, responsive design and campaign-oriented presentation.",
+      "Landing page implementation with structured content blocks and a responsive layout.",
     tags: [
       "WordPress",
       "Elementor Pro",
@@ -196,7 +172,7 @@ export const projects = [
     category: "agency-web",
     agency: "Sal & Picciotto",
     description:
-      "Corporate website developed with WordPress and Elementor Pro, including responsive layouts, content management, custom fields and production-ready website implementation.",
+      "Corporate website implementation with WordPress and Elementor Pro.",
     tags: [
       "WordPress",
       "Elementor Pro",

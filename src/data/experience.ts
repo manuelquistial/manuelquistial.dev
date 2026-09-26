@@ -2,28 +2,15 @@ export const experience = [
   {
     id: "anthology-blackboard",
     company: "Anthology / Blackboard",
-    role: "Software Engineer / Full-Stack Engineer",
-    type: "Enterprise Software",
+    role: "Software Engineer",
     description:
-      "Enterprise education software at scale: React and TypeScript frontends, Java and Spring Boot services, PostgreSQL, Angular-to-React migration, AWS Lambda feature flags, CI/CD pipelines and automated testing.",
+      "Work on learning platforms: administrative interfaces, feature configuration, and automated tests for critical workflows.",
     highlights: [
-      "Shipped full-stack features on edtech platforms used by institutions worldwide",
-      "Migrated Angular interfaces to React/TypeScript while keeping release cadence",
-      "Hardened CI/CD and automated tests across Java services and React clients",
+      "Developed administrative interfaces for managing settings and feature activation in learning platforms, integrated with Java, Python, and AWS services.",
+      "Implemented form validation, error handling, and loading states to guide users through administrative workflows.",
+      "Contributed to migrating modules from Angular to React and automating tests for critical workflows.",
     ],
-    technologies: [
-      "React",
-      "TypeScript",
-      "Redux",
-      "Angular",
-      "Java",
-      "Spring Boot",
-      "PostgreSQL",
-      "AWS Lambda",
-      "CI/CD",
-      "Jest",
-      "JUnit",
-    ],
+    technologies: ["React", "TypeScript", "Java", "Spring Boot", "WebdriverIO"],
     period: "Nov 2021 – May 2026",
     location: "Bogotá, Colombia",
   },
@@ -31,139 +18,72 @@ export const experience = [
     id: "digital-americas-pipeline",
     company: "Digital Americas Pipeline Initiative",
     role: "Backend Developer",
-    type: "Backend / Cloud",
     description:
-      "Backend development on cloud systems with Node.js, Express, AWS Lambda, SNS/SQS, EC2, API Gateway and Electron-based tooling.",
+      "Backend services and monitoring tools for cloud applications.",
     highlights: [
-      "Built event-driven backends on AWS Lambda, SNS/SQS and API Gateway",
-      "Delivered Node.js/Express services for cloud data workflows",
-      "Supported Electron tooling for operational cloud workflows",
+      "Developed services for processing data and distributing notifications across cloud application components.",
+      "Built monitoring tools with Electron and Elastic Stack to inspect service status and activity.",
     ],
-    technologies: [
-      "Node.js",
-      "Express",
-      "AWS Lambda",
-      "Amazon SNS",
-      "Amazon SQS",
-      "EC2",
-      "API Gateway",
-      "Electron",
-    ],
+    technologies: ["Node.js", "Express", "AWS"],
     period: "Feb 2020 – Nov 2021",
     location: "Medellín, Colombia",
   },
   {
     id: "babel-scores",
     company: "Babel Scores",
-    role: "Software Engineer / Full-Stack Engineer",
-    type: "Direct Client / Publishing Platform",
+    role: "Software Engineer",
     description:
-      "Direct-client publishing and e-commerce platform on WordPress and WooCommerce: custom plugins, React flipbook tooling with Fabric.js and PDF.js, AWS S3, WPML, async jobs, multivendor flows and federated institutional access.",
+      "Web reader and platform features for a digital sheet music publishing product.",
     highlights: [
-      "Owned end-to-end platform engineering for a digital scores product in production",
-      "Built a React flipbook reader with Fabric.js, PDF.js and async S3 workflows",
-      "Enabled federated institutional access and multivendor publishing flows",
+      "Developed the web score reader so users can consult musical documents in the browser.",
+      "Implemented e-commerce functionality and institutional access integrations for the platform.",
     ],
-    technologies: [
-      "WordPress",
-      "WooCommerce",
-      "React",
-      "Fabric.js",
-      "PDF.js",
-      "AWS S3",
-      "WPML",
-      "PHP",
-      "JavaScript",
-    ],
-    period: "May 2022 – Present",
+    technologies: ["WordPress", "WooCommerce", "React"],
+    period: "2022 – Present",
     location: "Remote",
-    current: true,
   },
   {
     id: "sal-picciotto",
     company: "Sal & Picciotto",
     role: "WordPress / Frontend Developer",
-    type: "Freelance / Agency",
     description:
-      "Freelance WordPress and Elementor Pro projects through Sal & Picciotto for corporate, healthcare, real estate, nonprofit and campaign clients. Responsive layouts, ACF, Polylang, custom CSS, JavaScript and production updates.",
+      "Website implementation from agency design proposals.",
     highlights: [
-      "Shipped production WordPress sites across healthcare, real estate and nonprofit",
-      "Delivered multilingual layouts with Polylang, ACF and Elementor Pro",
-      "Maintained responsive frontends and production content updates",
+      "Implemented websites from the agency's design proposals, adapting pages for different screen sizes.",
+      "Configured manageable content structures and multilingual versions, with fields and components adjusted per project.",
     ],
-    technologies: [
-      "WordPress",
-      "Elementor Pro",
-      "Polylang",
-      "ACF",
-      "WordPress Code Snippets",
-      "Custom CSS",
-      "JavaScript",
-    ],
-    period: "May 2022 – Present",
+    technologies: ["WordPress", "Elementor Pro", "ACF", "Polylang"],
+    period: "2022 – Present",
     location: "Remote",
-    current: true,
   },
   {
     id: "udea-fcf",
     company:
       "Universidad de Antioquia, Facultad de Comunicaciones y Filología",
-    role: "Software Engineer",
-    type: "Institutional Software Ecosystem",
+    role: "Advisory and software development",
     description:
-      "Institutional software for the digital ecosystem at Facultad de Comunicaciones y Filología, Universidad de Antioquia: legacy modernization, Laravel and Symfony applications, React and Next.js frontends, Python reporting services, Docker environments, validation scripts and centralized authentication with Keycloak/OIDC.",
+      "Advisory and development work on faculty applications for information management, updates, and training.",
     highlights: [
-      "Modernized legacy institutional apps into a shared digital ecosystem",
-      "Centralized identity with Keycloak/OIDC across Laravel and React surfaces",
-      "Built Python reporting services and Docker-based delivery workflows",
+      "Contributed to the design and launch of an information system for the faculty, working on its structure and functionality.",
+      "Updated existing applications and provided support and training for their use.",
+      "Advised on data management and analysis related to the faculty's applications.",
     ],
-    technologies: [
-      "Laravel",
-      "Symfony",
-      "React",
-      "Next.js",
-      "TypeScript",
-      "FastAPI",
-      "Flask",
-      "Python",
-      "PostgreSQL",
-      "MySQL",
-      "Keycloak",
-      "OIDC",
-      "Docker",
-    ],
-    period: "May 2022 – Present",
+    technologies: ["Web applications", "Data analysis"],
+    period: "Jul 2024 – Jul 2026",
     location: "Medellín, Colombia",
-    current: true,
   },
   {
-    id: "universidad-antioquia-research",
-    company: "Universidad de Antioquia, Research",
-    role: "Neuroengineering Researcher / Master's Student",
-    type: "Research",
+    id: "udea-teaching",
+    company: "Universidad de Antioquia",
+    role: "Adjunct Professor",
     description:
-      "Master's research on EEG-based motor imagery classification, BCI systems, signal processing and machine learning evaluation, building on prior neuroengineering work in cognitive rehabilitation applications.",
+      "Teaching and technical training in programming, data analysis, web development, and artificial intelligence.",
     highlights: [
-      "Designed an end-to-end EEG motor imagery classification pipeline",
-      "Applied FBCSP features with LDA/SVM under subject-disjoint evaluation",
-      "Treated research code as production software: versioned and reproducible",
+      "Taught courses and training in artificial intelligence, data analysis, programming, and web application development, as well as university teaching in academic practice courses.",
+      "Facilitated programming, data analysis, and AI bootcamps that included explorer and integrator levels depending on the activity.",
     ],
-    technologies: [
-      "Python",
-      "EEG",
-      "BCI",
-      "Signal Processing",
-      "Machine Learning",
-      "scikit-learn",
-      "pandas",
-      "NumPy",
-      "FBCSP",
-      "LDA",
-      "SVM",
-    ],
-    period: "Feb 2025 – Present",
+    period: "2022 – 2025",
     location: "Medellín, Colombia",
-    current: true,
   },
 ] as const;
 
@@ -186,14 +106,30 @@ export const featuredExperienceIds = [
   "anthology-blackboard",
   "digital-americas-pipeline",
   "babel-scores",
-  "sal-picciotto",
   "udea-fcf",
+] as const satisfies readonly ExperienceId[];
+
+export const teachingExperienceIds = [
+  "udea-teaching",
 ] as const satisfies readonly ExperienceId[];
 
 export function getFeaturedExperience(
   limit: number = featuredExperienceIds.length,
 ): Experience[] {
   return featuredExperienceIds.slice(0, limit).flatMap((id) => {
+    const item = experience.find((entry) => entry.id === id);
+    return item ? [item as Experience] : [];
+  });
+}
+
+export function getProfessionalExperience(): Experience[] {
+  return experience
+    .filter((item) => item.id !== "udea-teaching")
+    .map((item) => item as Experience);
+}
+
+export function getTeachingExperience(): Experience[] {
+  return teachingExperienceIds.flatMap((id) => {
     const item = experience.find((entry) => entry.id === id);
     return item ? [item as Experience] : [];
   });

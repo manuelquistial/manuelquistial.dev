@@ -38,65 +38,67 @@ export default async function ResearchPage({ params }: ResearchPageProps) {
 
       <section
         id={pageSections.researchOverview}
-        className="mb-14 max-w-[65ch]"
+        className="max-w-[65ch] space-y-10"
       >
-        <h2 className="text-[clamp(1.5rem,2.5vw,1.75rem)] font-semibold text-foreground">
-          {researchPage.overview.title}
-        </h2>
-        <div className="mt-5 space-y-4">
-          {researchPage.overview.paragraphs.map((paragraph, index) => (
-            <p
-              key={`overview-p-${index}`}
-              className="leading-relaxed text-muted"
-            >
-              {paragraph}
-            </p>
-          ))}
-        </div>
-      </section>
-
-      <section className="mb-14">
-        <h2 className="text-[clamp(1.5rem,2.5vw,1.75rem)] font-semibold text-foreground">
-          {researchPage.topics.title}
-        </h2>
-        <div className="mt-6 grid gap-8 sm:grid-cols-2">
-          {researchPage.topics.items.map((topic) => (
-            <article key={topic.title}>
-              <h3 className="font-semibold text-foreground">{topic.title}</h3>
-              <p className="mt-2 max-w-[45ch] text-base leading-relaxed text-muted">
-                {topic.description}
+        <div>
+          <h2 className="text-[clamp(1.5rem,2.5vw,1.75rem)] font-semibold text-foreground">
+            {researchPage.overview.title}
+          </h2>
+          <div className="mt-5 space-y-4">
+            {researchPage.overview.paragraphs.map((paragraph, index) => (
+              <p
+                key={`overview-p-${index}`}
+                className="leading-relaxed text-muted"
+              >
+                {paragraph}
               </p>
-            </article>
-          ))}
+            ))}
+          </div>
         </div>
-      </section>
 
-      <section className="mb-14 max-w-[65ch]">
-        <h2 className="text-[clamp(1.5rem,2.5vw,1.75rem)] font-semibold text-foreground">
-          {researchPage.methods.title}
-        </h2>
-        <ul className="mt-6 space-y-3">
-          {researchPage.methods.items.map((item) => (
-            <li key={item} className="text-base leading-relaxed text-muted">
-              {item}
-            </li>
-          ))}
-        </ul>
-      </section>
+        <div>
+          <h2 className="text-[clamp(1.5rem,2.5vw,1.75rem)] font-semibold text-foreground">
+            {researchPage.topics.title}
+          </h2>
+          <div className="mt-6 space-y-6">
+            {researchPage.topics.items.map((topic) => (
+              <article key={topic.title}>
+                <h3 className="font-semibold text-foreground">{topic.title}</h3>
+                <p className="mt-2 text-base leading-relaxed text-muted">
+                  {topic.description}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
 
-      <section className="max-w-[65ch]">
-        <h2 className="text-[clamp(1.5rem,2.5vw,1.75rem)] font-semibold text-foreground">
-          {researchPage.goals.title}
-        </h2>
-        <div className="mt-5 space-y-4">
-          {researchPage.goals.paragraphs.map((paragraph, index) => (
-            <p
-              key={`goals-p-${index}`}
-              className="leading-relaxed text-muted"
-            >
-              {paragraph}
-            </p>
-          ))}
+        <div>
+          <h2 className="text-[clamp(1.5rem,2.5vw,1.75rem)] font-semibold text-foreground">
+            {researchPage.methods.title}
+          </h2>
+          <ul className="mt-6 list-disc space-y-2 pl-5">
+            {researchPage.methods.items.map((item) => (
+              <li key={item} className="text-base leading-relaxed text-muted">
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h2 className="text-[clamp(1.5rem,2.5vw,1.75rem)] font-semibold text-foreground">
+            {researchPage.goals.title}
+          </h2>
+          <div className="mt-5 space-y-4">
+            {researchPage.goals.paragraphs.map((paragraph, index) => (
+              <p
+                key={`goals-p-${index}`}
+                className="leading-relaxed text-muted"
+              >
+                {paragraph}
+              </p>
+            ))}
+          </div>
         </div>
       </section>
     </Section>

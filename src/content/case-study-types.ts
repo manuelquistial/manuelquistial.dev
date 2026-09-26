@@ -19,7 +19,7 @@ export type CaseStudyContent = {
   frontend?: CaseStudySection;
   access?: CaseStudySection;
   responsibilities: CaseStudySection;
-  learnings: CaseStudySection;
+  learnings?: CaseStudySection;
 };
 
 export type CaseStudySections = Array<{

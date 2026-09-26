@@ -7,28 +7,23 @@ interface ProjectCardProps {
   project: Project;
   labels: SiteContent["projectCard"];
   featuredLayout?: boolean;
+  showCategory?: boolean;
+  showAgency?: boolean;
   className?: string;
-}
-
-function categoryLabel(
-  project: Project,
-  labels: SiteContent["projectCard"],
-): string {
-  if (project.category === "agency-web") return labels.webSelection;
-  if (project.category === "research") return labels.researchLabel;
-  return labels.softwareLabel;
 }
 
 function ProjectMeta({
   project,
   labels,
+  showAgency,
 }: {
   project: Project;
   labels: SiteContent["projectCard"];
+  showAgency: boolean;
 }) {
   const isAgencyProject = project.category === "agency-web";
 
-  if (isAgencyProject && project.agency) {
+  if (showAgency && isAgencyProject && project.agency) {
     return (
       <p className="mt-2 text-sm text-muted">
         {labels.deliveredThrough} {project.agency}
@@ -47,6 +42,8 @@ export function ProjectCard({
   project,
   labels,
   featuredLayout = false,
+  showCategory = false,
+  showAgency = true,
   className,
 }: ProjectCardProps) {
   const detailHref = project.caseStudyUrl;
@@ -68,26 +65,19 @@ export function ProjectCard({
           "overflow-hidden rounded-[8px] bg-surface-soft",
           featuredLayout ? "aspect-[16/9]" : "aspect-[16/10]",
         )}
-      >
-        <div className="flex h-full flex-col justify-between p-6 sm:p-8">
-          <p className="text-sm font-medium text-muted">
-            {categoryLabel(project, labels)}
-          </p>
-          <p
-            className={cn(
-              "font-semibold leading-[1.15] tracking-tight text-foreground",
-              featuredLayout
-                ? "max-w-[16ch] text-[clamp(2rem,4vw,3rem)]"
-                : "max-w-[14ch] text-[clamp(1.5rem,3vw,2rem)]",
-            )}
-            aria-hidden
-          >
-            {project.title}
-          </p>
-        </div>
-      </div>
+        aria-hidden
+      />
 
       <div className="mt-5 flex flex-1 flex-col">
+        {showCategory ? (
+          <p className="mb-2 text-sm text-muted">
+            {project.category === "agency-web"
+              ? labels.webSelection
+              : project.category === "research"
+                ? labels.researchLabel
+                : labels.softwareLabel}
+          </p>
+        ) : null}
         <h3
           className={cn(
             "font-semibold leading-snug text-foreground",
@@ -96,7 +86,11 @@ export function ProjectCard({
         >
           {titleContent}
         </h3>
-        <ProjectMeta project={project} labels={labels} />
+        <ProjectMeta
+          project={project}
+          labels={labels}
+          showAgency={showAgency}
+        />
         <p className="mt-3 max-w-[65ch] text-base leading-relaxed text-muted">
           {project.description}
         </p>

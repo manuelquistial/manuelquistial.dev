@@ -28,7 +28,8 @@ export async function generateMetadata({
 
 export default async function ContactPage({ params }: ContactPageProps) {
   const locale = parseLocale((await params).locale);
-  const { contactPage } = getSiteContent(locale);
+  const content = getSiteContent(locale);
+  const { contactPage, contactCta } = content;
 
   return (
     <Section>
@@ -39,22 +40,9 @@ export default async function ContactPage({ params }: ContactPageProps) {
       />
 
       <div className="mt-2 max-w-[40rem] space-y-10">
-        <div>
-          <p className="text-sm text-muted">{contactPage.linkedin}</p>
-          <a
-            href={profile.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-2 inline-block break-all text-lg font-semibold text-accent transition-colors duration-150 hover:text-accent-hover"
-          >
-            {profile.linkedin.replace("https://www.", "")}
-          </a>
-          <div className="mt-5">
-            <Button href={profile.linkedin} external size="lg">
-              {contactPage.linkedin}
-            </Button>
-          </div>
-        </div>
+        <Button href={profile.linkedin} external size="lg">
+          {contactCta.button}
+        </Button>
 
         <div>
           <p className="text-sm text-muted">{contactPage.cv}</p>

@@ -12,12 +12,11 @@ export function ExperienceCard({
   item,
   className,
   compact = false,
-  showTechnologies = false,
+  showTechnologies = true,
 }: ExperienceCardProps) {
   const bullets = compact
     ? item.highlights?.slice(0, 1) ?? []
-    : item.highlights?.slice(0, 2) ??
-      (item.description ? [item.description] : []);
+    : item.highlights?.slice(0, 3) ?? [];
 
   return (
     <article className={cn("min-w-0", className)}>
@@ -31,12 +30,9 @@ export function ExperienceCard({
       {item.location ? (
         <p className="mt-1 text-sm text-muted">{item.location}</p>
       ) : null}
-      {item.type && !compact ? (
-        <p className="mt-1 text-sm text-muted">{item.type}</p>
-      ) : null}
 
       {bullets.length > 0 ? (
-        <ul className="mt-4 space-y-2">
+        <ul className="mt-4 list-disc space-y-2 pl-5">
           {bullets.map((bullet) => (
             <li key={bullet} className="text-base leading-relaxed text-muted">
               {bullet}
@@ -45,17 +41,10 @@ export function ExperienceCard({
         </ul>
       ) : null}
 
-      {showTechnologies && item.technologies?.length ? (
-        <div className="mt-4 flex flex-wrap gap-2">
-          {item.technologies.map((tech) => (
-            <span
-              key={tech}
-              className="inline-flex items-center rounded-[6px] bg-surface-soft px-3 py-1 text-sm text-foreground"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
+      {showTechnologies && !compact && item.technologies?.length ? (
+        <p className="mt-4 text-sm text-muted">
+          {item.technologies.join(", ")}
+        </p>
       ) : null}
     </article>
   );

@@ -1,27 +1,27 @@
 export const meta = {
-  title: "Manuel Quistial | Ingeniería de software",
+  title: "Manuel Quistial | Ingeniero de software",
   description:
-    "Ingeniero de software: aplicaciones web, integración de sistemas y modernización de plataformas en productos digitales, software institucional y sitios para clientes.",
+    "Ingeniero de software: desarrollo aplicaciones web y herramientas para gestionar información, contenidos y procesos.",
   pages: {
     about: {
       title: "Trayectoria",
       description:
-        "Experiencia, formación y competencias en software empresarial, sistemas institucionales e investigación.",
+        "Experiencia profesional, docencia, formación académica y competencias.",
     },
     projects: {
       title: "Proyectos",
       description:
-        "Proyectos de software y desarrollo web seleccionados, con la contribución y la colaboración claramente identificadas.",
+        "Aplicaciones, plataformas y sitios web en los que he trabajado.",
     },
     research: {
       title: "Investigación",
       description:
-        "Investigación de maestría en interfaces cerebro-computador e imaginación motora, con procesamiento de señales y desarrollo de software.",
+        "Investigación de maestría en interfaces cerebro-computador basadas en señales EEG e imaginación motora.",
     },
     contact: {
       title: "Contacto",
       description:
-        "Escríbeme por LinkedIn sobre una oportunidad de trabajo, un proyecto de software o una colaboración de investigación.",
+        "Para oportunidades de trabajo, proyectos de software o colaboraciones de investigación, escríbeme por LinkedIn.",
     },
   },
 };
@@ -44,30 +44,31 @@ export const a11y = {
 };
 
 export const hero = {
-  title: "Ingeniería de software para aplicaciones web y sistemas conectados",
+  title: "Ingeniero de software",
   subtitle:
-    "Soy Manuel Quistial. Desarrollo aplicaciones web, integro sistemas y modernizo plataformas. Mi experiencia incluye productos digitales, software institucional y desarrollo web para clientes.",
+    "Desarrollo aplicaciones web y herramientas para gestionar información, contenidos y procesos. He trabajado en plataformas de aprendizaje, publicación de partituras y aplicaciones de la Universidad de Antioquia.",
   viewProjects: "Ver proyectos",
   contact: "Contactar",
 };
 
 export const sections = {
   about: "Sobre mí",
-  experience: "Trayectoria",
+  experience: "Experiencia profesional",
+  teaching: "Docencia y formación tecnológica",
   skills: "Competencias",
-  projects: "Proyectos seleccionados",
-  engineeringProjects: "Proyectos de software",
-  researchProjects: "Proyectos de investigación",
-  agencyWebProjects: "Desarrollo web",
+  projects: "Proyectos",
+  engineeringProjects: "Aplicaciones y plataformas",
+  researchProjects: "Investigación",
+  agencyWebProjects: "Sitios web",
   research: "Investigación",
   contact: "Contacto",
   viewAll: "Todos los proyectos",
   viewAllExperience: "Trayectoria completa",
-  viewResearch: "Detalle de investigación",
+  viewResearch: "Investigación",
 };
 
 export const agencyWebProjectsIntro =
-  "Sitios web implementados con Sal & Picciotto, con trabajo en interfaces adaptables, estructura de contenido y funcionalidades propias de cada proyecto.";
+  "Sitios web implementados con Sal & Picciotto a partir de las propuestas de diseño de la agencia.";
 
 export const footer = {
   rights: "Todos los derechos reservados.",
@@ -90,16 +91,16 @@ export const projectCard = {
   viewProject: "Detalle del proyecto",
   viewSite: "Abrir sitio",
   deliveredThrough: "Con",
-  softwareLabel: "Software",
-  webSelection: "Desarrollo web",
+  softwareLabel: "Aplicaciones y plataformas",
+  webSelection: "Sitios web",
   researchLabel: "Investigación",
 };
 
 export const contactCta = {
   title: "Contacto",
   description:
-    "Si quieres hablar sobre una oportunidad de trabajo, un proyecto de software o una colaboración de investigación, escríbeme por LinkedIn.",
-  button: "LinkedIn",
+    "Para oportunidades de trabajo, proyectos de software o colaboraciones de investigación, escríbeme por LinkedIn.",
+  button: "Escribirme por LinkedIn",
 };
 
 export const notFound = {
@@ -109,15 +110,15 @@ export const notFound = {
 };
 
 export const projectCategories = {
-  engineering: "Proyectos de software",
+  engineering: "Aplicaciones y plataformas",
   research: "Investigación",
-  "agency-web": "Desarrollo web",
+  "agency-web": "Sitios web",
 } as const;
 
 export const homeSkillCategoryIds = [
   "core-engineering",
-  "ai-neuroengineering",
   "cloud-auth",
+  "ai-neuroengineering",
 ] as const;
 
 export const languageSwitcher = {

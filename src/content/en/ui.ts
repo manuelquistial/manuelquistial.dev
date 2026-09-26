@@ -1,27 +1,27 @@
 export const meta = {
-  title: "Manuel Quistial | Software engineering",
+  title: "Manuel Quistial | Software Engineer",
   description:
-    "Software engineer building web applications, integrating systems, and modernizing platforms across digital products, institutional software, and client websites.",
+    "Software engineer developing web applications and tools for managing information, content, and workflows.",
   pages: {
     about: {
       title: "Background",
       description:
-        "Experience, education, and skills across enterprise software, institutional systems, and research.",
+        "Professional experience, teaching, education, and skills.",
     },
     projects: {
       title: "Projects",
       description:
-        "Selected software projects and web development work, with clear notes on contribution and collaboration.",
+        "Applications, platforms, and websites I have worked on.",
     },
     research: {
       title: "Research",
       description:
-        "Master's research on brain-computer interfaces and motor imagery, combining signal processing and software development.",
+        "Master's research on brain-computer interfaces based on EEG signals and motor imagery.",
     },
     contact: {
       title: "Contact",
       description:
-        "Reach out on LinkedIn about software roles, projects, or research collaboration.",
+        "For job opportunities, software projects, or research collaborations, contact me on LinkedIn.",
     },
   },
 };
@@ -44,30 +44,31 @@ export const a11y = {
 };
 
 export const hero = {
-  title: "Software engineering for web applications and connected systems",
+  title: "Software Engineer",
   subtitle:
-    "I'm Manuel Quistial. I build web applications, integrate systems, and modernize platforms. My experience spans digital products, institutional software, and client websites.",
+    "I develop web applications and tools for managing information, content, and workflows. My work includes learning platforms, digital sheet music publishing, and applications for Universidad de Antioquia.",
   viewProjects: "View projects",
   contact: "Contact",
 };
 
 export const sections = {
   about: "About",
-  experience: "Background",
+  experience: "Professional experience",
+  teaching: "Teaching and technical training",
   skills: "Skills",
-  projects: "Selected projects",
-  engineeringProjects: "Software projects",
-  researchProjects: "Research projects",
-  agencyWebProjects: "Web development",
+  projects: "Projects",
+  engineeringProjects: "Applications and platforms",
+  researchProjects: "Research",
+  agencyWebProjects: "Websites",
   research: "Research",
   contact: "Contact",
   viewAll: "All projects",
   viewAllExperience: "Full background",
-  viewResearch: "Research details",
+  viewResearch: "Research",
 };
 
 export const agencyWebProjectsIntro =
-  "Websites implemented with Sal & Picciotto, with work on responsive interfaces, content structure, and project-specific functionality.";
+  "Websites implemented with Sal & Picciotto from the agency's design proposals.";
 
 export const footer = {
   rights: "All rights reserved.",
@@ -90,16 +91,16 @@ export const projectCard = {
   viewProject: "Project details",
   viewSite: "Open site",
   deliveredThrough: "With",
-  softwareLabel: "Software",
-  webSelection: "Web development",
+  softwareLabel: "Applications and platforms",
+  webSelection: "Websites",
   researchLabel: "Research",
 };
 
 export const contactCta = {
   title: "Contact",
   description:
-    "If you want to talk about a job opportunity, a software project, or a research collaboration, write to me on LinkedIn.",
-  button: "LinkedIn",
+    "For job opportunities, software projects, or research collaborations, contact me on LinkedIn.",
+  button: "Message me on LinkedIn",
 };
 
 export const notFound = {
@@ -109,15 +110,15 @@ export const notFound = {
 };
 
 export const projectCategories = {
-  engineering: "Software projects",
+  engineering: "Applications and platforms",
   research: "Research",
-  "agency-web": "Web development",
+  "agency-web": "Websites",
 } as const;
 
 export const homeSkillCategoryIds = [
   "core-engineering",
-  "ai-neuroengineering",
   "cloud-auth",
+  "ai-neuroengineering",
 ] as const;
 
 export const languageSwitcher = {

@@ -2,7 +2,7 @@ export const profile = {
   name: "Manuel Alejandro Quistial Jurado",
   shortName: "Manuel Quistial",
   role: "Software Engineer",
-  tagline: "Software engineering for web applications and connected systems",
+  tagline: "Software Engineer",
   location: "Colombia",
   linkedin: "https://www.linkedin.com/in/manuelquistial",
   github: "https://github.com/manuelquistial",

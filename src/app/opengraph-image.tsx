@@ -41,7 +41,7 @@ export default function OgImage() {
             lineHeight: 1.35,
           }}
         >
-          Software engineering for web applications and connected systems
+          Software Engineer
         </div>
       </div>
     ),

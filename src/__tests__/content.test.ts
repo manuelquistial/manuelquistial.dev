@@ -29,6 +29,8 @@ const FORBIDDEN_PUBLIC_STRINGS = [
   "financial reconciliation",
   "classroom reservation",
   "classroom reservations",
+  "connected systems",
+  "sistemas conectados",
   "\u2014",
 ] as const;
 
@@ -89,7 +91,7 @@ describe("project data helpers", () => {
 
     expect(babel?.status).toBe("live");
     expect(babel?.liveUrl).toBe("https://babelscores.com/");
-    expect(babel?.clientType).toBe("Direct Client Project");
+    expect(babel?.clientType).toBe("Digital sheet music platform");
   });
 
   it("maps project status labels", () => {
@@ -123,18 +125,19 @@ describe("portfolio data completeness", () => {
   it("includes CV-aligned experience periods", () => {
     const anthology = experience.find((item) => item.id === "anthology-blackboard");
     const udea = experience.find((item) => item.id === "udea-fcf");
-    const research = experience.find(
-      (item) => item.id === "universidad-antioquia-research",
-    );
+    const teaching = experience.find((item) => item.id === "udea-teaching");
     const digitalAmericas = experience.find(
       (item) => item.id === "digital-americas-pipeline",
     );
 
     expect(anthology?.period).toBe("Nov 2021 – May 2026");
     expect(anthology).not.toHaveProperty("current");
-    expect(udea?.period).toBe("May 2022 – Present");
-    expect(research?.period).toBe("Feb 2025 – Present");
+    expect(udea?.period).toBe("Jul 2024 – Jul 2026");
+    expect(teaching?.period).toBe("2022 – 2025");
     expect(digitalAmericas?.company).toContain("Digital Americas");
+    expect(experience.map((item) => item.id)).not.toContain(
+      "universidad-antioquia-research" as never,
+    );
   });
 
   it("includes period on every experience entry", () => {
@@ -163,7 +166,7 @@ describe("portfolio data completeness", () => {
     const udea = projects.find((project) => project.id === "udea-fcf-digital-ecosystem");
     expect(udea).toBeDefined();
     expect(localizeProject(udea!, "es").title).toBe(
-      "Ecosistema digital, Universidad de Antioquia",
+      "Aplicaciones para la Facultad de Comunicaciones y Filología",
     );
   });
 

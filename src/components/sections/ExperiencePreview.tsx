@@ -24,13 +24,13 @@ export function ExperiencePreview({
     <Section variant="muted">
       <SectionTitle title={sectionLabel} />
 
-      <ol className="divide-y divide-border border-y border-border">
+      <ul className="divide-y divide-border border-y border-border">
         {items.map((item) => (
           <li key={item.id} className="py-6 first:pt-0 last:pb-0 sm:py-8">
             <ExperienceCard item={item} compact />
           </li>
         ))}
-      </ol>
+      </ul>
 
       <div className="mt-8">
         <ViewAllLink

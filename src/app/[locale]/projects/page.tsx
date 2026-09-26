@@ -15,11 +15,7 @@ interface ProjectsPageProps {
   params: Promise<{ locale: string }>;
 }
 
-const categoryOrder: ProjectCategory[] = [
-  "engineering",
-  "agency-web",
-  "research",
-];
+const categoryOrder: ProjectCategory[] = ["engineering", "agency-web"];
 
 export async function generateMetadata({
   params,
@@ -47,7 +43,7 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
     <Section>
       <SectionTitle
         as="h1"
-        title={content.sections.projects}
+        title={content.meta.pages.projects.title}
         subtitle={content.meta.pages.projects.description}
       />
 
@@ -84,6 +80,7 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
                       category === "engineering" &&
                       project.id === "babel-scores"
                     }
+                    showAgency={false}
                     className={
                       category === "engineering" &&
                       project.id === "babel-scores"

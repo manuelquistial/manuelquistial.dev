@@ -13,7 +13,7 @@ export const about = {
 export const aboutPage = {
   title: "Experience",
   intro:
-    "I am an electronics engineer working in software development. I have also taught programming, data analysis, and artificial intelligence at Universidad de Antioquia.",
+    "My experience spans full-stack engineering, backend development, and technical consulting for web applications. I hold a degree in Electronic Engineering and have taught programming, web development, data analysis, and artificial intelligence at Universidad de Antioquia.",
   engineering: {
     title: "Software engineering",
     paragraphs: [],
@@ -74,8 +74,7 @@ export const researchPage = {
   overview: {
     title: "Research",
     paragraphs: [
-      "My master's research at Universidad de Antioquia focuses on brain-computer interfaces based on EEG signals and motor imagery. I work on signal processing and software development for the experiments.",
-      "Motor imagery involves imagining a movement without performing it. EEG records the brain's electrical activity from the scalp.",
+      "Master’s research at Universidad de Antioquia on EEG-based brain-computer interfaces and motor imagery, with work on signal processing and experimental software.",
     ],
   },
   topics: {
@@ -95,7 +94,7 @@ export const researchPage = {
 export const contactPage = {
   title: "Contact",
   subtitle:
-    "For job opportunities, software projects, or research collaborations, contact me on LinkedIn.",
+    "Professional inquiries about software engineering roles, development projects, and research collaborations.",
   linkedin: "LinkedIn",
   github: "GitHub",
   cv: "Download CV",

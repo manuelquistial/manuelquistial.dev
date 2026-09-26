@@ -6,9 +6,8 @@ export const experience = [
     description:
       "Software engineering on learning platforms.",
     highlights: [
-      "Developed interfaces for managing settings and activating features in learning platforms.",
-      "Contributed to migrating modules from Angular to React and automating tests for critical workflows.",
-      "Implemented form validation, error handling, and loading states in administrative interfaces.",
+      "Developed administrative modules in React and TypeScript for learning platform configuration and feature activation, integrated with backend services.",
+      "Contributed to Angular-to-React module migrations and automated testing of administrative workflows.",
     ],
     technologies: ["React", "TypeScript", "Java", "Spring Boot", "WebdriverIO"],
     period: "Nov 2021 – May 2026",
@@ -21,10 +20,18 @@ export const experience = [
     description:
       "Backend services and monitoring tools for cloud applications.",
     highlights: [
-      "Built monitoring tools with Electron and Elastic Stack to inspect service status and activity.",
-      "Developed services for processing data and distributing notifications across cloud application components.",
+      "Developed backend services with Node.js and Express, with data processing and asynchronous messaging on AWS using Lambda, SNS, and SQS.",
+      "Implemented monitoring tools with Electron and Elastic Stack to inspect service activity and status.",
     ],
-    technologies: ["Node.js", "Express", "AWS"],
+    technologies: [
+      "Node.js",
+      "Express",
+      "AWS Lambda",
+      "Amazon SNS",
+      "Amazon SQS",
+      "Electron",
+      "Elastic Stack",
+    ],
     period: "Feb 2020 – Nov 2021",
     location: "Medellín, Colombia",
   },
@@ -35,8 +42,8 @@ export const experience = [
     description:
       "Browser sheet music reader and platform integrations.",
     highlights: [
-      "Developed the browser-based sheet music reader.",
-      "Implemented e-commerce features and institutional access integrations.",
+      "Developed the React-based web sheet music reader.",
+      "Implemented e-commerce functionality with WooCommerce and institutional access integrations.",
     ],
     technologies: ["WordPress", "WooCommerce", "React"],
     period: "2022 – Present",
@@ -49,9 +56,8 @@ export const experience = [
     description:
       "Website implementation from agency designs.",
     highlights: [
-      "Implemented websites based on the agency's designs and adapted them for different screen sizes.",
-      "Configured fields and components for updating website content in WordPress.",
-      "Implemented multilingual versions for projects that required them.",
+      "Developed WordPress websites from the agency’s designs, with responsive layouts in Elementor Pro and content fields built with ACF.",
+      "Implemented multilingual versions with Polylang.",
     ],
     technologies: ["WordPress", "Elementor Pro", "ACF", "Polylang"],
     period: "2022 – Present",
@@ -66,8 +72,8 @@ export const experience = [
       "Project-based advisory and development work for faculty applications.",
     highlights: [
       "Contributed to the design and launch of an information system for the faculty.",
-      "Updated existing applications and provided support and training for their use.",
-      "Provided advice on managing and analyzing data associated with those applications.",
+      "Updated existing applications and provided technical support and user training.",
+      "Advised on data management and analysis for the applications.",
     ],
     period: "Project-based work · 2024–2026",
     location: "Medellín, Colombia",
@@ -77,8 +83,8 @@ export const experience = [
     company: "Universidad de Antioquia",
     role: "Adjunct Instructor",
     description:
-      "Taught programming, web development, data analysis, and artificial intelligence, as well as academic practice courses.",
-    period: "Periodic teaching contracts · 2022–2025",
+      "Taught programming, web development, data analysis, and artificial intelligence as an adjunct instructor. My teaching responsibilities also included academic practice courses.",
+    period: "Teaching appointments · 2022–2025",
     location: "Medellín, Colombia",
   },
 ] as const;

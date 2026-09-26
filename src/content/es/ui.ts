@@ -1,7 +1,7 @@
 export const meta = {
-  title: "Manuel Quistial · Ingeniero de software",
+  title: "Manuel Quistial · Ingeniero de software full-stack",
   description:
-    "Ingeniero de software. Desarrollo de aplicaciones web, nuevas funcionalidades y evolución de productos existentes.",
+    "Ingeniería full-stack, aplicaciones empresariales y servicios backend. Experiencia en Anthology / Blackboard, migración de frontend y pruebas automatizadas.",
   pages: {
     about: {
       title: "Trayectoria · Manuel Quistial",
@@ -44,9 +44,9 @@ export const a11y = {
 };
 
 export const hero = {
-  title: "Ingeniero de software",
+  title: "Ingeniero de software full-stack",
   subtitle:
-    "Desarrollo aplicaciones web, desde la interfaz hasta los servicios que las hacen funcionar. Trabajo tanto en nuevas funcionalidades como en la evolución de productos existentes.",
+    "Aplicaciones empresariales, servicios backend y modernización de frontend. En Anthology / Blackboard trabajé en plataformas de aprendizaje, migración de Angular a React y automatización de pruebas.",
   viewProjects: "Ver proyectos",
   contact: "Contactar",
 };
@@ -68,7 +68,7 @@ export const sections = {
 };
 
 export const agencyWebProjectsIntro =
-  "Implementación web de diseños de Sal & Picciotto.";
+  "Desarrollo en WordPress a partir del diseño visual de Sal & Picciotto.";
 
 export const footer = {
   rights: "Todos los derechos reservados.",
@@ -100,7 +100,7 @@ export const projectCard = {
 export const contactCta = {
   title: "Contacto",
   description:
-    "Para oportunidades de trabajo, proyectos de software o colaboraciones de investigación, escríbeme por LinkedIn.",
+    "Contacto profesional para posiciones de ingeniería de software, proyectos de desarrollo y colaboraciones de investigación.",
   button: "Contactar por LinkedIn",
 };
 

@@ -94,9 +94,11 @@ export function ProjectCard({
           showAgency={showAgency}
           designCredit={designCredit}
         />
-        <p className="mt-3 max-w-[65ch] text-base leading-relaxed text-muted">
-          {project.description}
-        </p>
+        {project.description ? (
+          <p className="mt-3 max-w-[65ch] text-base leading-relaxed text-muted">
+            {project.description}
+          </p>
+        ) : null}
         {detailHref ? (
           <p className="mt-5">
             <Link

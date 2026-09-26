@@ -34,6 +34,8 @@ const FORBIDDEN_PUBLIC_STRINGS = [
   "Selected projects",
   "manageable content",
   "Full background",
+  "from user interfaces to the services behind them",
+  "desde la interfaz hasta los servicios que las hacen funcionar",
   "\u2014",
 ] as const;
 
@@ -120,7 +122,9 @@ describe("portfolio data completeness", () => {
   it("includes required project fields", () => {
     projects.forEach((project) => {
       expect(project.title).toBeTruthy();
-      expect(project.description).toBeTruthy();
+      if (project.id !== "fci-pty-box") {
+        expect(project.description).toBeTruthy();
+      }
       expect(project.tags.length).toBeGreaterThan(0);
     });
   });
@@ -136,7 +140,7 @@ describe("portfolio data completeness", () => {
     expect(anthology?.period).toBe("Nov 2021 – May 2026");
     expect(anthology).not.toHaveProperty("current");
     expect(udea?.period).toBe("Project-based work · 2024–2026");
-    expect(teaching?.period).toBe("Periodic teaching contracts · 2022–2025");
+    expect(teaching?.period).toBe("Teaching appointments · 2022–2025");
     expect(digitalAmericas?.company).toContain("Digital Americas");
     expect(experience.map((item) => item.id)).not.toContain(
       "universidad-antioquia-research" as never,

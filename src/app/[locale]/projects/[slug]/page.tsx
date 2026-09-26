@@ -25,12 +25,12 @@ const projectMeta: Record<
     en: {
       title: "Babel Scores · Manuel Quistial",
       description:
-        "Sheet music reader development, e-commerce integrations, and institutional access integrations for Babel Scores.",
+        "React sheet music reader development, WooCommerce functionality, and institutional access integrations for Babel Scores.",
     },
     es: {
       title: "Babel Scores · Manuel Quistial",
       description:
-        "Desarrollo del lector de partituras e integraciones de comercio electrónico y acceso institucional en Babel Scores.",
+        "Desarrollo del lector de partituras en React, comercio electrónico con WooCommerce e integraciones de acceso institucional en Babel Scores.",
     },
   },
   "udea-fcf-digital-ecosystem": {

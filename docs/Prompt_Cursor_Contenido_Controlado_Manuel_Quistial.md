@@ -1,6 +1,6 @@
-# Prompt completo para corregir el contenido de manuelquistial.dev sin suposiciones
+# Prompt para Cursor · Redacción profesional de manuelquistial.dev
 
-Versión editorial del 26 de septiembre de 2026. Basada en la revisión directa en navegador de Inicio, Trayectoria, Proyectos, detalles de Babel Scores y UdeA, Investigación y Contacto, en español e inglés.
+Revisión editorial del 25 de septiembre de 2026, hora de Colombia. Sustituye la redacción anterior, incluida la introducción rechazada «I develop web applications, from user interfaces to the services behind them…». Se revisaron las páginas públicas y referentes profesionales. La consulta web devuelve versiones diferentes entre rutas e idiomas; no se asume que represente una única versión del despliegue. Cursor debe aplicar esta especificación al repositorio que tenga abierto.
 
 ## Uso
 
@@ -11,6 +11,21 @@ Este documento fija los textos que Cursor debe implementar. No le delega la crea
 Importante: un texto ya publicado no constituye verificación independiente de los hechos. Esta edición conserva el alcance limitado de la información revisada, sin certificar nuevos resultados ni añadir responsabilidades. La ampliación de los proyectos y de la metodología de investigación requiere datos que aún no están definidos aquí.
 
 ---
+
+## Criterio editorial y referencias
+
+El error de la edición anterior fue describir el oficio con frases intercambiables y reducir contribuciones a acciones aisladas. Esta versión presenta el ámbito de trabajo, la experiencia que lo respalda y el alcance técnico de cada intervención. El lector principal es quien evalúa experiencia para una contratación o un proyecto de software.
+
+Referentes consultados; sirven para estudiar su organización editorial, no para copiar credenciales, tono personal, diseños o frases:
+
+| Referente | Observación | Aplicación a este portafolio |
+| --- | --- | --- |
+| [Simon Willison](https://simonwillison.net/about/) | Presenta productos concretos, función profesional y trayectoria. | Vincular el perfil con trabajo identificable y distinguir autoría de participación. |
+| [Tania Rascia](https://www.taniarascia.com/) | Relaciona su experiencia con áreas de responsabilidad y trabajo publicado. | Mostrar el alcance técnico de las contribuciones; no adoptar su registro informal ni sus métricas. |
+| [Martin Fowler](https://martinfowler.com/aboutMe.html) | Delimita su ámbito de especialización y lo respalda con trabajos y publicaciones. | Precisar las áreas de experiencia sin convertir la presentación en un catálogo de tecnologías. |
+| [Nielsen Norman Group](https://www.nngroup.com/articles/concise-scannable-and-objective-how-to-write-for-the-web/) | Su estudio de escritura web favorece contenido conciso, escaneable y objetivo frente a lenguaje promocional. | Encabezados informativos, evidencia concreta y eliminación de repeticiones. No extrapolar porcentajes del estudio a este sitio. |
+
+Las observaciones de los tres portafolios son una interpretación editorial, no una prueba de que un estilo garantice contratación o conversiones. Ninguna de estas referencias acredita hechos sobre Manuel. No publiques esta tabla en el sitio.
 
 ## Prompt de implementación
 
@@ -32,6 +47,22 @@ No redactes alternativas. No rellenes información faltante. No uses conocimient
 10. No agregues al sitio notas internas, justificaciones de verificación, información pendiente, placeholders ni advertencias editoriales.
 11. No elimines experiencias, activos o datos distintos de los cambios expresamente solicitados.
 12. Termina todas las modificaciones independientes. Un dato pendiente no bloquea las demás páginas.
+
+### 1.1. Estándar de voz profesional
+
+- Posicionamiento: ingeniería de software full-stack. La investigación y la docencia tienen secciones propias, sin competir con la presentación principal.
+- Presentación: ámbito de trabajo y experiencia concreta que lo respalda. No explicar qué hace un frontend o un backend.
+- Experiencia: describir la intervención, el sistema y la tecnología cuando ayuda a entender el trabajo. No convertir una lista de herramientas en un logro.
+- Inglés: redacción profesional natural, no traducción palabra por palabra. Usar exactamente la versión EN suministrada.
+- Mantener «contribuí» o «participé» cuando el alcance fue compartido. Evitar la muletilla «ayudé a», pero no reemplazarla automáticamente por «lideré».
+- No añadir «senior», «principal», «arquitecto» o «experto» a cargos históricos. La redacción debe comunicar experiencia mediante hechos. El título de presentación full-stack describe el alcance del trabajo, no un ascenso de cargo.
+- Eliminar frases como «llevar ideas a la realidad», «crear experiencias que impactan», «apasionado por la tecnología», «soluciones innovadoras» y «transformar negocios».
+- No sustituirlas por «robusto», «escalable», «de alto impacto», «mission-critical» o «enterprise-grade» sin evidencia. «Aplicaciones empresariales» describe un contexto de trabajo; no atribuye propiedades de rendimiento.
+- No explicar procedimientos básicos, inflar tareas con jerga ni redactar declaraciones de personalidad sin sustento.
+- No separar tres oraciones en tres secciones para simular profundidad. Babel Scores y UdeA tendrán cuerpos compactos definidos abajo.
+- No introducir preguntas retóricas, exhortaciones, emojis, flechas, slogans o promesas en CTA.
+- Un resultado funcional concreto puede describirse; una mejora de velocidad, negocio, calidad o productividad requiere evidencia adicional. No inventar cifras para producir impacto.
+- Las reglas de voz sirven para comprobar la implementación. No autorizan a Cursor a reescribir los textos literales.
 
 ### 2. Alcance y rutas
 
@@ -104,21 +135,21 @@ Orden fijo: presentación, proyectos, experiencia resumida, investigación, cont
 
 Nombre: Manuel Quistial.
 
-H1 ES: **Ingeniero de software**
+H1 ES: **Ingeniero de software full-stack**
 
 Texto ES:
 
-> Desarrollo aplicaciones web, desde la interfaz hasta los servicios que las hacen funcionar. Trabajo tanto en nuevas funcionalidades como en la evolución de productos existentes.
+> Aplicaciones empresariales, servicios backend y modernización de frontend. En Anthology / Blackboard trabajé en plataformas de aprendizaje, migración de Angular a React y automatización de pruebas.
 
-H1 EN: **Software Engineer**
+H1 EN: **Full-Stack Software Engineer**
 
 Texto EN:
 
-> I develop web applications, from user interfaces to the services behind them. My work includes building new features and improving existing products.
+> Enterprise applications, backend services, and frontend modernization. Previously at Anthology / Blackboard, working on learning platforms, Angular-to-React migrations, and test automation.
 
 Acción principal: Ver proyectos / View projects, hacia el bloque de proyectos del inicio. Acción secundaria: Contactar / Contact, hacia Contacto.
 
-Elimina por completo la introducción anterior sobre «gestionar información, contenidos y procesos» y la enumeración de plataformas de aprendizaje, partituras y UdeA dentro del hero. No sustituyas esos textos por la propuesta anterior «entender qué necesitan resolver y convertirlo en software». Solo se usa el texto literal de esta sección.
+Elimina por completo la introducción anterior sobre «gestionar información, contenidos y procesos» y la enumeración de plataformas de aprendizaje, partituras y UdeA dentro del hero. No sustituyas esos textos por la propuesta anterior «entender qué necesitan resolver y convertirlo en software». También queda descartada la introducción «desde la interfaz hasta los servicios que las hacen funcionar» y su versión inglesa. Solo se usa el texto literal de esta sección.
 
 #### Proyectos
 
@@ -173,11 +204,11 @@ Título: Babel Scores.
 
 Descripción ES:
 
-> Desarrollo del lector de partituras en el navegador e integraciones de comercio electrónico y acceso institucional.
+> Lector de partituras en React e integraciones de comercio electrónico y acceso institucional.
 
 Descripción EN:
 
-> Development of the browser-based sheet music reader, e-commerce integrations, and institutional access integrations.
+> React sheet music reader, e-commerce functionality, and institutional access integrations.
 
 Elimina la etiqueta «Plataforma de partituras digitales» y su traducción. No coloques dos frases con el mismo propósito. Conserva el enlace al detalle y un solo título visible.
 
@@ -191,11 +222,11 @@ Contexto, en ambos idiomas: Universidad de Antioquia.
 
 Descripción ES:
 
-> Desarrollo y actualización de aplicaciones de la facultad, con soporte, capacitación y asesoría en datos.
+> Desarrollo de un sistema de información, actualización de aplicaciones y asesoría en gestión de datos.
 
 Descripción EN:
 
-> Development and updates for faculty applications, including support, training, and data consulting.
+> Information system development, application updates, and data management consulting.
 
 No uses «gestión de aplicaciones» para introducir una responsabilidad de operación que no está definida aquí.
 
@@ -203,27 +234,34 @@ No uses «gestión de aplicaciones» para introducir una responsabilidad de oper
 
 Introducción ES:
 
-> Implementación web de diseños de Sal & Picciotto.
+> Desarrollo en WordPress a partir del diseño visual de Sal & Picciotto.
 
 Introducción EN:
 
-> Web development based on designs by Sal & Picciotto.
+> WordPress development with visual design by Sal & Picciotto.
 
 Este crédito se muestra una vez en el grupo. En la portada, donde el sitio de la agencia aparece separado, conserva un crédito breve «Diseño de Sal & Picciotto» / «Design by Sal & Picciotto».
 
-Textos exactos de las fichas:
+Contenido exacto de las fichas:
 
-| Proyecto | ES | EN |
+| Proyecto | Descripción ES | Descripción EN |
 | --- | --- | --- |
-| Sal & Picciotto | Implementación del sitio de la agencia en WordPress. | WordPress implementation of the agency's website. |
-| Trapatsas Eye Center | Implementación del sitio web del centro oftalmológico. | Implementation of the eye center's website. |
-| Giving Tuesday Panamá | Implementación del sitio web de la campaña Giving Tuesday Panamá. | Implementation of the Giving Tuesday Panamá campaign website. |
-| Barrio Alto Panamá | Implementación de un sitio inmobiliario con versiones en varios idiomas. | Implementation of a real estate website in multiple languages. |
-| FCI PTY Box | Implementación de la página de FCI PTY Box. | Implementation of the FCI PTY Box page. |
+| Sal & Picciotto | Sitio corporativo de la agencia. | Agency website. |
+| Trapatsas Eye Center | Sitio web de un centro oftalmológico. | Eye care practice website. |
+| Giving Tuesday Panamá | Sitio web de la campaña. | Campaign website. |
+| Barrio Alto Panamá | Sitio inmobiliario multilingüe. | Multilingual real estate website. |
+| FCI PTY Box | Sin descripción; omitir este campo. | No description; omit this field. |
 
-El título del primer sitio será «Sal & Picciotto», sin añadir «Sitio web» o «Website», porque el grupo ya informa el tipo de trabajo.
+«Sin descripción» y «No description» son instrucciones internas: jamás se publican. El título FCI PTY Box, la captura existente y el enlace bastan mientras no haya información adicional. No sustituir la ausencia de datos por «Implementación de la página de FCI PTY Box».
 
-Estos textos son deliberadamente limitados. No los amplíes con filtros, pagos, agendamiento, donaciones, generación de clientes potenciales o automatizaciones. No conocemos aquí el alcance de esas funciones.
+En el índice, el crédito compartido ya comunica la contribución de desarrollo. Por eso no se repite «implementación del sitio» en cada tarjeta. En la portada, la tarjeta aislada Sal & Picciotto usa esta descripción diferente y literal:
+
+- ES: «Desarrollo del sitio corporativo de la agencia en WordPress.»
+- EN: «WordPress development for the agency’s website.»
+
+El título será «Sal & Picciotto», sin añadir «Sitio web» o «Website». Conserva el crédito de diseño definido arriba. No atribuyas a Manuel el diseño visual.
+
+No amplíes las fichas con filtros, pagos, agendamiento, donaciones, generación de clientes potenciales o automatizaciones. El sector de un cliente no demuestra esas funcionalidades.
 
 Mantén las URLs externas actuales. El CTA es Abrir sitio / Visit website. No añadas un detalle vacío para los proyectos que actualmente solo tienen enlace externo.
 
@@ -231,37 +269,35 @@ Mantén las URLs externas actuales. El CTA es Abrir sitio / Visit website. No a�
 
 Conserva la ruta, el H1 Babel Scores, el enlace al dominio y las imágenes reales existentes válidas. No cambies la autoría de imágenes ni generes capturas falsas.
 
-Reemplaza el cuerpo por esta estructura exacta:
+Cuerpo exacto: un párrafo de contexto y una sola sección de contribución técnica con dos viñetas. No incluir «Qué es», «Reader development», «E-commerce and institutional access» ni una segunda lista de «Mi aporte».
 
-**Introducción ES**
+**Contexto ES**
 
-> Babel Scores permite explorar, comprar y leer partituras digitales en línea.
+> Plataforma de publicación, consulta y venta de partituras digitales.
 
-**Introducción EN**
+**Contexto EN**
 
-> Babel Scores lets users browse, purchase, and read digital sheet music online.
+> Digital sheet music publishing, browsing, and sales platform.
 
-**Sección ES: Desarrollo del lector**
+**Encabezado ES:** Desarrollo e integraciones
 
-> Desarrollé el lector de partituras para su consulta directamente en el navegador.
+**Viñetas ES:**
 
-**Sección EN: Reader development**
+- Desarrollé el lector de partituras en React para la consulta de documentos dentro de la plataforma web.
+- Implementé funcionalidades de comercio electrónico con WooCommerce e integraciones de acceso institucional.
 
-> I developed the sheet music reader for use directly in the browser.
+**Encabezado EN:** Development and integrations
 
-**Sección ES: Comercio electrónico y acceso institucional**
+**Viñetas EN:**
 
-> Implementé funciones de comercio electrónico e integraciones de acceso institucional para la plataforma.
+- Developed the React sheet music reader for viewing scores within the web platform.
+- Implemented e-commerce functionality with WooCommerce and institutional access integrations.
 
-**Sección EN: E-commerce and institutional access**
+La relación React–lector y WooCommerce–comercio está respaldada por el historial de trabajo revisado. No asignes WooCommerce al mecanismo de autenticación ni deduzcas protocolos concretos de «acceso institucional».
 
-> I implemented e-commerce features and institutional access integrations for the platform.
+No añadas una sección de resultados, retos, arquitectura o aprendizajes sin datos. No atribuyas anotaciones, edición, zoom, exportación, arquitectura de almacenamiento o métodos de autenticación basándote solo en lo que veas en el producto.
 
-Elimina «Qué es», el párrafo que vuelve a resumir la contribución y la lista final «Mi aporte». Las funciones solo se describen una vez en esta página.
-
-No añadas una sección de resultados, retos, arquitectura o aprendizajes sin los datos correspondientes. No atribuyas anotaciones, edición, zoom, exportación o navegación concreta a Manuel basándote solo en lo que veas en el producto.
-
-El detalle seguirá siendo breve porque falta información confirmada sobre funciones y decisiones. Registra B01 y B02 del apartado de pendientes. No declares que recuperaste profundidad técnica: se habrá eliminado redundancia, pero la ampliación factual seguirá pendiente.
+Registra B01 y B02. Esta página comunica el alcance conocido con mayor precisión; todavía no documenta decisiones de arquitectura, restricciones ni resultados medidos. No afirmes que esos aspectos están resueltos.
 
 ### 8. Detalle de UdeA
 
@@ -275,41 +311,29 @@ Metadato ES: Colaboraciones por proyecto · 2024–2026.
 
 Metadato EN: Project-based work · 2024–2026.
 
-**Introducción ES**
+No añadir una introducción que enumere otra vez las tres contribuciones. Después de los metadatos mostrar una sola sección:
 
-> Colaboré en el desarrollo y la actualización de aplicaciones utilizadas por la facultad, además de brindar soporte, capacitación y asesoría en datos.
+**Encabezado ES:** Desarrollo y asesoría técnica
 
-**Introducción EN**
+**Viñetas ES:**
 
-> I contributed to developing and updating applications used by the faculty, and provided support, training, and data consulting.
+- Participé en el diseño y puesta en marcha de un sistema de información para la facultad.
+- Actualicé aplicaciones existentes y brindé soporte técnico y capacitación a sus usuarios.
+- Asesoré la gestión y el análisis de datos asociados a las aplicaciones.
 
-**Sección ES: Sistema de información**
+**Encabezado EN:** Software development and technical consulting
 
-> Participé en el diseño y puesta en marcha de un sistema de información, trabajando en su estructura y funcionalidad.
+**Viñetas EN:**
 
-**Sección EN: Information system**
+- Contributed to the design and launch of an information system for the faculty.
+- Updated existing applications and provided technical support and user training.
+- Advised on data management and analysis for the applications.
 
-> I contributed to the design and launch of an information system, working on its structure and functionality.
+Eliminar los tres apartados con un párrafo cada uno. También eliminar «Mi aporte» y el párrafo «El trabajo corresponde a periodos documentados… no a un único cargo continuo…», con sus equivalentes ingleses. El metadato ya indica la modalidad.
 
-**Sección ES: Actualización y uso de las aplicaciones**
+No inventar el nombre del sistema, procesos administrativos, reportes, población usuaria o mejoras operativas. No reponer Keycloak, OIDC, arquitectura de microservicios o patrones de migración desde textos anteriores generados sin confirmación. Registrar U01 y U02.
 
-> Actualicé aplicaciones existentes y brindé soporte y capacitación para su uso.
-
-**Sección EN: Application updates and support**
-
-> I updated existing applications and provided support and training for their use.
-
-**Sección ES: Gestión y análisis de datos**
-
-> Realicé asesoría en gestión y análisis de datos asociados a las aplicaciones de la facultad.
-
-**Sección EN: Data management and analysis**
-
-> I provided advice on managing and analyzing data associated with the faculty's applications.
-
-Elimina el bloque «Mi aporte» y el párrafo «El trabajo corresponde a periodos documentados… no a un único cargo continuo…», incluidos sus equivalentes ingleses. El metadato comunica la modalidad sin una justificación defensiva.
-
-No inventes el nombre del sistema, procesos administrativos, reportes, población usuaria o mejoras operativas. No repongas Keycloak, OIDC, arquitectura de microservicios o patrones de migración desde textos antiguos. Registra U01 y U02 para ampliar con datos confirmados.
+No convertir la falta de detalle técnico en frases corporativas abstractas. Un cuerpo breve es preferible a tres encabezados que repiten la misma información.
 
 ### 9. Trayectoria
 
@@ -317,11 +341,11 @@ H1 ES: Trayectoria. H1 EN: Experience.
 
 Introducción ES:
 
-> Soy ingeniero electrónico y trabajo en desarrollo de software. También he impartido formación en programación, análisis de datos e inteligencia artificial en la Universidad de Antioquia.
+> Mi trayectoria comprende ingeniería full-stack, desarrollo backend y asesoría técnica en aplicaciones web. Soy ingeniero electrónico y he sido profesor de programación, desarrollo web, análisis de datos e inteligencia artificial en la Universidad de Antioquia.
 
 Introducción EN:
 
-> I am an electronics engineer working in software development. I have also taught programming, data analysis, and artificial intelligence at Universidad de Antioquia.
+> My experience spans full-stack engineering, backend development, and technical consulting for web applications. I hold a degree in Electronic Engineering and have taught programming, web development, data analysis, and artificial intelligence at Universidad de Antioquia.
 
 No utilices «taken part in technical training», que puede interpretarse como formación recibida.
 
@@ -333,19 +357,19 @@ Cargo: Ingeniero de software / Software Engineer.
 
 Viñetas ES, en este orden:
 
-1. Desarrollé interfaces para administrar configuraciones y activar funcionalidades en plataformas de aprendizaje.
-2. Participé en la migración de módulos de Angular a React y en la automatización de pruebas de flujos críticos.
-3. Implementé validaciones de formularios, manejo de errores y estados de carga en las interfaces administrativas.
+1. Desarrollé módulos administrativos en React y TypeScript para configurar plataformas de aprendizaje y gestionar la activación de funcionalidades, con integración a servicios backend.
+2. Participé en la migración de módulos de Angular a React y en la automatización de pruebas de los flujos administrativos.
 
 Viñetas EN:
 
-1. Developed interfaces for managing settings and activating features in learning platforms.
-2. Contributed to migrating modules from Angular to React and automating tests for critical workflows.
-3. Implemented form validation, error handling, and loading states in administrative interfaces.
+1. Developed administrative modules in React and TypeScript for learning platform configuration and feature activation, integrated with backend services.
+2. Contributed to Angular-to-React module migrations and automated testing of administrative workflows.
 
 Línea técnica: React, TypeScript, Java, Spring Boot, WebdriverIO.
 
-No vincules todas las tecnologías a cada función. No añadas escala global, ahorro de tiempo, mejora de conversiones, liderazgo de migración o ausencia de incidencias.
+Retira el punto separado sobre estados de carga, validaciones y manejo de errores. Son detalles de implementación; no deben ocupar el mismo nivel narrativo que la migración y las funcionalidades administrativas. No los reemplaces por mejoras de usabilidad no medidas.
+
+No vincules todas las tecnologías a cada función. No añadas escala global, ahorro de tiempo, liderazgo de migración o ausencia de incidencias. No presentes a Manuel como responsable de toda la plataforma.
 
 #### Digital Americas Pipeline Initiative
 
@@ -353,17 +377,17 @@ Cargo: Desarrollador backend / Backend Developer.
 
 Viñetas ES:
 
-1. Construí herramientas de monitoreo con Electron y Elastic Stack para consultar el estado y la actividad de los servicios.
-2. Desarrollé servicios para procesar información y distribuir notificaciones entre componentes de aplicaciones en la nube.
+1. Desarrollé servicios backend con Node.js y Express, con procesamiento de datos y mensajería asíncrona en AWS mediante Lambda, SNS y SQS.
+2. Implementé herramientas de monitoreo con Electron y Elastic Stack para consultar la actividad y el estado de los servicios.
 
 Viñetas EN:
 
-1. Built monitoring tools with Electron and Elastic Stack to inspect service status and activity.
-2. Developed services for processing data and distributing notifications across cloud application components.
+1. Developed backend services with Node.js and Express, with data processing and asynchronous messaging on AWS using Lambda, SNS, and SQS.
+2. Implemented monitoring tools with Electron and Elastic Stack to inspect service activity and status.
 
-Línea técnica: Node.js, Express, AWS.
+Línea técnica: Node.js, Express, AWS Lambda, Amazon SNS, Amazon SQS, Electron, Elastic Stack.
 
-No inventes el tipo de datos, clientes o sector. Registra D01.
+Lambda, SNS y SQS ya forman parte del historial aportado; recuperarlos da precisión técnica. No deduzcas microservicios, garantías de entrega, resiliencia, volumen de eventos ni reducciones de latencia. No inventes el tipo de datos, clientes o sector. Registra D01.
 
 #### Babel Scores
 
@@ -371,13 +395,13 @@ Cargo: Ingeniero de software / Software Engineer.
 
 Viñetas ES:
 
-1. Desarrollé el lector de partituras para su consulta en el navegador.
-2. Implementé funciones de comercio electrónico e integraciones de acceso institucional.
+1. Desarrollé el lector web de partituras en React.
+2. Implementé funcionalidades de comercio electrónico con WooCommerce e integraciones de acceso institucional.
 
 Viñetas EN:
 
-1. Developed the browser-based sheet music reader.
-2. Implemented e-commerce features and institutional access integrations.
+1. Developed the React-based web sheet music reader.
+2. Implemented e-commerce functionality with WooCommerce and institutional access integrations.
 
 Línea técnica: WordPress, WooCommerce, React.
 
@@ -391,15 +415,13 @@ Cargo EN: WordPress / Frontend Developer.
 
 Viñetas ES:
 
-1. Implementé sitios web a partir de los diseños de la agencia, adaptándolos a diferentes tamaños de pantalla.
-2. Configuré campos y componentes para actualizar el contenido de los sitios desde WordPress.
-3. Implementé versiones multilingües en los proyectos que lo requerían.
+1. Desarrollé sitios WordPress a partir de los diseños de la agencia, con implementación responsive en Elementor Pro y campos de contenido con ACF.
+2. Implementé versiones multilingües con Polylang.
 
 Viñetas EN:
 
-1. Implemented websites based on the agency's designs and adapted them for different screen sizes.
-2. Configured fields and components for updating website content in WordPress.
-3. Implemented multilingual versions for projects that required them.
+1. Developed WordPress websites from the agency’s designs, with responsive layouts in Elementor Pro and content fields built with ACF.
+2. Implemented multilingual versions with Polylang.
 
 Línea técnica: WordPress, Elementor Pro, ACF, Polylang.
 
@@ -416,14 +438,14 @@ Periodo: Colaboraciones por proyecto · 2024–2026 / Project-based work · 2024
 Viñetas ES:
 
 1. Participé en el diseño y puesta en marcha de un sistema de información para la facultad.
-2. Actualicé aplicaciones existentes y brindé soporte y capacitación para su uso.
-3. Realicé asesoría en gestión y análisis de datos asociados a esas aplicaciones.
+2. Actualicé aplicaciones existentes y brindé soporte técnico y capacitación a sus usuarios.
+3. Asesoré la gestión y el análisis de datos asociados a las aplicaciones.
 
 Viñetas EN:
 
 1. Contributed to the design and launch of an information system for the faculty.
-2. Updated existing applications and provided support and training for their use.
-3. Provided advice on managing and analyzing data associated with those applications.
+2. Updated existing applications and provided technical support and user training.
+3. Advised on data management and analysis for the applications.
 
 Elimina la línea «Web applications, Data analysis». No es un stack y repite las actividades. No la sustituyas por tecnologías no confirmadas.
 
@@ -435,15 +457,15 @@ Cargo: Profesor de cátedra / Adjunct Instructor.
 
 Periodo ES: Contratos por periodos · 2022–2025.
 
-Periodo EN: Periodic teaching contracts · 2022–2025.
+Periodo EN: Teaching appointments · 2022–2025.
 
 Texto ES, un solo párrafo:
 
-> Impartí formación en programación, desarrollo web, análisis de datos e inteligencia artificial, además de docencia en prácticas académicas.
+> Profesor de cátedra en programación, desarrollo web, análisis de datos e inteligencia artificial. Mi actividad docente también incluyó prácticas académicas.
 
 Texto EN:
 
-> Taught programming, web development, data analysis, and artificial intelligence, as well as academic practice courses.
+> Taught programming, web development, data analysis, and artificial intelligence as an adjunct instructor. My teaching responsibilities also included academic practice courses.
 
 Elimina la segunda viñeta repetida sobre bootcamps. No traduzcas niveles explorador e integrador como explorer e integrator: retira esas etiquetas del resumen. No inventes participantes, tasas de aprobación o resultados de aprendizaje.
 
@@ -475,11 +497,11 @@ H1: Contacto / Contact.
 
 Texto ES:
 
-> Para oportunidades de trabajo, proyectos de software o colaboraciones de investigación, escríbeme por LinkedIn.
+> Contacto profesional para posiciones de ingeniería de software, proyectos de desarrollo y colaboraciones de investigación.
 
 Texto EN:
 
-> For job opportunities, software projects, or research collaborations, contact me on LinkedIn.
+> Professional inquiries about software engineering roles, development projects, and research collaborations.
 
 CTA: Contactar por LinkedIn / Contact me on LinkedIn.
 
@@ -491,39 +513,31 @@ No sobrescribas el CV ni sustituyas el archivo por otro adaptado a una postulaci
 
 ### 12. Investigación
 
-La información disponible permite describir el tema, pero no completar aquí la metodología vigente, resultados o avance. No uses versiones antiguas del portafolio para llenar esos campos.
-
-Reemplaza Tema, Enfoque, Enfoque de trabajo y Trabajo actual por una sola presentación con este contenido:
+Reemplaza Tema, Enfoque, Enfoque de trabajo y Trabajo actual por una sola presentación. El contenido disponible no permite publicar resultados ni completar la metodología vigente.
 
 **H1 ES:** Investigación
 
 **Subtítulo ES:** Interfaces cerebro-computador e imaginación motora
 
-**Párrafo 1 ES:**
+**Párrafo ES:**
 
-> Mi investigación de maestría en la Universidad de Antioquia se centra en interfaces cerebro-computador basadas en señales EEG e imaginación motora. Trabajo en procesamiento de señales y desarrollo de software para los experimentos.
-
-**Párrafo 2 ES:**
-
-> La imaginación motora consiste en imaginar un movimiento sin ejecutarlo. El EEG permite registrar la actividad eléctrica cerebral desde el cuero cabelludo.
+> Investigación de maestría en la Universidad de Antioquia sobre interfaces cerebro-computador basadas en EEG e imaginación motora, con trabajo en procesamiento de señales y software experimental.
 
 **H1 EN:** Research
 
 **Subtítulo EN:** Brain-computer interfaces and motor imagery
 
-**Párrafo 1 EN:**
+**Párrafo EN:**
 
-> My master's research at Universidad de Antioquia focuses on brain-computer interfaces based on EEG signals and motor imagery. I work on signal processing and software development for the experiments.
+> Master’s research at Universidad de Antioquia on EEG-based brain-computer interfaces and motor imagery, with work on signal processing and experimental software.
 
-**Párrafo 2 EN:**
+Elimina el párrafo didáctico que define imaginación motora y EEG. La página presenta una línea de investigación profesional; no es una introducción educativa a la disciplina. No reemplaces esas definiciones por resultados o métodos no confirmados.
 
-> Motor imagery involves imagining a movement without performing it. EEG records the brain's electrical activity from the scalp.
+No añadas apartados vacíos de métodos, resultados o publicaciones. Conserva enlaces a materiales existentes si no contradicen esta edición. Si hay materiales con datos adicionales, registra el conflicto antes de alterar su contenido; esta instrucción no autoriza a borrar publicaciones.
 
-No agregues apartados vacíos de métodos, resultados o publicaciones. Conserva materiales existentes solo si estaban publicados y no contradicen esta edición; si encuentras esa situación, registra el conflicto antes de alterar el material.
+No publiques frases como «se mantiene general», «solo cuando esté autorizado», «pendiente de materiales» o «sin atribuir resultados clínicos». Son reglas internas.
 
-No publiques frases como «se mantiene general», «solo cuando esté autorizado», «pendiente de materiales» o «sin atribuir resultados clínicos». Son reglas editoriales internas.
-
-No añadas técnicas, número de participantes, hardware, clasificación de manos, datasets o métricas. No equipares tiempo real y lazo cerrado. La ampliación queda registrada como R01; no puede resolverse adivinando.
+No añadas técnicas, número de participantes, hardware, clasificación de manos, datasets o métricas. No equipares tiempo real y lazo cerrado. La ampliación requiere R01 y no puede resolverse adivinando.
 
 ### 13. Imágenes y textos asociados
 
@@ -541,7 +555,7 @@ Aplica títulos y descripciones en cada idioma. No amplíes palabras clave ni a�
 
 | Página | Título ES | Título EN |
 | --- | --- | --- |
-| Inicio | Manuel Quistial · Ingeniero de software | Manuel Quistial · Software Engineer |
+| Inicio | Manuel Quistial · Ingeniero de software full-stack | Manuel Quistial · Full-Stack Software Engineer |
 | Trayectoria | Trayectoria · Manuel Quistial | Experience · Manuel Quistial |
 | Proyectos | Proyectos · Manuel Quistial | Projects · Manuel Quistial |
 | Babel Scores | Babel Scores · Manuel Quistial | Babel Scores · Manuel Quistial |
@@ -551,10 +565,10 @@ Aplica títulos y descripciones en cada idioma. No amplíes palabras clave ni a�
 
 Descripciones ES/EN, respectivamente:
 
-- Inicio: «Ingeniero de software. Desarrollo de aplicaciones web, nuevas funcionalidades y evolución de productos existentes.» / «Software engineer working on web applications, new features, and improvements to existing products.»
+- Inicio: «Ingeniería full-stack, aplicaciones empresariales y servicios backend. Experiencia en Anthology / Blackboard, migración de frontend y pruebas automatizadas.» / «Full-stack engineering, enterprise applications, and backend services. Experience at Anthology / Blackboard, frontend migration, and automated testing.»
 - Trayectoria: «Experiencia de Manuel Quistial en desarrollo de software y formación tecnológica.» / «Manuel Quistial's experience in software development and technical teaching.»
 - Proyectos: «Proyectos de aplicaciones, plataformas y sitios web en los que ha trabajado Manuel Quistial.» / «Applications, platforms, and websites Manuel Quistial has worked on.»
-- Babel Scores: «Desarrollo del lector de partituras e integraciones de comercio electrónico y acceso institucional en Babel Scores.» / «Sheet music reader development, e-commerce integrations, and institutional access integrations for Babel Scores.»
+- Babel Scores: «Desarrollo del lector de partituras en React, comercio electrónico con WooCommerce e integraciones de acceso institucional en Babel Scores.» / «React sheet music reader development, WooCommerce functionality, and institutional access integrations for Babel Scores.»
 - UdeA: «Desarrollo y actualización de aplicaciones de la Facultad de Comunicaciones y Filología de la Universidad de Antioquia.» / «Development and updates for applications at Universidad de Antioquia's Faculty of Communications and Philology.»
 - Investigación: «Investigación de maestría en interfaces cerebro-computador, señales EEG e imaginación motora.» / «Master's research on brain-computer interfaces, EEG signals, and motor imagery.»
 - Contacto: «Contacto con Manuel Quistial para oportunidades de trabajo, proyectos de software y colaboraciones de investigación.» / «Contact Manuel Quistial about job opportunities, software projects, and research collaborations.»
@@ -565,6 +579,7 @@ Conserva canonical, hreflang, sitemap y URLs. No inventes nuevos datos estructur
 
 Busca estas formulaciones y sus equivalentes dentro del contenido público. Elimina el uso rechazado, no palabras técnicas legítimas en cualquier archivo indiscriminadamente:
 
+- «I develop web applications, from user interfaces to the services behind them» y la continuación «My work includes building new features and improving existing products», incluidos sus equivalentes españoles.
 - Connected systems / sistemas conectados en el posicionamiento.
 - Selected projects / proyectos seleccionados como rótulo.
 - Gestionar información, contenidos y procesos en la introducción antigua.
@@ -602,7 +617,7 @@ Un resumen factual más limitado evita inventar, pero no equivale a completar la
 2. Compara las cadenas implementadas con los textos literales de este documento. No debe haber frases añadidas para llenar espacio.
 3. Revisa las siete rutas en ambos idiomas. Conserva nombres propios y equivalencia de responsabilidad.
 4. Comprueba que las fechas solo cambiaron de formato, salvo la presentación por proyectos de UdeA y docencia definida expresamente.
-5. Comprueba que la portada ya no repite viñetas de experiencia y que los detalles no tienen la lista Mi aporte duplicada.
+5. Comprueba que la portada ya no repite viñetas de experiencia y que cada detalle tiene una sola sección de contribuciones, sin una segunda lista Mi aporte duplicada.
 6. Verifica enlaces al CV, a proyectos, LinkedIn, GitHub y cambio de idioma. No envíes mensajes ni formularios.
 7. Revisa visualmente 375 px y 1440 px; confirma también que no hay desbordamiento a 320 px. Ajusta espacios y wrapping sin reescribir el texto ni reducir indebidamente la letra.
 8. Conserva un H1 por página, estructura semántica, foco visible y accesibilidad de los enlaces. No uses líneas bajo títulos ni flechas decorativas.
@@ -611,10 +626,14 @@ Un resumen factual más limitado evita inventar, pero no equivale a completar la
 ### 18. Criterios de aceptación
 
 - [ ] La introducción es exactamente la nueva versión ES/EN.
-- [ ] No se reutilizó ninguna de las dos introducciones rechazadas.
+- [ ] No se reutilizó ninguna introducción rechazada, incluida la explicación «from user interfaces to the services behind them».
+- [ ] El texto profesional usa contribuciones verificables, sin slogans, atributos de rendimiento ni cargos inventados.
+- [ ] Las fichas web no repiten «implementación del sitio»; FCI PTY Box no tiene una descripción tautológica.
+- [ ] Babel Scores y UdeA tienen un cuerpo compacto, sin encabezados que simulan profundidad.
+- [ ] Investigación no contiene el párrafo didáctico de definiciones.
 - [ ] Proyectos y navegación usan los nombres fijados.
 - [ ] La portada muestra experiencia sin viñetas de contribuciones.
-- [ ] Cada tarjeta contiene una sola descripción, sin etiqueta redundante.
+- [ ] Cada tarjeta contiene como máximo una descripción, sin etiqueta redundante; FCI PTY Box no lleva descripción.
 - [ ] Los detalles no repiten sus aportes en una lista final.
 - [ ] UdeA comunica modalidad por proyectos sin párrafo defensivo.
 - [ ] Trayectoria contiene las contribuciones literales, sin ampliaciones.
@@ -649,4 +668,4 @@ No entregues solo un plan. Implementa todo lo definido. No afirmes haber mejorad
 
 ## Nota para Manuel
 
-Este prompt cierra las decisiones editoriales e incluye todos los textos en ambos idiomas para limitar la improvisación de Cursor. La descripción detallada de funciones y resultados que aún no se ha confirmado no puede completarse con rigor mediante una orden al modelo; queda registrada con preguntas concretas. El documento permite terminar las correcciones de redacción y estructura sin inventar esa información.
+Esta revisión reemplaza la versión anterior en su totalidad. Recupera contexto profesional y precisión técnica sin atribuir liderazgo ni resultados no documentados. Contiene texto cerrado en ambos idiomas, referencias editoriales y reglas de implementación. Los datos que faltan para describir decisiones de arquitectura, restricciones y resultados permanecen identificados; no se sustituyen por prosa genérica.

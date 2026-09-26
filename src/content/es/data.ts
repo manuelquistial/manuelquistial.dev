@@ -6,12 +6,12 @@ export const data: LocaleData = {
       title: "Aplicaciones de la Facultad de Comunicaciones y Filología",
       clientType: "Universidad de Antioquia",
       description:
-        "Desarrollo y actualización de aplicaciones de la facultad, con soporte, capacitación y asesoría en datos.",
+        "Desarrollo de un sistema de información, actualización de aplicaciones y asesoría en gestión de datos.",
     },
     "babel-scores": {
       title: "Babel Scores",
       description:
-        "Desarrollo del lector de partituras en el navegador e integraciones de comercio electrónico y acceso institucional.",
+        "Lector de partituras en React e integraciones de comercio electrónico y acceso institucional.",
     },
     "eeg-motor-imagery-pipeline": {
       title: "Interfaces cerebro-computador e imaginación motora",
@@ -20,27 +20,25 @@ export const data: LocaleData = {
     },
     "sal-picciotto-website": {
       title: "Sal & Picciotto",
-      description:
-        "Implementación del sitio de la agencia en WordPress.",
+      description: "Sitio corporativo de la agencia.",
+      homeDescription:
+        "Desarrollo del sitio corporativo de la agencia en WordPress.",
     },
     "trapatsa-eye-center": {
       title: "Trapatsas Eye Center",
-      description:
-        "Implementación del sitio web del centro oftalmológico.",
+      description: "Sitio web de un centro oftalmológico.",
     },
     "giving-tuesday-panama": {
       title: "Giving Tuesday Panamá",
-      description:
-        "Implementación del sitio web de la campaña Giving Tuesday Panamá.",
+      description: "Sitio web de la campaña.",
     },
     "barrio-alto-panama": {
       title: "Barrio Alto Panamá",
-      description:
-        "Implementación de un sitio inmobiliario con versiones en varios idiomas.",
+      description: "Sitio inmobiliario multilingüe.",
     },
     "fci-pty-box": {
       title: "FCI PTY Box",
-      description: "Implementación de la página de FCI PTY Box.",
+      description: "",
     },
     "pdc-colombia": {
       title: "PDC Colombia",
@@ -56,9 +54,8 @@ export const data: LocaleData = {
       description:
         "Ingeniería de software en plataformas de aprendizaje.",
       highlights: [
-        "Desarrollé interfaces para administrar configuraciones y activar funcionalidades en plataformas de aprendizaje.",
-        "Participé en la migración de módulos de Angular a React y en la automatización de pruebas de flujos críticos.",
-        "Implementé validaciones de formularios, manejo de errores y estados de carga en las interfaces administrativas.",
+        "Desarrollé módulos administrativos en React y TypeScript para configurar plataformas de aprendizaje y gestionar la activación de funcionalidades, con integración a servicios backend.",
+        "Participé en la migración de módulos de Angular a React y en la automatización de pruebas de los flujos administrativos.",
       ],
     },
     "digital-americas-pipeline": {
@@ -68,8 +65,8 @@ export const data: LocaleData = {
       description:
         "Servicios backend y herramientas de monitoreo para aplicaciones en la nube.",
       highlights: [
-        "Construí herramientas de monitoreo con Electron y Elastic Stack para consultar el estado y la actividad de los servicios.",
-        "Desarrollé servicios para procesar información y distribuir notificaciones entre componentes de aplicaciones en la nube.",
+        "Desarrollé servicios backend con Node.js y Express, con procesamiento de datos y mensajería asíncrona en AWS mediante Lambda, SNS y SQS.",
+        "Implementé herramientas de monitoreo con Electron y Elastic Stack para consultar la actividad y el estado de los servicios.",
       ],
     },
     "sal-picciotto": {
@@ -79,9 +76,8 @@ export const data: LocaleData = {
       description:
         "Implementación de sitios web a partir de los diseños de la agencia.",
       highlights: [
-        "Implementé sitios web a partir de los diseños de la agencia, adaptándolos a diferentes tamaños de pantalla.",
-        "Configuré campos y componentes para actualizar el contenido de los sitios desde WordPress.",
-        "Implementé versiones multilingües en los proyectos que lo requerían.",
+        "Desarrollé sitios WordPress a partir de los diseños de la agencia, con implementación responsive en Elementor Pro y campos de contenido con ACF.",
+        "Implementé versiones multilingües con Polylang.",
       ],
     },
     "babel-scores": {
@@ -91,8 +87,8 @@ export const data: LocaleData = {
       description:
         "Lector de partituras e integraciones de plataforma.",
       highlights: [
-        "Desarrollé el lector de partituras para su consulta en el navegador.",
-        "Implementé funciones de comercio electrónico e integraciones de acceso institucional.",
+        "Desarrollé el lector web de partituras en React.",
+        "Implementé funcionalidades de comercio electrónico con WooCommerce e integraciones de acceso institucional.",
       ],
     },
     "udea-fcf": {
@@ -103,8 +99,8 @@ export const data: LocaleData = {
         "Asesoría y desarrollo por proyecto en aplicaciones de la facultad.",
       highlights: [
         "Participé en el diseño y puesta en marcha de un sistema de información para la facultad.",
-        "Actualicé aplicaciones existentes y brindé soporte y capacitación para su uso.",
-        "Realicé asesoría en gestión y análisis de datos asociados a esas aplicaciones.",
+        "Actualicé aplicaciones existentes y brindé soporte técnico y capacitación a sus usuarios.",
+        "Asesoré la gestión y el análisis de datos asociados a las aplicaciones.",
       ],
     },
     "udea-teaching": {
@@ -112,7 +108,7 @@ export const data: LocaleData = {
       period: "Contratos por periodos · 2022–2025",
       location: "Medellín, Colombia",
       description:
-        "Impartí formación en programación, desarrollo web, análisis de datos e inteligencia artificial, además de docencia en prácticas académicas.",
+        "Profesor de cátedra en programación, desarrollo web, análisis de datos e inteligencia artificial. Mi actividad docente también incluyó prácticas académicas.",
     },
   },
   skills: {

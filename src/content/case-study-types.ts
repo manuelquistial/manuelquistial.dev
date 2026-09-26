@@ -51,14 +51,11 @@ export function getCaseStudySections(
     .filter((entry): entry is [string, CaseStudySection] => {
       const section = entry[1];
       if (!section) return false;
-      if (entry[0] === "responsibilities" || entry[0] === "learnings") {
-        return Boolean(
-          section.title ||
-            (section.paragraphs && section.paragraphs.length > 0) ||
-            (section.items && section.items.length > 0),
-        );
-      }
-      return true;
+      return Boolean(
+        section.title ||
+          (section.paragraphs && section.paragraphs.length > 0) ||
+          (section.items && section.items.length > 0),
+      );
     })
     .map(([key, section]) => ({ key, section }));
 }

@@ -9,6 +9,7 @@ export type LocaleData = {
       {
         title?: string;
         description?: string;
+        homeDescription?: string;
         longDescription?: string;
         clientType?: string;
       }

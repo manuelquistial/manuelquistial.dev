@@ -5,7 +5,7 @@ export const projects = [
     category: "engineering",
     clientType: "Universidad de Antioquia",
     description:
-      "Development and updates for faculty applications, including support, training, and data consulting.",
+      "Information system development, application updates, and data management consulting.",
     tags: ["Web applications"],
     status: "in-progress",
     featured: true,
@@ -16,7 +16,7 @@ export const projects = [
     title: "Babel Scores",
     category: "engineering",
     description:
-      "Development of the browser-based sheet music reader, e-commerce integrations, and institutional access integrations.",
+      "React sheet music reader, e-commerce functionality, and institutional access integrations.",
     tags: ["WordPress", "WooCommerce", "React"],
     status: "live",
     liveUrl: "https://babelscores.com/",
@@ -38,7 +38,9 @@ export const projects = [
     title: "Sal & Picciotto",
     category: "agency-web",
     agency: "Sal & Picciotto",
-    description: "WordPress implementation of the agency's website.",
+    description: "Agency website.",
+    homeDescription:
+      "WordPress development for the agency’s website.",
     tags: ["WordPress", "Elementor Pro"],
     status: "live",
     liveUrl: "https://salypicciotto.com/",
@@ -49,7 +51,7 @@ export const projects = [
     title: "Trapatsas Eye Center",
     category: "agency-web",
     agency: "Sal & Picciotto",
-    description: "Implementation of the eye center's website.",
+    description: "Eye care practice website.",
     tags: ["WordPress", "Elementor Pro"],
     status: "live",
     liveUrl: "https://trapatsaseyecenter.com/",
@@ -60,8 +62,7 @@ export const projects = [
     title: "Giving Tuesday Panamá",
     category: "agency-web",
     agency: "Sal & Picciotto",
-    description:
-      "Implementation of the Giving Tuesday Panamá campaign website.",
+    description: "Campaign website.",
     tags: ["WordPress", "Elementor Pro"],
     status: "live",
     liveUrl: "https://givingtuesdaypanama.org/",
@@ -72,8 +73,7 @@ export const projects = [
     title: "Barrio Alto Panamá",
     category: "agency-web",
     agency: "Sal & Picciotto",
-    description:
-      "Implementation of a real estate website in multiple languages.",
+    description: "Multilingual real estate website.",
     tags: ["WordPress", "Elementor Pro", "Polylang"],
     status: "live",
     liveUrl: "https://barrioaltopanama.com/es/inicio/",
@@ -83,7 +83,6 @@ export const projects = [
     title: "FCI PTY Box",
     category: "agency-web",
     agency: "Sal & Picciotto",
-    description: "Implementation of the FCI PTY Box page.",
     tags: ["WordPress", "Elementor Pro"],
     status: "live",
     liveUrl: "https://fcipty.com/box/",
@@ -126,7 +125,8 @@ export type Project = {
   category: ProjectCategory;
   agency?: string;
   clientType?: string;
-  description: string;
+  description?: string;
+  homeDescription?: string;
   longDescription?: string;
   tags: readonly string[];
   status: ProjectStatus;

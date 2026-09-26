@@ -25,10 +25,17 @@ export default async function HomePage({ params }: HomePageProps) {
   const udea = getProjectById("udea-fcf-digital-ecosystem");
   const sal = getProjectById("sal-picciotto-website");
 
-  const featured = babel ? localizeProject(babel, locale) : undefined;
+  const withHomeCopy = (project: ReturnType<typeof localizeProject>) =>
+    project.homeDescription
+      ? { ...project, description: project.homeDescription }
+      : project;
+
+  const featured = babel
+    ? withHomeCopy(localizeProject(babel, locale))
+    : undefined;
   const secondary = [udea, sal]
     .filter((project): project is NonNullable<typeof project> => Boolean(project))
-    .map((project) => localizeProject(project, locale));
+    .map((project) => withHomeCopy(localizeProject(project, locale)));
 
   const experiencePreview = localizeExperienceList(
     getFeaturedExperience(4),

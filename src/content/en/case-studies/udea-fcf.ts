@@ -2,27 +2,16 @@ import type { CaseStudyContent } from "@/content/case-study-types";
 
 export const udeaFcfCaseStudy: CaseStudyContent = {
   title: "Applications for the Faculty of Communications and Philology",
-  subtitle:
-    "I contributed to developing and updating applications used by the faculty, and provided support, training, and data consulting.",
+  subtitle: "",
   backLabel: "Back to projects",
   context: "Universidad de Antioquia",
   period: "Project-based work · 2024–2026",
   overview: {
-    title: "Information system",
-    paragraphs: [
-      "I contributed to the design and launch of an information system, working on its structure and functionality.",
-    ],
-  },
-  modern: {
-    title: "Application updates and support",
-    paragraphs: [
-      "I updated existing applications and provided support and training for their use.",
-    ],
-  },
-  reporting: {
-    title: "Data management and analysis",
-    paragraphs: [
-      "I provided advice on managing and analyzing data associated with the faculty's applications.",
+    title: "Software development and technical consulting",
+    items: [
+      "Contributed to the design and launch of an information system for the faculty.",
+      "Updated existing applications and provided technical support and user training.",
+      "Advised on data management and analysis for the applications.",
     ],
   },
   responsibilities: {

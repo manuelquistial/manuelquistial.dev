@@ -13,7 +13,7 @@ export const about = {
 export const aboutPage = {
   title: "Trayectoria",
   intro:
-    "Soy ingeniero electrónico y trabajo en desarrollo de software. También he impartido formación en programación, análisis de datos e inteligencia artificial en la Universidad de Antioquia.",
+    "Mi trayectoria comprende ingeniería full-stack, desarrollo backend y asesoría técnica en aplicaciones web. Soy ingeniero electrónico y he sido profesor de programación, desarrollo web, análisis de datos e inteligencia artificial en la Universidad de Antioquia.",
   engineering: {
     title: "Ingeniería de software",
     paragraphs: [],
@@ -74,8 +74,7 @@ export const researchPage = {
   overview: {
     title: "Investigación",
     paragraphs: [
-      "Mi investigación de maestría en la Universidad de Antioquia se centra en interfaces cerebro-computador basadas en señales EEG e imaginación motora. Trabajo en procesamiento de señales y desarrollo de software para los experimentos.",
-      "La imaginación motora consiste en imaginar un movimiento sin ejecutarlo. El EEG permite registrar la actividad eléctrica cerebral desde el cuero cabelludo.",
+      "Investigación de maestría en la Universidad de Antioquia sobre interfaces cerebro-computador basadas en EEG e imaginación motora, con trabajo en procesamiento de señales y software experimental.",
     ],
   },
   topics: {
@@ -95,7 +94,7 @@ export const researchPage = {
 export const contactPage = {
   title: "Contacto",
   subtitle:
-    "Para oportunidades de trabajo, proyectos de software o colaboraciones de investigación, escríbeme por LinkedIn.",
+    "Contacto profesional para posiciones de ingeniería de software, proyectos de desarrollo y colaboraciones de investigación.",
   linkedin: "LinkedIn",
   github: "GitHub",
   cv: "Descargar CV",

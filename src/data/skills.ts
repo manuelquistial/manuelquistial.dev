@@ -16,7 +16,7 @@ export const skillCategories = [
   {
     id: "cloud-auth",
     name: "Infrastructure and integration",
-    skills: ["AWS", "AWS Lambda", "Docker", "CI/CD", "API Gateway"],
+    skills: ["AWS", "Docker", "CI/CD", "API Gateway"],
   },
   {
     id: "ai-neuroengineering",

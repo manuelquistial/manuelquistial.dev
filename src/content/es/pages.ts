@@ -6,16 +6,14 @@ import type {
 } from "../pages-types";
 
 export const about = {
-  previewParagraphs: [
-    "Soy ingeniero electrónico y trabajo en desarrollo de software. Mi experiencia combina aplicaciones web, servicios backend y herramientas de gestión.",
-  ],
+  previewParagraphs: [],
   highlights: [],
 } satisfies AboutPreviewContent;
 
 export const aboutPage = {
   title: "Trayectoria",
   intro:
-    "Soy ingeniero electrónico y trabajo en desarrollo de software. Mi experiencia combina aplicaciones web, servicios backend y herramientas de gestión. También he participado en formación tecnológica en la Universidad de Antioquia.",
+    "Soy ingeniero electrónico y trabajo en desarrollo de software. También he impartido formación en programación, análisis de datos e inteligencia artificial en la Universidad de Antioquia.",
   engineering: {
     title: "Ingeniería de software",
     paragraphs: [],
@@ -34,17 +32,17 @@ export const aboutPage = {
       {
         degree: "Maestría en Ingeniería (enfoque en neuroingeniería)",
         institution: "Universidad de Antioquia",
-        period: "Feb 2025 – Dic 2026 (previsto)",
+        period: "feb. 2025 – dic. 2026 (previsto)",
       },
       {
         degree: "Especialización en Desarrollo de Software",
         institution: "Universidad EAFIT",
-        period: "Jul 2025 – Dic 2026 (previsto)",
+        period: "jul. 2025 – dic. 2026 (previsto)",
       },
       {
         degree: "Ingeniería Electrónica",
         institution: "Universidad de Antioquia",
-        period: "Ago 2012 – Sep 2021",
+        period: "ago. 2012 – sep. 2021",
       },
     ],
   },
@@ -60,9 +58,8 @@ export const aboutPage = {
     title: "Investigación",
     items: [
       {
-        title: "Interfaces cerebro-computador e imaginación motora",
-        description:
-          "Investigo interfaces cerebro-computador basadas en señales EEG e imaginación motora en la Universidad de Antioquia. Mi trabajo combina procesamiento de señales y desarrollo de software.",
+        title: "Investigación",
+        description: "",
         href: "/research",
       },
     ],
@@ -71,43 +68,27 @@ export const aboutPage = {
 
 export const researchPage = {
   title: "Investigación",
-  subtitle:
-    "Investigación de maestría en la Universidad de Antioquia sobre interfaces cerebro-computador e imaginación motora.",
+  subtitle: "Interfaces cerebro-computador e imaginación motora",
   previewTagline:
-    "Investigo interfaces cerebro-computador basadas en señales EEG e imaginación motora en la Universidad de Antioquia. Mi trabajo combina procesamiento de señales y desarrollo de software.",
+    "Mi investigación de maestría en la Universidad de Antioquia se centra en interfaces cerebro-computador basadas en señales EEG e imaginación motora.",
   overview: {
-    title: "Tema",
+    title: "Investigación",
     paragraphs: [
-      "Investigo interfaces cerebro-computador basadas en señales EEG e imaginación motora en la Universidad de Antioquia. Mi trabajo combina procesamiento de señales y desarrollo de software.",
+      "Mi investigación de maestría en la Universidad de Antioquia se centra en interfaces cerebro-computador basadas en señales EEG e imaginación motora. Trabajo en procesamiento de señales y desarrollo de software para los experimentos.",
+      "La imaginación motora consiste en imaginar un movimiento sin ejecutarlo. El EEG permite registrar la actividad eléctrica cerebral desde el cuero cabelludo.",
     ],
   },
   topics: {
     title: "Enfoque",
-    items: [
-      {
-        title: "Interfaces cerebro-computador",
-        description:
-          "Investigación BCI no invasiva basada en señales EEG.",
-      },
-      {
-        title: "Imaginación motora",
-        description:
-          "Estudio del movimiento imaginado como base de interacción con sistemas computacionales.",
-      },
-    ],
+    items: [],
   },
   methods: {
     title: "Enfoque de trabajo",
-    items: [
-      "Procesamiento de señales para flujos de investigación orientados a EEG",
-      "Desarrollo de software que apoya el análisis y los experimentos",
-    ],
+    items: [],
   },
   goals: {
     title: "Trabajo actual",
-    paragraphs: [
-      "Continúo esta investigación de maestría con foco en el procesamiento de señales y en el software que sostiene los experimentos.",
-    ],
+    paragraphs: [],
   },
 } satisfies ResearchPageContent;
 

@@ -8,6 +8,8 @@ export type CaseStudyContent = {
   title: string;
   subtitle: string;
   backLabel: string;
+  context?: string;
+  period?: string;
   overview: CaseStudySection;
   legacy?: CaseStudySection;
   modern?: CaseStudySection;
@@ -46,6 +48,17 @@ export function getCaseStudySections(
   ];
 
   return optionalSections
-    .filter((entry): entry is [string, CaseStudySection] => Boolean(entry[1]))
+    .filter((entry): entry is [string, CaseStudySection] => {
+      const section = entry[1];
+      if (!section) return false;
+      if (entry[0] === "responsibilities" || entry[0] === "learnings") {
+        return Boolean(
+          section.title ||
+            (section.paragraphs && section.paragraphs.length > 0) ||
+            (section.items && section.items.length > 0),
+        );
+      }
+      return true;
+    })
     .map(([key, section]) => ({ key, section }));
 }

@@ -1,27 +1,27 @@
 export const meta = {
-  title: "Manuel Quistial | Ingeniero de software",
+  title: "Manuel Quistial · Ingeniero de software",
   description:
-    "Ingeniero de software: desarrollo aplicaciones web y herramientas para gestionar información, contenidos y procesos.",
+    "Ingeniero de software. Desarrollo de aplicaciones web, nuevas funcionalidades y evolución de productos existentes.",
   pages: {
     about: {
-      title: "Trayectoria",
+      title: "Trayectoria · Manuel Quistial",
       description:
-        "Experiencia profesional, docencia, formación académica y competencias.",
+        "Experiencia de Manuel Quistial en desarrollo de software y formación tecnológica.",
     },
     projects: {
-      title: "Proyectos",
+      title: "Proyectos · Manuel Quistial",
       description:
-        "Aplicaciones, plataformas y sitios web en los que he trabajado.",
+        "Proyectos de aplicaciones, plataformas y sitios web en los que ha trabajado Manuel Quistial.",
     },
     research: {
-      title: "Investigación",
+      title: "Investigación · Manuel Quistial",
       description:
-        "Investigación de maestría en interfaces cerebro-computador basadas en señales EEG e imaginación motora.",
+        "Investigación de maestría en interfaces cerebro-computador, señales EEG e imaginación motora.",
     },
     contact: {
-      title: "Contacto",
+      title: "Contacto · Manuel Quistial",
       description:
-        "Para oportunidades de trabajo, proyectos de software o colaboraciones de investigación, escríbeme por LinkedIn.",
+        "Contacto con Manuel Quistial para oportunidades de trabajo, proyectos de software y colaboraciones de investigación.",
     },
   },
 };
@@ -46,7 +46,7 @@ export const a11y = {
 export const hero = {
   title: "Ingeniero de software",
   subtitle:
-    "Desarrollo aplicaciones web y herramientas para gestionar información, contenidos y procesos. He trabajado en plataformas de aprendizaje, publicación de partituras y aplicaciones de la Universidad de Antioquia.",
+    "Desarrollo aplicaciones web, desde la interfaz hasta los servicios que las hacen funcionar. Trabajo tanto en nuevas funcionalidades como en la evolución de productos existentes.",
   viewProjects: "Ver proyectos",
   contact: "Contactar",
 };
@@ -64,11 +64,11 @@ export const sections = {
   contact: "Contacto",
   viewAll: "Todos los proyectos",
   viewAllExperience: "Trayectoria completa",
-  viewResearch: "Investigación",
+  viewResearch: "Ver investigación",
 };
 
 export const agencyWebProjectsIntro =
-  "Sitios web implementados con Sal & Picciotto a partir de las propuestas de diseño de la agencia.";
+  "Implementación web de diseños de Sal & Picciotto.";
 
 export const footer = {
   rights: "Todos los derechos reservados.",
@@ -91,6 +91,7 @@ export const projectCard = {
   viewProject: "Detalle del proyecto",
   viewSite: "Abrir sitio",
   deliveredThrough: "Con",
+  designBy: "Diseño de",
   softwareLabel: "Aplicaciones y plataformas",
   webSelection: "Sitios web",
   researchLabel: "Investigación",
@@ -100,7 +101,7 @@ export const contactCta = {
   title: "Contacto",
   description:
     "Para oportunidades de trabajo, proyectos de software o colaboraciones de investigación, escríbeme por LinkedIn.",
-  button: "Escribirme por LinkedIn",
+  button: "Contactar por LinkedIn",
 };
 
 export const notFound = {

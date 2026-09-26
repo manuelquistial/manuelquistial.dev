@@ -31,6 +31,9 @@ const FORBIDDEN_PUBLIC_STRINGS = [
   "classroom reservations",
   "connected systems",
   "sistemas conectados",
+  "Selected projects",
+  "manageable content",
+  "Full background",
   "\u2014",
 ] as const;
 
@@ -91,7 +94,7 @@ describe("project data helpers", () => {
 
     expect(babel?.status).toBe("live");
     expect(babel?.liveUrl).toBe("https://babelscores.com/");
-    expect(babel?.clientType).toBe("Digital sheet music platform");
+    expect("clientType" in (babel ?? {})).toBe(false);
   });
 
   it("maps project status labels", () => {
@@ -132,8 +135,8 @@ describe("portfolio data completeness", () => {
 
     expect(anthology?.period).toBe("Nov 2021 – May 2026");
     expect(anthology).not.toHaveProperty("current");
-    expect(udea?.period).toBe("Jul 2024 – Jul 2026");
-    expect(teaching?.period).toBe("2022 – 2025");
+    expect(udea?.period).toBe("Project-based work · 2024–2026");
+    expect(teaching?.period).toBe("Periodic teaching contracts · 2022–2025");
     expect(digitalAmericas?.company).toContain("Digital Americas");
     expect(experience.map((item) => item.id)).not.toContain(
       "universidad-antioquia-research" as never,
@@ -166,7 +169,7 @@ describe("portfolio data completeness", () => {
     const udea = projects.find((project) => project.id === "udea-fcf-digital-ecosystem");
     expect(udea).toBeDefined();
     expect(localizeProject(udea!, "es").title).toBe(
-      "Aplicaciones para la Facultad de Comunicaciones y Filología",
+      "Aplicaciones de la Facultad de Comunicaciones y Filología",
     );
   });
 

@@ -36,7 +36,6 @@ export function SelectedProjects({
             project={featured}
             labels={projectCard}
             featuredLayout
-            showAgency={false}
           />
         </div>
       ) : null}
@@ -48,7 +47,7 @@ export function SelectedProjects({
               key={project.id}
               project={project}
               labels={projectCard}
-              showAgency={project.category === "agency-web"}
+              designCredit={project.id === "sal-picciotto-website"}
             />
           ))}
         </div>

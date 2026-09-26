@@ -1,34 +1,34 @@
 export const meta = {
-  title: "Manuel Quistial | Software Engineer",
+  title: "Manuel Quistial · Software Engineer",
   description:
-    "Software engineer developing web applications and tools for managing information, content, and workflows.",
+    "Software engineer working on web applications, new features, and improvements to existing products.",
   pages: {
     about: {
-      title: "Background",
+      title: "Experience · Manuel Quistial",
       description:
-        "Professional experience, teaching, education, and skills.",
+        "Manuel Quistial's experience in software development and technical teaching.",
     },
     projects: {
-      title: "Projects",
+      title: "Projects · Manuel Quistial",
       description:
-        "Applications, platforms, and websites I have worked on.",
+        "Applications, platforms, and websites Manuel Quistial has worked on.",
     },
     research: {
-      title: "Research",
+      title: "Research · Manuel Quistial",
       description:
-        "Master's research on brain-computer interfaces based on EEG signals and motor imagery.",
+        "Master's research on brain-computer interfaces, EEG signals, and motor imagery.",
     },
     contact: {
-      title: "Contact",
+      title: "Contact · Manuel Quistial",
       description:
-        "For job opportunities, software projects, or research collaborations, contact me on LinkedIn.",
+        "Contact Manuel Quistial about job opportunities, software projects, and research collaborations.",
     },
   },
 };
 
 export const nav = {
   home: "Home",
-  about: "Background",
+  about: "Experience",
   projects: "Projects",
   research: "Research",
   contact: "Contact",
@@ -46,7 +46,7 @@ export const a11y = {
 export const hero = {
   title: "Software Engineer",
   subtitle:
-    "I develop web applications and tools for managing information, content, and workflows. My work includes learning platforms, digital sheet music publishing, and applications for Universidad de Antioquia.",
+    "I develop web applications, from user interfaces to the services behind them. My work includes building new features and improving existing products.",
   viewProjects: "View projects",
   contact: "Contact",
 };
@@ -63,12 +63,12 @@ export const sections = {
   research: "Research",
   contact: "Contact",
   viewAll: "All projects",
-  viewAllExperience: "Full background",
-  viewResearch: "Research",
+  viewAllExperience: "View experience",
+  viewResearch: "View research",
 };
 
 export const agencyWebProjectsIntro =
-  "Websites implemented with Sal & Picciotto from the agency's design proposals.";
+  "Web development based on designs by Sal & Picciotto.";
 
 export const footer = {
   rights: "All rights reserved.",
@@ -89,8 +89,9 @@ export const projectStatus = {
 export const projectCard = {
   github: "GitHub",
   viewProject: "Project details",
-  viewSite: "Open site",
+  viewSite: "Visit website",
   deliveredThrough: "With",
+  designBy: "Design by",
   softwareLabel: "Applications and platforms",
   webSelection: "Websites",
   researchLabel: "Research",
@@ -100,7 +101,7 @@ export const contactCta = {
   title: "Contact",
   description:
     "For job opportunities, software projects, or research collaborations, contact me on LinkedIn.",
-  button: "Message me on LinkedIn",
+  button: "Contact me on LinkedIn",
 };
 
 export const notFound = {

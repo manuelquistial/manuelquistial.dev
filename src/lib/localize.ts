@@ -48,10 +48,18 @@ export function localizeSkillCategory(
   locale: Locale,
 ): SkillCategory {
   const overlay = getSiteContent(locale).data.skills[category.id];
+  const skillLabelsEs: Record<string, string> = {
+    "Data analysis": "Análisis de datos",
+    "Signal processing": "Procesamiento de señales",
+  };
 
   return {
     ...category,
     name: overlay?.name ?? category.name,
+    skills:
+      locale === "es"
+        ? category.skills.map((skill) => skillLabelsEs[skill] ?? skill)
+        : category.skills,
   };
 }
 

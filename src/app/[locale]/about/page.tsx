@@ -33,6 +33,7 @@ export async function generateMetadata({
     title: content.meta.pages.about.title,
     description: content.meta.pages.about.description,
     path: "/about",
+    fullTitle: true,
     locale,
   });
 }
@@ -47,8 +48,6 @@ export default async function AboutPage({ params }: AboutPageProps) {
   );
   const teaching = localizeExperienceList(getTeachingExperience(), locale);
   const skills = localizeSkillCategories(skillCategories, locale);
-  const researchLinkLabel =
-    locale === "es" ? "Ver investigación" : "View research";
 
   return (
     <Section>
@@ -129,30 +128,18 @@ export default async function AboutPage({ params }: AboutPageProps) {
         </div>
       </section>
 
-      <section className="mt-16 max-w-[65ch]">
+      <section className="mt-16">
         <h2 className="text-[clamp(1.5rem,2.5vw,1.75rem)] font-semibold text-foreground">
           {aboutPage.researchOutputs.title}
         </h2>
-        <ul className="mt-6 space-y-6">
-          {aboutPage.researchOutputs.items.map((item) => (
-            <li key={item.title}>
-              <h3 className="text-lg font-semibold text-foreground">
-                {item.title}
-              </h3>
-              <p className="mt-3 text-base leading-relaxed text-muted">
-                {item.description}
-              </p>
-              {item.href ? (
-                <a
-                  href={localizedPath(locale, item.href)}
-                  className="mt-4 inline-block text-base font-semibold text-accent transition-colors duration-150 hover:text-accent-hover"
-                >
-                  {researchLinkLabel}
-                </a>
-              ) : null}
-            </li>
-          ))}
-        </ul>
+        <p className="mt-4">
+          <a
+            href={localizedPath(locale, "/research")}
+            className="text-base font-semibold text-accent transition-colors duration-150 hover:text-accent-hover"
+          >
+            {content.sections.viewResearch}
+          </a>
+        </p>
       </section>
 
       <section className="mt-16">

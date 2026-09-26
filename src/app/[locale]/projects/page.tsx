@@ -27,6 +27,7 @@ export async function generateMetadata({
     title: content.meta.pages.projects.title,
     description: content.meta.pages.projects.description,
     path: "/projects",
+    fullTitle: true,
     locale,
   });
 }
@@ -41,11 +42,7 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
 
   return (
     <Section>
-      <SectionTitle
-        as="h1"
-        title={content.meta.pages.projects.title}
-        subtitle={content.meta.pages.projects.description}
-      />
+      <SectionTitle as="h1" title={content.sections.projects} />
 
       <div className="space-y-16 lg:space-y-24">
         {categoryOrder.map((category) => {
@@ -80,7 +77,6 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
                       category === "engineering" &&
                       project.id === "babel-scores"
                     }
-                    showAgency={false}
                     className={
                       category === "engineering" &&
                       project.id === "babel-scores"

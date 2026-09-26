@@ -22,6 +22,7 @@ export async function generateMetadata({
     title: content.meta.pages.contact.title,
     description: content.meta.pages.contact.description,
     path: "/contact",
+    fullTitle: true,
     locale,
   });
 }
@@ -39,34 +40,33 @@ export default async function ContactPage({ params }: ContactPageProps) {
         subtitle={contactPage.subtitle}
       />
 
-      <div className="mt-2 max-w-[40rem] space-y-10">
+      <div className="mt-2 max-w-[40rem] space-y-8">
         <Button href={profile.linkedin} external size="lg">
           {contactCta.button}
         </Button>
 
         <div>
-          <p className="text-sm text-muted">{contactPage.cv}</p>
-          <div className="mt-4">
-            <Button
-              href={getCvUrl(locale)}
-              download={getCvDownloadName(locale)}
-              variant="outline"
-            >
-              {contactPage.cv}
-            </Button>
-          </div>
+          <Button
+            href={getCvUrl(locale)}
+            download={getCvDownloadName(locale)}
+            variant="outline"
+          >
+            {contactPage.cv}
+          </Button>
         </div>
 
         <div>
-          <p className="text-sm text-muted">{contactPage.github}</p>
           <a
             href={profile.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-2 inline-block break-all text-base text-muted transition-colors duration-150 hover:text-accent"
+            className="text-base font-semibold text-accent transition-colors duration-150 hover:text-accent-hover"
           >
-            {`${getUrlHost(profile.github)}/${getUrlPath(profile.github)}`}
+            {contactPage.github}
           </a>
+          <p className="mt-1 break-all text-sm text-muted">
+            {`${getUrlHost(profile.github)}/${getUrlPath(profile.github)}`}
+          </p>
         </div>
       </div>
     </Section>

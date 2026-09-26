@@ -9,6 +9,7 @@ interface ProjectCardProps {
   featuredLayout?: boolean;
   showCategory?: boolean;
   showAgency?: boolean;
+  designCredit?: boolean;
   className?: string;
 }
 
@@ -16,14 +17,22 @@ function ProjectMeta({
   project,
   labels,
   showAgency,
+  designCredit,
 }: {
   project: Project;
   labels: SiteContent["projectCard"];
   showAgency: boolean;
+  designCredit: boolean;
 }) {
-  const isAgencyProject = project.category === "agency-web";
+  if (designCredit && project.agency) {
+    return (
+      <p className="mt-2 text-sm text-muted">
+        {labels.designBy} {project.agency}
+      </p>
+    );
+  }
 
-  if (showAgency && isAgencyProject && project.agency) {
+  if (showAgency && project.category === "agency-web" && project.agency) {
     return (
       <p className="mt-2 text-sm text-muted">
         {labels.deliveredThrough} {project.agency}
@@ -31,7 +40,7 @@ function ProjectMeta({
     );
   }
 
-  if (!isAgencyProject && project.clientType) {
+  if (project.category !== "agency-web" && project.clientType) {
     return <p className="mt-2 text-sm text-muted">{project.clientType}</p>;
   }
 
@@ -43,7 +52,8 @@ export function ProjectCard({
   labels,
   featuredLayout = false,
   showCategory = false,
-  showAgency = true,
+  showAgency = false,
+  designCredit = false,
   className,
 }: ProjectCardProps) {
   const detailHref = project.caseStudyUrl;
@@ -60,15 +70,7 @@ export function ProjectCard({
 
   return (
     <article className={cn("flex h-full min-w-0 flex-col", className)}>
-      <div
-        className={cn(
-          "overflow-hidden rounded-[8px] bg-surface-soft",
-          featuredLayout ? "aspect-[16/9]" : "aspect-[16/10]",
-        )}
-        aria-hidden
-      />
-
-      <div className="mt-5 flex flex-1 flex-col">
+      <div className="mt-0 flex flex-1 flex-col">
         {showCategory ? (
           <p className="mb-2 text-sm text-muted">
             {project.category === "agency-web"
@@ -90,6 +92,7 @@ export function ProjectCard({
           project={project}
           labels={labels}
           showAgency={showAgency}
+          designCredit={designCredit}
         />
         <p className="mt-3 max-w-[65ch] text-base leading-relaxed text-muted">
           {project.description}

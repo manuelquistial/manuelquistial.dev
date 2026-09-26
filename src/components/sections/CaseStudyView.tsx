@@ -17,13 +17,17 @@ function CaseStudyBlock({
   paragraphs?: readonly string[];
   items?: readonly string[];
 }) {
+  if (!title && !paragraphs?.length && !items?.length) return null;
+
   return (
     <section>
-      <h2 className="text-[clamp(1.5rem,2.5vw,1.75rem)] font-semibold leading-[1.25] text-foreground">
-        {title}
-      </h2>
+      {title ? (
+        <h2 className="text-[clamp(1.5rem,2.5vw,1.75rem)] font-semibold leading-[1.25] text-foreground">
+          {title}
+        </h2>
+      ) : null}
       {paragraphs?.length ? (
-        <div className="mt-5 space-y-4">
+        <div className={title ? "mt-5 space-y-4" : "space-y-4"}>
           {paragraphs.map((paragraph, index) => (
             <p
               key={`${title}-p-${index}`}
@@ -35,12 +39,9 @@ function CaseStudyBlock({
         </div>
       ) : null}
       {items?.length ? (
-        <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+        <ul className="mt-5 list-disc space-y-2 pl-5">
           {items.map((item) => (
-            <li
-              key={item}
-              className="rounded-[6px] bg-surface-soft px-4 py-3 text-sm text-foreground"
-            >
+            <li key={item} className="max-w-[65ch] text-base text-muted">
               {item}
             </li>
           ))}
@@ -80,9 +81,14 @@ export function CaseStudyView({
         className="mt-6"
       />
 
-      {project.clientType ? (
-        <p className="mb-10 text-sm text-muted">{project.clientType}</p>
-      ) : null}
+      {(caseStudy.context || project.clientType || caseStudy.period) && (
+        <div className="mb-10 space-y-1 text-sm text-muted">
+          {caseStudy.context || project.clientType ? (
+            <p>{caseStudy.context ?? project.clientType}</p>
+          ) : null}
+          {caseStudy.period ? <p>{caseStudy.period}</p> : null}
+        </div>
+      )}
 
       {liveHost && project.liveUrl ? (
         <p className="mb-10">

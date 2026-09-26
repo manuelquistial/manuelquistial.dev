@@ -6,16 +6,14 @@ import type {
 } from "../pages-types";
 
 export const about = {
-  previewParagraphs: [
-    "I am an electronic engineer working in software development. My experience combines web applications, backend services, and management tools.",
-  ],
+  previewParagraphs: [],
   highlights: [],
 } satisfies AboutPreviewContent;
 
 export const aboutPage = {
-  title: "Background",
+  title: "Experience",
   intro:
-    "I am an electronic engineer working in software development. My experience combines web applications, backend services, and management tools. I have also taken part in technical training at Universidad de Antioquia.",
+    "I am an electronics engineer working in software development. I have also taught programming, data analysis, and artificial intelligence at Universidad de Antioquia.",
   engineering: {
     title: "Software engineering",
     paragraphs: [],
@@ -60,9 +58,8 @@ export const aboutPage = {
     title: "Research",
     items: [
       {
-        title: "Brain-computer interfaces and motor imagery",
-        description:
-          "I research brain-computer interfaces based on EEG signals and motor imagery at Universidad de Antioquia. My work combines signal processing and software development.",
+        title: "Research",
+        description: "",
         href: "/research",
       },
     ],
@@ -71,43 +68,27 @@ export const aboutPage = {
 
 export const researchPage = {
   title: "Research",
-  subtitle:
-    "Master's research at Universidad de Antioquia on brain-computer interfaces and motor imagery.",
+  subtitle: "Brain-computer interfaces and motor imagery",
   previewTagline:
-    "I research brain-computer interfaces based on EEG signals and motor imagery at Universidad de Antioquia. My work combines signal processing and software development.",
+    "My master's research at Universidad de Antioquia focuses on brain-computer interfaces based on EEG signals and motor imagery.",
   overview: {
-    title: "Topic",
+    title: "Research",
     paragraphs: [
-      "I research brain-computer interfaces based on EEG signals and motor imagery at Universidad de Antioquia. My work combines signal processing and software development.",
+      "My master's research at Universidad de Antioquia focuses on brain-computer interfaces based on EEG signals and motor imagery. I work on signal processing and software development for the experiments.",
+      "Motor imagery involves imagining a movement without performing it. EEG records the brain's electrical activity from the scalp.",
     ],
   },
   topics: {
     title: "Focus",
-    items: [
-      {
-        title: "Brain-computer interfaces",
-        description:
-          "Non-invasive BCI research based on EEG signals.",
-      },
-      {
-        title: "Motor imagery",
-        description:
-          "Studying imagined movement as a basis for interaction with computational systems.",
-      },
-    ],
+    items: [],
   },
   methods: {
     title: "Approach",
-    items: [
-      "Signal processing for EEG-oriented research workflows",
-      "Software development supporting analysis and experiments",
-    ],
+    items: [],
   },
   goals: {
     title: "Current work",
-    paragraphs: [
-      "I continue this master's research with a focus on signal processing and the software that supports the experiments.",
-    ],
+    paragraphs: [],
   },
 } satisfies ResearchPageContent;
 

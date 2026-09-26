@@ -14,9 +14,7 @@ export function ExperienceCard({
   compact = false,
   showTechnologies = true,
 }: ExperienceCardProps) {
-  const bullets = compact
-    ? item.highlights?.slice(0, 1) ?? []
-    : item.highlights?.slice(0, 3) ?? [];
+  const bullets = compact ? [] : item.highlights?.slice(0, 3) ?? [];
 
   return (
     <article className={cn("min-w-0", className)}>
@@ -27,8 +25,14 @@ export function ExperienceCard({
         <p className="shrink-0 text-sm text-muted">{item.period}</p>
       </div>
       <p className="mt-1.5 text-base font-medium text-foreground">{item.role}</p>
-      {item.location ? (
+      {!compact && item.location ? (
         <p className="mt-1 text-sm text-muted">{item.location}</p>
+      ) : null}
+
+      {!compact && !bullets.length && item.description ? (
+        <p className="mt-4 max-w-[65ch] text-base leading-relaxed text-muted">
+          {item.description}
+        </p>
       ) : null}
 
       {bullets.length > 0 ? (

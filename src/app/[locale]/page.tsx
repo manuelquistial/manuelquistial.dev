@@ -22,7 +22,10 @@ export default async function HomePage({ params }: HomePageProps) {
   const content = getSiteContent(locale);
 
   const babel = getProjectById("babel-scores");
-  const udea = getProjectById("udea-fcf-digital-ecosystem");
+  const sita = getProjectById("sita");
+  const siar = getProjectById("siar");
+  const finanzas = getProjectById("finanzas");
+  const conciliacion = getProjectById("conciliacion");
   const sal = getProjectById("sal-picciotto-website");
 
   const withHomeCopy = (project: ReturnType<typeof localizeProject>) =>
@@ -33,7 +36,7 @@ export default async function HomePage({ params }: HomePageProps) {
   const featured = babel
     ? withHomeCopy(localizeProject(babel, locale))
     : undefined;
-  const secondary = [udea, sal]
+  const secondary = [sita, siar, finanzas, conciliacion, sal]
     .filter((project): project is NonNullable<typeof project> => Boolean(project))
     .map((project) => withHomeCopy(localizeProject(project, locale)));
 

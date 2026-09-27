@@ -44,18 +44,17 @@ export type AboutPageContent = {
 
 export type ResearchPageContent = {
   title: string;
-  subtitle: string;
+  projectTitle: string;
+  affiliation: string;
   previewTagline: string;
-  overview: ContentSection;
-  topics: {
+  summary: string;
+  objective: ContentSection;
+  system: {
     title: string;
     items: readonly { title: string; description: string }[];
   };
-  methods: {
-    title: string;
-    items: readonly string[];
-  };
-  goals: ContentSection;
+  design: ContentSection;
+  evaluation: ContentSection;
 };
 
 export type ContactPageContent = {

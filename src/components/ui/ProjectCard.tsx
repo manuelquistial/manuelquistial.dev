@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/data/projects";
 import type { SiteContent } from "@/content";
@@ -70,6 +71,20 @@ export function ProjectCard({
 
   return (
     <article className={cn("flex h-full min-w-0 flex-col", className)}>
+      {project.image ? (
+        <div className={cn(
+          "relative mb-4 aspect-[8/5] w-full overflow-hidden bg-surface",
+          featuredLayout && "md:max-w-[calc((100%-2rem)/2)]",
+        )}>
+          <Image
+            src={project.image}
+            alt={project.imageAlt ?? ""}
+            fill
+            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            className="object-cover object-top"
+          />
+        </div>
+      ) : null}
       <div className="mt-0 flex flex-1 flex-col">
         {showCategory ? (
           <p className="mb-2 text-sm text-muted">
@@ -100,7 +115,7 @@ export function ProjectCard({
           </p>
         ) : null}
         {detailHref ? (
-          <p className="mt-5">
+          <p className="mt-auto pt-5">
             <Link
               href={detailHref}
               className="text-base font-semibold text-accent transition-colors duration-150 hover:text-accent-hover"
@@ -109,7 +124,7 @@ export function ProjectCard({
             </Link>
           </p>
         ) : project.liveUrl && project.status !== "coming-soon" ? (
-          <p className="mt-5">
+          <p className="mt-auto pt-5">
             <a
               href={project.liveUrl}
               target="_blank"

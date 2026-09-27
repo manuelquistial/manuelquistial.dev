@@ -10,6 +10,7 @@ export type LocaleData = {
         title?: string;
         description?: string;
         homeDescription?: string;
+        imageAlt?: string;
         longDescription?: string;
         clientType?: string;
       }

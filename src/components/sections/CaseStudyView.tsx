@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Locale } from "@/i18n/config";
 import type { CaseStudyContent } from "@/content";
@@ -80,6 +81,19 @@ export function CaseStudyView({
         subtitle={caseStudy.subtitle}
         className="mt-6"
       />
+
+      {project.image ? (
+        <div className="relative mb-10 aspect-[8/5] w-full max-w-3xl overflow-hidden bg-surface">
+          <Image
+            src={project.image}
+            alt={project.imageAlt ?? ""}
+            fill
+            sizes="(min-width: 768px) 768px, 100vw"
+            className="object-cover object-top"
+            priority
+          />
+        </div>
+      ) : null}
 
       {(caseStudy.context || project.clientType || caseStudy.period) && (
         <div className="mb-10 space-y-1 text-sm text-muted">

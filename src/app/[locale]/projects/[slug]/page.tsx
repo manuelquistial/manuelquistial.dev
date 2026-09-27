@@ -33,16 +33,52 @@ const projectMeta: Record<
         "Desarrollo del lector de partituras en React, comercio electrónico con WooCommerce e integraciones de acceso institucional en Babel Scores.",
     },
   },
-  "udea-fcf-digital-ecosystem": {
+  sita: {
     en: {
-      title: "Faculty applications · Manuel Quistial",
+      title: "SITA · Manuel Quistial",
       description:
-        "Development and updates for applications at Universidad de Antioquia's Faculty of Communications and Philology.",
+        "SITA, the administrative procedures information system for Universidad de Antioquia's Faculty of Communications and Philology.",
     },
     es: {
-      title: "Aplicaciones de la facultad · Manuel Quistial",
+      title: "SITA · Manuel Quistial",
       description:
-        "Desarrollo y actualización de aplicaciones de la Facultad de Comunicaciones y Filología de la Universidad de Antioquia.",
+        "SITA, el sistema de información de trámites administrativos para la Facultad de Comunicaciones y Filología de la Universidad de Antioquia.",
+    },
+  },
+  siar: {
+    en: {
+      title: "SIAR · Manuel Quistial",
+      description:
+        "SIAR, for space and equipment reservations and incident reports, for Universidad de Antioquia's Faculty of Communications and Philology.",
+    },
+    es: {
+      title: "SIAR · Manuel Quistial",
+      description:
+        "SIAR, para reserva de espacios y equipos y reporte de novedades, para la Facultad de Comunicaciones y Filología de la Universidad de Antioquia.",
+    },
+  },
+  finanzas: {
+    en: {
+      title: "Finanzas · Manuel Quistial",
+      description:
+        "Finanzas, for budget consultation and financial information, for Universidad de Antioquia's Faculty of Communications and Philology.",
+    },
+    es: {
+      title: "Finanzas · Manuel Quistial",
+      description:
+        "Finanzas, para la consulta de presupuesto e información financiera, para la Facultad de Comunicaciones y Filología de la Universidad de Antioquia.",
+    },
+  },
+  conciliacion: {
+    en: {
+      title: "Conciliación · Manuel Quistial",
+      description:
+        "Conciliación, for comparing accounting movements, for Universidad de Antioquia's Faculty of Communications and Philology.",
+    },
+    es: {
+      title: "Conciliación · Manuel Quistial",
+      description:
+        "Conciliación, para comparar movimientos contables, para la Facultad de Comunicaciones y Filología de la Universidad de Antioquia.",
     },
   },
 };

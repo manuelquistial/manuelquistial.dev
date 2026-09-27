@@ -69,11 +69,11 @@ export const experience = [
       "Universidad de Antioquia, Facultad de Comunicaciones y Filología",
     role: "Software Development and Consulting",
     description:
-      "Project-based advisory and development work for faculty applications.",
+      "Project-based advisory and development work for applications at the Faculty of Communications and Philology.",
     highlights: [
-      "Contributed to the design and launch of an information system for the faculty.",
-      "Updated existing applications and provided technical support and user training.",
-      "Advised on data management and analysis for the applications.",
+      "Developed SITA and SIAR for administrative procedures and for managing spaces, equipment, and incident reports.",
+      "Developed Finanzas and Conciliación for budget consultation and comparing accounting movements.",
+      "Provided technical support and user training for the applications.",
     ],
     period: "Project-based work · 2024–2026",
     location: "Medellín, Colombia",

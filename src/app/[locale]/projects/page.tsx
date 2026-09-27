@@ -61,28 +61,12 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
                 className="mb-8 sm:mb-10"
               />
 
-              <div
-                className={
-                  category === "engineering"
-                    ? "grid gap-10 md:grid-cols-2 md:gap-8"
-                    : "grid gap-10 sm:grid-cols-2 lg:grid-cols-3 md:gap-8"
-                }
-              >
+              <div className="grid auto-rows-fr gap-10 sm:grid-cols-2 md:gap-8 lg:grid-cols-3">
                 {items.map((project) => (
                   <ProjectCard
                     key={project.id}
                     project={project}
                     labels={content.projectCard}
-                    featuredLayout={
-                      category === "engineering" &&
-                      project.id === "babel-scores"
-                    }
-                    className={
-                      category === "engineering" &&
-                      project.id === "babel-scores"
-                        ? "md:col-span-2"
-                        : undefined
-                    }
                   />
                 ))}
               </div>

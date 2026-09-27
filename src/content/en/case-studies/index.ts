@@ -1,7 +1,15 @@
 import { babelScoresCaseStudy } from "./babel-scores";
-import { udeaFcfCaseStudy } from "./udea-fcf";
+import {
+  conciliacionCaseStudy,
+  finanzasCaseStudy,
+  siarCaseStudy,
+  sitaCaseStudy,
+} from "./udea-fcf";
 
 export const caseStudies = {
-  "udea-fcf-digital-ecosystem": udeaFcfCaseStudy,
+  sita: sitaCaseStudy,
+  siar: siarCaseStudy,
+  finanzas: finanzasCaseStudy,
+  conciliacion: conciliacionCaseStudy,
   "babel-scores": babelScoresCaseStudy,
 } as const;

@@ -68,26 +68,51 @@ export const aboutPage = {
 
 export const researchPage = {
   title: "Research",
-  subtitle: "Brain-computer interfaces and motor imagery",
+  projectTitle:
+    "Closed-loop motor imagery decoding with a low-density EEG–EMG interface",
+  affiliation: "Master’s in Engineering · Universidad de Antioquia",
   previewTagline:
-    "My master's research at Universidad de Antioquia focuses on brain-computer interfaces based on EEG signals and motor imagery.",
-  overview: {
-    title: "Research",
+    "Master’s research on motor imagery decoding with eight-channel EEG, EMG-based muscular contamination control, and closed-loop visual feedback.",
+  summary:
+    "My research addresses upper-limb motor imagery decoding through a hybrid EEG–EMG brain-computer interface. The proposed approach combines eight-channel EEG, EMG-based muscular contamination control, and adaptive visual feedback to evaluate closed-loop interaction between the participant and the system.",
+  objective: {
+    title: "Research objective",
     paragraphs: [
-      "Master’s research at Universidad de Antioquia on EEG-based brain-computer interfaces and motor imagery, with work on signal processing and experimental software.",
+      "To evaluate online motor imagery decoding with a low-density EEG setup, considering classification accuracy and latency during interaction with visual feedback.",
     ],
   },
-  topics: {
-    title: "Focus",
-    items: [],
+  system: {
+    title: "Proposed system",
+    items: [
+      {
+        title: "EEG decoding",
+        description:
+          "The design uses eight EEG channels over sensorimotor regions to process brain activity associated with upper-limb motor imagery tasks.",
+      },
+      {
+        title: "Muscular contamination control",
+        description:
+          "Forearm EMG is intended to detect unintended muscle activity and reject contaminated segments. It is not used as an additional classifier input or as an independent control channel.",
+      },
+      {
+        title: "Adaptive visual feedback",
+        description:
+          "The proposed system provides a visual response linked to its output during the task. This interaction enables closed-loop evaluation, with the participant receiving feedback throughout the experiment.",
+      },
+    ],
   },
-  methods: {
-    title: "Approach",
-    items: [],
+  design: {
+    title: "Experimental design",
+    paragraphs: [
+      "The study is designed for 15 healthy participants aged 18–45, with two sessions on separate days. The first session covers signal acquisition, offline calibration, and task familiarization. The second focuses on online closed-loop evaluation with the same participants.",
+      "Calibration and offline evaluation are planned using data acquired in the study, rather than public datasets.",
+    ],
   },
-  goals: {
-    title: "Current work",
-    paragraphs: [],
+  evaluation: {
+    title: "Evaluation",
+    paragraphs: [
+      "The proposed evaluation covers classification accuracy, response latency, and the rejection of segments affected by muscular contamination. The analysis distinguishes offline performance from system behavior during closed-loop interaction.",
+    ],
   },
 } satisfies ResearchPageContent;
 

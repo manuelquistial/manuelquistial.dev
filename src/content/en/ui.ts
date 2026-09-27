@@ -14,9 +14,9 @@ export const meta = {
         "Applications, platforms, and websites Manuel Quistial has worked on.",
     },
     research: {
-      title: "Research · Manuel Quistial",
+      title: "EEG–EMG Research · Manuel Quistial",
       description:
-        "Master's research on brain-computer interfaces, EEG signals, and motor imagery.",
+        "Master’s research on motor imagery, low-density EEG, muscular contamination control, and closed-loop visual feedback.",
     },
     contact: {
       title: "Contact · Manuel Quistial",

@@ -3,9 +3,19 @@ import { getCaseStudies } from "@/content/getCaseStudy";
 import { getSiteContent } from "@/content/getSiteContent";
 import { about, aboutPage } from "@/content/en/pages";
 import { hero, meta } from "@/content/en/ui";
-import { udeaFcfCaseStudy } from "@/content/en/case-studies/udea-fcf";
+import {
+  conciliacionCaseStudy,
+  finanzasCaseStudy,
+  siarCaseStudy,
+  sitaCaseStudy,
+} from "@/content/en/case-studies/udea-fcf";
 import { babelScoresCaseStudy } from "@/content/en/case-studies/babel-scores";
-import { udeaFcfCaseStudy as udeaFcfCaseStudyEs } from "@/content/es/case-studies/udea-fcf";
+import {
+  conciliacionCaseStudy as conciliacionCaseStudyEs,
+  finanzasCaseStudy as finanzasCaseStudyEs,
+  siarCaseStudy as siarCaseStudyEs,
+  sitaCaseStudy as sitaCaseStudyEs,
+} from "@/content/es/case-studies/udea-fcf";
 import {
   getFeaturedProjects,
   getProjectsByCategory,
@@ -43,9 +53,15 @@ const PUBLIC_CONTENT_SOURCES = [
   JSON.stringify(projects),
   JSON.stringify({ about, aboutPage }),
   JSON.stringify({ meta, hero }),
-  JSON.stringify(udeaFcfCaseStudy),
+  JSON.stringify(sitaCaseStudy),
+  JSON.stringify(siarCaseStudy),
+  JSON.stringify(finanzasCaseStudy),
+  JSON.stringify(conciliacionCaseStudy),
   JSON.stringify(babelScoresCaseStudy),
-  JSON.stringify(udeaFcfCaseStudyEs),
+  JSON.stringify(sitaCaseStudyEs),
+  JSON.stringify(siarCaseStudyEs),
+  JSON.stringify(finanzasCaseStudyEs),
+  JSON.stringify(conciliacionCaseStudyEs),
   JSON.stringify(experience),
 ];
 
@@ -74,12 +90,16 @@ describe("project data helpers", () => {
     }
   });
 
-  it("returns featured engineering projects with UDEA FCF first", () => {
-    const featured = getFeaturedProjects("engineering", 4);
+  it("returns featured engineering projects with the faculty applications first", () => {
+    const featured = getFeaturedProjects("engineering", 5);
 
-    expect(featured[0]?.id).toBe("udea-fcf-digital-ecosystem");
-    expect(featured[1]?.id).toBe("babel-scores");
-    expect(featured.length).toBe(2);
+    expect(featured.map((project) => project.id)).toEqual([
+      "sita",
+      "siar",
+      "finanzas",
+      "conciliacion",
+      "babel-scores",
+    ]);
   });
 
   it("returns featured agency projects for the home preview", () => {
@@ -169,11 +189,45 @@ describe("portfolio data completeness", () => {
     });
   });
 
+  it("keeps real agency captures on the matching projects", () => {
+    expect(
+      projects.find((project) => project.id === "babel-scores")?.image,
+    ).toBe("/images/projects/babel-scores.jpg");
+    expect(
+      projects.find((project) => project.id === "sal-picciotto-website")?.image,
+    ).toBe("/images/projects/sal-picciotto.jpg");
+    expect(
+      projects.find((project) => project.id === "barrio-alto-panama")?.image,
+    ).toBe("/images/projects/barrio-alto-panama.jpg");
+    expect(projects.find((project) => project.id === "fci-pty-box")?.image).toBe(
+      "/images/projects/fci-box.jpg",
+    );
+    expect(
+      projects.find((project) => project.id === "trapatsa-eye-center")?.image,
+    ).toBe("/images/projects/trapatsas-eye-center.jpg");
+    expect(
+      projects.find((project) => project.id === "giving-tuesday-panama")?.image,
+    ).toBe("/images/projects/giving-tuesday-panama.jpg");
+  });
   it("localizes Spanish project titles", () => {
-    const udea = projects.find((project) => project.id === "udea-fcf-digital-ecosystem");
-    expect(udea).toBeDefined();
-    expect(localizeProject(udea!, "es").title).toBe(
-      "Aplicaciones de la Facultad de Comunicaciones y Filología",
+    const sita = projects.find((project) => project.id === "sita");
+    expect(sita).toBeDefined();
+    expect(localizeProject(sita!, "es").title).toBe("SITA");
+    expect(localizeProject(sita!, "es").description).toContain("trámites administrativos");
+  });
+
+  it("keeps faculty application captures on separate projects", () => {
+    expect(projects.find((project) => project.id === "sita")?.image).toBe(
+      "/images/projects/sita.jpg",
+    );
+    expect(projects.find((project) => project.id === "siar")?.image).toBe(
+      "/images/projects/siar.jpg",
+    );
+    expect(projects.find((project) => project.id === "finanzas")?.image).toBe(
+      "/images/projects/finanzas.jpg",
+    );
+    expect(projects.find((project) => project.id === "conciliacion")?.image).toBe(
+      "/images/projects/conciliacion.jpg",
     );
   });
 

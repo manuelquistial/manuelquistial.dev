@@ -14,9 +14,9 @@ export const meta = {
         "Proyectos de aplicaciones, plataformas y sitios web en los que ha trabajado Manuel Quistial.",
     },
     research: {
-      title: "Investigación · Manuel Quistial",
+      title: "Investigación EEG–EMG · Manuel Quistial",
       description:
-        "Investigación de maestría en interfaces cerebro-computador, señales EEG e imaginación motora.",
+        "Investigación de maestría sobre imaginación motora, EEG de baja densidad, control de contaminación muscular y retroalimentación visual en lazo cerrado.",
     },
     contact: {
       title: "Contacto · Manuel Quistial",

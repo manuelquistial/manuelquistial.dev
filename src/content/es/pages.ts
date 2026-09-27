@@ -68,26 +68,51 @@ export const aboutPage = {
 
 export const researchPage = {
   title: "Investigación",
-  subtitle: "Interfaces cerebro-computador e imaginación motora",
+  projectTitle:
+    "Decodificación de imaginación motora en lazo cerrado con una interfaz EEG–EMG de baja densidad",
+  affiliation: "Maestría en Ingeniería · Universidad de Antioquia",
   previewTagline:
-    "Mi investigación de maestría en la Universidad de Antioquia se centra en interfaces cerebro-computador basadas en señales EEG e imaginación motora.",
-  overview: {
-    title: "Investigación",
+    "Investigación de maestría en decodificación de imaginación motora con EEG de ocho canales, control de contaminación muscular mediante EMG y retroalimentación visual en lazo cerrado.",
+  summary:
+    "Mi investigación aborda la decodificación de imaginación motora del miembro superior mediante una interfaz cerebro-computador híbrida EEG–EMG. La propuesta combina EEG de ocho canales, control de contaminación muscular mediante EMG y retroalimentación visual adaptativa para evaluar la interacción entre el participante y el sistema en lazo cerrado.",
+  objective: {
+    title: "Objetivo de investigación",
     paragraphs: [
-      "Investigación de maestría en la Universidad de Antioquia sobre interfaces cerebro-computador basadas en EEG e imaginación motora, con trabajo en procesamiento de señales y software experimental.",
+      "Evaluar el desempeño de la decodificación en línea de imaginación motora con un montaje EEG de baja densidad, considerando la precisión de clasificación y la latencia durante la interacción con retroalimentación visual.",
     ],
   },
-  topics: {
-    title: "Enfoque",
-    items: [],
+  system: {
+    title: "Sistema propuesto",
+    items: [
+      {
+        title: "Decodificación EEG",
+        description:
+          "El diseño contempla ocho canales EEG sobre regiones sensoriomotoras para procesar la actividad cerebral asociada a tareas de imaginación motora del miembro superior.",
+      },
+      {
+        title: "Control de contaminación muscular",
+        description:
+          "El EMG de antebrazo se plantea como una señal de control para detectar actividad muscular no intencionada y rechazar segmentos contaminados. No se utiliza como una entrada adicional del clasificador ni como un canal independiente de control.",
+      },
+      {
+        title: "Retroalimentación visual adaptativa",
+        description:
+          "La propuesta incorpora una respuesta visual vinculada a la salida del sistema durante la tarea. Esta interacción permite evaluar la decodificación en lazo cerrado, con el participante recibiendo retroalimentación mientras realiza el experimento.",
+      },
+    ],
   },
-  methods: {
-    title: "Enfoque de trabajo",
-    items: [],
+  design: {
+    title: "Diseño experimental",
+    paragraphs: [
+      "El estudio contempla 15 participantes sanos, de 18 a 45 años, y dos sesiones en días separados. La primera se destina a la adquisición de señales, la calibración offline y la familiarización con la tarea. La segunda se orienta a la evaluación online en lazo cerrado con los mismos participantes.",
+      "La calibración y la evaluación offline se plantean con los datos adquiridos en el estudio, no con bases de datos públicas.",
+    ],
   },
-  goals: {
-    title: "Trabajo actual",
-    paragraphs: [],
+  evaluation: {
+    title: "Evaluación",
+    paragraphs: [
+      "La evaluación propuesta considera la precisión de clasificación, la latencia de respuesta y el rechazo de segmentos con contaminación muscular. El análisis distingue el desempeño offline del comportamiento del sistema durante la interacción en lazo cerrado.",
+    ],
   },
 } satisfies ResearchPageContent;
 

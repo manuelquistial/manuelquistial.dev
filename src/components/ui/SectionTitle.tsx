@@ -7,6 +7,7 @@ interface SectionTitleProps {
   className?: string;
   align?: "left" | "center";
   as?: "h1" | "h2";
+  spaced?: boolean;
 }
 
 export function SectionTitle({
@@ -16,11 +17,12 @@ export function SectionTitle({
   className,
   align = "left",
   as: Heading = "h2",
+  spaced = true,
 }: SectionTitleProps) {
   return (
     <header
       className={cn(
-        "mb-6 sm:mb-8",
+        spaced && "mb-6 sm:mb-8",
         align === "center" && "text-center",
         className,
       )}

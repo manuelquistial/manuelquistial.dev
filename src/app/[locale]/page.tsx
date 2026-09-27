@@ -11,7 +11,6 @@ import { Hero } from "@/components/sections/Hero";
 import { SelectedProjects } from "@/components/sections/SelectedProjects";
 import { ExperiencePreview } from "@/components/sections/ExperiencePreview";
 import { ResearchPreview } from "@/components/sections/ResearchPreview";
-import { ContactCTA } from "@/components/sections/ContactCTA";
 
 interface HomePageProps {
   params: Promise<{ locale: string }>;
@@ -33,10 +32,7 @@ export default async function HomePage({ params }: HomePageProps) {
       ? { ...project, description: project.homeDescription }
       : project;
 
-  const featured = babel
-    ? withHomeCopy(localizeProject(babel, locale))
-    : undefined;
-  const secondary = [sita, siar, finanzas, conciliacion, sal]
+  const selectedProjects = [babel, sita, siar, finanzas, conciliacion, sal]
     .filter((project): project is NonNullable<typeof project> => Boolean(project))
     .map((project) => withHomeCopy(localizeProject(project, locale)));
 
@@ -50,7 +46,7 @@ export default async function HomePage({ params }: HomePageProps) {
       <Hero locale={locale} content={content.hero} />
       <SelectedProjects
         title={content.sections.projects}
-        projects={{ featured, secondary }}
+        projects={selectedProjects}
         projectCard={content.projectCard}
         viewAllHref={localizedPath(locale, "/projects")}
         viewAllLabel={content.sections.viewAll}
@@ -67,7 +63,6 @@ export default async function HomePage({ params }: HomePageProps) {
         viewAllLabel={content.sections.viewResearch}
         summary={content.researchPage.previewTagline}
       />
-      <ContactCTA locale={locale} content={content.contactCta} />
     </>
   );
 }

@@ -11,5 +11,4 @@ export const staticRoutes = [
   "/about",
   "/projects",
   "/research",
-  "/contact",
 ] as const;

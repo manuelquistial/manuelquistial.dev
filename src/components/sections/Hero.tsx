@@ -1,7 +1,7 @@
 import type { Locale } from "@/i18n/config";
 import type { SiteContent } from "@/content";
 import { profile } from "@/data/profile";
-import { localizedPath, localizedSectionPath } from "@/lib/localizedPath";
+import { localizedSectionPath } from "@/lib/localizedPath";
 import { pageSections } from "@/lib/pageSections";
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/Button";
@@ -38,7 +38,7 @@ export function Hero({ locale, content }: HeroProps) {
             {content.viewProjects}
           </Button>
           <Button
-            href={localizedPath(locale, "/contact")}
+            href="#contact"
             variant="outline"
             size="lg"
           >

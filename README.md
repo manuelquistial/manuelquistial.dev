@@ -58,7 +58,6 @@ Open [http://localhost:3000](http://localhost:3000). The root path redirects to 
 | `/[locale]/projects` | Projects by category |
 | `/[locale]/projects/[slug]` | Case study (when published) |
 | `/[locale]/research` | Research overview |
-| `/[locale]/contact` | Contact |
 
 Project categories: `engineering`, `research`, `agency-web`.
 

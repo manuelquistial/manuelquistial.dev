@@ -8,10 +8,7 @@ import { pageSections } from "@/lib/pageSections";
 
 interface SelectedProjectsProps {
   title: string;
-  projects: {
-    featured: Project | undefined;
-    secondary: readonly Project[];
-  };
+  projects: readonly Project[];
   projectCard: SiteContent["projectCard"];
   viewAllHref: string;
   viewAllLabel: string;
@@ -24,37 +21,25 @@ export function SelectedProjects({
   viewAllHref,
   viewAllLabel,
 }: SelectedProjectsProps) {
-  const { featured, secondary } = projects;
-
   return (
     <Section id={pageSections.selectedProjects}>
-      <SectionTitle title={title} />
+      <div className="mb-6 flex items-center justify-between gap-4 sm:mb-8">
+        <SectionTitle title={title} spaced={false} />
+        <ViewAllLink href={viewAllHref} className="shrink-0">
+          {viewAllLabel}
+        </ViewAllLink>
+      </div>
 
-      {featured ? (
-        <div className="mt-2">
+      <div className="grid auto-rows-fr grid-cols-1 gap-10 md:grid-cols-2 md:gap-8">
+        {projects.map((project) => (
           <ProjectCard
-            project={featured}
+            key={project.id}
+            project={project}
             labels={projectCard}
-            featuredLayout
+            designCredit={project.id === "sal-picciotto-website"}
+            uniform
           />
-        </div>
-      ) : null}
-
-      {secondary.length > 0 ? (
-        <div className="mt-10 grid gap-10 md:grid-cols-2 md:gap-8">
-          {secondary.map((project) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              labels={projectCard}
-              designCredit={project.id === "sal-picciotto-website"}
-            />
-          ))}
-        </div>
-      ) : null}
-
-      <div className="mt-10">
-        <ViewAllLink href={viewAllHref}>{viewAllLabel}</ViewAllLink>
+        ))}
       </div>
     </Section>
   );

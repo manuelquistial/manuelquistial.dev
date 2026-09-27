@@ -1,16 +1,13 @@
 import Link from "next/link";
-import type { Locale } from "@/i18n/config";
 import type { SiteContent } from "@/content";
 import { profile } from "@/data/profile";
-import { localizedPath } from "@/lib/localizedPath";
 import { Container } from "@/components/layout/Container";
 
 interface FooterProps {
-  locale: Locale;
   content: Pick<SiteContent, "footer" | "nav" | "contactPage">;
 }
 
-export function Footer({ locale, content }: FooterProps) {
+export function Footer({ content }: FooterProps) {
   const year = new Date().getFullYear();
   const { footer, nav, contactPage } = content;
 
@@ -22,7 +19,7 @@ export function Footer({ locale, content }: FooterProps) {
         </p>
         <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm">
           <Link
-            href={localizedPath(locale, "/contact")}
+            href="#contact"
             className="text-muted transition-colors duration-150 hover:text-accent"
           >
             {nav.contact}

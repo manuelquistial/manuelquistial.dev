@@ -1,15 +1,14 @@
-import Link from "next/link";
 import type { SiteContent } from "@/content";
 import { profile } from "@/data/profile";
 import { Container } from "@/components/layout/Container";
 
 interface FooterProps {
-  content: Pick<SiteContent, "footer" | "nav" | "contactPage">;
+  content: Pick<SiteContent, "footer" | "contactPage">;
 }
 
 export function Footer({ content }: FooterProps) {
   const year = new Date().getFullYear();
-  const { footer, nav, contactPage } = content;
+  const { footer, contactPage } = content;
 
   return (
     <footer className="mt-auto border-t border-border">
@@ -18,12 +17,6 @@ export function Footer({ content }: FooterProps) {
           © {year} {profile.shortName}. {footer.rights}
         </p>
         <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm">
-          <Link
-            href="#contact"
-            className="text-muted transition-colors duration-150 hover:text-accent"
-          >
-            {nav.contact}
-          </Link>
           <a
             href={profile.linkedin}
             target="_blank"

@@ -6,7 +6,7 @@ export const data: LocaleData = {
       title: "SITA",
       clientType: "Universidad de Antioquia",
       description:
-        "Sistema de información de trámites administrativos de la Facultad de Comunicaciones y Filología.",
+        "Desarrollo de una aplicación para gestionar trámites administrativos de la Facultad de Comunicaciones y Filología.",
       imageAlt:
         "Página principal de SITA para preparar un trámite administrativo.",
     },
@@ -14,7 +14,7 @@ export const data: LocaleData = {
       title: "SIAR",
       clientType: "Universidad de Antioquia",
       description:
-        "Administración de recursos de la Facultad de Comunicaciones y Filología, con reserva de espacios y equipos y reporte de novedades.",
+        "Desarrollo del sistema de reservas de espacios y equipos, con registro de novedades para la administración de recursos de la Facultad de Comunicaciones y Filología.",
       imageAlt:
         "Página principal de SIAR para reservar espacios, reservar equipos y reportar novedades.",
     },
@@ -22,21 +22,21 @@ export const data: LocaleData = {
       title: "Finanzas",
       clientType: "Universidad de Antioquia",
       description:
-        "Consulta de presupuesto e información financiera de la Facultad de Comunicaciones y Filología.",
+        "Desarrollo de una aplicación de consulta presupuestal y financiera para apoyar el trabajo administrativo de la Facultad de Comunicaciones y Filología.",
       imageAlt: "Página principal de Finanzas con las categorías de presupuesto.",
     },
     conciliacion: {
       title: "Conciliación",
       clientType: "Universidad de Antioquia",
       description:
-        "Comparación de movimientos contables de la Facultad de Comunicaciones y Filología.",
+        "Desarrollo de una herramienta para comparar movimientos contables y apoyar su revisión por el equipo administrativo.",
       imageAlt:
         "Página principal de Conciliación para comparar movimientos contables.",
     },
     "babel-scores": {
       title: "Babel Scores",
       description:
-        "Lector de partituras en React e integraciones de comercio electrónico y acceso institucional.",
+        "Plataforma de publicación, consulta y venta de partituras digitales, con lector web de partituras.",
       imageAlt:
         "Página de inicio de Babel Scores con su navegación y una imagen de unas manos sobre un teclado.",
     },
@@ -47,33 +47,36 @@ export const data: LocaleData = {
     },
     "sal-picciotto-website": {
       title: "Sal & Picciotto",
-      description: "Sitio corporativo de la agencia.",
-      homeDescription:
-        "Desarrollo del sitio corporativo de la agencia en WordPress.",
+      description:
+        "Implementación del sitio corporativo que presenta los servicios y el portafolio de la agencia.",
       imageAlt:
         "Página de inicio de Sal & Picciotto con una cuadrícula de proyectos de marca.",
     },
     "trapatsa-eye-center": {
       title: "Trapatsas Eye Center",
-      description: "Sitio web de un centro oftalmológico.",
+      description:
+        "Desarrollo del sitio web para presentar los servicios de atención de un centro oftalmológico.",
       imageAlt:
         "Página de inicio de Trapatsas Eye Center con su navegación y una imagen de cirugía ocular.",
     },
     "giving-tuesday-panama": {
       title: "Giving Tuesday Panamá",
-      description: "Sitio web de la campaña.",
+      description:
+        "Desarrollo del sitio de comunicación de la campaña Giving Tuesday en Panamá.",
       imageAlt:
         "Página de inicio de Giving Tuesday Panamá con su navegación y el horizonte de la ciudad.",
     },
     "barrio-alto-panama": {
       title: "Barrio Alto Panamá",
-      description: "Sitio inmobiliario multilingüe.",
+      description:
+        "Desarrollo de un sitio inmobiliario multilingüe para presentar el proyecto residencial y recibir consultas de personas interesadas.",
       imageAlt:
         "Página de Barrio Alto con imagen de acceso al proyecto y formulario de contacto.",
     },
     "fci-pty-box": {
       title: "FCI PTY Box",
-      description: "Página del servicio de casillero internacional FCI Box.",
+      description:
+        "Desarrollo de la página de FCI Box para presentar su servicio de casillero internacional y las opciones de envío a Panamá.",
       imageAlt:
         "Página de FCI Box con su navegación y la imagen principal del servicio.",
     },
@@ -84,15 +87,58 @@ export const data: LocaleData = {
     },
   },
   experience: {
+    "independent-consulting": {
+      company: "Ingeniería de software y consultoría independiente",
+      role: "Ingeniero full-stack y consultor de plataformas web",
+      period: "may. 2022 – Presente",
+      description:
+        "Desarrollo aplicaciones e integraciones para clientes empresariales e institucionales, con especial atención a las herramientas que sus equipos utilizan para administrar contenidos, productos y procesos.",
+      highlights: [
+        "Construí interfaces para que equipos no técnicos administraran páginas, información de programas, galerías, contenidos multilingües y datos de productos sin depender de un desarrollador para cada actualización.",
+        "Implementé integraciones de autenticación, automatización de reportes y funcionalidades de administración adaptadas a las necesidades de cada cliente.",
+      ],
+      engagements: {
+        "babel-scores": {
+          highlights: [
+            "Desarrollé el lector web de partituras y funcionalidades de previsualización de documentos PDF.",
+            "Mejoré los flujos de vendedores y administradores para gestionar catálogos digitales, información de productos y contenidos de acceso restringido.",
+            "Trabajé en las integraciones de comercio electrónico, almacenamiento y autenticación de la plataforma.",
+          ],
+          technologiesLabel: "Tecnologías",
+        },
+        "sal-picciotto": {
+          highlights: [
+            "Desarrollé soluciones en WordPress y Shopify con estructuras de contenido administrables por equipos no técnicos.",
+            "Habilité la actualización de páginas, información de programas y galerías para que los equipos pudieran mantener sus contenidos sin solicitar cambios de código.",
+            "Implementé los diseños de la agencia y funcionalidades de administración específicas para sus proyectos.",
+          ],
+          technologiesLabel: "Tecnologías",
+        },
+        "udea-fcf": {
+          period: "Colaboraciones por proyecto · 2024–2026",
+          highlights: [
+            "Desarrollé SITA y SIAR para atender trámites administrativos, reservas de espacios y equipos, y registro de novedades.",
+            "Desarrollé Finanzas y Conciliación para consultar información presupuestal y apoyar la revisión de movimientos contables.",
+            "Participé en la modernización de interfaces y la migración de servicios backend, con trabajo en autenticación, reportes y flujos de datos institucionales.",
+            "Brindé soporte técnico y capacitación para el uso de las aplicaciones.",
+          ],
+          technologiesLabel: "Tecnologías de la colaboración",
+        },
+      },
+    },
     "anthology-blackboard": {
       role: "Ingeniero de software",
       period: "nov. 2021 – may. 2026",
       location: "Bogotá, Colombia",
       description:
-        "Ingeniería de software en plataformas de aprendizaje.",
+        "Desarrollo full-stack de funcionalidades empresariales, con trabajo en interfaces administrativas, servicios backend y modernización de frontend.",
+      technologiesLabel: "Tecnologías",
       highlights: [
-        "Desarrollé módulos administrativos en React y TypeScript para configurar plataformas de aprendizaje y gestionar la activación de funcionalidades, con integración a servicios backend.",
-        "Participé en la migración de módulos de Angular a React y en la automatización de pruebas de los flujos administrativos.",
+        "Desarrollé módulos en React y TypeScript dentro de una arquitectura modular, con componentes reutilizables para mantener consistencia entre las interfaces.",
+        "Extendí y mantuve APIs REST y lógica de negocio en Java y Spring Boot para soportar las integraciones del frontend y los flujos de la plataforma.",
+        "Diseñé e implementé interfaces de gestión de funcionalidades conectadas con servicios de feature flags en Python y AWS Lambda, para administrar su configuración y activación.",
+        "Participé en la migración de funcionalidades de Angular a React, coordinando su integración con los servicios backend y los contratos de las APIs.",
+        "Implementé pruebas automatizadas de interfaz con WebdriverIO para verificar flujos críticos y apoyar la detección de regresiones.",
       ],
     },
     "digital-americas-pipeline": {
@@ -100,44 +146,12 @@ export const data: LocaleData = {
       period: "feb. 2020 – nov. 2021",
       location: "Medellín, Colombia",
       description:
-        "Servicios backend y herramientas de monitoreo para aplicaciones en la nube.",
+        "Desarrollo de servicios y herramientas de operación para aplicaciones distribuidas en AWS.",
+      technologiesLabel: "Tecnologías",
       highlights: [
-        "Desarrollé servicios backend con Node.js y Express, con procesamiento de datos y mensajería asíncrona en AWS mediante Lambda, SNS y SQS.",
-        "Implementé herramientas de monitoreo con Electron y Elastic Stack para consultar la actividad y el estado de los servicios.",
-      ],
-    },
-    "sal-picciotto": {
-      role: "Desarrollador WordPress / Frontend",
-      period: "2022 – Presente",
-      location: "Remoto",
-      description:
-        "Implementación de sitios web a partir de los diseños de la agencia.",
-      highlights: [
-        "Desarrollé sitios WordPress a partir de los diseños de la agencia, con implementación responsive en Elementor Pro y campos de contenido con ACF.",
-        "Implementé versiones multilingües con Polylang.",
-      ],
-    },
-    "babel-scores": {
-      role: "Ingeniero de software",
-      period: "2022 – Presente",
-      location: "Remoto",
-      description:
-        "Lector de partituras e integraciones de plataforma.",
-      highlights: [
-        "Desarrollé el lector web de partituras en React.",
-        "Implementé funcionalidades de comercio electrónico con WooCommerce e integraciones de acceso institucional.",
-      ],
-    },
-    "udea-fcf": {
-      role: "Asesoría y desarrollo de software",
-      period: "Colaboraciones por proyecto · 2024–2026",
-      location: "Medellín, Colombia",
-      description:
-        "Asesoría y desarrollo por proyecto en aplicaciones de la Facultad de Comunicaciones y Filología.",
-      highlights: [
-        "Desarrollé SITA y SIAR para trámites administrativos y para la administración de espacios, equipos y novedades.",
-        "Desarrollé Finanzas y Conciliación para consultar presupuesto y comparar movimientos contables.",
-        "Brindé soporte técnico y capacitación a los usuarios de las aplicaciones.",
+        "Desarrollé microservicios con Node.js y Express para soportar el procesamiento de datos y la integración entre componentes.",
+        "Implementé flujos distribuidos de procesamiento y notificaciones con servicios de AWS para ejecutar tareas de forma asíncrona.",
+        "Construí aplicaciones con Electron e integraciones con Elastic Stack para consultar la actividad de los servicios y apoyar las tareas de monitoreo y soporte.",
       ],
     },
     "udea-teaching": {
@@ -145,7 +159,7 @@ export const data: LocaleData = {
       period: "Contratos por periodos · 2022–2025",
       location: "Medellín, Colombia",
       description:
-        "Profesor de cátedra en programación, desarrollo web, análisis de datos e inteligencia artificial. Mi actividad docente también incluyó prácticas académicas.",
+        "Profesor de cátedra en programación, desarrollo web, análisis de datos e inteligencia artificial para MisionTic y TalentoTech, tanto en modalidad presencial como virtual.",
     },
   },
   skills: {

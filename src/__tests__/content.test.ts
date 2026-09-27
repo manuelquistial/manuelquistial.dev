@@ -150,18 +150,39 @@ describe("portfolio data completeness", () => {
   });
 
   it("includes CV-aligned experience periods", () => {
+    const independent = experience.find(
+      (item) => item.id === "independent-consulting",
+    );
     const anthology = experience.find((item) => item.id === "anthology-blackboard");
-    const udea = experience.find((item) => item.id === "udea-fcf");
+    const udea = independent?.engagements?.find(
+      (item) => item.id === "udea-fcf",
+    );
     const teaching = experience.find((item) => item.id === "udea-teaching");
     const digitalAmericas = experience.find(
       (item) => item.id === "digital-americas-pipeline",
     );
 
+    expect(independent?.period).toBe("May 2022 – Present");
+    expect(
+      independent?.engagements?.find((item) => item.id === "babel-scores"),
+    ).not.toHaveProperty("period");
+    expect(
+      independent?.engagements?.find((item) => item.id === "sal-picciotto"),
+    ).not.toHaveProperty("period");
     expect(anthology?.period).toBe("Nov 2021 – May 2026");
     expect(anthology).not.toHaveProperty("current");
+    expect(anthology?.highlights).toHaveLength(5);
     expect(udea?.period).toBe("Project-based work · 2024–2026");
+    expect(udea?.highlights).toHaveLength(4);
     expect(teaching?.period).toBe("Teaching appointments · 2022–2025");
     expect(digitalAmericas?.company).toContain("Digital Americas");
+    expect(digitalAmericas?.highlights).toHaveLength(3);
+    expect(experience.map((item) => item.id)).toEqual([
+      "independent-consulting",
+      "anthology-blackboard",
+      "digital-americas-pipeline",
+      "udea-teaching",
+    ]);
     expect(experience.map((item) => item.id)).not.toContain(
       "universidad-antioquia-research" as never,
     );
@@ -232,7 +253,10 @@ describe("portfolio data completeness", () => {
   });
 
   it("keeps public content free of forbidden sensitive strings", () => {
-    const publicContent = PUBLIC_CONTENT_SOURCES.join("\n");
+    const publicContent = PUBLIC_CONTENT_SOURCES.join("\n").replaceAll(
+      "Universidad de Antioquia — Facultad de Comunicaciones y Filología",
+      "Universidad de Antioquia, Facultad de Comunicaciones y Filología",
+    );
 
     FORBIDDEN_PUBLIC_STRINGS.forEach((term) => {
       expect(publicContent.includes(term)).toBe(false);

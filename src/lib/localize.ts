@@ -30,9 +30,21 @@ export function localizeExperience(
 ): Experience {
   const overlay = getSiteContent(locale).data.experience[item.id];
 
+  if (!overlay) return item;
+
+  const { engagements: engagementOverlays, ...rest } = overlay;
+
   return {
     ...item,
-    ...overlay,
+    ...rest,
+    ...(item.engagements
+      ? {
+          engagements: item.engagements.map((engagement) => ({
+            ...engagement,
+            ...engagementOverlays?.[engagement.id],
+          })),
+        }
+      : {}),
   };
 }
 

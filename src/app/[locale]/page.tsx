@@ -37,7 +37,7 @@ export default async function HomePage({ params }: HomePageProps) {
     .map((project) => withHomeCopy(localizeProject(project, locale)));
 
   const experiencePreview = localizeExperienceList(
-    getFeaturedExperience(4),
+    getFeaturedExperience(),
     locale,
   );
 

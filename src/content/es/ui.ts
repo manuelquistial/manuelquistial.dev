@@ -6,7 +6,7 @@ export const meta = {
     about: {
       title: "Trayectoria · Manuel Quistial",
       description:
-        "Experiencia de Manuel Quistial en desarrollo de software y formación tecnológica.",
+        "Experiencia en desarrollo full-stack, APIs, modernización de aplicaciones y herramientas de administración para empresas y equipos institucionales.",
     },
     projects: {
       title: "Proyectos · Manuel Quistial",
@@ -46,9 +46,9 @@ export const a11y = {
 export const hero = {
   title: "Ingeniero de software full-stack",
   subtitle:
-    "Aplicaciones empresariales, servicios backend y modernización de frontend. En Anthology / Blackboard trabajé en plataformas de aprendizaje, migración de Angular a React y automatización de pruebas.",
+    "7 años de experiencia en desarrollo de plataformas empresariales, integración de servicios y modernización de aplicaciones. He trabajado en Anthology / Blackboard y desarrollado soluciones para Babel Scores, Sal & Picciotto y la Universidad de Antioquia.",
   viewProjects: "Ver proyectos",
-  contact: "Contactar",
+  viewExperience: "Ver trayectoria",
 };
 
 export const sections = {
@@ -68,7 +68,7 @@ export const sections = {
 };
 
 export const agencyWebProjectsIntro =
-  "Desarrollo en WordPress a partir del diseño visual de Sal & Picciotto.";
+  "Desarrollo web en colaboración con Sal & Picciotto. Diseño visual de la agencia; implementación y funcionalidades a mi cargo.";
 
 export const footer = {
   rights: "Todos los derechos reservados.",

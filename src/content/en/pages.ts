@@ -13,7 +13,7 @@ export const about = {
 export const aboutPage = {
   title: "Experience",
   intro:
-    "My experience spans full-stack engineering, backend development, and technical consulting for web applications. I hold a degree in Electronic Engineering and have taught programming, web development, data analysis, and artificial intelligence at Universidad de Antioquia.",
+    "My experience combines full-stack development, application modernization, and service integration. I have worked on enterprise platforms and administrative tools for marketing, operations, and academic teams.",
   engineering: {
     title: "Software engineering",
     paragraphs: [],

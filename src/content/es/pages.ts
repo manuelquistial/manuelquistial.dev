@@ -13,7 +13,7 @@ export const about = {
 export const aboutPage = {
   title: "Trayectoria",
   intro:
-    "Mi trayectoria comprende ingeniería full-stack, desarrollo backend y asesoría técnica en aplicaciones web. Soy ingeniero electrónico y he sido profesor de programación, desarrollo web, análisis de datos e inteligencia artificial en la Universidad de Antioquia.",
+    "Mi experiencia combina desarrollo full-stack, modernización de aplicaciones e integración de servicios. He trabajado en plataformas empresariales y en herramientas de administración para equipos de marketing, operaciones y áreas académicas.",
   engineering: {
     title: "Ingeniería de software",
     paragraphs: [],

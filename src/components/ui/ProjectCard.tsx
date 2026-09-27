@@ -102,10 +102,7 @@ export function ProjectCard({
         />
         {project.description ? (
           <p
-            className={cn(
-              "mt-3 max-w-[65ch] text-base leading-relaxed text-muted",
-              uniform && "min-h-[6.5em]",
-            )}
+            className="mt-3 max-w-[65ch] text-base leading-relaxed text-muted"
           >
             {project.description}
           </p>

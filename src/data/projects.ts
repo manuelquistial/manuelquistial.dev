@@ -5,7 +5,7 @@ export const projects = [
     category: "engineering",
     clientType: "Universidad de Antioquia",
     description:
-      "Administrative procedures information system for the Faculty of Communications and Philology.",
+      "Development of an application for administrative procedures at the Faculty of Communications and Philology.",
     image: "/images/projects/sita.jpg",
     imageAlt: "SITA main page for preparing an administrative request.",
     imageWidth: 1348,
@@ -21,7 +21,7 @@ export const projects = [
     category: "engineering",
     clientType: "Universidad de Antioquia",
     description:
-      "Resource administration for space and equipment reservations and incident reports at the Faculty of Communications and Philology.",
+      "Development of a room and equipment booking system with issue reporting for resource management at the Faculty of Communications and Philology.",
     image: "/images/projects/siar.jpg",
     imageAlt:
       "SIAR main page for space reservations, equipment reservations, and incident reports.",
@@ -38,7 +38,7 @@ export const projects = [
     category: "engineering",
     clientType: "Universidad de Antioquia",
     description:
-      "Budget consultation and financial information for the Faculty of Communications and Philology.",
+      "Development of a budget and financial information application to support administrative work at the Faculty of Communications and Philology.",
     image: "/images/projects/finanzas.jpg",
     imageAlt: "Finanzas main page showing budget categories.",
     imageWidth: 1348,
@@ -54,7 +54,7 @@ export const projects = [
     category: "engineering",
     clientType: "Universidad de Antioquia",
     description:
-      "Comparison of accounting movements for the Faculty of Communications and Philology.",
+      "Development of a tool for comparing accounting entries and supporting their review by the administrative team.",
     image: "/images/projects/conciliacion.jpg",
     imageAlt: "Conciliación main page for comparing accounting movements.",
     imageWidth: 1348,
@@ -69,7 +69,7 @@ export const projects = [
     title: "Babel Scores",
     category: "engineering",
     description:
-      "React sheet music reader, e-commerce functionality, and institutional access integrations.",
+      "Platform for publishing, browsing, and selling digital sheet music, with a web sheet music reader.",
     image: "/images/projects/babel-scores.jpg",
     imageAlt:
       "Babel Scores homepage showing its navigation and a green-tinted image of hands on a keyboard.",
@@ -96,9 +96,8 @@ export const projects = [
     title: "Sal & Picciotto",
     category: "agency-web",
     agency: "Sal & Picciotto",
-    description: "Agency website.",
-    homeDescription:
-      "WordPress development for the agency’s website.",
+    description:
+      "Implementation of the agency’s corporate website presenting its services and portfolio.",
     tags: ["WordPress", "Elementor Pro"],
     status: "live",
     image: "/images/projects/sal-picciotto.jpg",
@@ -111,7 +110,8 @@ export const projects = [
     title: "Trapatsas Eye Center",
     category: "agency-web",
     agency: "Sal & Picciotto",
-    description: "Eye care practice website.",
+    description:
+      "Website development to present the services of an eye care center.",
     image: "/images/projects/trapatsas-eye-center.jpg",
     imageAlt:
       "Trapatsas Eye Center homepage showing its navigation and an eye surgery image.",
@@ -127,7 +127,8 @@ export const projects = [
     title: "Giving Tuesday Panamá",
     category: "agency-web",
     agency: "Sal & Picciotto",
-    description: "Campaign website.",
+    description:
+      "Development of the website for the Giving Tuesday campaign in Panama.",
     image: "/images/projects/giving-tuesday-panama.jpg",
     imageAlt:
       "Giving Tuesday Panamá homepage showing its navigation and the Panama City skyline.",
@@ -143,7 +144,8 @@ export const projects = [
     title: "Barrio Alto Panamá",
     category: "agency-web",
     agency: "Sal & Picciotto",
-    description: "Multilingual real estate website.",
+    description:
+      "Development of a multilingual real estate website presenting the residential project and accepting inquiries from prospective buyers.",
     tags: ["WordPress", "Elementor Pro", "Polylang"],
     status: "live",
     image: "/images/projects/barrio-alto-panama.jpg",
@@ -157,7 +159,7 @@ export const projects = [
     category: "agency-web",
     agency: "Sal & Picciotto",
     description:
-      "Website for the FCI Box international package forwarding service.",
+      "Development of the FCI Box page presenting its international package forwarding service and shipping options to Panama.",
     image: "/images/projects/fci-box.jpg",
     imageAlt: "FCI Box page showing its navigation and main service image.",
     tags: ["WordPress", "Elementor Pro"],

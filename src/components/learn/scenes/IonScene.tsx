@@ -1,62 +1,72 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { learnArt } from "@/content/learn/art";
 import { learnUi } from "@/content/learn/es/ui";
 import { neuronsLesson } from "@/content/learn/es/neurons";
-import { MembraneFigure } from "@/components/learn/illustrations/MembraneFigure";
-import { LearnFrame } from "@/components/learn/LearnFrame";
-import { PlaybackControls } from "@/components/learn/PlaybackControls";
-import { StageCaption } from "@/components/learn/StageCaption";
+import { SceneStage, hotspotsFromParts } from "@/components/learn/SceneStage";
 import { applyFrameVars } from "@/components/learn/applyFrameVars";
-import { useInView } from "@/components/learn/useInView";
 import { useScenePlayback } from "@/components/learn/useScenePlayback";
-import { ionFrameVars, ionPlaybackStages } from "@/lib/learn/physiology";
+import { progressWithinStage } from "@/lib/learn/playback";
+import { ionPlaybackStages, referenceIonMotion } from "@/lib/learn/physiology";
 
-const stages = ionPlaybackStages();
+const layout = {
+  "sodium-channel": { top: "32%", left: "12%", width: "14%", height: "34%" },
+  "potassium-channel": { top: "32%", left: "34%", width: "14%", height: "34%" },
+  "other-proteins": { top: "32%", left: "56%", width: "36%", height: "34%" },
+  sodium: { top: "16%", left: "8%", width: "22%", height: "16%" },
+  potassium: { top: "68%", left: "30%", width: "22%", height: "16%" },
+};
 
 export function IonScene() {
   const scene = neuronsLesson.scenes[5];
-  const [viewRef, inView] = useInView<HTMLDivElement>();
-  const visualRef = useRef<HTMLDivElement>(null);
-  const playback = useScenePlayback(stages, inView);
+  const playback = useScenePlayback(ionPlaybackStages());
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const caption = scene.stages?.find((item) => item.id === playback.snapshot.stageId);
 
   useEffect(() => {
     return playback.controller.onFrame((snapshot) => {
-      applyFrameVars(visualRef.current, ionFrameVars(snapshot.time, stages), {
-        stage: snapshot.stageId,
+      const stage = ionPlaybackStages().find((item) => item.id === snapshot.stageId);
+      const motion = referenceIonMotion(
+        snapshot.stageId,
+        progressWithinStage(snapshot.time, stage),
+      );
+      applyFrameVars(overlayRef.current, {
+        "--na-top": `${motion.na}%`,
+        "--k-top": `${motion.k}%`,
       });
     });
   }, [playback.controller]);
 
   return (
-    <div ref={viewRef} className="flex flex-col gap-4">
-      <div
-        ref={visualRef}
-        className="learn-membrane"
-        data-stage={playback.snapshot.stageId}
-      >
-        <LearnFrame>
-          <MembraneFigure label={scene.textAlternative} />
-        </LearnFrame>
-      </div>
-      <ul className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted">
-        <li>{learnUi.sodium}</li>
-        <li>{learnUi.potassium}</li>
-        <li>{learnUi.pumpLegend}</li>
-        <li>{learnUi.schematic}</li>
-      </ul>
-      <PlaybackControls
-        playing={playback.snapshot.playing}
-        speed={playback.snapshot.speed}
-        canStep={playback.canStep}
-        reducedMotion={playback.reducedMotion}
-        onPlay={playback.play}
-        onPause={playback.pause}
-        onRestart={playback.restart}
-        onStep={playback.step}
-        onSpeed={playback.setSpeed}
-      />
-      <StageCaption stages={scene.stages} stageId={playback.snapshot.stageId} />
-    </div>
+    <SceneStage
+      label={scene.textAlternative}
+      src={learnArt.membrane}
+      playback={playback}
+      caption={caption}
+      hotspots={hotspotsFromParts(scene.parts, layout)}
+      selectedId={selectedId}
+      onSelect={setSelectedId}
+      legend={
+        <ul className="flex flex-wrap gap-x-4 gap-y-1">
+          <li>{learnUi.sodium}</li>
+          <li>{learnUi.potassium}</li>
+          <li>{learnUi.schematic}</li>
+        </ul>
+      }
+      overlay={
+        <div ref={overlayRef} className="learn-ions absolute inset-0">
+          <span className="learn-ion learn-ion-na">Na+</span>
+          <span className="learn-ion learn-ion-na learn-ion-still" style={{ left: "8%", top: "18%" }}>
+            Na+
+          </span>
+          <span className="learn-ion learn-ion-k">K+</span>
+          <span className="learn-ion learn-ion-k learn-ion-still" style={{ left: "62%", top: "74%" }}>
+            K+
+          </span>
+        </div>
+      }
+    />
   );
 }

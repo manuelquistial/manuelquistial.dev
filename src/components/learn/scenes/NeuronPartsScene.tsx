@@ -1,58 +1,27 @@
 "use client";
 
 import { useState } from "react";
-import { learnUi } from "@/content/learn/es/ui";
+import { learnArt } from "@/content/learn/art";
 import { neuronsLesson } from "@/content/learn/es/neurons";
-import {
-  NeuronFigure,
-  type NeuronPart,
-} from "@/components/learn/illustrations/NeuronFigure";
-import { LearnFrame } from "@/components/learn/LearnFrame";
-import {
-  learnControlActiveClass,
-  learnControlClass,
-} from "@/components/learn/controlClass";
-import { cn } from "@/lib/utils";
+import { SceneStage, hotspotsFromParts } from "@/components/learn/SceneStage";
+
+const layout = {
+  dendrites: { top: "8%", left: "1%", width: "34%", height: "82%" },
+  soma: { top: "40%", left: "18%", width: "16%", height: "22%" },
+  axon: { top: "38%", left: "36%", width: "62%", height: "34%" },
+};
 
 export function NeuronPartsScene() {
   const scene = neuronsLesson.scenes[1];
-  const [selected, setSelected] = useState<NeuronPart | null>(null);
-  const part = scene.parts?.find((item) => item.id === selected);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
   return (
-    <div className="flex flex-col gap-4">
-      <LearnFrame>
-        <NeuronFigure
-          label={scene.textAlternative}
-          selected={selected}
-          onSelect={setSelected}
-        />
-      </LearnFrame>
-      <div role="group" aria-label={scene.title} className="flex flex-wrap gap-2">
-        {scene.parts?.map((item) => (
-          <button
-            key={item.id}
-            type="button"
-            className={cn(
-              learnControlClass,
-              selected === item.id && learnControlActiveClass,
-            )}
-            aria-pressed={selected === item.id}
-            onClick={() => setSelected(item.id as NeuronPart)}
-          >
-            {item.label}
-          </button>
-        ))}
-      </div>
-      <p className="max-w-[65ch] text-sm leading-relaxed text-foreground" aria-live="polite">
-        {part ? (
-          <>
-            <span className="font-semibold">{part.label}.</span> {part.text}
-          </>
-        ) : (
-          learnUi.choosePart
-        )}
-      </p>
-    </div>
+    <SceneStage
+      label={scene.textAlternative}
+      src={learnArt.neuron}
+      hotspots={hotspotsFromParts(scene.parts, layout)}
+      selectedId={selectedId}
+      onSelect={setSelectedId}
+    />
   );
 }

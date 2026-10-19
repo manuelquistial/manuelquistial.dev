@@ -12,11 +12,17 @@ import {
   createPlaybackController,
   createSnapshot,
 } from "@/lib/learn/playback";
+import { lessonCitationOrder } from "@/lib/learn/citations";
+import {
+  initialPlaybackSession,
+  reducePlaybackSession,
+} from "@/lib/learn/presence";
 import {
   crossesLipidOutsideChannel,
   ionPositions,
   membraneVoltage,
   networkState,
+  referenceIonMotion,
   signalFrameVars,
   synapseFrameVars,
   voltageStageAt,
@@ -61,7 +67,16 @@ describe("learn catalog", () => {
     for (const block of neuronsLesson.deepen) {
       expect(neuronSceneIds).toContain(block.afterSceneId);
     }
-    expect(neuronsLesson.sources.map((source) => source.href)).toEqual(verifiedSources);
+    expect(neuronsLesson.sources.map((source) => source.href).sort()).toEqual(
+      [...verifiedSources].sort(),
+    );
+    expect(lessonCitationOrder(neuronsLesson)).toEqual([
+      "tissue",
+      "communication",
+      "myelin",
+      "chemical",
+      "potential",
+    ]);
     const copy = JSON.stringify(neuronsLesson);
     expect(copy).not.toContain("\u2014");
     expect(copy).not.toMatch(/\d+\s*ms/);
@@ -160,6 +175,10 @@ describe("neuron models", () => {
     expect(membraneVoltage(0.76)).toBeLessThan(-70);
     expect(membraneVoltage(1)).toBeGreaterThan(-80);
     expect(membraneVoltage(1)).toBeLessThan(-70);
+    expect(referenceIonMotion("rest", 0)).toEqual({ na: 22, k: 76 });
+    expect(referenceIonMotion("depolarization", 1).na).toBe(76);
+    expect(referenceIonMotion("depolarization", 1).k).toBe(76);
+    expect(referenceIonMotion("repolarization", 1)).toEqual({ na: 76, k: 22 });
   });
 
   it("moves ions only through their channels", () => {
@@ -194,6 +213,77 @@ describe("neuron models", () => {
       active: ["n3"],
       inhibited: ["n4"],
     });
+  });
+});
+
+describe("scene presence", () => {
+  const base = { primary: true, reducedMotion: false, wasPlaying: true };
+
+  it("plays on entry, pauses offscreen, and resumes unless the viewer paused", () => {
+    const entered = reducePlaybackSession(initialPlaybackSession, "primary", {
+      ...base,
+      wasPlaying: false,
+    });
+    expect(entered.command).toBe("play");
+
+    const away = reducePlaybackSession(entered.session, "away", base);
+    expect(away.command).toBe("pause");
+    expect(away.session.hold).toBe("follow");
+
+    const back = reducePlaybackSession(away.session, "primary", {
+      ...base,
+      wasPlaying: false,
+    });
+    expect(back.command).toBe("play");
+
+    const paused = reducePlaybackSession(back.session, "pause", base);
+    const ignored = reducePlaybackSession(paused.session, "primary", {
+      ...base,
+      wasPlaying: false,
+    });
+    expect(ignored.command).toBe("none");
+    expect(ignored.session.hold).toBe("userPaused");
+  });
+
+  it("keeps a finished scene still and resumes after a card only if it was playing", () => {
+    const done = reducePlaybackSession(initialPlaybackSession, "ended", base);
+    expect(reducePlaybackSession(done.session, "primary", base).command).toBe("none");
+
+    const suspended = reducePlaybackSession(initialPlaybackSession, "suspend", base);
+    expect(suspended.command).toBe("pause");
+    expect(
+      reducePlaybackSession(suspended.session, "release", {
+        ...base,
+        wasPlaying: false,
+      }).command,
+    ).toBe("play");
+
+    const userPaused = reducePlaybackSession(initialPlaybackSession, "pause", base);
+    const card = reducePlaybackSession(userPaused.session, "suspend", {
+      ...base,
+      wasPlaying: false,
+    });
+    expect(
+      reducePlaybackSession(card.session, "release", { ...base, wasPlaying: false }).command,
+    ).toBe("none");
+  });
+
+  it("restarts into playback only while the scene is the one in view", () => {
+    expect(
+      reducePlaybackSession(initialPlaybackSession, "restart", base).command,
+    ).toBe("replay");
+    expect(
+      reducePlaybackSession(initialPlaybackSession, "restart", {
+        ...base,
+        primary: false,
+      }).command,
+    ).toBe("restart");
+    expect(
+      reducePlaybackSession(initialPlaybackSession, "primary", {
+        ...base,
+        reducedMotion: true,
+      }).command,
+    ).toBe("pause");
   });
 });
 

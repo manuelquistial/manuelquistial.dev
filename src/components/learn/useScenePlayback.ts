@@ -1,86 +1,120 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   createPlaybackController,
   type PlaybackController,
   type PlaybackSnapshot,
   type StageBound,
 } from "@/lib/learn/playback";
+import {
+  initialPlaybackSession,
+  reducePlaybackSession,
+  type PlaybackEvent,
+  type PlaybackSession,
+} from "@/lib/learn/presence";
 import { usePrefersReducedMotion } from "@/components/learn/usePrefersReducedMotion";
+import { usePrimaryFrame } from "@/components/learn/usePrimaryFrame";
 
-export function useScenePlayback(stages: readonly StageBound[], visible = true) {
+export function useScenePlayback(
+  stages: readonly StageBound[],
+  temporal = true,
+) {
   const reducedMotion = usePrefersReducedMotion();
+  const [frameRef, primary] = usePrimaryFrame<HTMLDivElement>();
   const [controller] = useState<PlaybackController>(() =>
     createPlaybackController(stages),
   );
   const [snapshot, setSnapshot] = useState<PlaybackSnapshot>(() =>
     controller.getSnapshot(),
   );
+  const sessionRef = useRef<PlaybackSession>(initialPlaybackSession);
+  const wasPlayingRef = useRef(false);
 
-  const cancelLoop = useCallback((rafId: { current: number | null }) => {
-    if (rafId.current != null) {
-      cancelAnimationFrame(rafId.current);
-      rafId.current = null;
-    }
-  }, []);
+  const apply = useCallback(
+    (event: PlaybackEvent) => {
+      const snapshotNow = controller.getSnapshot();
+      const result = reducePlaybackSession(sessionRef.current, event, {
+        primary,
+        reducedMotion,
+        wasPlaying: snapshotNow.playing,
+      });
+      sessionRef.current = result.session;
+
+      if (result.command === "pause") controller.pause();
+      if (result.command === "play") controller.play({ reducedMotion });
+      if (result.command === "restart") controller.restart();
+      if (result.command === "replay") {
+        controller.restart();
+        controller.play({ reducedMotion });
+      }
+    },
+    [controller, primary, reducedMotion],
+  );
+
+  useEffect(() => controller.subscribe(() => setSnapshot(controller.getSnapshot())), [controller]);
 
   useEffect(() => {
-    return controller.subscribe(() => {
-      setSnapshot(controller.getSnapshot());
-    });
-  }, [controller]);
+    if (!temporal) return;
+    apply(primary && !document.hidden ? "primary" : "away");
+  }, [apply, primary, reducedMotion, temporal]);
 
   useEffect(() => {
-    const rafId = { current: null as number | null };
+    if (!temporal) return;
+    const onHide = () => apply(document.hidden || !primary ? "away" : "primary");
+    document.addEventListener("visibilitychange", onHide);
+    return () => document.removeEventListener("visibilitychange", onHide);
+  }, [apply, primary, temporal]);
 
-    if (!visible) {
-      if (controller.getSnapshot().playing) controller.pause();
-      return;
-    }
+  useEffect(() => {
+    const playing = snapshot.playing;
+    const ended =
+      wasPlayingRef.current &&
+      !playing &&
+      snapshot.duration > 0 &&
+      snapshot.time >= snapshot.duration - 0.001;
+    wasPlayingRef.current = playing;
+    if (ended) apply("ended");
+  }, [apply, snapshot.playing, snapshot.duration, snapshot.time]);
 
-    if (!snapshot.playing || reducedMotion) {
-      if (reducedMotion && controller.getSnapshot().playing) controller.pause();
-      return;
-    }
-
+  useEffect(() => {
+    if (!snapshot.playing || reducedMotion) return;
+    let raf = 0;
     let last = performance.now();
     const loop = (now: number) => {
       if (document.hidden || reducedMotion) {
-        controller.pause();
-        rafId.current = null;
+        apply("away");
         return;
       }
       const delta = Math.min(48, now - last);
       last = now;
-      const keepGoing = controller.frame(delta);
-      if (!keepGoing) {
-        rafId.current = null;
-        return;
-      }
-      rafId.current = requestAnimationFrame(loop);
+      if (!controller.frame(delta)) return;
+      raf = requestAnimationFrame(loop);
     };
+    raf = requestAnimationFrame(loop);
+    return () => cancelAnimationFrame(raf);
+  }, [apply, controller, reducedMotion, snapshot.playing]);
 
-    rafId.current = requestAnimationFrame(loop);
-    return () => cancelLoop(rafId);
-  }, [cancelLoop, controller, reducedMotion, snapshot.playing, visible]);
-
-  useEffect(() => {
-    return () => {
-      controller.pause();
-    };
-  }, [controller]);
+  useEffect(() => () => controller.pause(), [controller]);
 
   return {
+    frameRef,
+    primary,
     snapshot,
     reducedMotion,
     controller,
     canStep: snapshot.stageIndex < snapshot.stageCount - 1,
-    play: () => controller.play({ reducedMotion }),
-    pause: () => controller.pause(),
-    restart: () => controller.restart(),
+    play: () => apply("play"),
+    pause: () => apply("pause"),
+    restart: () => apply("restart"),
     step: () => controller.step(),
     setSpeed: (speed: number) => controller.setSpeed(speed),
-    reset: (nextStages: readonly StageBound[]) => controller.reset(nextStages),
+    reset: (nextStages: readonly StageBound[]) => {
+      controller.reset(nextStages);
+      sessionRef.current = initialPlaybackSession;
+      if (primary && !reducedMotion) controller.play();
+    },
+    suspend: () => apply("suspend"),
+    release: () => apply("release"),
   };
 }

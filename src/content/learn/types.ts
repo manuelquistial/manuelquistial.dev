@@ -1,5 +1,10 @@
 import type { Locale } from "@/i18n/config";
 
+export type LearnText = {
+  text: string;
+  cites?: readonly string[];
+};
+
 export type LearnStageCopy = {
   id: string;
   label: string;
@@ -16,7 +21,7 @@ export type LearnScene = {
   id: string;
   title: string;
   textAlternative: string;
-  paragraphs: readonly string[];
+  paragraphs: readonly LearnText[];
   stages?: readonly LearnStageCopy[];
   parts?: readonly LearnPartCopy[];
 };
@@ -33,14 +38,16 @@ export type LearnQuestion = {
 export type LearnDeepen = {
   afterSceneId: string;
   title: string;
-  paragraphs: readonly string[];
+  paragraphs: readonly LearnText[];
 };
 
 export type LearnSource = {
+  id: string;
   title: string;
-  detail: string;
+  authors: string;
+  year: string;
+  edition: string;
   href: string;
-  supports: string;
 };
 
 export type LearnLessonContent = {
@@ -50,14 +57,12 @@ export type LearnLessonContent = {
   description: string;
   cardDescription: string;
   metaTitle: string;
-  intro: readonly string[];
-  disclaimer: string;
+  intro: readonly LearnText[];
   scenes: readonly LearnScene[];
   questions: readonly LearnQuestion[];
   deepen: readonly LearnDeepen[];
   sources: readonly LearnSource[];
-  sourcesNote: string;
   closingTitle: string;
-  closing: readonly string[];
+  closing: readonly LearnText[];
   originalPostUrl?: string;
 };

@@ -129,6 +129,23 @@ export function ionPositions(
   return { na: naRest, k: kRest };
 }
 
+/** Vertical position, as a percentage of the reference membrane figure. */
+export function referenceIonMotion(
+  stageId: string,
+  progress: number,
+): { na: number; k: number } {
+  const amount = clamp(progress, 0, 1);
+  const outside = 22;
+  const inside = 76;
+  if (stageId === "depolarization") {
+    return { na: lerp(outside, inside, amount), k: inside };
+  }
+  if (stageId === "repolarization" || stageId === "hyperpolarization") {
+    return { na: inside, k: lerp(inside, outside, amount) };
+  }
+  return { na: outside, k: inside };
+}
+
 export function crossesLipidOutsideChannel(point: IonPoint, channel: "na" | "k" | "none"): boolean {
   const inLipid =
     point.y > membrane.bilayerTop && point.y < membrane.bilayerBottom;

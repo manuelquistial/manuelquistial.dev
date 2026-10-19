@@ -1,65 +1,44 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { learnArt } from "@/content/learn/art";
 import { learnUi } from "@/content/learn/es/ui";
 import { neuronsLesson } from "@/content/learn/es/neurons";
-import { MembraneFigure } from "@/components/learn/illustrations/MembraneFigure";
+import { SceneStage } from "@/components/learn/SceneStage";
 import { VoltageGraph } from "@/components/learn/illustrations/VoltageGraph";
-import { LearnFrame } from "@/components/learn/LearnFrame";
-import { PlaybackControls } from "@/components/learn/PlaybackControls";
-import { StageCaption } from "@/components/learn/StageCaption";
 import { applyFrameVars } from "@/components/learn/applyFrameVars";
-import { useInView } from "@/components/learn/useInView";
 import { useScenePlayback } from "@/components/learn/useScenePlayback";
 import { voltageFrameVars, voltagePlaybackStages } from "@/lib/learn/physiology";
 
-const stages = voltagePlaybackStages();
-
 export function VoltageScene() {
   const scene = neuronsLesson.scenes[6];
-  const [viewRef, inView] = useInView<HTMLDivElement>();
-  const visualRef = useRef<HTMLDivElement>(null);
-  const playback = useScenePlayback(stages, inView);
+  const playback = useScenePlayback(voltagePlaybackStages());
+  const graphRef = useRef<HTMLDivElement>(null);
+  const caption = scene.stages?.find((item) => item.id === playback.snapshot.stageId);
 
   useEffect(() => {
     return playback.controller.onFrame((snapshot) => {
-      applyFrameVars(
-        visualRef.current,
-        voltageFrameVars(snapshot.time, snapshot.duration),
-        { stage: snapshot.stageId },
-      );
+      applyFrameVars(graphRef.current, voltageFrameVars(snapshot.time, snapshot.duration));
     });
   }, [playback.controller]);
 
   return (
-    <div ref={viewRef} className="flex flex-col gap-4">
-      <div
-        ref={visualRef}
-        className="learn-voltage grid gap-4 lg:grid-cols-2"
-        data-stage={playback.snapshot.stageId}
-      >
-        <LearnFrame>
-          <MembraneFigure label={scene.textAlternative} />
-        </LearnFrame>
-        <LearnFrame>
+    <SceneStage
+      label={scene.textAlternative}
+      src={learnArt.neuron}
+      playback={playback}
+      caption={caption}
+      legend={<p>{learnUi.graphCaption}</p>}
+      overlay={
+        <span className="learn-measure" data-stage={playback.snapshot.stageId}>
+          <span className="learn-measure-label">Punto</span>
+        </span>
+      }
+      aside={
+        <div ref={graphRef} className="learn-voltage h-full min-h-48">
           <VoltageGraph label={learnUi.graphCaption} />
-        </LearnFrame>
-      </div>
-      <p className="max-w-[65ch] text-sm leading-relaxed text-muted">
-        {learnUi.voltageExample} {learnUi.graphCaption}
-      </p>
-      <PlaybackControls
-        playing={playback.snapshot.playing}
-        speed={playback.snapshot.speed}
-        canStep={playback.canStep}
-        reducedMotion={playback.reducedMotion}
-        onPlay={playback.play}
-        onPause={playback.pause}
-        onRestart={playback.restart}
-        onStep={playback.step}
-        onSpeed={playback.setSpeed}
-      />
-      <StageCaption stages={scene.stages} stageId={playback.snapshot.stageId} />
-    </div>
+        </div>
+      }
+    />
   );
 }

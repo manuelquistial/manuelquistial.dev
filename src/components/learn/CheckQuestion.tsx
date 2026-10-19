@@ -3,7 +3,6 @@
 import { useRef, useState } from "react";
 import { learnUi } from "@/content/learn/es/ui";
 import type { LearnQuestion } from "@/content/learn/types";
-import { learnControlClass } from "@/components/learn/controlClass";
 
 export function CheckQuestion({ question }: { question: LearnQuestion }) {
   const [choice, setChoice] = useState<string | null>(null);
@@ -11,10 +10,9 @@ export function CheckQuestion({ question }: { question: LearnQuestion }) {
   const feedbackRef = useRef<HTMLParagraphElement>(null);
   const firstOptionRef = useRef<HTMLInputElement>(null);
 
-  const check = () => {
-    if (!choice) return;
-    const next = choice === question.correctId ? "correct" : "review";
-    setResult(next);
+  const answer = (id: string) => {
+    setChoice(id);
+    setResult(id === question.correctId ? "correct" : "review");
     requestAnimationFrame(() => feedbackRef.current?.focus());
   };
 
@@ -27,13 +25,10 @@ export function CheckQuestion({ question }: { question: LearnQuestion }) {
   return (
     <form
       className="mt-8 max-w-[65ch] rounded-[8px] border border-border bg-surface p-4 sm:p-5"
-      onSubmit={(event) => {
-        event.preventDefault();
-        check();
-      }}
+      onSubmit={(event) => event.preventDefault()}
     >
       <p className="text-sm font-semibold text-muted">{learnUi.questionEyebrow}</p>
-      <fieldset className="mt-3" disabled={result !== null}>
+      <fieldset className="mt-3">
         <legend className="text-base font-semibold text-foreground">
           {question.prompt}
         </legend>
@@ -50,7 +45,7 @@ export function CheckQuestion({ question }: { question: LearnQuestion }) {
                 name={question.id}
                 value={option.id}
                 checked={choice === option.id}
-                onChange={() => setChoice(option.id)}
+                onChange={() => answer(option.id)}
               />
               <span className="text-base leading-snug text-foreground">
                 {option.label}
@@ -71,17 +66,13 @@ export function CheckQuestion({ question }: { question: LearnQuestion }) {
           </span>{" "}
           {question.feedback}
         </p>
-      ) : (
-        <button
-          type="submit"
-          className={`${learnControlClass} mt-4`}
-          disabled={!choice}
-        >
-          {learnUi.check}
-        </button>
-      )}
+      ) : null}
       {result ? (
-        <button type="button" className={`${learnControlClass} mt-4`} onClick={retry}>
+        <button
+          type="button"
+          className="mt-4 inline-flex min-h-11 items-center justify-center rounded-[6px] border border-border bg-surface px-4 text-base font-semibold text-foreground"
+          onClick={retry}
+        >
           {learnUi.retry}
         </button>
       ) : null}

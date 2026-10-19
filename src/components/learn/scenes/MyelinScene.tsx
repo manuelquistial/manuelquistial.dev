@@ -1,96 +1,66 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { learnArt } from "@/content/learn/art";
 import { neuronsLesson } from "@/content/learn/es/neurons";
-import { MyelinFigure } from "@/components/learn/illustrations/MyelinFigure";
-import { LearnFrame } from "@/components/learn/LearnFrame";
-import { PlaybackControls } from "@/components/learn/PlaybackControls";
-import { StageCaption } from "@/components/learn/StageCaption";
+import { SceneStage } from "@/components/learn/SceneStage";
 import { applyFrameVars } from "@/components/learn/applyFrameVars";
-import { useInView } from "@/components/learn/useInView";
 import { useScenePlayback } from "@/components/learn/useScenePlayback";
-import {
-  learnControlActiveClass,
-  learnControlClass,
-} from "@/components/learn/controlClass";
-import { cn } from "@/lib/utils";
 import { myelinFrame, myelinPlaybackStages } from "@/lib/learn/physiology";
-import { progressWithinStage } from "@/lib/learn/playback";
 
-type MyelinPart = "myelin" | "glia" | "nodes";
+const layout = [
+  { id: "glia", top: "12%", left: "34%", width: "32%", height: "40%" },
+  { id: "myelin", top: "54%", left: "6%", width: "18%", height: "18%" },
+  { id: "myelin", top: "54%", left: "28%", width: "16%", height: "18%" },
+  { id: "myelin", top: "54%", left: "50%", width: "16%", height: "18%" },
+  { id: "myelin", top: "54%", left: "72%", width: "16%", height: "18%" },
+  { id: "nodes", top: "56%", left: "22%", width: "8%", height: "16%" },
+  { id: "nodes", top: "56%", left: "44%", width: "8%", height: "16%" },
+  { id: "nodes", top: "56%", left: "66%", width: "8%", height: "16%" },
+];
+
+const nodeLeft = ["8%", "24%", "46%", "69%"];
 
 export function MyelinScene() {
   const scene = neuronsLesson.scenes[3];
-  const [selected, setSelected] = useState<MyelinPart | null>(null);
-  const [viewRef, inView] = useInView<HTMLDivElement>();
-  const visualRef = useRef<HTMLDivElement>(null);
-  const playback = useScenePlayback(myelinPlaybackStages(), inView);
-  const part = scene.parts?.find((item) => item.id === selected);
-  const activeNode = myelinFrame(playback.snapshot.stageId, 0).activeNode;
+  const playback = useScenePlayback(myelinPlaybackStages());
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const caption = scene.stages?.find((item) => item.id === playback.snapshot.stageId);
 
   useEffect(() => {
     return playback.controller.onFrame((snapshot) => {
-      const stages = myelinPlaybackStages();
-      const stage = stages[snapshot.stageIndex];
-      const frame = myelinFrame(
-        snapshot.stageId,
-        progressWithinStage(snapshot.time, stage),
-      );
+      const frame = myelinFrame(snapshot.stageId, 0);
+      const progress =
+        snapshot.duration <= 0 ? 0 : Math.min(1, snapshot.time / snapshot.duration);
       applyFrameVars(
-        visualRef.current,
-        { "--spread": String(frame.spread) },
+        overlayRef.current,
+        { "--spread": String(progress) },
         { activeNode: String(frame.activeNode) },
       );
     });
   }, [playback.controller]);
 
   return (
-    <div ref={viewRef} className="flex flex-col gap-4">
-      <div ref={visualRef} className="learn-myelin" data-active-node={activeNode}>
-        <LearnFrame>
-          <MyelinFigure
-            label={scene.textAlternative}
-            selected={selected}
-            onSelect={setSelected}
-          />
-        </LearnFrame>
-      </div>
-      <div role="group" aria-label={scene.title} className="flex flex-wrap gap-2">
-        {scene.parts?.map((item) => (
-          <button
-            key={item.id}
-            type="button"
-            className={cn(
-              learnControlClass,
-              selected === item.id && learnControlActiveClass,
-            )}
-            aria-pressed={selected === item.id}
-            onClick={() => setSelected(item.id as MyelinPart)}
-          >
-            {item.label}
-          </button>
-        ))}
-      </div>
-      {part ? (
-        <p className="max-w-[65ch] text-sm leading-relaxed text-foreground" aria-live="polite">
-          <span className="font-semibold">{part.label}.</span> {part.text}
-        </p>
-      ) : null}
-      <PlaybackControls
-        playing={playback.snapshot.playing}
-        speed={playback.snapshot.speed}
-        canStep={playback.canStep}
-        reducedMotion={playback.reducedMotion}
-        onPlay={playback.play}
-        onPause={playback.pause}
-        onRestart={() => {
-          setSelected(null);
-          playback.restart();
-        }}
-        onStep={playback.step}
-        onSpeed={playback.setSpeed}
-      />
-      <StageCaption stages={scene.stages} stageId={playback.snapshot.stageId} />
-    </div>
+    <SceneStage
+      label={scene.textAlternative}
+      src={learnArt.glia}
+      playback={playback}
+      caption={caption}
+      hotspots={layout.map((spot) => {
+        const part = scene.parts?.find((item) => item.id === spot.id);
+        return { ...spot, label: part?.label ?? spot.id, text: part?.text ?? "" };
+      })}
+      selectedId={selectedId}
+      onSelect={setSelectedId}
+      overlay={
+        <div ref={overlayRef} className="learn-saltatory absolute inset-0">
+          <span className="learn-axon-current" />
+          {nodeLeft.map((left, index) => (
+            <span key={left} className="learn-node-glow" data-node={index} style={{ left }} />
+          ))}
+        </div>
+      }
+    />
   );
 }

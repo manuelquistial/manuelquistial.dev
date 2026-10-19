@@ -10,11 +10,11 @@ export function LearnFrame({
   return (
     <div
       className={cn(
-        "min-w-0 touch-pan-y overflow-hidden rounded-[8px] border border-border bg-surface",
+        "min-w-0 touch-pan-y overflow-hidden rounded-[8px] border border-border bg-[#eef3f6] aspect-[1672/941]",
         className,
       )}
     >
-      <div className="aspect-[5/4] w-full sm:aspect-[16/9]">{children}</div>
+      <div className="h-full w-full">{children}</div>
     </div>
   );
 }

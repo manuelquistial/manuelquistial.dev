@@ -1,62 +1,25 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import type { ComponentType } from "react";
 import { neuronSceneIds, type NeuronSceneId } from "@/content/learn/scene-ids";
-import { LearnFrame } from "@/components/learn/LearnFrame";
-
-function SceneFallback() {
-  return (
-    <LearnFrame>
-      <div className="h-full w-full bg-surface" />
-    </LearnFrame>
-  );
-}
+import { IonScene } from "@/components/learn/scenes/IonScene";
+import { MyelinScene } from "@/components/learn/scenes/MyelinScene";
+import { NetworkScene } from "@/components/learn/scenes/NetworkScene";
+import { NeuronOverviewScene } from "@/components/learn/scenes/NeuronOverviewScene";
+import { NeuronPartsScene } from "@/components/learn/scenes/NeuronPartsScene";
+import { SignalScene } from "@/components/learn/scenes/SignalScene";
+import { SynapseScene } from "@/components/learn/scenes/SynapseScene";
+import { VoltageScene } from "@/components/learn/scenes/VoltageScene";
 
 const sceneLoaders = {
-  "una-neurona": dynamic(
-    () =>
-      import("@/components/learn/scenes/NeuronOverviewScene").then(
-        (mod) => mod.NeuronOverviewScene,
-      ),
-    { loading: SceneFallback },
-  ),
-  partes: dynamic(
-    () =>
-      import("@/components/learn/scenes/NeuronPartsScene").then(
-        (mod) => mod.NeuronPartsScene,
-      ),
-    { loading: SceneFallback },
-  ),
-  "recibir-y-transmitir": dynamic(
-    () =>
-      import("@/components/learn/scenes/SignalScene").then((mod) => mod.SignalScene),
-    { loading: SceneFallback },
-  ),
-  "glia-y-mielina": dynamic(
-    () =>
-      import("@/components/learn/scenes/MyelinScene").then((mod) => mod.MyelinScene),
-    { loading: SceneFallback },
-  ),
-  sinapsis: dynamic(
-    () =>
-      import("@/components/learn/scenes/SynapseScene").then((mod) => mod.SynapseScene),
-    { loading: SceneFallback },
-  ),
-  "iones-y-membrana": dynamic(
-    () => import("@/components/learn/scenes/IonScene").then((mod) => mod.IonScene),
-    { loading: SceneFallback },
-  ),
-  "diferencia-de-potencial": dynamic(
-    () =>
-      import("@/components/learn/scenes/VoltageScene").then((mod) => mod.VoltageScene),
-    { loading: SceneFallback },
-  ),
-  "red-neuronal": dynamic(
-    () =>
-      import("@/components/learn/scenes/NetworkScene").then((mod) => mod.NetworkScene),
-    { loading: SceneFallback },
-  ),
+  "una-neurona": NeuronOverviewScene,
+  partes: NeuronPartsScene,
+  "recibir-y-transmitir": SignalScene,
+  "glia-y-mielina": MyelinScene,
+  sinapsis: SynapseScene,
+  "iones-y-membrana": IonScene,
+  "diferencia-de-potencial": VoltageScene,
+  "red-neuronal": NetworkScene,
 } satisfies Record<NeuronSceneId, ComponentType>;
 
 function isNeuronSceneId(value: string): value is NeuronSceneId {

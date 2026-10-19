@@ -3,7 +3,9 @@ import { isSafeHttpUrl } from "@/content/learn/catalog";
 import { learnUi } from "@/content/learn/es/ui";
 import type { LearnLessonContent } from "@/content/learn/types";
 import type { Locale } from "@/i18n/config";
+import { lessonCitationOrder } from "@/lib/learn/citations";
 import { localizedPath } from "@/lib/localizedPath";
+import { CiteMark } from "@/components/learn/CiteMark";
 import { ContinueBanner } from "@/components/learn/ContinueBanner";
 import { SceneProgressTracker } from "@/components/learn/SceneProgressTracker";
 import { SceneSection } from "@/components/learn/SceneSection";
@@ -21,6 +23,12 @@ export function LearnLesson({
   const originalPost = isSafeHttpUrl(lesson.originalPostUrl)
     ? lesson.originalPostUrl
     : null;
+  const order = lessonCitationOrder(lesson);
+  const numbers = Object.fromEntries(order.map((id, index) => [id, index + 1]));
+  const citedSources = order.flatMap((id) => {
+    const source = lesson.sources.find((item) => item.id === id);
+    return source ? [source] : [];
+  });
 
   return (
     <Section containerClassName="overflow-x-clip">
@@ -38,11 +46,16 @@ export function LearnLesson({
       </h1>
       <div className="mt-6 max-w-[65ch] space-y-4">
         {lesson.intro.map((paragraph) => (
-          <p key={paragraph} className="leading-relaxed text-muted">
-            {paragraph}
+          <p key={paragraph.text} className="leading-relaxed text-muted">
+            {paragraph.text}
+            {paragraph.cites?.map((id) => {
+              const source = lesson.sources.find((item) => item.id === id);
+              const number = numbers[id];
+              if (!source || !number) return null;
+              return <CiteMark key={id} source={source} number={number} />;
+            })}
           </p>
         ))}
-        <p className="text-sm leading-relaxed text-muted">{lesson.disclaimer}</p>
       </div>
       <ContinueBanner slug={lesson.slug} sceneIds={sceneIds} />
       <nav className="mt-10" aria-label={learnUi.scenesLabel}>
@@ -65,6 +78,8 @@ export function LearnLesson({
           total={lesson.scenes.length}
           deepen={lesson.deepen.find((item) => item.afterSceneId === scene.id)}
           question={lesson.questions.find((item) => item.afterSceneId === scene.id)}
+          numbers={numbers}
+          sources={lesson.sources}
         >
           <SceneVisual sceneId={scene.id} />
         </SceneSection>
@@ -79,8 +94,8 @@ export function LearnLesson({
         </h2>
         <div className="mt-6 max-w-[65ch] space-y-4">
           {lesson.closing.map((paragraph) => (
-            <p key={paragraph} className="leading-relaxed text-muted">
-              {paragraph}
+            <p key={paragraph.text} className="leading-relaxed text-muted">
+              {paragraph.text}
             </p>
           ))}
         </div>
@@ -92,25 +107,24 @@ export function LearnLesson({
         >
           {learnUi.sourcesTitle}
         </h2>
-        <ul className="mt-6 max-w-[65ch] space-y-5">
-          {lesson.sources.map((source) => (
-            <li key={source.href}>
+        <ol className="mt-6 max-w-[65ch] space-y-4">
+          {citedSources.map((source) => (
+            <li key={source.id} id={`ref-${source.id}`} className="scroll-mt-28">
+              <p className="text-sm font-semibold text-foreground">
+                {numbers[source.id]}. {source.authors}, {source.year}
+              </p>
+              <p className="mt-1 text-sm leading-relaxed text-muted">{source.edition}</p>
               <a
                 href={source.href}
-                className="prose-link font-semibold"
+                className="prose-link mt-1 inline-block text-sm font-semibold"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 {source.title}
               </a>
-              <p className="mt-1 text-sm leading-relaxed text-muted">{source.detail}</p>
-              <p className="mt-1 text-sm leading-relaxed text-foreground">{source.supports}</p>
             </li>
           ))}
-        </ul>
-        <p className="mt-6 max-w-[65ch] text-sm leading-relaxed text-muted">
-          {lesson.sourcesNote}
-        </p>
+        </ol>
         {originalPost ? (
           <p className="mt-4">
             <a

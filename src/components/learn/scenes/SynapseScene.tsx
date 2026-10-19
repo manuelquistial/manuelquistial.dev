@@ -1,108 +1,128 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { learnArt } from "@/content/learn/art";
 import { learnUi } from "@/content/learn/es/ui";
 import { neuronsLesson } from "@/content/learn/es/neurons";
-import {
-  ChemicalSynapse,
-  ElectricalSynapse,
-} from "@/components/learn/illustrations/SynapseFigure";
-import { LearnFrame } from "@/components/learn/LearnFrame";
-import { PlaybackControls } from "@/components/learn/PlaybackControls";
-import { StageCaption } from "@/components/learn/StageCaption";
+import { SceneStage, type SceneHotspot } from "@/components/learn/SceneStage";
 import { applyFrameVars } from "@/components/learn/applyFrameVars";
-import { useInView } from "@/components/learn/useInView";
 import { useScenePlayback } from "@/components/learn/useScenePlayback";
-import {
-  learnControlActiveClass,
-  learnControlClass,
-} from "@/components/learn/controlClass";
-import { cn } from "@/lib/utils";
 import { progressWithinStage } from "@/lib/learn/playback";
 import { synapseFrameVars, synapsePlaybackStages } from "@/lib/learn/physiology";
 
-type SynapseMode = "chemical" | "electrical";
+const chemicalLayout: SceneHotspot[] = [
+  {
+    id: "vesicles",
+    label: "",
+    text: "",
+    top: "6%",
+    left: "22%",
+    width: "56%",
+    height: "34%",
+  },
+  {
+    id: "transmitters",
+    label: "",
+    text: "",
+    top: "40%",
+    left: "28%",
+    width: "44%",
+    height: "18%",
+  },
+  {
+    id: "receptors",
+    label: "",
+    text: "",
+    top: "62%",
+    left: "16%",
+    width: "68%",
+    height: "16%",
+  },
+];
+
+const electricalLayout: SceneHotspot[] = [
+  {
+    id: "junctions",
+    label: "",
+    text: "",
+    top: "36%",
+    left: "26%",
+    width: "52%",
+    height: "24%",
+  },
+];
 
 export function SynapseScene() {
   const scene = neuronsLesson.scenes[4];
-  const [mode, setMode] = useState<SynapseMode>("chemical");
-  const modeRef = useRef<SynapseMode>(mode);
-  const [viewRef, inView] = useInView<HTMLDivElement>();
-  const visualRef = useRef<HTMLDivElement>(null);
-  const playback = useScenePlayback(synapsePlaybackStages("chemical"), inView);
-
-  useEffect(() => {
-    modeRef.current = mode;
-  }, [mode]);
+  const [mode, setMode] = useState<"chemical" | "electrical">("chemical");
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const playback = useScenePlayback(synapsePlaybackStages(mode));
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const caption = scene.stages?.find((item) => item.id === playback.snapshot.stageId);
+  const layout = (mode === "chemical" ? chemicalLayout : electricalLayout).map((item) => {
+    const part = scene.parts?.find((entry) => entry.id === item.id);
+    return { ...item, label: part?.label ?? item.id, text: part?.text ?? "" };
+  });
 
   useEffect(() => {
     return playback.controller.onFrame((snapshot) => {
-      const stages = synapsePlaybackStages(modeRef.current);
-      const stage = stages[snapshot.stageIndex];
+      const stages = synapsePlaybackStages(mode);
+      const stage = stages.find((item) => item.id === snapshot.stageId);
       applyFrameVars(
-        visualRef.current,
+        overlayRef.current,
         synapseFrameVars(
-          modeRef.current,
+          mode,
           snapshot.stageId,
           progressWithinStage(snapshot.time, stage),
         ),
       );
     });
-  }, [playback.controller]);
+  }, [mode, playback.controller]);
 
-  const choose = (next: SynapseMode) => {
-    modeRef.current = next;
+  const switchMode = (next: "chemical" | "electrical") => {
+    if (next === mode) return;
     setMode(next);
+    setSelectedId(null);
     playback.reset(synapsePlaybackStages(next));
   };
 
   return (
-    <div ref={viewRef} className="flex flex-col gap-4">
-      <div role="tablist" aria-label={learnUi.synapseModes} className="flex flex-wrap gap-2">
-        {(
-          [
-            ["chemical", learnUi.chemical],
-            ["electrical", learnUi.electrical],
-          ] as const
-        ).map(([value, label]) => (
-          <button
-            key={value}
-            type="button"
-            role="tab"
-            id={`synapse-tab-${value}`}
-            className={cn(learnControlClass, mode === value && learnControlActiveClass)}
-            aria-selected={mode === value}
-            onClick={() => choose(value)}
-          >
-            {label}
-          </button>
-        ))}
-      </div>
-      <div
-        ref={visualRef}
-        role="tabpanel"
-        aria-labelledby={`synapse-tab-${mode}`}
-      >
-        <LearnFrame>
-          {mode === "chemical" ? (
-            <ChemicalSynapse label="Esquema de sinapsis química: terminal, hendidura, neurotransmisores y membrana postsináptica." />
-          ) : (
-            <ElectricalSynapse label="Esquema de sinapsis eléctrica: dos células unidas por uniones comunicantes, con paso directo de iones." />
-          )}
-        </LearnFrame>
-      </div>
-      <PlaybackControls
-        playing={playback.snapshot.playing}
-        speed={playback.snapshot.speed}
-        canStep={playback.canStep}
-        reducedMotion={playback.reducedMotion}
-        onPlay={playback.play}
-        onPause={playback.pause}
-        onRestart={playback.restart}
-        onStep={playback.step}
-        onSpeed={playback.setSpeed}
-      />
-      <StageCaption stages={scene.stages} stageId={playback.snapshot.stageId} />
-    </div>
+    <SceneStage
+      label={scene.textAlternative}
+      src={mode === "chemical" ? learnArt.chemical : learnArt.electrical}
+      playback={playback}
+      caption={caption}
+      hotspots={layout}
+      selectedId={selectedId}
+      onSelect={setSelectedId}
+      toolbarExtra={
+        <div role="tablist" aria-label={learnUi.synapseModes} className="flex gap-1">
+          {(["chemical", "electrical"] as const).map((item) => (
+            <button
+              key={item}
+              type="button"
+              role="tab"
+              aria-selected={mode === item}
+              className={`min-h-11 rounded-[6px] border px-3 text-sm font-semibold ${mode === item ? "border-foreground/40 bg-surface-soft text-foreground" : "border-border text-foreground"}`}
+              onClick={() => switchMode(item)}
+            >
+              {item === "chemical" ? learnUi.chemical : learnUi.electrical}
+            </button>
+          ))}
+        </div>
+      }
+      overlay={
+        <div ref={overlayRef} className={`learn-synapse absolute inset-0 is-${mode}`}>
+          <span className="learn-calcium" />
+          <span className="learn-nt learn-nt-a" />
+          <span className="learn-nt learn-nt-b" />
+          <span className="learn-nt learn-nt-c" />
+          <span className="learn-response-band" />
+          <span className="learn-ion-flow learn-ion-flow-a" />
+          <span className="learn-ion-flow learn-ion-flow-b" />
+          <span className="learn-ion-flow learn-ion-flow-c" />
+        </div>
+      }
+    />
   );
 }

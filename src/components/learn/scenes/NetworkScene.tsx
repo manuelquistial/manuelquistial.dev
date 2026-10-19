@@ -1,64 +1,52 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { learnArt } from "@/content/learn/art";
 import { learnUi } from "@/content/learn/es/ui";
 import { neuronsLesson } from "@/content/learn/es/neurons";
-import { NetworkFigure } from "@/components/learn/illustrations/NetworkFigure";
-import { LearnFrame } from "@/components/learn/LearnFrame";
-import { PlaybackControls } from "@/components/learn/PlaybackControls";
-import { StageCaption } from "@/components/learn/StageCaption";
-import { applyFrameVars } from "@/components/learn/applyFrameVars";
-import { useInView } from "@/components/learn/useInView";
+import { SceneStage } from "@/components/learn/SceneStage";
 import { useScenePlayback } from "@/components/learn/useScenePlayback";
 import { networkPlaybackStages, networkState } from "@/lib/learn/physiology";
 
-const stages = networkPlaybackStages();
+const cells = [
+  { id: "n1", left: "11.2%", top: "20.9%" },
+  { id: "n2", left: "39.8%", top: "15.6%" },
+  { id: "n3", left: "55.2%", top: "40%" },
+  { id: "n4", left: "41.4%", top: "72.2%" },
+];
 
 export function NetworkScene() {
   const scene = neuronsLesson.scenes[7];
-  const [viewRef, inView] = useInView<HTMLDivElement>();
-  const visualRef = useRef<HTMLDivElement>(null);
-  const playback = useScenePlayback(stages, inView);
+  const playback = useScenePlayback(networkPlaybackStages());
   const state = networkState(playback.snapshot.stageId);
-
-  useEffect(() => {
-    return playback.controller.onFrame((snapshot) => {
-      const next = networkState(snapshot.stageId);
-      applyFrameVars(visualRef.current, {}, {
-        active: next.active[0] ?? "",
-        inhibited: next.inhibited[0] ?? "",
-      });
-    });
-  }, [playback.controller]);
+  const caption = scene.stages?.find((item) => item.id === playback.snapshot.stageId);
 
   return (
-    <div ref={viewRef} className="flex flex-col gap-4">
-      <div
-        ref={visualRef}
-        className="learn-network"
-        data-active={state.active[0] ?? ""}
-        data-inhibited={state.inhibited[0] ?? ""}
-      >
-        <LearnFrame className="sm:aspect-[16/10]">
-          <NetworkFigure label={scene.textAlternative} />
-        </LearnFrame>
-      </div>
-      <ul className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted">
-        <li>{learnUi.excitatory}</li>
-        <li>{learnUi.inhibitory}</li>
-      </ul>
-      <PlaybackControls
-        playing={playback.snapshot.playing}
-        speed={playback.snapshot.speed}
-        canStep={playback.canStep}
-        reducedMotion={playback.reducedMotion}
-        onPlay={playback.play}
-        onPause={playback.pause}
-        onRestart={playback.restart}
-        onStep={playback.step}
-        onSpeed={playback.setSpeed}
-      />
-      <StageCaption stages={scene.stages} stageId={playback.snapshot.stageId} />
-    </div>
+    <SceneStage
+      label={scene.textAlternative}
+      src={learnArt.network}
+      playback={playback}
+      caption={caption}
+      legend={
+        <ul className="flex flex-wrap gap-x-4 gap-y-1">
+          <li className="learn-key-excitatory">{learnUi.excitatory}</li>
+          <li className="learn-key-inhibitory">{learnUi.inhibitory}</li>
+        </ul>
+      }
+      overlay={
+        <div className="absolute inset-0">
+          {cells.map((cell) => {
+            const active = state.active.includes(cell.id);
+            const inhibited = state.inhibited.includes(cell.id);
+            return (
+              <span
+                key={cell.id}
+                className={`learn-net-ring ${active ? "is-active" : ""} ${inhibited ? "is-inhibited" : ""}`}
+                style={{ left: cell.left, top: cell.top }}
+              />
+            );
+          })}
+        </div>
+      }
+    />
   );
 }

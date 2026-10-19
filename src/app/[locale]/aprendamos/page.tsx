@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { learnLessons } from "@/content/learn/catalog";
@@ -9,8 +10,7 @@ import type { Locale } from "@/i18n/config";
 import { buildPageMetadata } from "@/lib/metadata";
 import { localizedPath } from "@/lib/localizedPath";
 import { Section } from "@/components/layout/Section";
-import { LearnFrame } from "@/components/learn/LearnFrame";
-import { NeuronFigure } from "@/components/learn/illustrations/NeuronFigure";
+import { learnArt, learnArtSize } from "@/content/learn/art";
 
 interface LearnIndexPageProps {
   params: Promise<{ locale: string }>;
@@ -64,9 +64,14 @@ export default async function LearnIndexPage({ params }: LearnIndexPageProps) {
             key={lesson.slug}
             className="grid gap-6 border-t border-border pt-10 md:grid-cols-[minmax(0,18rem)_minmax(0,1fr)] md:items-center"
           >
-            <LearnFrame>
-              <NeuronFigure label={lesson.scenes[0]?.textAlternative ?? lesson.title} />
-            </LearnFrame>
+            <Image
+              src={learnArt.neuron}
+              alt={lesson.scenes[0]?.textAlternative ?? lesson.title}
+              width={learnArtSize.width}
+              height={learnArtSize.height}
+              className="h-auto w-full rounded-[8px] border border-border bg-[#eef3f6]"
+              sizes="(min-width: 768px) 288px, 100vw"
+            />
             <div className="min-w-0">
               <h2 className="text-[clamp(1.5rem,2.5vw,1.75rem)] font-semibold leading-[1.25] text-foreground">
                 <Link

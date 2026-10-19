@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { learnArt } from "@/content/learn/art";
 import { learnUi } from "@/content/learn/es/ui";
 import { neuronsLesson } from "@/content/learn/es/neurons";
-import { SceneStage } from "@/components/learn/SceneStage";
+import { NeuronArt } from "@/components/learn/illustrations/NeuronArt";
 import { VoltageGraph } from "@/components/learn/illustrations/VoltageGraph";
+import { SceneStage } from "@/components/learn/SceneStage";
 import { applyFrameVars } from "@/components/learn/applyFrameVars";
 import { useScenePlayback } from "@/components/learn/useScenePlayback";
 import { voltageFrameVars, voltagePlaybackStages } from "@/lib/learn/physiology";
@@ -25,20 +25,16 @@ export function VoltageScene() {
   return (
     <SceneStage
       label={scene.textAlternative}
-      src={learnArt.neuron}
       playback={playback}
       caption={caption}
       legend={<p>{learnUi.graphCaption}</p>}
-      overlay={
-        <span className="learn-measure" data-stage={playback.snapshot.stageId}>
-          <span className="learn-measure-label">Punto</span>
-        </span>
-      }
       aside={
         <div ref={graphRef} className="learn-voltage h-full min-h-48">
           <VoltageGraph label={learnUi.graphCaption} />
         </div>
       }
-    />
+    >
+      <NeuronArt label={scene.textAlternative} showMeasure />
+    </SceneStage>
   );
 }

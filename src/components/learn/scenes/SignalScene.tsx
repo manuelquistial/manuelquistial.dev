@@ -1,43 +1,72 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { learnArt } from "@/content/learn/art";
 import { neuronsLesson } from "@/content/learn/es/neurons";
+import { NeuronArt } from "@/components/learn/illustrations/NeuronArt";
+import { pointAlong } from "@/components/learn/illustrations/geometry";
+import { axonCurve, signalChains, somaCenter } from "@/components/learn/illustrations/neuronModel";
 import { SceneStage } from "@/components/learn/SceneStage";
-import { applyFrameVars } from "@/components/learn/applyFrameVars";
 import { useScenePlayback } from "@/components/learn/useScenePlayback";
 import { signalFrameVars, signalPlaybackStages } from "@/lib/learn/physiology";
 
 export function SignalScene() {
   const scene = neuronsLesson.scenes[2];
   const playback = useScenePlayback(signalPlaybackStages());
-  const overlayRef = useRef<HTMLDivElement>(null);
+  const layerRef = useRef<SVGGElement>(null);
   const caption = scene.stages?.find((item) => item.id === playback.snapshot.stageId);
 
   useEffect(() => {
     return playback.controller.onFrame((snapshot) => {
-      applyFrameVars(overlayRef.current, signalFrameVars(snapshot.time, snapshot.duration));
+      const layer = layerRef.current;
+      if (!layer) return;
+      const vars = signalFrameVars(snapshot.time, snapshot.duration);
+      layer.querySelectorAll<SVGCircleElement>("[data-signal]").forEach((dot) => {
+        const index = Number(dot.dataset.signal);
+        const chain = signalChains[index];
+        if (!chain) return;
+        const point = pointAlong(chain, Number(vars[`--p${index + 1}`] ?? 0));
+        dot.setAttribute("cx", String(point.x));
+        dot.setAttribute("cy", String(point.y));
+        dot.style.opacity = vars["--p-opacity"] ?? "0";
+      });
+      const spike = layer.querySelector<SVGCircleElement>("[data-spike]");
+      if (spike) {
+        const point = pointAlong([axonCurve], Number(vars["--spike"] ?? 0));
+        spike.setAttribute("cx", String(point.x));
+        spike.setAttribute("cy", String(point.y));
+        spike.style.opacity = vars["--spike-opacity"] ?? "0";
+      }
+      const soma = layer.querySelector<SVGCircleElement>("[data-soma]");
+      if (soma) soma.style.opacity = vars["--integration"] ?? "0";
+      const threshold = layer.querySelector<SVGCircleElement>("[data-threshold]");
+      if (threshold) threshold.style.opacity = vars["--threshold"] ?? "0";
     });
   }, [playback.controller]);
 
   return (
-    <SceneStage
-      label={scene.textAlternative}
-      src={learnArt.neuron}
-      playback={playback}
-      caption={caption}
-      overlay={
-        <div ref={overlayRef} className="learn-signal absolute inset-0">
-          <span className="learn-pulse" style={{ top: "28%", left: "10%" }} />
-          <span className="learn-pulse learn-pulse-2" style={{ top: "68%", left: "16%" }} />
-          <span className="learn-pulse learn-pulse-3" style={{ top: "18%", left: "24%" }} />
-          <span className="learn-soma-glow" />
-          <span className="learn-threshold-glow" />
-          <svg viewBox="0 0 100 56.3" className="absolute inset-0 h-full w-full" aria-hidden="true">
-            <path className="learn-spike" d="M38 30 C 52 31, 70 29, 93 28" />
-          </svg>
-        </div>
-      }
-    />
+    <SceneStage label={scene.textAlternative} playback={playback} caption={caption}>
+      <NeuronArt label={scene.textAlternative}>
+        <g ref={layerRef} pointerEvents="none">
+          {signalChains.map((chain, index) => {
+            const start = pointAlong(chain, 0);
+            return (
+              <circle
+                key={index}
+                data-signal={index}
+                cx={start.x}
+                cy={start.y}
+                r="8"
+                fill="#9e3b2d"
+                stroke="#fff"
+                strokeWidth="2"
+              />
+            );
+          })}
+          <circle data-spike="" cx={axonCurve.x0} cy={axonCurve.y0} r="9" fill="#9e3b2d" stroke="#fff" strokeWidth="2" opacity="0" />
+          <circle data-soma="" cx={somaCenter.x} cy={somaCenter.y} r="78" fill="none" stroke="#6d5b88" strokeWidth="3" opacity="0" />
+          <circle data-threshold="" cx={axonCurve.x0} cy={axonCurve.y0} r="14" fill="#9e3b2d" opacity="0" />
+        </g>
+      </NeuronArt>
+    </SceneStage>
   );
 }

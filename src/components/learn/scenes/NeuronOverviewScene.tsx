@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { learnArt } from "@/content/learn/art";
 import { neuronsLesson } from "@/content/learn/es/neurons";
+import { NeuronArt } from "@/components/learn/illustrations/NeuronArt";
 import { SceneStage } from "@/components/learn/SceneStage";
 
 export function NeuronOverviewScene() {
@@ -10,11 +10,8 @@ export function NeuronOverviewScene() {
   const [zoomed, setZoomed] = useState(false);
 
   return (
-    <SceneStage
-      label={scene.textAlternative}
-      src={learnArt.neuron}
-      zoomed={zoomed}
-      onZoom={() => setZoomed((value) => !value)}
-    />
+    <SceneStage label={scene.textAlternative} zoomed={zoomed} onZoom={() => setZoomed((value) => !value)}>
+      <NeuronArt label={scene.textAlternative} />
+    </SceneStage>
   );
 }

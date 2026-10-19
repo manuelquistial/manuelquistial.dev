@@ -1,8 +1,6 @@
 "use client";
 
-import Image from "next/image";
-import { useEffect, useId, useRef } from "react";
-import { learnArtSize } from "@/content/learn/art";
+import { useEffect, useId, useRef, type ReactNode } from "react";
 import { learnUi } from "@/content/learn/es/ui";
 import type { LearnPartCopy, LearnStageCopy } from "@/content/learn/types";
 import { PlaybackControls } from "@/components/learn/PlaybackControls";
@@ -11,76 +9,82 @@ import type { useScenePlayback } from "@/components/learn/useScenePlayback";
 
 type Playback = ReturnType<typeof useScenePlayback>;
 
-export type SceneHotspot = {
+export type SceneCardAnchor = {
   id: string;
   label: string;
   text: string;
-  top: string;
-  left: string;
-  width: string;
-  height: string;
+  x: number;
+  y: number;
 };
 
 const iconButtonClass =
   "inline-flex size-11 items-center justify-center rounded-[6px] border border-border bg-surface text-foreground hover:border-foreground/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground";
 
+export function cardFor(
+  parts: readonly LearnPartCopy[] | undefined,
+  anchors: Record<string, { x: number; y: number }>,
+  selectedId: string | null,
+): SceneCardAnchor | null {
+  if (!selectedId) return null;
+  const part = parts?.find((item) => item.id === selectedId);
+  const anchor = anchors[selectedId];
+  if (!part || !anchor) return null;
+  return { id: part.id, label: part.label, text: part.text, x: anchor.x, y: anchor.y };
+}
+
 export function SceneStage({
   label,
-  src,
   playback,
   caption,
-  hotspots = [],
-  selectedId,
-  onSelect,
+  card = null,
+  onClose,
   zoomed = false,
   onZoom,
   toolbarExtra,
-  overlay,
   aside,
   legend,
+  children,
 }: {
   label: string;
-  src: string;
   playback?: Playback;
   caption?: LearnStageCopy | null;
-  hotspots?: readonly SceneHotspot[];
-  selectedId?: string | null;
-  onSelect?: (id: string | null) => void;
+  card?: SceneCardAnchor | null;
+  onClose?: () => void;
   zoomed?: boolean;
   onZoom?: () => void;
-  toolbarExtra?: React.ReactNode;
-  overlay?: React.ReactNode;
-  aside?: React.ReactNode;
-  legend?: React.ReactNode;
+  toolbarExtra?: ReactNode;
+  aside?: ReactNode;
+  legend?: ReactNode;
+  children: ReactNode;
 }) {
   const titleId = useId();
   const closeRef = useRef<HTMLButtonElement>(null);
-  const hotspotRefs = useRef(new Map<string, HTMLButtonElement>());
+  const artRef = useRef<HTMLDivElement>(null);
   const openRef = useRef(false);
-  const selected = hotspots.find((item) => item.id === selectedId) ?? null;
-  const hinted = hotspots[0]?.id;
 
   useEffect(() => {
-    const open = Boolean(selectedId);
+    const open = Boolean(card);
     if (open && !openRef.current) {
       playback?.suspend();
       requestAnimationFrame(() => closeRef.current?.focus());
     }
     if (!open && openRef.current) playback?.release();
     openRef.current = open;
-  }, [playback, selectedId]);
+  }, [playback, card]);
 
   const close = () => {
-    const current = selectedId;
-    onSelect?.(null);
-    if (current) hotspotRefs.current.get(current)?.focus();
+    const current = card?.id;
+    onClose?.();
+    if (!current || !artRef.current) return;
+    const part = artRef.current.querySelector<SVGElement>(`[data-part="${current}"]`);
+    part?.focus();
   };
 
   return (
     <div
       className="overflow-hidden rounded-[8px] border border-border bg-[#eef3f6]"
       onKeyDown={(event) => {
-        if (event.key === "Escape" && selected) {
+        if (event.key === "Escape" && card) {
           event.preventDefault();
           close();
         }
@@ -91,57 +95,22 @@ export function SceneStage({
           ref={playback?.frameRef}
           className="relative min-w-0"
           onClick={(event) => {
-            const target = event.target as HTMLElement;
-            if (target.closest("[data-hotspot], .learn-card, button")) return;
-            if (selected) onSelect?.(null);
+            const target = event.target;
+            if (!(target instanceof Element)) return;
+            if (target.closest("[data-part], .learn-card, button")) return;
+            if (card) onClose?.();
           }}
         >
-          <div className={`learn-zoom-target relative ${zoomed ? "is-zoomed" : ""}`}>
-            <Image
-              src={src}
-              alt=""
-              width={learnArtSize.width}
-              height={learnArtSize.height}
-              className="block h-auto w-full"
-              sizes="(min-width: 1024px) 960px, 100vw"
-            />
-            <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-              {overlay}
-            </div>
-            {hotspots.map((hotspot) => (
-              <button
-                key={`${hotspot.id}-${hotspot.left}`}
-                type="button"
-                data-hotspot=""
-                ref={(node) => {
-                  if (node) hotspotRefs.current.set(hotspot.id, node);
-                  else hotspotRefs.current.delete(hotspot.id);
-                }}
-                className={`learn-hotspot absolute ${hotspot.id === hinted && !selected ? "learn-hint" : ""} ${selectedId === hotspot.id ? "is-selected" : ""}`}
-                style={{
-                  top: hotspot.top,
-                  left: hotspot.left,
-                  width: hotspot.width,
-                  height: hotspot.height,
-                }}
-                aria-pressed={selectedId === hotspot.id}
-                aria-label={hotspot.label}
-                onClick={() => onSelect?.(selectedId === hotspot.id ? null : hotspot.id)}
-              />
-            ))}
-            {selected ? (
+          <div ref={artRef} className={`learn-zoom-target relative ${zoomed ? "is-zoomed" : ""}`}>
+            {children}
+            {card ? (
               <>
-                <svg
-                  className="pointer-events-none absolute inset-0 h-full w-full text-accent"
-                  viewBox="0 0 100 100"
-                  preserveAspectRatio="none"
-                  aria-hidden="true"
-                >
+                <svg className="pointer-events-none absolute inset-0 h-full w-full text-accent" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
                   <line
-                    x1={Number.parseFloat(selected.left) + Number.parseFloat(selected.width) / 2}
-                    y1={Number.parseFloat(selected.top) + Number.parseFloat(selected.height) / 2}
-                    x2={Math.min(Number.parseFloat(selected.left), 78)}
-                    y2={Math.max(4, Number.parseFloat(selected.top))}
+                    x1={card.x}
+                    y1={card.y}
+                    x2={Math.min(card.x, 72)}
+                    y2={Math.max(6, card.y - 6)}
                     stroke="currentColor"
                     strokeWidth="0.35"
                     vectorEffect="non-scaling-stroke"
@@ -150,15 +119,15 @@ export function SceneStage({
                 <div
                   className="learn-card absolute z-10 max-w-64 rounded-[8px] border border-border bg-surface p-3 text-foreground shadow-sm"
                   style={{
-                    left: `min(${selected.left}, calc(100% - 16.5rem))`,
-                    top: `max(0.5rem, calc(${selected.top} - 0.25rem))`,
+                    left: `min(${card.x}%, calc(100% - 16.5rem))`,
+                    top: `min(${card.y}%, calc(100% - 8rem))`,
                   }}
                   role="dialog"
                   aria-labelledby={titleId}
                 >
                   <div className="flex items-start justify-between gap-2">
                     <p id={titleId} className="text-sm font-semibold">
-                      {selected.label}
+                      {card.label}
                     </p>
                     <button
                       ref={closeRef}
@@ -171,7 +140,7 @@ export function SceneStage({
                       <IconClose />
                     </button>
                   </div>
-                  <p className="mt-1 text-sm leading-relaxed">{selected.text}</p>
+                  <p className="mt-1 text-sm leading-relaxed">{card.text}</p>
                 </div>
               </>
             ) : null}
@@ -211,7 +180,7 @@ export function SceneStage({
                 onPlay={playback.play}
                 onPause={playback.pause}
                 onRestart={() => {
-                  onSelect?.(null);
+                  onClose?.();
                   playback.restart();
                 }}
                 onStep={playback.step}
@@ -223,13 +192,4 @@ export function SceneStage({
       ) : null}
     </div>
   );
-}
-
-export function hotspotsFromParts(
-  parts: readonly LearnPartCopy[] | undefined,
-  layout: Record<string, Pick<SceneHotspot, "top" | "left" | "width" | "height">>,
-): SceneHotspot[] {
-  return (parts ?? [])
-    .filter((part) => layout[part.id])
-    .map((part) => ({ ...part, ...layout[part.id] }));
 }

@@ -1,0 +1,51 @@
+export const learnUi = {
+  indexTitle: "Aprendamos",
+  indexMetaTitle: "Aprendamos · Manuel Quistial",
+  indexDescription:
+    "Explicaciones visuales para ampliar temas de redes: leer, observar y usar controles. La primera trata de cómo se comunican las neuronas.",
+  indexIntro:
+    "Aquí puedes explorar con más detalle algunos temas que comento en redes. Cada explicación se puede leer, mirar y recorrer con controles.",
+  explore: "Explorar explicación",
+  scenesLabel: "Escenas",
+  scenePosition: (current: number, total: number) =>
+    `Escena ${current} de ${total}`,
+  continueLabel: "Continuar donde quedaste",
+  questionEyebrow: "Pregunta",
+  check: "Comprobar",
+  retry: "Volver a intentar",
+  correct: "Correcto.",
+  review: "Revisa esta idea.",
+  deepenLabel: "Para profundizar",
+  sourcesTitle: "Fuentes",
+  closingLabel: "Cierre",
+  originalPost: "Publicación original",
+  backToIndex: "Aprendamos",
+  choosePart: "Elige una parte para ver su nombre y una explicación breve.",
+  play: "Reproducir",
+  pause: "Pausar",
+  restart: "Reiniciar",
+  step: "Siguiente etapa",
+  speedLabel: "Velocidad de reproducción",
+  speedNote: "Solo cambia la animación. No representa una velocidad fisiológica.",
+  reduced:
+    "Con movimiento reducido, la escena avanza por etapas y no se anima de forma continua.",
+  reducedPlay:
+    "La reproducción continua está desactivada. Usa Siguiente etapa.",
+  zoomIn: "Ampliar",
+  zoomOut: "Restaurar vista",
+  chemical: "Química",
+  electrical: "Eléctrica",
+  synapseModes: "Tipo de sinapsis",
+  schematic: "Esquema, no a escala.",
+  outside: "Exterior",
+  inside: "Interior",
+  pumpLegend: "Bomba: mantiene gradientes. No produce la fase rápida.",
+  sodium: "Na+, sodio",
+  potassium: "K+, potasio",
+  excitatory: "Conexión excitatoria",
+  inhibitory: "Conexión inhibitoria",
+  graphCaption:
+    "Voltaje en un punto de la membrana. El eje horizontal ordena las etapas de la animación y no está en milisegundos.",
+  voltageExample:
+    "Los valores, cerca de -70 mV en reposo y un pico cercano a +30 mV, son un ejemplo habitual de libro de texto. Cambian según el tipo de neurona.",
+} as const;

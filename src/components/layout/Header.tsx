@@ -56,14 +56,14 @@ export function Header({ locale, content }: HeaderProps) {
             locale={locale}
             nav={content.nav}
             ariaLabel={content.a11y.mainNav}
-            className="hidden items-center gap-1 md:flex"
+            className="hidden items-center gap-1 lg:flex"
             linkClassName="rounded-[6px] px-3 py-2 text-base font-medium transition-colors duration-150"
           />
           <LocaleSwitcher locale={locale} labels={content.languageSwitcher} />
           <button
             ref={menuButtonRef}
             type="button"
-            className="inline-flex min-h-11 items-center justify-center rounded-[6px] border border-border px-4 text-base font-semibold text-foreground transition-colors duration-150 hover:border-foreground/40 md:hidden"
+            className="inline-flex min-h-11 items-center justify-center rounded-[6px] border border-border px-4 text-base font-semibold text-foreground transition-colors duration-150 hover:border-foreground/40 lg:hidden"
             aria-expanded={open}
             aria-controls={panelId}
             onClick={() => setOpen((value) => !value)}
@@ -77,7 +77,7 @@ export function Header({ locale, content }: HeaderProps) {
         <div
           id={panelId}
           ref={panelRef}
-          className="border-t border-border md:hidden"
+          className="border-t border-border lg:hidden"
         >
           <Container className="py-4">
             <NavLinks

@@ -31,6 +31,7 @@ export const nav = {
   about: "Trayectoria",
   projects: "Proyectos",
   research: "Investigación",
+  learn: "Aprendamos",
   contact: "Contacto",
 };
 
@@ -49,6 +50,8 @@ export const hero = {
     "7 años de experiencia en desarrollo de plataformas empresariales, integración de servicios y modernización de aplicaciones. He trabajado en Anthology / Blackboard y desarrollado soluciones para Babel Scores, Sal & Picciotto y la Universidad de Antioquia.",
   viewProjects: "Ver proyectos",
   viewExperience: "Ver trayectoria",
+  learnLabel: "Aprendamos",
+  learnNote: "Temas de las redes, con más detalle.",
 };
 
 export const sections = {
@@ -126,4 +129,5 @@ export const languageSwitcher = {
   label: "Idioma",
   en: "English",
   es: "Español",
+  unavailableHere: "No hay versión en este idioma. Ir al inicio.",
 };

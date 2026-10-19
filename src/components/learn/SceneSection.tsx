@@ -1,0 +1,61 @@
+import { learnUi } from "@/content/learn/es/ui";
+import type { LearnDeepen, LearnQuestion, LearnScene } from "@/content/learn/types";
+import { CheckQuestion } from "@/components/learn/CheckQuestion";
+
+export function SceneSection({
+  scene,
+  index,
+  total,
+  children,
+  deepen,
+  question,
+}: {
+  scene: LearnScene;
+  index: number;
+  total: number;
+  children: React.ReactNode;
+  deepen?: LearnDeepen;
+  question?: LearnQuestion;
+}) {
+  return (
+    <section
+      id={scene.id}
+      aria-labelledby={`${scene.id}-title`}
+      className="scroll-mt-28 border-t border-border py-12 md:py-16"
+    >
+      <p className="text-sm font-medium text-muted">
+        {learnUi.scenePosition(index, total)}
+      </p>
+      <h2
+        id={`${scene.id}-title`}
+        className="mt-2 text-[clamp(1.5rem,2.5vw,1.75rem)] font-semibold leading-[1.25] text-foreground"
+      >
+        {scene.title}
+      </h2>
+      <p className="sr-only">{scene.textAlternative}</p>
+      <div className="mt-6">{children}</div>
+      <div className="mt-6 max-w-[65ch] space-y-4">
+        {scene.paragraphs.map((paragraph) => (
+          <p key={paragraph} className="leading-relaxed text-muted">
+            {paragraph}
+          </p>
+        ))}
+      </div>
+      {deepen ? (
+        <details className="mt-6 max-w-[65ch] rounded-[8px] border border-border bg-surface px-4 py-3">
+          <summary className="cursor-pointer text-base font-semibold text-foreground">
+            {learnUi.deepenLabel}: {deepen.title}
+          </summary>
+          <div className="mt-3 space-y-3">
+            {deepen.paragraphs.map((paragraph) => (
+              <p key={paragraph} className="leading-relaxed text-muted">
+                {paragraph}
+              </p>
+            ))}
+          </div>
+        </details>
+      ) : null}
+      {question ? <CheckQuestion question={question} /> : null}
+    </section>
+  );
+}

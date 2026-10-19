@@ -9,6 +9,7 @@ interface PageMetadataInput {
   path: string;
   fullTitle?: boolean;
   locale?: Locale;
+  availableLocales?: readonly Locale[];
 }
 
 export function buildPageMetadata(page: PageMetadataInput): Metadata {
@@ -18,8 +19,9 @@ export function buildPageMetadata(page: PageMetadataInput): Metadata {
   const canonicalUrl = `${site.url}${canonicalPath}`;
   const fullTitle = page.fullTitle ? page.title : `${page.title} | ${site.name}`;
 
+  const languageLocales = page.availableLocales ?? locales;
   const languages = Object.fromEntries(
-    locales.map((item) => [
+    languageLocales.map((item) => [
       item,
       `${site.url}${localizedPath(item, normalizedPath === "/" ? "" : normalizedPath)}`,
     ]),

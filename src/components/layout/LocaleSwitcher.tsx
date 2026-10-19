@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import type { Locale } from "@/i18n/config";
 import { locales, localeLabels } from "@/i18n/config";
 import type { SiteContent } from "@/content";
-import { switchLocalePath } from "@/lib/localizedPath";
+import { switchLocaleHref } from "@/lib/localizedPath";
 import { cn } from "@/lib/utils";
 
 interface LocaleSwitcherProps {
@@ -32,14 +32,19 @@ export function LocaleSwitcher({
     >
       {locales.map((item) => {
         const isActive = item === locale;
+        const target = switchLocaleHref(pathname, item);
+        const ariaLabel = target.fallback
+          ? `${localeLabels[item]}. ${labels.unavailableHere}`
+          : localeLabels[item];
 
         return (
           <Link
             key={item}
-            href={switchLocalePath(pathname, item)}
+            href={target.href}
             hrefLang={item}
             lang={item}
-            aria-label={localeLabels[item]}
+            aria-label={ariaLabel}
+            title={target.fallback ? labels.unavailableHere : undefined}
             aria-current={isActive ? "true" : undefined}
             className={cn(
               "rounded-[6px] px-2.5 py-1.5 text-sm font-semibold uppercase tracking-wide transition-colors duration-150",

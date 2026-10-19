@@ -102,6 +102,77 @@ body {
   color: var(--accent-hover);
 }
 
+.learn-hit {
+  fill: none;
+  stroke: transparent;
+  stroke-width: 28px;
+}
+
+.learn-neuron [role="button"],
+.learn-myelin-art [role="button"] {
+  cursor: pointer;
+}
+
+.learn-neuron .is-selected .learn-process-edge,
+.learn-neuron .is-selected .learn-shape,
+.learn-myelin-art .is-selected path,
+.learn-myelin-art .is-selected rect {
+  stroke: var(--accent);
+}
+
+.learn-membrane,
+.learn-voltage {
+  --na-x: 118;
+  --na-y: 28;
+  --k-x: 214;
+  --k-y: 196;
+  --dot-x: 46;
+  --dot-y: 172.6;
+}
+
+.learn-membrane[data-stage="depolarization"] .gate-na,
+.learn-voltage[data-stage="depolarization"] .gate-na,
+.learn-membrane[data-stage="repolarization"] .gate-k,
+.learn-voltage[data-stage="repolarization"] .gate-k,
+.learn-voltage[data-stage="hyperpolarization"] .gate-k {
+  opacity: 0.15;
+}
+
+.learn-myelin {
+  --spread: 0;
+}
+
+.learn-myelin .inner-current {
+  opacity: 0;
+}
+
+.learn-myelin[data-active-node="1"] .inner-1,
+.learn-myelin[data-active-node="2"] .inner-2,
+.learn-myelin[data-active-node="3"] .inner-3 {
+  opacity: 0.95;
+}
+
+.learn-myelin[data-active-node="0"] .node-0 rect,
+.learn-myelin[data-active-node="1"] .node-1 rect,
+.learn-myelin[data-active-node="2"] .node-2 rect,
+.learn-myelin[data-active-node="3"] .node-3 rect {
+  fill: #b85a48;
+}
+
+.learn-network[data-active="n1"] [data-cell="n1"] .learn-shape,
+.learn-network[data-active="n1"] [data-cell="n1"] .learn-process-edge,
+.learn-network[data-active="n2"] [data-cell="n2"] .learn-shape,
+.learn-network[data-active="n2"] [data-cell="n2"] .learn-process-edge,
+.learn-network[data-active="n3"] [data-cell="n3"] .learn-shape,
+.learn-network[data-active="n3"] [data-cell="n3"] .learn-process-edge {
+  stroke: var(--accent);
+}
+
+.learn-network[data-inhibited="n4"] [data-cell="n4"] .learn-shape,
+.learn-network[data-inhibited="n4"] [data-cell="n4"] .learn-process-edge {
+  stroke: #4f678f;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

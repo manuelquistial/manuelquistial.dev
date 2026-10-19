@@ -1,7 +1,12 @@
+import Link from "next/link";
 import type { Locale } from "@/i18n/config";
 import type { SiteContent } from "@/content";
 import { profile } from "@/data/profile";
-import { localizedPath, localizedSectionPath } from "@/lib/localizedPath";
+import {
+  localizedPath,
+  localizedPathForAvailableContent,
+  localizedSectionPath,
+} from "@/lib/localizedPath";
 import { pageSections } from "@/lib/pageSections";
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/Button";
@@ -12,6 +17,8 @@ interface HeroProps {
 }
 
 export function Hero({ locale, content }: HeroProps) {
+  const learn = localizedPathForAvailableContent(locale, "/aprendamos");
+
   return (
     <section className="bg-background">
       <Container className="pb-10 pt-14 md:pb-12 md:pt-16 lg:pb-16 lg:pt-20">
@@ -43,6 +50,17 @@ export function Hero({ locale, content }: HeroProps) {
             {content.viewExperience}
           </Button>
         </div>
+        <p className="mt-6 max-w-[65ch] text-sm leading-relaxed text-muted">
+          <Link
+            href={learn.href}
+            lang={learn.lang}
+            hrefLang={learn.lang}
+            className="font-semibold text-accent transition-colors duration-150 hover:text-accent-hover"
+          >
+            {content.learnLabel}
+          </Link>
+          <span> {content.learnNote}</span>
+        </p>
       </Container>
     </section>
   );

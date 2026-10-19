@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { defaultLocale, locales, type Locale } from "./i18n/config";
+import { resolveUnlocalizedRedirect } from "./lib/unlocalizedRedirect";
 
 const PUBLIC_FILE = /\.(.*)$/;
 const LOCALE_COOKIE = "NEXT_LOCALE";
@@ -47,24 +48,24 @@ export function proxy(request: NextRequest) {
     return;
   }
 
-  const pathnameHasLocale = locales.some(
-    (locale) =>
-      pathname === `/${locale}` || pathname.startsWith(`/${locale}/`),
-  );
+  const learnAlias =
+    pathname === "/aprendamos" || pathname.startsWith("/aprendamos/");
+  const locale = learnAlias ? "es" : resolveLocale(request);
+  const target = resolveUnlocalizedRedirect(pathname, locale);
 
-  if (pathnameHasLocale) {
-    const locale = pathname.split("/")[1] as Locale;
+  if (!target) {
+    const pathLocale = pathname.split("/")[1] as Locale;
     const response = NextResponse.next();
-    response.cookies.set(LOCALE_COOKIE, locale, { path: "/" });
-    response.headers.set("x-next-locale", locale);
+    response.cookies.set(LOCALE_COOKIE, pathLocale, { path: "/" });
+    response.headers.set("x-next-locale", pathLocale);
     return response;
   }
 
-  const locale = resolveLocale(request);
   const url = request.nextUrl.clone();
-  url.pathname = `/${locale}${pathname === "/" ? "" : pathname}`;
+  url.pathname = target;
   const response = NextResponse.redirect(url);
-  response.cookies.set(LOCALE_COOKIE, locale, { path: "/" });
+  const destinationLocale = target.split("/")[1] as Locale;
+  response.cookies.set(LOCALE_COOKIE, destinationLocale, { path: "/" });
   return response;
 }
 

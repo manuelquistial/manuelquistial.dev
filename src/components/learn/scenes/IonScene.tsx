@@ -14,7 +14,6 @@ export function IonScene() {
   const playback = useScenePlayback(ionPlaybackStages());
   const artRef = useRef<SVGSVGElement>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const caption = scene.stages?.find((item) => item.id === playback.snapshot.stageId);
   const labels = Object.fromEntries((scene.parts ?? []).map((part) => [part.id, part.label]));
   const openChannel =
     playback.snapshot.stageId === "depolarization"
@@ -42,7 +41,7 @@ export function IonScene() {
     <SceneStage
       label={scene.textAlternative}
       playback={playback}
-      caption={caption}
+      stages={scene.stages}
       card={cardFor(scene.parts, membraneAnchors, selectedId)}
       onClose={() => setSelectedId(null)}
       legend={

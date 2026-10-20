@@ -11,13 +11,12 @@ export function NetworkScene() {
   const scene = neuronsLesson.scenes[7];
   const playback = useScenePlayback(networkPlaybackStages());
   const state = networkState(playback.snapshot.stageId);
-  const caption = scene.stages?.find((item) => item.id === playback.snapshot.stageId);
 
   return (
     <SceneStage
       label={scene.textAlternative}
       playback={playback}
-      caption={caption}
+      stages={scene.stages}
       legend={
         <ul className="flex flex-wrap gap-x-4 gap-y-1">
           <li className="learn-key-excitatory">{learnUi.excitatory}</li>

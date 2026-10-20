@@ -11,7 +11,6 @@ export function MyelinScene() {
   const scene = neuronsLesson.scenes[3];
   const playback = useScenePlayback(myelinPlaybackStages());
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const caption = scene.stages?.find((item) => item.id === playback.snapshot.stageId);
   const labels = Object.fromEntries((scene.parts ?? []).map((part) => [part.id, part.label]));
   const activeNode = myelinFrame(playback.snapshot.stageId, 0).activeNode;
 
@@ -19,7 +18,7 @@ export function MyelinScene() {
     <SceneStage
       label={scene.textAlternative}
       playback={playback}
-      caption={caption}
+      stages={scene.stages}
       card={cardFor(scene.parts, gliaAnchors, selectedId)}
       onClose={() => setSelectedId(null)}
     >

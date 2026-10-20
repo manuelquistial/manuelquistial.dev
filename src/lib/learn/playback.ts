@@ -12,6 +12,8 @@ export type PlaybackSnapshot = {
   stageIndex: number;
   stageId: string;
   stageCount: number;
+  stageStart: number;
+  stageEnd: number;
 };
 
 export const PLAYBACK_SPEEDS = [0.5, 1, 1.5] as const;
@@ -51,6 +53,8 @@ export function createSnapshot(
     stageIndex: 0,
     stageId: stages[0]?.id ?? "",
     stageCount: stages.length,
+    stageStart: stages[0]?.start ?? 0,
+    stageEnd: stages[0]?.end ?? 0,
   };
 }
 
@@ -62,12 +66,15 @@ function withTime(
 ): PlaybackSnapshot {
   const nextTime = clampUnit(time, snapshot.duration);
   const stageIndex = stageIndexAt(nextTime, stages);
+  const stage = stages[stageIndex];
   return {
     ...snapshot,
     time: nextTime,
     playing,
     stageIndex,
-    stageId: stages[stageIndex]?.id ?? snapshot.stageId,
+    stageId: stage?.id ?? snapshot.stageId,
+    stageStart: stage?.start ?? 0,
+    stageEnd: stage?.end ?? snapshot.duration,
   };
 }
 
@@ -94,6 +101,25 @@ export function stepPlayback(
     return { ...snapshot, playing: false };
   }
   return withTime(snapshot, stages[nextIndex].start, stages, false);
+}
+
+export function stepBackPlayback(
+  snapshot: PlaybackSnapshot,
+  stages: readonly StageBound[],
+): PlaybackSnapshot {
+  const previous = snapshot.stageIndex - 1;
+  if (previous < 0) return { ...snapshot, playing: false };
+  return withTime(snapshot, stages[previous].start, stages, false);
+}
+
+export function seekPlayback(
+  snapshot: PlaybackSnapshot,
+  stages: readonly StageBound[],
+  index: number,
+): PlaybackSnapshot {
+  if (stages.length === 0) return { ...snapshot, playing: false };
+  const safe = Math.min(stages.length - 1, Math.max(0, Math.floor(index)));
+  return withTime(snapshot, stages[safe].start, stages, false);
 }
 
 export function progressWithinStage(
@@ -127,6 +153,8 @@ export type PlaybackController = {
   pause: () => void;
   restart: () => void;
   step: () => void;
+  stepBack: () => void;
+  seek: (index: number) => void;
   setSpeed: (speed: number) => void;
   reset: (stages: readonly StageBound[]) => void;
   frame: (deltaMs: number) => boolean;
@@ -189,11 +217,19 @@ export function createPlaybackController(
     },
     restart: () => {
       loopGeneration += 1;
-      replace(createSnapshot(stageList, 1));
+      replace(createSnapshot(stageList, snapshot.speed));
     },
     step: () => {
       loopGeneration += 1;
       replace(stepPlayback({ ...snapshot, playing: false }, stageList));
+    },
+    stepBack: () => {
+      loopGeneration += 1;
+      replace(stepBackPlayback({ ...snapshot, playing: false }, stageList));
+    },
+    seek: (index) => {
+      loopGeneration += 1;
+      replace(seekPlayback({ ...snapshot, playing: false }, stageList, index));
     },
     setSpeed: (speed) => {
       if (!Number.isFinite(speed) || speed <= 0 || snapshot.speed === speed) {
@@ -205,7 +241,7 @@ export function createPlaybackController(
     reset: (nextStages) => {
       loopGeneration += 1;
       stageList = nextStages;
-      replace(createSnapshot(stageList, 1));
+      replace(createSnapshot(stageList, snapshot.speed));
     },
     frame: (deltaMs) => {
       if (!snapshot.playing) return false;

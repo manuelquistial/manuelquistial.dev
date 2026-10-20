@@ -13,7 +13,6 @@ export function SignalScene() {
   const scene = neuronsLesson.scenes[2];
   const playback = useScenePlayback(signalPlaybackStages());
   const layerRef = useRef<SVGGElement>(null);
-  const caption = scene.stages?.find((item) => item.id === playback.snapshot.stageId);
 
   useEffect(() => {
     return playback.controller.onFrame((snapshot) => {
@@ -44,7 +43,7 @@ export function SignalScene() {
   }, [playback.controller]);
 
   return (
-    <SceneStage label={scene.textAlternative} playback={playback} caption={caption}>
+    <SceneStage label={scene.textAlternative} playback={playback} stages={scene.stages}>
       <NeuronArt label={scene.textAlternative}>
         <g ref={layerRef} pointerEvents="none">
           {signalChains.map((chain, index) => {

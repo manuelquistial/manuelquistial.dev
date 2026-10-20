@@ -15,7 +15,9 @@ export function SynapseScene() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const playback = useScenePlayback(synapsePlaybackStages(mode));
   const artRef = useRef<SVGSVGElement>(null);
-  const caption = scene.stages?.find((item) => item.id === playback.snapshot.stageId);
+  const stages = scene.stages?.filter((item) =>
+    synapsePlaybackStages(mode).some((bound) => bound.id === item.id),
+  );
   const labels = Object.fromEntries((scene.parts ?? []).map((part) => [part.id, part.label]));
 
   useEffect(() => {
@@ -69,23 +71,28 @@ export function SynapseScene() {
     <SceneStage
       label={scene.textAlternative}
       playback={playback}
-      caption={caption}
+      stages={stages}
       card={cardFor(scene.parts, synapseAnchors, selectedId)}
       onClose={() => setSelectedId(null)}
-      toolbarExtra={
-        <div role="tablist" aria-label={learnUi.synapseModes} className="flex gap-1">
-          {(["chemical", "electrical"] as const).map((item) => (
-            <button
-              key={item}
-              type="button"
-              role="tab"
-              aria-selected={mode === item}
-              className={`min-h-11 rounded-[6px] border px-3 text-sm font-semibold ${mode === item ? "border-foreground/40 bg-surface-soft text-foreground" : "border-border text-foreground"}`}
-              onClick={() => switchMode(item)}
-            >
-              {item === "chemical" ? learnUi.chemical : learnUi.electrical}
-            </button>
-          ))}
+      leading={
+        <div className="px-3 pt-3">
+          <div role="tablist" aria-label={learnUi.synapseModes} className="inline-flex rounded-full bg-surface-soft p-1">
+            {(["chemical", "electrical"] as const).map((item) => {
+              const selected = mode === item;
+              return (
+                <button
+                  key={item}
+                  type="button"
+                  role="tab"
+                  aria-selected={selected}
+                  className={`min-h-11 rounded-full px-4 text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-foreground ${selected ? "bg-surface text-foreground shadow-sm" : "text-muted"}`}
+                  onClick={() => switchMode(item)}
+                >
+                  {item === "chemical" ? learnUi.chemical : learnUi.electrical}
+                </button>
+              );
+            })}
+          </div>
         </div>
       }
     >

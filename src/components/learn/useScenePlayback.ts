@@ -104,15 +104,30 @@ export function useScenePlayback(
     reducedMotion,
     controller,
     canStep: snapshot.stageIndex < snapshot.stageCount - 1,
+    canStepBack: snapshot.stageIndex > 0,
     play: () => apply("play"),
     pause: () => apply("pause"),
     restart: () => apply("restart"),
-    step: () => controller.step(),
+    step: () => {
+      controller.step();
+      apply("pause");
+    },
+    stepBack: () => {
+      controller.stepBack();
+      apply("pause");
+    },
+    seek: (index: number) => {
+      controller.seek(index);
+      apply("pause");
+    },
     setSpeed: (speed: number) => controller.setSpeed(speed),
     reset: (nextStages: readonly StageBound[]) => {
       controller.reset(nextStages);
-      sessionRef.current = initialPlaybackSession;
-      if (primary && !reducedMotion) controller.play();
+      sessionRef.current = {
+        hold: "userPaused",
+        suspended: false,
+        resumeAfterSuspend: false,
+      };
     },
     suspend: () => apply("suspend"),
     release: () => apply("release"),

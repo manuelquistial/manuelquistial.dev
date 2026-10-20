@@ -33,6 +33,15 @@ export function IconRestart() {
   );
 }
 
+export function IconStepBack() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="size-5" fill="currentColor">
+      <rect x="5.6" y="6.2" width="2.4" height="11.6" rx="0.5" />
+      <path d="M18 6.4v11.2L9.4 12 18 6.4Z" />
+    </svg>
+  );
+}
+
 export function IconStep() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" className="size-5" fill="currentColor">

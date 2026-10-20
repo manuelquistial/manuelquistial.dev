@@ -159,6 +159,12 @@ describe("scene playback", () => {
     });
     controller.step();
     expect(controller.getSnapshot().stageId).toBe("b");
+    controller.stepBack();
+    expect(controller.getSnapshot()).toMatchObject({ playing: false, stageId: "a", time: 0 });
+    controller.seek(1);
+    expect(controller.getSnapshot()).toMatchObject({ playing: false, stageId: "b", time: 1 });
+    controller.seek(8);
+    expect(controller.getSnapshot().stageId).toBe("b");
   });
 });
 
@@ -245,18 +251,19 @@ describe("scene presence", () => {
     expect(ignored.session.hold).toBe("userPaused");
   });
 
-  it("keeps a finished scene still and resumes after a card only if it was playing", () => {
+  it("keeps a finished scene still and stays paused after closing a part", () => {
     const done = reducePlaybackSession(initialPlaybackSession, "ended", base);
     expect(reducePlaybackSession(done.session, "primary", base).command).toBe("none");
 
     const suspended = reducePlaybackSession(initialPlaybackSession, "suspend", base);
     expect(suspended.command).toBe("pause");
+    expect(suspended.session.hold).toBe("userPaused");
     expect(
       reducePlaybackSession(suspended.session, "release", {
         ...base,
         wasPlaying: false,
       }).command,
-    ).toBe("play");
+    ).toBe("none");
 
     const userPaused = reducePlaybackSession(initialPlaybackSession, "pause", base);
     const card = reducePlaybackSession(userPaused.session, "suspend", {

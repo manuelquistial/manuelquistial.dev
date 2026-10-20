@@ -14,7 +14,6 @@ export function VoltageScene() {
   const scene = neuronsLesson.scenes[6];
   const playback = useScenePlayback(voltagePlaybackStages());
   const graphRef = useRef<HTMLDivElement>(null);
-  const caption = scene.stages?.find((item) => item.id === playback.snapshot.stageId);
 
   useEffect(() => {
     return playback.controller.onFrame((snapshot) => {
@@ -26,7 +25,7 @@ export function VoltageScene() {
     <SceneStage
       label={scene.textAlternative}
       playback={playback}
-      caption={caption}
+      stages={scene.stages}
       legend={<p>{learnUi.graphCaption}</p>}
       aside={
         <div ref={graphRef} className="learn-voltage h-full min-h-48">

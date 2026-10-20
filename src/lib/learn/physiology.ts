@@ -42,8 +42,8 @@ export const voltageStages = [
   { id: "hyperpolarization", start: 0.7, end: 1 },
 ] as const;
 
-export const VOLTAGE_DURATION = 12;
-export const ION_DURATION = 9;
+export const VOLTAGE_DURATION = 30;
+export const ION_DURATION = 18;
 
 export function membraneVoltage(time: number): number {
   const x = clamp(time, 0, 1);
@@ -79,9 +79,9 @@ export function voltagePlaybackStages(): StageBound[] {
 
 export function ionPlaybackStages(): StageBound[] {
   return [
-    { id: "rest", start: 0, end: 3 },
-    { id: "depolarization", start: 3, end: 6 },
-    { id: "repolarization", start: 6, end: 9 },
+    { id: "rest", start: 0, end: 6 },
+    { id: "depolarization", start: 6, end: 12 },
+    { id: "repolarization", start: 12, end: 18 },
   ];
 }
 
@@ -190,13 +190,13 @@ export function ionFrameVars(
 }
 
 export const signalStages = [
-  { id: "inputs", start: 0, end: 0.28 },
-  { id: "integration", start: 0.28, end: 0.52 },
-  { id: "threshold", start: 0.52, end: 0.68 },
-  { id: "propagation", start: 0.68, end: 1 },
+  { id: "inputs", start: 0, end: 0.25 },
+  { id: "integration", start: 0.25, end: 0.47 },
+  { id: "threshold", start: 0.47, end: 0.67 },
+  { id: "propagation", start: 0.67, end: 1 },
 ] as const;
 
-export const SIGNAL_DURATION = 10;
+export const SIGNAL_DURATION = 28;
 
 export function signalPlaybackStages(): StageBound[] {
   return scaleStages(signalStages, SIGNAL_DURATION);
@@ -228,14 +228,14 @@ export function signalFrameVars(
 }
 
 export const myelinStages = [
-  { id: "rest", start: 0, end: 0.12 },
-  { id: "node-1", start: 0.12, end: 0.34 },
-  { id: "node-2", start: 0.34, end: 0.56 },
-  { id: "node-3", start: 0.56, end: 0.78 },
-  { id: "node-4", start: 0.78, end: 1 },
+  { id: "rest", start: 0, end: 0.18 },
+  { id: "node-1", start: 0.18, end: 0.385 },
+  { id: "node-2", start: 0.385, end: 0.59 },
+  { id: "node-3", start: 0.59, end: 0.795 },
+  { id: "node-4", start: 0.795, end: 1 },
 ] as const;
 
-export const MYELIN_DURATION = 10;
+export const MYELIN_DURATION = 32;
 
 const myelinNodeIndex: Record<string, number> = {
   rest: -1,
@@ -274,11 +274,9 @@ export const electricalStages = [
   { id: "shared", start: 0.7, end: 1 },
 ] as const;
 
-export const SYNAPSE_DURATION = 12;
-
 export function synapsePlaybackStages(mode: "chemical" | "electrical"): StageBound[] {
   const source = mode === "chemical" ? chemicalStages : electricalStages;
-  return scaleStages(source, SYNAPSE_DURATION);
+  return scaleStages(source, mode === "chemical" ? 36 : 18);
 }
 
 export function synapseFrameVars(
@@ -312,13 +310,13 @@ export function synapseFrameVars(
 }
 
 export const networkStages = [
-  { id: "idle", start: 0, end: 0.2 },
-  { id: "input", start: 0.2, end: 0.45 },
-  { id: "relay", start: 0.45, end: 0.7 },
-  { id: "split", start: 0.7, end: 1 },
+  { id: "idle", start: 0, end: 0.22 },
+  { id: "input", start: 0.22, end: 0.48 },
+  { id: "relay", start: 0.48, end: 0.74 },
+  { id: "split", start: 0.74, end: 1 },
 ] as const;
 
-export const NETWORK_DURATION = 8;
+export const NETWORK_DURATION = 24;
 
 export function networkPlaybackStages(): StageBound[] {
   return scaleStages(networkStages, NETWORK_DURATION);

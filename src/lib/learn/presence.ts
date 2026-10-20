@@ -72,21 +72,16 @@ export function reducePlaybackSession(
       return {
         session: {
           ...session,
+          hold: "userPaused",
           suspended: true,
-          resumeAfterSuspend: context.wasPlaying && session.hold === "follow",
+          resumeAfterSuspend: false,
         },
         command: "pause",
       };
-    case "release": {
-      const resume =
-        session.resumeAfterSuspend &&
-        session.hold === "follow" &&
-        context.primary &&
-        !context.reducedMotion;
+    case "release":
       return {
         session: { ...session, suspended: false, resumeAfterSuspend: false },
-        command: resume ? "play" : "none",
+        command: "none",
       };
-    }
   }
 }

@@ -192,6 +192,15 @@ body {
   animation: learn-hint 1.6s ease-in-out 2;
 }
 
+.learn-scene.is-paused .learn-hint,
+.learn-scene.is-paused .learn-part.learn-hint {
+  animation-play-state: paused;
+}
+
+.learn-stage-copy {
+  animation: learn-stage-in 180ms ease;
+}
+
 .learn-part {
   cursor: pointer;
 }
@@ -398,14 +407,9 @@ body {
 .learn-key-excitatory::before { background: #9e3b2d; }
 .learn-key-inhibitory::before { background: #4f678f; }
 
-@media (max-width: 720px) {
-  .learn-card {
-    left: 0.5rem !important;
-    right: 0.5rem;
-    top: auto !important;
-    bottom: 0.5rem;
-    max-width: none;
-  }
+@keyframes learn-stage-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @keyframes learn-hint {

@@ -4,7 +4,9 @@ import { useEffect, useId, useRef, type ReactNode } from "react";
 import { learnUi } from "@/content/learn/es/ui";
 import type { LearnPartCopy, LearnStageCopy } from "@/content/learn/types";
 import { PlaybackControls } from "@/components/learn/PlaybackControls";
-import { IconClose, IconCollapse, IconExpand } from "@/components/learn/icons";
+import { StageExplanation } from "@/components/learn/StageCaption";
+import { StageTrack } from "@/components/learn/StageTrack";
+import { IconCollapse, IconExpand } from "@/components/learn/icons";
 import type { useScenePlayback } from "@/components/learn/useScenePlayback";
 
 type Playback = ReturnType<typeof useScenePlayback>;
@@ -17,8 +19,8 @@ export type SceneCardAnchor = {
   y: number;
 };
 
-const iconButtonClass =
-  "inline-flex size-11 items-center justify-center rounded-[6px] border border-border bg-surface text-foreground hover:border-foreground/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground";
+const zoomButtonClass =
+  "inline-flex size-11 items-center justify-center rounded-full bg-transparent text-foreground transition-colors duration-150 hover:bg-surface-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-foreground";
 
 export function cardFor(
   parts: readonly LearnPartCopy[] | undefined,
@@ -35,24 +37,24 @@ export function cardFor(
 export function SceneStage({
   label,
   playback,
-  caption,
+  stages,
   card = null,
   onClose,
   zoomed = false,
   onZoom,
-  toolbarExtra,
+  leading,
   aside,
   legend,
   children,
 }: {
   label: string;
   playback?: Playback;
-  caption?: LearnStageCopy | null;
+  stages?: readonly LearnStageCopy[];
   card?: SceneCardAnchor | null;
   onClose?: () => void;
   zoomed?: boolean;
   onZoom?: () => void;
-  toolbarExtra?: ReactNode;
+  leading?: ReactNode;
   aside?: ReactNode;
   legend?: ReactNode;
   children: ReactNode;
@@ -61,6 +63,9 @@ export function SceneStage({
   const closeRef = useRef<HTMLButtonElement>(null);
   const artRef = useRef<HTMLDivElement>(null);
   const openRef = useRef(false);
+  const stage =
+    stages?.find((item) => item.id === playback?.snapshot.stageId) ?? null;
+  const paused = Boolean(playback) && !playback?.snapshot.playing;
 
   useEffect(() => {
     const open = Boolean(card);
@@ -80,9 +85,16 @@ export function SceneStage({
     part?.focus();
   };
 
+  const leaveAnd = (action: () => void) => {
+    if (card) onClose?.();
+    action();
+  };
+
+  const showFooter = Boolean(playback || stage || card || onZoom);
+
   return (
     <div
-      className={`mx-auto w-full overflow-hidden rounded-[8px] border border-border bg-[#eef3f6] ${aside ? "max-w-5xl" : "max-w-3xl"}`}
+      className={`learn-scene mx-auto w-full overflow-hidden rounded-[8px] border border-border bg-[#eef3f6] ${aside ? "max-w-5xl" : "max-w-3xl"} ${paused ? "is-paused" : ""}`}
       onKeyDown={(event) => {
         if (event.key === "Escape" && card) {
           event.preventDefault();
@@ -90,6 +102,7 @@ export function SceneStage({
         }
       }}
     >
+      {leading}
       <div className={aside ? "grid lg:grid-cols-[minmax(0,1.4fr)_minmax(16rem,0.8fr)]" : undefined}>
         <div
           ref={playback?.frameRef}
@@ -97,72 +110,53 @@ export function SceneStage({
           onClick={(event) => {
             const target = event.target;
             if (!(target instanceof Element)) return;
-            if (target.closest("[data-part], .learn-card, button")) return;
+            if (target.closest("[data-part], button")) return;
             if (card) onClose?.();
           }}
         >
           <div ref={artRef} className={`learn-zoom-target relative ${zoomed ? "is-zoomed" : ""}`}>
             {children}
-            {card ? (
-              <>
-                <svg className="pointer-events-none absolute inset-0 h-full w-full text-accent" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-                  <line
-                    x1={card.x}
-                    y1={card.y}
-                    x2={Math.min(card.x, 72)}
-                    y2={Math.max(6, card.y - 6)}
-                    stroke="currentColor"
-                    strokeWidth="0.35"
-                    vectorEffect="non-scaling-stroke"
-                  />
-                </svg>
-                <div
-                  className="learn-card absolute z-10 max-w-64 rounded-[8px] border border-border bg-surface p-3 text-foreground shadow-sm"
-                  style={{
-                    left: `min(${card.x}%, calc(100% - 16.5rem))`,
-                    top: `min(${card.y}%, calc(100% - 8rem))`,
-                  }}
-                  role="dialog"
-                  aria-labelledby={titleId}
-                >
-                  <div className="flex items-start justify-between gap-2">
-                    <p id={titleId} className="text-sm font-semibold">
-                      {card.label}
-                    </p>
-                    <button
-                      ref={closeRef}
-                      type="button"
-                      className={`${iconButtonClass} shrink-0`}
-                      aria-label={learnUi.closeCard}
-                      title={learnUi.closeCard}
-                      onClick={close}
-                    >
-                      <IconClose />
-                    </button>
-                  </div>
-                  <p className="mt-1 text-sm leading-relaxed">{card.text}</p>
-                </div>
-              </>
-            ) : null}
           </div>
-          <p className="sr-only">{label}</p>
+          <p className="sr-only" id={titleId}>
+            {label}
+          </p>
         </div>
         {aside ? <div className="min-w-0 border-t border-border bg-surface lg:border-t-0 lg:border-l">{aside}</div> : null}
       </div>
-      {legend ? <div className="border-t border-border bg-surface px-3 py-2 text-sm text-foreground">{legend}</div> : null}
-      {caption ? (
-        <p aria-live="polite" className="border-t border-border bg-surface px-3 py-2 text-sm leading-relaxed text-foreground">
-          <span className="font-semibold">{caption.label}.</span> {caption.text}
-        </p>
-      ) : null}
-      {playback || onZoom || toolbarExtra ? (
-        <div className="learn-toolbar flex flex-wrap items-center justify-between gap-2 border-t border-border bg-surface px-2 py-1.5">
-          <div className="flex flex-wrap items-center gap-2">{toolbarExtra}</div>
-          <div className="ml-auto flex items-center gap-1">
-            {onZoom ? (
+      {legend ? <div className="border-t border-border bg-surface px-4 py-2 text-sm text-foreground">{legend}</div> : null}
+      {showFooter ? (
+        <div className="border-t border-border bg-surface">
+          {playback && stages && stages.length > 0 ? (
+            <StageTrack
+              stages={stages}
+              stageIndex={playback.snapshot.stageIndex}
+              controller={playback.controller}
+              onSeek={(index) => leaveAnd(() => playback.seek(index))}
+            />
+          ) : null}
+          <StageExplanation stage={card ? null : stage} card={card} onClose={close} closeRef={closeRef} />
+          {playback ? (
+            <div className="px-2 pt-1 pb-2">
+              <PlaybackControls
+                playing={playback.snapshot.playing}
+                speed={playback.snapshot.speed}
+                canStep={playback.canStep}
+                canStepBack={playback.canStepBack}
+                reducedMotion={playback.reducedMotion}
+                onPlay={() => leaveAnd(playback.play)}
+                onPause={playback.pause}
+                onRestart={() => leaveAnd(playback.restart)}
+                onStep={() => leaveAnd(playback.step)}
+                onStepBack={() => leaveAnd(playback.stepBack)}
+                onSpeed={playback.setSpeed}
+              />
+            </div>
+          ) : null}
+          {onZoom ? (
+            <div className="flex justify-end px-2 pb-2">
               <button
                 type="button"
-                className={iconButtonClass}
+                className={zoomButtonClass}
                 aria-pressed={zoomed}
                 aria-label={zoomed ? learnUi.zoomOut : learnUi.zoomIn}
                 title={zoomed ? learnUi.zoomOut : learnUi.zoomIn}
@@ -170,24 +164,8 @@ export function SceneStage({
               >
                 {zoomed ? <IconCollapse /> : <IconExpand />}
               </button>
-            ) : null}
-            {playback ? (
-              <PlaybackControls
-                playing={playback.snapshot.playing}
-                speed={playback.snapshot.speed}
-                canStep={playback.canStep}
-                reducedMotion={playback.reducedMotion}
-                onPlay={playback.play}
-                onPause={playback.pause}
-                onRestart={() => {
-                  onClose?.();
-                  playback.restart();
-                }}
-                onStep={playback.step}
-                onSpeed={playback.setSpeed}
-              />
-            ) : null}
-          </div>
+            </div>
+          ) : null}
         </div>
       ) : null}
     </div>

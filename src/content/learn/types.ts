@@ -8,6 +8,7 @@ export type LearnText = {
 export type LearnStageCopy = {
   id: string;
   label: string;
+  title: string;
   text: string;
 };
 

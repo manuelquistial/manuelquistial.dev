@@ -1,12 +1,10 @@
 "use client";
 
 import { useEffect, useId, useRef, type ReactNode } from "react";
-import { learnUi } from "@/content/learn/es/ui";
 import type { LearnPartCopy, LearnStageCopy } from "@/content/learn/types";
 import { PlaybackControls } from "@/components/learn/PlaybackControls";
 import { StageExplanation } from "@/components/learn/StageCaption";
 import { StageTrack } from "@/components/learn/StageTrack";
-import { IconCollapse, IconExpand } from "@/components/learn/icons";
 import type { useScenePlayback } from "@/components/learn/useScenePlayback";
 
 type Playback = ReturnType<typeof useScenePlayback>;
@@ -18,9 +16,6 @@ export type SceneCardAnchor = {
   x: number;
   y: number;
 };
-
-const zoomButtonClass =
-  "inline-flex size-11 items-center justify-center rounded-full bg-transparent text-foreground transition-colors duration-150 hover:bg-surface-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-foreground";
 
 export function cardFor(
   parts: readonly LearnPartCopy[] | undefined,
@@ -40,8 +35,6 @@ export function SceneStage({
   stages,
   card = null,
   onClose,
-  zoomed = false,
-  onZoom,
   leading,
   aside,
   legend,
@@ -52,8 +45,6 @@ export function SceneStage({
   stages?: readonly LearnStageCopy[];
   card?: SceneCardAnchor | null;
   onClose?: () => void;
-  zoomed?: boolean;
-  onZoom?: () => void;
   leading?: ReactNode;
   aside?: ReactNode;
   legend?: ReactNode;
@@ -90,7 +81,7 @@ export function SceneStage({
     action();
   };
 
-  const showFooter = Boolean(playback || stage || card || onZoom);
+  const showFooter = Boolean(playback || stage || card);
 
   return (
     <div
@@ -114,7 +105,7 @@ export function SceneStage({
             if (card) onClose?.();
           }}
         >
-          <div ref={artRef} className={`learn-zoom-target relative ${zoomed ? "is-zoomed" : ""}`}>
+          <div ref={artRef} className="learn-zoom-target relative">
             {children}
           </div>
           <p className="sr-only" id={titleId}>
@@ -150,20 +141,6 @@ export function SceneStage({
                 onStepBack={() => leaveAnd(playback.stepBack)}
                 onSpeed={playback.setSpeed}
               />
-            </div>
-          ) : null}
-          {onZoom ? (
-            <div className="flex justify-end px-2 pb-2">
-              <button
-                type="button"
-                className={zoomButtonClass}
-                aria-pressed={zoomed}
-                aria-label={zoomed ? learnUi.zoomOut : learnUi.zoomIn}
-                title={zoomed ? learnUi.zoomOut : learnUi.zoomIn}
-                onClick={onZoom}
-              >
-                {zoomed ? <IconCollapse /> : <IconExpand />}
-              </button>
             </div>
           ) : null}
         </div>

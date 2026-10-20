@@ -28,8 +28,6 @@ export const learnUi = {
   partEyebrow: "Parte del dibujo",
   openReference: "Abrir fuente",
   goToReference: "Ver en referencias",
-  zoomIn: "Ampliar",
-  zoomOut: "Restaurar vista",
   chemical: "Química",
   electrical: "Eléctrica",
   synapseModes: "Tipo de sinapsis",

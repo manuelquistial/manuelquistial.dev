@@ -239,11 +239,6 @@ body {
   height: auto;
 }
 
-.learn-zoom-target.is-zoomed {
-  transform: scale(1.65);
-  transform-origin: 26% 50%;
-}
-
 .learn-pulse,
 .learn-soma-glow,
 .learn-threshold-glow,

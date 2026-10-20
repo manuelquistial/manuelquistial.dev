@@ -51,38 +51,6 @@ export function IconStep() {
   );
 }
 
-export function IconExpand() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      className="size-5"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.75"
-      strokeLinecap="round"
-    >
-      <path d="M9 5H5v4M15 5h4v4M19 15v4h-4M9 19H5v-4" />
-    </svg>
-  );
-}
-
-export function IconCollapse() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      className="size-5"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.75"
-      strokeLinecap="round"
-    >
-      <path d="M5 9h4V5M15 5v4h4M19 15h-4v4M9 19v-4H5" />
-    </svg>
-  );
-}
-
 export function IconClose() {
   return (
     <svg

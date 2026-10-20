@@ -84,39 +84,7 @@ export function PlaybackControls({
   }, [open]);
 
   return (
-    <div ref={rootRef} className="flex w-full flex-col">
-      {open ? (
-        <div
-          id={menuId}
-          role="menu"
-          aria-label={learnUi.speedLabel}
-          className="mb-1 ml-auto w-36 rounded-[8px] border border-border bg-surface p-1"
-        >
-          {PLAYBACK_SPEEDS.map((value) => {
-            const selected = speed === value;
-            return (
-              <button
-                key={value}
-                type="button"
-                role="menuitemradio"
-                aria-checked={selected}
-                className={`flex min-h-11 w-full items-center gap-2 rounded-[6px] px-3 text-left text-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-foreground ${selected ? "bg-surface-soft font-semibold text-foreground" : "font-medium text-foreground hover:bg-surface-soft"}`}
-                onClick={() => {
-                  onSpeed(value);
-                  setOpen(false);
-                }}
-              >
-                <span
-                  aria-hidden="true"
-                  className={`size-2 rounded-full ${selected ? "bg-accent" : "bg-transparent"}`}
-                />
-                {formatSpeed(value)}
-              </button>
-            );
-          })}
-        </div>
-      ) : null}
-      <div className="flex w-full items-center justify-between gap-2">
+    <div ref={rootRef} className="flex w-full items-center justify-between gap-2">
       <div className="flex items-center gap-1">
         <button
           type="button"
@@ -169,8 +137,38 @@ export function PlaybackControls({
             {formatSpeed(speed)}
             <Tip label={`${learnUi.speedLabel}. ${learnUi.speedNote}`} align="end" />
           </button>
+          {open ? (
+            <div
+              id={menuId}
+              role="menu"
+              aria-label={learnUi.speedLabel}
+              className="absolute right-0 bottom-full z-30 mb-1 w-36 rounded-[8px] border border-border bg-surface p-1 shadow-sm"
+            >
+              {PLAYBACK_SPEEDS.map((value) => {
+                const selected = speed === value;
+                return (
+                  <button
+                    key={value}
+                    type="button"
+                    role="menuitemradio"
+                    aria-checked={selected}
+                    className={`flex min-h-11 w-full items-center gap-2 rounded-[6px] px-3 text-left text-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-foreground ${selected ? "bg-surface-soft font-semibold text-foreground" : "font-medium text-foreground hover:bg-surface-soft"}`}
+                    onClick={() => {
+                      onSpeed(value);
+                      setOpen(false);
+                    }}
+                  >
+                    <span
+                      aria-hidden="true"
+                      className={`size-2 rounded-full ${selected ? "bg-accent" : "bg-transparent"}`}
+                    />
+                    {formatSpeed(value)}
+                  </button>
+                );
+              })}
+            </div>
+          ) : null}
         </div>
-      </div>
       </div>
     </div>
   );

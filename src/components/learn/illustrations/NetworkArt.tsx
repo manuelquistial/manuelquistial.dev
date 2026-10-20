@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { learnColors } from "@/components/learn/illustrations/palette";
 import { Part } from "@/components/learn/illustrations/Part";
 import { Grain, useSvgId } from "@/components/learn/illustrations/shapes";
@@ -270,22 +270,30 @@ function paintTerritory(active: readonly string[], inhibited: readonly string[],
   return canvas.toDataURL("image/png");
 }
 
-function useNeuronTint(active: readonly string[], inhibited: readonly string[], litLink: string | null) {
-  const [href, setHref] = useState<string | null>(null);
+const tintCache = new Map<string, string | null>();
+
+function tintHref(active: readonly string[], inhibited: readonly string[], litLink: string | null) {
   const key = `${active.join(",")}|${inhibited.join(",")}|${litLink ?? ""}`;
-
-  useEffect(() => {
-    const [activeKey, inhibitedKey, linkKey] = key.split("|");
-    const activeIds = activeKey ? activeKey.split(",") : [];
-    const inhibitedIds = inhibitedKey ? inhibitedKey.split(",") : [];
-    if (activeIds.length === 0 && inhibitedIds.length === 0 && !linkKey) {
-      setHref(null);
-      return;
-    }
-    setHref(paintTerritory(activeIds, inhibitedIds, linkKey || null));
-  }, [key]);
-
+  const cached = tintCache.get(key);
+  if (cached !== undefined) return cached;
+  const href =
+    active.length === 0 && inhibited.length === 0 && !litLink
+      ? null
+      : paintTerritory(active, inhibited, litLink);
+  tintCache.set(key, href);
   return href;
+}
+
+function subscribeTint() {
+  return () => {};
+}
+
+function useNeuronTint(active: readonly string[], inhibited: readonly string[], litLink: string | null) {
+  return useSyncExternalStore(
+    subscribeTint,
+    () => tintHref(active, inhibited, litLink),
+    () => null,
+  );
 }
 
 export function NetworkArt({
@@ -352,8 +360,6 @@ export function NetworkArt({
       {networkNuclei.map((nucleus) => {
         const role = roleAt(nucleus.cx, nucleus.cy);
         const id = role?.id;
-        const isActive = id ? active.includes(id) : false;
-        const isInhibited = id ? inhibited.includes(id) : false;
         const isLocal = id && local === id;
         const body = (
           <g data-cell={id ?? "context"} opacity={id ? 1 : 0.72}>

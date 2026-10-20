@@ -24,7 +24,7 @@ export function CheckQuestion({ question }: { question: LearnQuestion }) {
 
   return (
     <form
-      className="mt-8 max-w-[65ch] rounded-[8px] border border-border bg-surface p-4 sm:p-5"
+      className="mt-8 rounded-[8px] border border-border bg-surface p-4 sm:p-5"
       onSubmit={(event) => event.preventDefault()}
     >
       <p className="text-sm font-semibold text-muted">{learnUi.questionEyebrow}</p>

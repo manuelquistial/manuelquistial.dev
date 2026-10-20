@@ -56,14 +56,14 @@ export default async function LearnIndexPage({ params }: LearnIndexPageProps) {
       <h1 className="max-w-[16ch] text-[clamp(2.375rem,4vw,3.75rem)] font-semibold leading-[1.1] tracking-tight text-foreground">
         {learnUi.indexTitle}
       </h1>
-      <p className="mt-6 max-w-[65ch] leading-relaxed text-muted">{learnUi.indexIntro}</p>
+      <p className="mt-6 leading-relaxed text-muted">{learnUi.indexIntro}</p>
       <div className="mt-12 grid gap-10">
         {lessons.map((lesson) => (
           <article
             key={lesson.slug}
             className="grid gap-6 border-t border-border pt-10 md:grid-cols-[minmax(0,18rem)_minmax(0,1fr)] md:items-center"
           >
-            <div className="overflow-hidden rounded-[8px] border border-border bg-[#eef3f6]">
+            <div className="mx-auto w-full max-w-sm overflow-hidden rounded-[8px] border border-border bg-[#eef3f6]">
               <NeuronArt label={lesson.scenes[0]?.textAlternative ?? lesson.title} />
             </div>
             <div className="min-w-0">
@@ -75,7 +75,7 @@ export default async function LearnIndexPage({ params }: LearnIndexPageProps) {
                   {lesson.title}
                 </Link>
               </h2>
-              <p className="mt-4 max-w-[65ch] leading-relaxed text-muted">
+              <p className="mt-4 leading-relaxed text-muted">
                 {lesson.cardDescription}
               </p>
               <p className="mt-5">

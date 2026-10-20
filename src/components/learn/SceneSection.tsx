@@ -5,8 +5,6 @@ import { CiteMark } from "@/components/learn/CiteMark";
 
 export function SceneSection({
   scene,
-  index,
-  total,
   children,
   deepen,
   question,
@@ -14,8 +12,6 @@ export function SceneSection({
   sources,
 }: {
   scene: LearnScene;
-  index: number;
-  total: number;
   children: React.ReactNode;
   deepen?: LearnDeepen;
   question?: LearnQuestion;
@@ -28,17 +24,14 @@ export function SceneSection({
       aria-labelledby={`${scene.id}-title`}
       className="scroll-mt-28 border-t border-border py-12 md:py-16"
     >
-      <p className="text-sm font-medium text-muted">
-        {learnUi.scenePosition(index, total)}
-      </p>
       <h2
         id={`${scene.id}-title`}
-        className="mt-2 text-[clamp(1.5rem,2.5vw,1.75rem)] font-semibold leading-[1.25] text-foreground"
+        className="text-[clamp(1.5rem,2.5vw,1.75rem)] font-semibold leading-[1.25] text-foreground"
       >
         {scene.title}
       </h2>
       <div className="mt-6">{children}</div>
-      <div className="mt-6 max-w-[65ch] space-y-4">
+      <div className="mt-6 space-y-4">
         {scene.paragraphs.map((paragraph) => (
           <p key={paragraph.text} className="leading-relaxed text-muted">
             {paragraph.text}
@@ -47,7 +40,7 @@ export function SceneSection({
         ))}
       </div>
       {deepen ? (
-        <details className="mt-6 max-w-[65ch] rounded-[8px] border border-border bg-surface px-4 py-3">
+        <details className="mt-6 rounded-[8px] border border-border bg-surface px-4 py-3">
           <summary className="cursor-pointer text-base font-semibold text-foreground">
             {learnUi.deepenLabel}: {deepen.title}
           </summary>

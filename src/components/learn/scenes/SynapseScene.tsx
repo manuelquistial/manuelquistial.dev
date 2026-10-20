@@ -30,17 +30,19 @@ export function SynapseScene() {
         const release = Number(vars["--release"] ?? 0);
         const travel = Math.max(Number(vars["--diffuse"] ?? 0), Number(vars["--bind"] ?? 0));
         const calcium = Number(vars["--calcium"] ?? 0);
-        art.querySelector(".learn-fusion-vesicle")?.setAttribute("transform", `translate(0 ${release * 34})`);
+        art.querySelector(".learn-fusion-vesicle")?.setAttribute("transform", `translate(0 ${release * 16})`);
         art.querySelectorAll<SVGGElement>(".learn-calcium-channel").forEach((channel) => {
           const origin = channel.dataset.origin ?? "";
           const scale = 1 + calcium * 0.55;
           channel.setAttribute("transform", `${origin} scale(${scale} ${1 + calcium * 0.15})`);
         });
         art.querySelectorAll<SVGCircleElement>(".learn-nt-particle").forEach((dot) => {
+          const homeX = Number(dot.dataset.homeX);
+          const homeY = Number(dot.dataset.homeY);
           const targetX = Number(dot.dataset.targetX);
           const targetY = Number(dot.dataset.targetY);
-          dot.setAttribute("cx", String(450 + (targetX - 450) * travel));
-          dot.setAttribute("cy", String(360 + (targetY - 360) * travel));
+          dot.setAttribute("cx", String(homeX + (targetX - homeX) * travel));
+          dot.setAttribute("cy", String(homeY + (targetY - homeY) * travel));
           dot.style.opacity = String(Math.max(release * 0.35, travel));
         });
         return;
@@ -48,7 +50,9 @@ export function SynapseScene() {
 
       const current = Number(vars["--current"] ?? 0);
       art.querySelectorAll<SVGCircleElement>(".learn-junction-ion").forEach((dot, index) => {
-        dot.setAttribute("cy", String(300 + current * (28 + index * 6)));
+        const home = Number(dot.dataset.homeY);
+        const span = Number(dot.dataset.span ?? 72);
+        dot.setAttribute("cy", String(home + current * (span + index * 6)));
         dot.style.opacity = String(current);
       });
     });

@@ -6,8 +6,6 @@ import type { Locale } from "@/i18n/config";
 import { lessonCitationOrder } from "@/lib/learn/citations";
 import { localizedPath } from "@/lib/localizedPath";
 import { CiteMark } from "@/components/learn/CiteMark";
-import { ContinueBanner } from "@/components/learn/ContinueBanner";
-import { SceneProgressTracker } from "@/components/learn/SceneProgressTracker";
 import { SceneSection } from "@/components/learn/SceneSection";
 import { SceneVisual } from "@/components/learn/SceneVisual";
 import { Section } from "@/components/layout/Section";
@@ -19,7 +17,6 @@ export function LearnLesson({
   lesson: LearnLessonContent;
   locale: Locale;
 }) {
-  const sceneIds = lesson.scenes.map((scene) => scene.id);
   const originalPost = isSafeHttpUrl(lesson.originalPostUrl)
     ? lesson.originalPostUrl
     : null;
@@ -32,7 +29,6 @@ export function LearnLesson({
 
   return (
     <Section containerClassName="overflow-x-clip">
-      <SceneProgressTracker slug={lesson.slug} sceneIds={sceneIds} />
       <p className="text-sm font-semibold">
         <Link
           href={localizedPath(locale, "/aprendamos")}
@@ -44,7 +40,7 @@ export function LearnLesson({
       <h1 className="mt-4 max-w-[18ch] text-[clamp(2.375rem,4vw,3.75rem)] font-semibold leading-[1.1] tracking-tight text-foreground">
         {lesson.title}
       </h1>
-      <div className="mt-6 max-w-[65ch] space-y-4">
+      <div className="mt-6 space-y-4">
         {lesson.intro.map((paragraph) => (
           <p key={paragraph.text} className="leading-relaxed text-muted">
             {paragraph.text}
@@ -57,8 +53,7 @@ export function LearnLesson({
           </p>
         ))}
       </div>
-      <ContinueBanner slug={lesson.slug} sceneIds={sceneIds} />
-      <nav className="mt-10" aria-label={learnUi.scenesLabel}>
+      <nav className="mt-10 mb-12" aria-label={learnUi.scenesLabel}>
         <p className="text-base font-semibold text-foreground">{learnUi.scenesLabel}</p>
         <ol className="mt-4 grid gap-2 sm:grid-cols-2">
           {lesson.scenes.map((scene, index) => (
@@ -70,12 +65,10 @@ export function LearnLesson({
           ))}
         </ol>
       </nav>
-      {lesson.scenes.map((scene, index) => (
+      {lesson.scenes.map((scene) => (
         <SceneSection
           key={scene.id}
           scene={scene}
-          index={index + 1}
-          total={lesson.scenes.length}
           deepen={lesson.deepen.find((item) => item.afterSceneId === scene.id)}
           question={lesson.questions.find((item) => item.afterSceneId === scene.id)}
           numbers={numbers}
@@ -84,22 +77,6 @@ export function LearnLesson({
           <SceneVisual sceneId={scene.id} />
         </SceneSection>
       ))}
-      <section className="border-t border-border py-12 md:py-16" aria-labelledby="learn-closing">
-        <p className="text-sm font-medium text-muted">{learnUi.closingLabel}</p>
-        <h2
-          id="learn-closing"
-          className="mt-2 max-w-[22ch] text-[clamp(1.5rem,2.5vw,1.75rem)] font-semibold leading-[1.25] text-foreground"
-        >
-          {lesson.closingTitle}
-        </h2>
-        <div className="mt-6 max-w-[65ch] space-y-4">
-          {lesson.closing.map((paragraph) => (
-            <p key={paragraph.text} className="leading-relaxed text-muted">
-              {paragraph.text}
-            </p>
-          ))}
-        </div>
-      </section>
       <section className="border-t border-border py-12" aria-labelledby="learn-sources">
         <h2
           id="learn-sources"
@@ -107,20 +84,19 @@ export function LearnLesson({
         >
           {learnUi.sourcesTitle}
         </h2>
-        <ol className="mt-6 max-w-[65ch] space-y-4">
+        <ol className="mt-6 space-y-4">
           {citedSources.map((source) => (
             <li key={source.id} id={`ref-${source.id}`} className="scroll-mt-28">
               <p className="text-sm font-semibold text-foreground">
                 {numbers[source.id]}. {source.authors}, {source.year}
               </p>
-              <p className="mt-1 text-sm leading-relaxed text-muted">{source.edition}</p>
               <a
                 href={source.href}
-                className="prose-link mt-1 inline-block text-sm font-semibold"
+                className="prose-link mt-1 inline-block text-sm leading-relaxed"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {source.title}
+                {source.edition}
               </a>
             </li>
           ))}

@@ -196,12 +196,19 @@ body {
   cursor: pointer;
 }
 
-.learn-part.is-selected :is(path, rect, ellipse, circle):not([stroke="transparent"]),
-.learn-part:focus-visible :is(path, rect, ellipse, circle):not([stroke="transparent"]),
-.learn-part.is-selected .learn-node-mark,
-.learn-part:focus-visible .learn-node-mark {
-  stroke: var(--accent);
-  stroke-width: 2.4;
+.learn-highlight {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.learn-part.is-selected,
+.learn-part:focus-visible {
+  filter: drop-shadow(0 0 2px var(--accent));
+}
+
+.learn-part.is-selected .learn-highlight,
+.learn-part:focus-visible .learn-highlight {
+  opacity: 1;
 }
 
 .learn-part:focus-visible {
@@ -213,17 +220,14 @@ body {
 }
 
 .learn-zoom-target {
-  width: fit-content;
+  width: 100%;
   max-width: 100%;
-  margin-inline: auto;
 }
 
 .learn-zoom-target > svg {
   display: block;
-  width: auto;
+  width: 100%;
   height: auto;
-  max-width: 100%;
-  max-height: min(50vh, 480px);
 }
 
 .learn-zoom-target.is-zoomed {

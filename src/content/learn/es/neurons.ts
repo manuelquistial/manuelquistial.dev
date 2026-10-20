@@ -486,10 +486,4 @@ export const neuronsLesson = {
       href: "https://www.ncbi.nlm.nih.gov/books/NBK11009/",
     },
   ],
-  closingTitle: "¿Cómo pasamos de esta actividad a controlar un dron?",
-  closing: [
-    {
-      text: "Hacen falta registro de señales, procesamiento, identificación de patrones y conversión de ese resultado en comandos.",
-    },
-  ],
 } as const satisfies LearnLessonContent;

@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { neuronsLesson } from "@/content/learn/es/neurons";
 import { NeuronArt } from "@/components/learn/illustrations/NeuronArt";
 import { pointAlong } from "@/components/learn/illustrations/geometry";
-import { axonCurve, signalChains, somaCenter } from "@/components/learn/illustrations/neuronModel";
+import { axonCurves, signalChains, somaCenter } from "@/components/learn/illustrations/neuronModel";
 import { SceneStage } from "@/components/learn/SceneStage";
 import { useScenePlayback } from "@/components/learn/useScenePlayback";
 import { signalFrameVars, signalPlaybackStages } from "@/lib/learn/physiology";
@@ -31,7 +31,7 @@ export function SignalScene() {
       });
       const spike = layer.querySelector<SVGCircleElement>("[data-spike]");
       if (spike) {
-        const point = pointAlong([axonCurve], Number(vars["--spike"] ?? 0));
+        const point = pointAlong(axonCurves, Number(vars["--spike"] ?? 0));
         spike.setAttribute("cx", String(point.x));
         spike.setAttribute("cy", String(point.y));
         spike.style.opacity = vars["--spike-opacity"] ?? "0";
@@ -62,9 +62,9 @@ export function SignalScene() {
               />
             );
           })}
-          <circle data-spike="" cx={axonCurve.x0} cy={axonCurve.y0} r="9" fill="#9e3b2d" stroke="#fff" strokeWidth="2" opacity="0" />
-          <circle data-soma="" cx={somaCenter.x} cy={somaCenter.y} r="78" fill="none" stroke="#6d5b88" strokeWidth="3" opacity="0" />
-          <circle data-threshold="" cx={axonCurve.x0} cy={axonCurve.y0} r="14" fill="#9e3b2d" opacity="0" />
+          <circle data-spike="" cx={axonCurves[0]?.x0 ?? 0} cy={axonCurves[0]?.y0 ?? 0} r="11" fill="#9e3b2d" stroke="#fff" strokeWidth="2" opacity="0" />
+          <circle data-soma="" cx={somaCenter.x} cy={somaCenter.y} r="96" fill="none" stroke="#6d5b88" strokeWidth="3" opacity="0" />
+          <circle data-threshold="" cx={axonCurves[0]?.x0 ?? 0} cy={axonCurves[0]?.y0 ?? 0} r="16" fill="#9e3b2d" opacity="0" />
         </g>
       </NeuronArt>
     </SceneStage>

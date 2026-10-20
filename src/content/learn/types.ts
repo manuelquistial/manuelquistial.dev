@@ -62,7 +62,5 @@ export type LearnLessonContent = {
   questions: readonly LearnQuestion[];
   deepen: readonly LearnDeepen[];
   sources: readonly LearnSource[];
-  closingTitle: string;
-  closing: readonly LearnText[];
   originalPostUrl?: string;
 };

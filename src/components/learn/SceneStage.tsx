@@ -82,7 +82,7 @@ export function SceneStage({
 
   return (
     <div
-      className="overflow-hidden rounded-[8px] border border-border bg-[#eef3f6]"
+      className={`mx-auto w-full overflow-hidden rounded-[8px] border border-border bg-[#eef3f6] ${aside ? "max-w-5xl" : "max-w-3xl"}`}
       onKeyDown={(event) => {
         if (event.key === "Escape" && card) {
           event.preventDefault();

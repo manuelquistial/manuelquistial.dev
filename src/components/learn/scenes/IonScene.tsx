@@ -49,7 +49,6 @@ export function IonScene() {
         <ul className="flex flex-wrap gap-x-4 gap-y-1">
           <li>{learnUi.sodium}</li>
           <li>{learnUi.potassium}</li>
-          <li>{learnUi.schematic}</li>
         </ul>
       }
     >

@@ -22,7 +22,6 @@ export function lessonTexts(lesson: LearnLessonContent): LearnText[] {
     ...lesson.intro,
     ...lesson.scenes.flatMap((scene) => scene.paragraphs),
     ...lesson.deepen.flatMap((block) => block.paragraphs),
-    ...lesson.closing,
   ];
 }
 

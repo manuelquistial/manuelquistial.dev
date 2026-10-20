@@ -121,14 +121,14 @@ export function SignalScene() {
             <circle cx={520} cy={500} r="7" fill="#9e3b2d" />
           </g>
         </NeuronArt>
-        <div className="absolute top-2 right-2 w-24 rounded-[8px] border border-border bg-surface/95 p-2 shadow-sm">
-          <p className="text-[11px] leading-tight font-semibold text-foreground">{learnUi.meterTitle}</p>
-          <div className="relative mx-auto mt-2 h-24 w-3 rounded-full bg-surface-soft">
-            <span className="absolute -left-1 h-px w-5 bg-accent" style={{ top: "28%" }} />
-            <span data-meter-dot="" className="absolute left-1/2 size-2.5 -translate-x-1/2 rounded-full bg-foreground" style={{ top: "84%" }} />
+        <div className="learn-meter">
+          <p className="text-[15px] leading-tight font-semibold text-foreground">{learnUi.meterTitle}</p>
+          <div className="relative mx-auto mt-3 h-36 w-4 rounded-full bg-surface-soft">
+            <span className="absolute -left-1 h-0.5 w-6 bg-accent" style={{ top: "28%" }} />
+            <span data-meter-dot="" className="absolute left-1/2 size-4 -translate-x-1/2 rounded-full border-2 border-white bg-foreground" style={{ top: "84%" }} />
           </div>
-          <p className="mt-1 text-[10px] text-muted">{learnUi.meterMark}</p>
-          <p data-meter-state="" className="text-[10px] font-semibold text-foreground">
+          <p className="mt-2 text-sm text-muted">{learnUi.meterMark}</p>
+          <p data-meter-state="" className="text-base font-semibold text-foreground">
             Por debajo
           </p>
         </div>

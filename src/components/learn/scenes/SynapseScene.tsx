@@ -62,30 +62,30 @@ const chemicalMoment: Record<string, Record<string, string>> = {
 
 const electricalMoment: Record<string, Record<string, string>> = {
   connected: {
-    junctions: "El poro comunica los dos interiores. No es una tapa cerrada. Este ejemplo es bidireccional; otras sinapsis eléctricas no lo son.",
-    "cell-1": "Célula de arriba. En este ejemplo puede ser el origen o el destino.",
-    "cell-2": "Célula de abajo. El mensaje puede recorrer el poro en cualquiera de los dos sentidos de este ejemplo.",
+    junctions: "El poro comunica los dos interiores. No es una tapa cerrada.",
+    "cell-1": "La célula de arriba. En este ejemplo el cambio empieza aquí.",
+    "cell-2": "La célula de abajo. Recibe la corriente que cruza el poro.",
   },
   current: {
-    junctions: "Los iones cruzan el poro abierto. No hay vesículas ni hendidura química.",
-    "cell-1": "Si esta célula cambia primero, la corriente sale hacia la otra. Si es el destino, el cambio llega después.",
-    "cell-2": "La corriente iónica entra o sale según cuál célula se activó en el ejemplo.",
+    junctions: "Los iones cruzan el poro abierto, de la célula de arriba a la de abajo. No hay vesículas ni hendidura química.",
+    "cell-1": "Esta célula cambia primero. La corriente sale hacia el poro.",
+    "cell-2": "Todavía no ha cambiado. Los iones van hacia su interior.",
   },
   shared: {
-    junctions: "El paso de iones cambia el voltaje de la célula acoplada.",
-    "cell-1": "Su voltaje depende de si fue el origen o la célula que responde.",
-    "cell-2": "La respuesta es un cambio local de voltaje, no una copia química del mensaje.",
+    junctions: "El paso de iones cambia el voltaje de la célula de abajo.",
+    "cell-1": "Sigue siendo el origen de este ejemplo.",
+    "cell-2": "Su voltaje cambia de forma local. No hay un mensajero químico.",
   },
 };
 
 function ChemicalInset({ stageId, pose }: { stageId: string; pose: ChemicalPose }) {
   if (stageId === "binding" || stageId === "response") {
     return (
-      <DetailInset title="Receptor de este ejemplo" source="Un receptor ionotrópico de la membrana postsináptica.">
+      <DetailInset title="Receptor de este ejemplo" source="Un receptor ionotrópico de la membrana postsináptica. El mensajero queda en la hendidura.">
         <svg viewBox="0 0 160 120" className="block h-auto w-full" aria-hidden="true">
-          <text x="8" y="16" fontSize="12" fill="#20201e">Hendidura</text>
+          <text x="8" y="16" fontSize="14" fill="#20201e">Hendidura</text>
           <rect x="16" y="48" width="128" height="14" rx="3" fill="#e7a090" />
-          <text x="8" y="108" fontSize="12" fill="#20201e">Interior</text>
+          <text x="8" y="112" fontSize="14" fill="#20201e">Interior</text>
           <path d="M 58 40 C 50 62, 52 78, 62 86 C 70 90, 78 84, 76 72 C 82 58, 74 44, 66 40 Z" fill="#8eb4d4" stroke="#3d5f86" />
           <path d="M 102 40 C 94 62, 96 78, 106 86 C 114 90, 122 84, 120 72 C 126 58, 118 44, 110 40 Z" fill="#8eb4d4" stroke="#3d5f86" />
           <rect x="74" y="62" width="12" height="28" rx="3" fill="#f7f4ee" stroke="#3d5f86" />
@@ -94,12 +94,10 @@ function ChemicalInset({ stageId, pose }: { stageId: string; pose: ChemicalPose 
             <circle cx="-9" cy="0" r="6" fill="#d4789a" stroke="#7d5d86" />
             <circle cx="9" cy="0" r="6" fill="#d4789a" stroke="#7d5d86" />
           </g>
-          {stageId === "response" ? (
-            <g transform="translate(80 96)">
-              <circle r="9" fill="#8eb4d4" stroke="#3d5f86" />
-              <text y="3" textAnchor="middle" fontSize="8" fill="#20201e">Na⁺</text>
-            </g>
-          ) : null}
+          <g className="learn-inset-post-na" opacity={stageId === "response" ? 1 : 0} transform="translate(80 100)">
+            <circle r="11" fill="#8eb4d4" stroke="#3d5f86" />
+            <text x="16" y="4" fontSize="14" fontWeight="700" fill="#20201e">Na⁺</text>
+          </g>
         </svg>
       </DetailInset>
     );
@@ -117,25 +115,27 @@ function ChemicalInset({ stageId, pose }: { stageId: string; pose: ChemicalPose 
     );
   }
 
+  if (stageId !== "calcium") return null;
   const open = pose.caOpen > 0.2;
   const swung = pose.caOpen > 0.45;
   return (
-    <DetailInset title="Canal de calcio" source="Tomado de la membrana presináptica. El calcio entra desde fuera.">
-      <svg viewBox="0 0 160 130" className="block h-auto w-full" aria-hidden="true">
-        <text x="8" y="16" fontSize="12" fill="#20201e">Exterior</text>
-        <rect x="18" y="36" width="124" height="12" fill="#e7a090" />
-        <rect x="18" y="86" width="124" height="12" fill="#e7a090" />
-        <text x="8" y="122" fontSize="12" fill="#20201e">Interior</text>
-        <rect x="58" y="28" width="44" height="78" rx="16" fill="#e0b15a" stroke="#a89880" />
-        <rect x={open ? 74 : 77} y="40" width={open ? 12 : 6} height="54" rx="3" fill={open ? "#f7f4ee" : "#a89880"} />
-        <path d="M 66 58 L 76 70 L 68 82" fill="#a89880" transform={swung ? "rotate(-60 72 70)" : undefined} />
-        <path d="M 94 58 L 84 70 L 92 82" fill="#a89880" transform={swung ? "rotate(60 88 70)" : undefined} />
-        {pose.caTravel > 0.05 ? (
-          <g transform={`translate(80 ${96 - pose.caTravel * 52})`}>
-            <circle r="11" fill="#e0b15a" stroke="#a89880" />
-            <text y="3" textAnchor="middle" fontSize="8" fill="#20201e">Ca²⁺</text>
-          </g>
-        ) : null}
+    <DetailInset title="Canal de calcio" source="Misma orientación que la membrana presináptica: el calcio entra desde la hendidura hacia el terminal.">
+      <svg viewBox="0 0 180 150" className="block h-auto w-full" aria-hidden="true">
+        <text x="8" y="18" fontSize="14" fontWeight="700" fill="#20201e">Interior</text>
+        <circle cx="132" cy="28" r="16" fill="#f6f1f6" stroke="#7d5d86" strokeWidth="1.6" />
+        <circle cx="126" cy="28" r="4" fill="#d4789a" />
+        <circle cx="138" cy="28" r="4" fill="#d4789a" />
+        <rect x="18" y="48" width="144" height="12" fill="#e7a090" />
+        <rect x="18" y="96" width="144" height="12" fill="#e7a090" />
+        <text x="8" y="140" fontSize="14" fontWeight="700" fill="#20201e">Exterior</text>
+        <rect x="68" y="40" width="44" height="76" rx="16" fill="#e0b15a" stroke="#a89880" />
+        <rect className="learn-inset-pore" x={open ? 84 : 87} y="52" width={open ? 12 : 6} height="52" rx="3" fill={open ? "#f7f4ee" : "#a89880"} />
+        <path className="learn-inset-gate" data-side="left" d="M 76 70 L 86 82 L 78 94" fill="#a89880" transform={swung ? "rotate(-60 82 82)" : undefined} />
+        <path className="learn-inset-gate" data-side="right" d="M 104 70 L 94 82 L 102 94" fill="#a89880" transform={swung ? "rotate(60 98 82)" : undefined} />
+        <g className="learn-inset-ca" transform={`translate(90 ${118 - pose.caTravel * 62})`} opacity={pose.caTravel > 0.05 ? 1 : 0}>
+          <circle r="12" fill="#e0b15a" stroke="#a89880" />
+          <text x="16" y="4" fontSize="14" fontWeight="700" fill="#20201e">Ca²⁺</text>
+        </g>
       </svg>
     </DetailInset>
   );
@@ -144,14 +144,10 @@ function ChemicalInset({ stageId, pose }: { stageId: string; pose: ChemicalPose 
 export function SynapseScene() {
   const scene = neuronsLesson.scenes[4];
   const [mode, setMode] = useState<"chemical" | "electrical">("chemical");
-  const [flow, setFlow] = useState<ElectricalFlow>("forward");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const playback = useScenePlayback(synapsePlaybackStages(mode));
   const artRef = useRef<SVGSVGElement>(null);
-  const flowRef = useRef(flow);
-  useEffect(() => {
-    flowRef.current = flow;
-  }, [flow]);
+  const flow: ElectricalFlow = "forward";
   const stages = scene.stages?.filter((item) => synapsePlaybackStages(mode).some((bound) => bound.id === item.id));
   const labels = Object.fromEntries((scene.parts ?? []).map((part) => [part.id, part.label]));
   const stageBound = synapsePlaybackStages(mode).find((item) => item.id === playback.snapshot.stageId);
@@ -212,12 +208,22 @@ export function SynapseScene() {
           post.setAttribute("opacity", frame.response > 0.15 ? "1" : "0");
           post.setAttribute("transform", `translate(835 ${700 + frame.response * 70})`);
         }
+        const insetCa = art.parentElement?.querySelector(".learn-inset-ca");
+        if (insetCa) {
+          insetCa.setAttribute("transform", `translate(90 ${118 - frame.caTravel * 62})`);
+          insetCa.setAttribute("opacity", frame.caTravel > 0.05 ? "1" : "0");
+        }
+        const insetNa = art.parentElement?.querySelector(".learn-inset-post-na");
+        if (insetNa) {
+          insetNa.setAttribute("opacity", frame.response > 0.15 ? "1" : "0");
+          insetNa.setAttribute("transform", `translate(80 ${92 + frame.response * 16})`);
+        }
         return;
       }
 
-      const frame = electricalPose(snapshot.stageId, amount, flowRef.current);
-      const top = frame.direction === 1 ? frame.source : frame.shared;
-      const bottom = frame.direction === 1 ? frame.shared : frame.source;
+      const frame = electricalPose(snapshot.stageId, amount, "forward");
+      const top = frame.source;
+      const bottom = frame.shared;
       art.querySelector(".learn-cell-top")?.setAttribute("opacity", String(top * 0.85));
       art.querySelector(".learn-cell-bottom")?.setAttribute("opacity", String(bottom * 0.85));
       art.querySelectorAll<SVGGElement>(".learn-junction-ion").forEach((dot) => {
@@ -225,7 +231,7 @@ export function SynapseScene() {
         const span = Number(dot.dataset.span ?? 120);
         const y = home + frame.direction * frame.current * span;
         dot.setAttribute("transform", `translate(0 ${y - home})`);
-        dot.style.opacity = String(Math.min(1, frame.current));
+        dot.style.opacity = "1";
       });
       const detail = art.parentElement?.querySelector(".learn-detail-ion");
       if (detail) {
@@ -242,13 +248,6 @@ export function SynapseScene() {
     setMode(next);
     setSelectedId(null);
     playback.reset(synapsePlaybackStages(next));
-  };
-
-  const switchFlow = (next: ElectricalFlow) => {
-    if (next === flow) return;
-    setFlow(next);
-    setSelectedId(null);
-    playback.reset(synapsePlaybackStages("electrical"));
   };
 
   return (
@@ -284,25 +283,6 @@ export function SynapseScene() {
               );
             })}
           </div>
-          {mode === "electrical" ? (
-            <div role="tablist" aria-label={learnUi.electricalDirection} className="inline-flex rounded-full bg-surface-soft p-1">
-              {(["forward", "reverse"] as const).map((item) => {
-                const selected = flow === item;
-                return (
-                  <button
-                    key={item}
-                    type="button"
-                    role="tab"
-                    aria-selected={selected}
-                    className={`min-h-11 rounded-full px-4 text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-foreground ${selected ? "bg-surface text-foreground shadow-sm" : "text-muted"}`}
-                    onClick={() => switchFlow(item)}
-                  >
-                    {item === "forward" ? learnUi.fromCell1 : learnUi.fromCell2}
-                  </button>
-                );
-              })}
-            </div>
-          ) : null}
         </div>
       }
       legend={
@@ -340,9 +320,11 @@ export function SynapseScene() {
             shared={electric.shared}
             onSelect={(id) => setSelectedId((current) => (current === id ? null : id))}
           />
-          <DetailInset title="Poro de la unión" source="Tomada de la unión central. El lumen sigue abierto.">
-            <JunctionDetail flow={flow} />
-          </DetailInset>
+          {selectedId === "junctions" ? (
+            <DetailInset title="Poro de la unión" source="Tomada de la unión central. El lumen sigue abierto.">
+              <JunctionDetail flow={flow} />
+            </DetailInset>
+          ) : null}
         </div>
       )}
     </SceneStage>

@@ -86,7 +86,7 @@ export function useScenePlayback(
         apply("away");
         return;
       }
-      const delta = Math.min(48, now - last);
+      const delta = Math.min(500, Math.max(0, now - last));
       last = now;
       if (!controller.frame(delta)) return;
       raf = requestAnimationFrame(loop);

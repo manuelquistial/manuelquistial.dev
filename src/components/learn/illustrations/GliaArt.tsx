@@ -21,14 +21,16 @@ export function GliaArt({
   hintId,
   onSelect,
   activeNode = -1,
-  phase = "isolation",
+  phase = "spread",
+  markSheath = false,
 }: {
   labels?: Partial<Record<"glia" | "myelin" | "nodes", string>>;
   selectedId?: string | null;
   hintId?: string;
   onSelect?: (id: string) => void;
   activeNode?: number;
-  phase?: "isolation" | "spread" | "regeneration" | "continuation";
+  phase?: "spread" | "regeneration" | "continuation";
+  markSheath?: boolean;
 }) {
   const grain = useSvgId("glia-grain");
 
@@ -129,14 +131,15 @@ export function GliaArt({
           pathLength={1}
           opacity={phase === "spread" || phase === "continuation" ? 0.35 : 0}
         />
-        {phase === "isolation" ? (
-          <g>
-            <circle cx={620} cy={560} r="10" fill="none" stroke={learnColors.ink} strokeWidth="2" />
-            <path d="M 630 550 L 760 180" fill="none" stroke={learnColors.ink} strokeWidth="1.5" strokeDasharray="6 5" />
-          </g>
-        ) : null}
-        {phase === "regeneration" || phase === "continuation" ? (
-          <path d={`M ${(gliaNodes[activeNode]?.x ?? 466) + 16} ${(gliaNodes[activeNode]?.y ?? 620) - 28} L 760 160`} fill="none" stroke={learnColors.ink} strokeWidth="1.5" strokeDasharray="6 5" />
+        {markSheath ? (
+          <circle
+            cx={((gliaNodes[0]?.x ?? 0) + (gliaNodes[1]?.x ?? 0)) / 2}
+            cy={(gliaNodes[0]?.y ?? 620) - 28}
+            r="16"
+            fill="none"
+            stroke={learnColors.ink}
+            strokeWidth="3"
+          />
         ) : null}
       </g>
     </svg>

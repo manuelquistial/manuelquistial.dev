@@ -145,7 +145,13 @@ export function SceneStage({
             <div
               className={`px-[var(--learn-panel-pad)] ${hasTrack ? "pt-3" : "pt-4"} ${playback ? "pb-2" : "pb-4"}`}
             >
-              <StageExplanation copies={copies} activeKey={activeKey} onClose={close} closeRef={closeRef} />
+              <StageExplanation
+                copies={copies}
+                activeKey={activeKey}
+                onClose={close}
+                closeRef={closeRef}
+                compact={Boolean(playback?.snapshot.playing) && !card}
+              />
             </div>
           ) : null}
           {playback ? (

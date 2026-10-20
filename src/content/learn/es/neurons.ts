@@ -121,12 +121,6 @@ export const neuronsLesson = {
       ],
       stages: [
         {
-          id: "isolation",
-          label: "Aislamiento",
-          title: "La vaina ya envuelve el axón",
-          text: "El corte muestra capas alrededor del axón. La mielina no se forma ni desaparece con cada impulso.",
-        },
-        {
           id: "spread",
           label: "Entre nodos",
           title: "La despolarización avanza por el tramo cubierto",
@@ -191,12 +185,12 @@ export const neuronsLesson = {
         {
           id: "cell-1",
           label: "Célula 1",
-          text: "La célula de arriba. En el ejemplo bidireccional puede iniciar el cambio o recibirlo.",
+          text: "La célula de arriba. En este ejemplo el cambio empieza aquí y los iones cruzan el poro hacia la otra célula.",
         },
         {
           id: "cell-2",
           label: "Célula 2",
-          text: "La célula de abajo. Su voltaje cambia cuando los iones cruzan el poro desde la otra célula.",
+          text: "La célula de abajo. Su voltaje cambia cuando los iones llegan por el poro.",
         },
       ],
       stages: [
@@ -301,12 +295,6 @@ export const neuronsLesson = {
       ],
       stages: [
         {
-          id: "rest",
-          label: "Reposo",
-          title: "Los canales rápidos están cerrados",
-          text: "Hay más Na+ fuera y más K+ dentro. Las compuertas de Na+ y de K+ de este ejemplo se ven cerradas. El canal de fuga es otro poro.",
-        },
-        {
           id: "depolarization",
           label: "Entrada",
           title: "Se abre el canal de sodio",
@@ -328,39 +316,39 @@ export const neuronsLesson = {
     },
     {
       id: "diferencia-de-potencial",
-      title: "Diferencia de potencial",
+      title: "El potencial de acción recorre el axón",
       textAlternative:
-        "La neurona con un punto marcado en el axón y, al lado, la gráfica del voltaje de ese punto. El marcador y la gráfica comparten el mismo tiempo.",
+        "Neurona con tres potenciales de acción consecutivos. Cada pico recorre el axón desde el segmento inicial hasta los terminales.",
       paragraphs: [
         {
-          text: "Los valores de este ejemplo, cerca de -70 mV en reposo y un pico cercano a +30 mV, cambian según el tipo de neurona. La gráfica sigue el mismo punto marcado en el axón.",
+          text: "En este ejemplo salen tres potenciales de acción, de amplitud parecida. Cada pico nace en el segmento inicial y recorre el axón; detrás, esa zona vuelve al reposo. El tiempo de la animación está ralentizado.",
           cites: ["potential"],
         },
       ],
       stages: [
         {
-          id: "rest",
-          label: "Reposo",
-          title: "Este punto está cerca de -70 mV",
-          text: "El voltaje es la diferencia entre el interior y el exterior en el lugar marcado, no en todo el axón.",
+          id: "first",
+          label: "Primero",
+          title: "Empieza el primer impulso",
+          text: "El potencial nace en el segmento inicial. Más adelante el axón sigue en reposo.",
         },
         {
-          id: "depolarization",
-          label: "Subida",
-          title: "El voltaje de este punto sube",
-          text: "Entra Na+ y el interior se vuelve menos negativo. En el ejemplo el pico se acerca a +30 mV.",
+          id: "second",
+          label: "Segundo",
+          title: "Sale el segundo impulso",
+          text: "El inicio ya se recuperó. El primer impulso sigue más adelante, con la misma amplitud.",
         },
         {
-          id: "repolarization",
-          label: "Bajada",
-          title: "Sale potasio y el voltaje baja",
-          text: "El K+ sale por su canal y este punto vuelve hacia el valor de reposo.",
+          id: "third",
+          label: "Tercero",
+          title: "Sale el tercer impulso",
+          text: "Otra vez después de la recuperación del inicio. Los tres tienen un tamaño semejante.",
         },
         {
-          id: "hyperpolarization",
-          label: "Más negativo",
-          title: "El voltaje queda un momento más negativo",
-          text: "Después de la bajada puede pasar de -70 mV. Luego se acerca otra vez a ese valor.",
+          id: "terminals",
+          label: "Terminales",
+          title: "Los impulsos llegan al extremo",
+          text: "Cada potencial sigue hasta los terminales. Detrás, esa zona de membrana vuelve al reposo.",
         },
       ],
     },
@@ -379,48 +367,42 @@ export const neuronsLesson = {
         {
           id: "cell-a",
           label: "Célula A",
-          text: "Inicia el episodio de este ejemplo y envía una conexión excitatoria a B.",
+          text: "Inicia el episodio. Envía una conexión excitatoria a B y una rama inhibitoria hacia D.",
         },
         {
           id: "cell-b",
           label: "Célula B",
-          text: "Recibe la entrada de A. Después puede disparar hacia C y enviar una conexión inhibitoria a D.",
+          text: "Recibe la entrada de A. Después dispara hacia C.",
         },
         {
           id: "cell-c",
           label: "Célula C",
-          text: "Recibe una conexión excitatoria desde B. En este ejemplo esa entrada basta para que dispare.",
+          text: "Recibe la conexión excitatoria de B. En este ejemplo esa entrada basta para que dispare.",
         },
         {
           id: "cell-d",
           label: "Célula D",
-          text: "Recibe una conexión inhibitoria. Muestra una respuesta local y no dispara.",
+          text: "Recibe la rama inhibitoria que baja desde A. Muestra una respuesta local y no dispara.",
         },
       ],
       stages: [
         {
-          id: "idle",
-          label: "Reposo",
-          title: "A, B, C y D esperan",
-          text: "Ninguna de las células marcadas está disparando.",
-        },
-        {
           id: "input",
           label: "Entrada",
-          title: "A inicia el episodio",
-          text: "La señal recorre el axón de A hasta el terminal que contacta con B. B muestra una respuesta local.",
+          title: "A excita a B",
+          text: "La señal recorre el axón de A hasta B. B muestra una respuesta local y todavía no dispara.",
         },
         {
           id: "relay",
           label: "Relevo",
           title: "B dispara hacia C",
-          text: "Después de la respuesta local, B conduce un potencial de acción. C empieza a responder.",
+          text: "B conduce el potencial de acción por su axón hasta C. C empieza a responder.",
         },
         {
           id: "split",
           label: "Dos destinos",
           title: "C dispara y D no",
-          text: "La señal llega a C por una conexión excitatoria y C dispara. D recibe la conexión inhibitoria y no lo hace.",
+          text: "C dispara con la entrada que llegó desde B. D recibe la rama inhibitoria de A, muestra una respuesta local y no dispara.",
         },
       ],
     },

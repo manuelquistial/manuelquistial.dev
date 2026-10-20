@@ -16,31 +16,24 @@ const linkFor: Record<string, string> = {
 };
 
 const localFor: Record<string, "n2" | "n3" | "n4" | null> = {
-  idle: null,
   input: "n2",
   relay: "n3",
   split: "n4",
 };
 
 const moment: Record<string, Record<string, string>> = {
-  idle: {
-    "cell-a": "A está en reposo. En este ejemplo es la célula que inicia el episodio.",
-    "cell-b": "B espera una entrada excitatoria de A.",
-    "cell-c": "C todavía no recibe la señal de B.",
-    "cell-d": "D puede recibir una conexión inhibitoria desde B. Ahora no hay actividad.",
-  },
   input: {
-    "cell-a": "A inicia el episodio. La franja recorre su axón hasta el terminal que contacta con B.",
+    "cell-a": "A inicia el episodio. La señal recorre su axón hasta B.",
     "cell-b": "B muestra una respuesta local. Aún no dispara.",
   },
   relay: {
-    "cell-b": "B dispara después de esa respuesta. Su axón lleva la señal hacia C.",
+    "cell-b": "B dispara. Su axón lleva la señal hasta C.",
     "cell-c": "C recibe una respuesta local excitatoria.",
   },
   split: {
-    "cell-c": "C dispara. La conexión que llegó desde B era excitatoria.",
-    "cell-d": "D recibe la conexión inhibitoria, marcada con el signo menos. Hay respuesta local, pero no dispara.",
-    "cell-b": "Desde B salen dos caminos: uno excitatorio hacia C y otro inhibitorio hacia D.",
+    "cell-a": "Desde A también baja una rama inhibitoria hasta D.",
+    "cell-c": "C dispara. La entrada que llegó desde B era excitatoria.",
+    "cell-d": "D recibe esa rama inhibitoria. Hay respuesta local, pero no dispara.",
   },
 };
 
@@ -67,7 +60,7 @@ export function NetworkScene() {
       root.querySelectorAll<SVGPathElement>(".learn-link").forEach((path) => {
         const on = path.dataset.link === current;
         path.setAttribute("opacity", on ? "1" : "0");
-        path.setAttribute("stroke-dashoffset", String(1 - amount));
+        path.setAttribute("stroke-dashoffset", String(on ? 1 - Math.max(amount, 0.16) : 1));
       });
     });
   }, [playback.controller, playback.snapshot.stageId, playback.snapshot.time]);
@@ -91,6 +84,7 @@ export function NetworkScene() {
           active={state.active}
           inhibited={state.inhibited}
           local={localFor[playback.snapshot.stageId] ?? null}
+          litLink={linkFor[playback.snapshot.stageId] ?? null}
           labels={labels}
           selectedId={selectedId}
           onSelect={(id) => setSelectedId((current) => (current === id ? null : id))}

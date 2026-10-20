@@ -22,26 +22,26 @@ export const membraneArt = {
 type Home = { id: string; species: "na" | "k"; x: number; y: number; mover?: "na" | "k" };
 
 const homes: readonly Home[] = [
-  { id: "na-1", species: "na", x: 220, y: 170 },
-  { id: "na-2", species: "na", x: 400, y: 150 },
-  { id: "na-3", species: "na", x: 250, y: 280 },
-  { id: "na-4", species: "na", x: 450, y: 250 },
-  { id: "na-5", species: "na", x: 300, y: 210 },
-  { id: "na-m", species: "na", x: 300, y: 230, mover: "na" },
-  { id: "na-i1", species: "na", x: 230, y: 700 },
-  { id: "na-i2", species: "na", x: 420, y: 790 },
-  { id: "k-o1", species: "k", x: 560, y: 180 },
-  { id: "k-o2", species: "k", x: 740, y: 260 },
-  { id: "k-1", species: "k", x: 540, y: 680 },
-  { id: "k-2", species: "k", x: 760, y: 760 },
-  { id: "k-3", species: "k", x: 620, y: 800 },
-  { id: "k-4", species: "k", x: 800, y: 680 },
-  { id: "k-5", species: "k", x: 700, y: 720 },
-  { id: "k-m", species: "k", x: 640, y: 660, mover: "k" },
+  { id: "na-1", species: "na", x: 70, y: 300 },
+  { id: "na-2", species: "na", x: 165, y: 318 },
+  { id: "na-3", species: "na", x: 215, y: 300 },
+  { id: "na-4", species: "na", x: 430, y: 318 },
+  { id: "na-5", species: "na", x: 555, y: 308 },
+  { id: "na-m", species: "na", x: 115, y: 348, mover: "na" },
+  { id: "na-i1", species: "na", x: 110, y: 640 },
+  { id: "na-i2", species: "na", x: 250, y: 700 },
+  { id: "k-o1", species: "k", x: 900, y: 318 },
+  { id: "k-o2", species: "k", x: 980, y: 340 },
+  { id: "k-1", species: "k", x: 400, y: 660 },
+  { id: "k-2", species: "k", x: 520, y: 700 },
+  { id: "k-3", species: "k", x: 640, y: 640 },
+  { id: "k-4", species: "k", x: 860, y: 700 },
+  { id: "k-5", species: "k", x: 980, y: 640 },
+  { id: "k-m", species: "k", x: 760, y: 680, mover: "k" },
 ];
 
-const naEnd = { x: 340, y: 740 };
-const kEnd = { x: 690, y: 200 };
+const naEnd = { x: 360, y: 650 };
+const kEnd = { x: 700, y: 330 };
 
 function lerp(from: number, to: number, amount: number) {
   return from + (to - from) * amount;

@@ -79,7 +79,7 @@ export const ChemicalSynapseArt = forwardRef<
   const bound = pose?.bound ?? 0;
 
   return (
-    <svg ref={ref} viewBox={`0 0 ${synapseView.width} ${synapseView.height}`} width={synapseView.width} height={synapseView.height} className="learn-synapse-art block h-auto w-full" role="group">
+    <svg ref={ref} viewBox="0 40 1672 760" width={synapseView.width} height={synapseView.height} className="learn-synapse-art block h-auto w-full" role="group">
       <defs>
         <Grain id={grain} />
       </defs>
@@ -167,30 +167,29 @@ export const ChemicalSynapseArt = forwardRef<
   );
 });
 
-function Connexon({ x, featured = false }: { x: number; featured?: boolean }) {
-  const lumen = featured ? 14 : 8;
+function Connexon({ x }: { x: number }) {
+  const lumen = 20;
   return (
     <g data-junction={x}>
       <path
-        d={`M ${x - 36} 392
-          C ${x - 30} 430, ${x - 22} 450, ${x - (lumen + 8)} 470
-          L ${x - (lumen + 8)} 500
-          C ${x - 22} 520, ${x - 30} 540, ${x - 36} 578
-          L ${x + 36} 578
-          C ${x + 30} 540, ${x + 22} 520, ${x + (lumen + 8)} 500
-          L ${x + (lumen + 8)} 470
-          C ${x + 22} 450, ${x + 30} 430, ${x + 36} 392 Z`}
+        d={`M ${x - 48} 380
+          C ${x - 40} 420, ${x - 30} 448, ${x - (lumen + 10)} 468
+          L ${x - (lumen + 10)} 508
+          C ${x - 30} 528, ${x - 40} 556, ${x - 48} 596
+          L ${x + 48} 596
+          C ${x + 40} 556, ${x + 30} 528, ${x + (lumen + 10)} 508
+          L ${x + (lumen + 10)} 468
+          C ${x + 30} 448, ${x + 40} 420, ${x + 48} 380 Z`}
         fill={learnColors.collar}
         stroke={learnColors.collarInk}
-        strokeWidth="1.5"
+        strokeWidth="1.8"
       />
-      <path
-        d={`M ${x - lumen} 404 L ${x - lumen} 566 L ${x + lumen} 566 L ${x + lumen} 404 Z`}
-        fill="#f7f4ee"
-      />
-      <g className="learn-junction-ion" data-home-y={430} data-span="120" opacity="0">
-        <circle cx={x} cy={430} r="11" fill={learnColors.sodium} stroke={learnColors.blueInk} />
-        <text x={x} y={434} textAnchor="middle" fontSize="9" fontWeight="700" fill={learnColors.ink}>Na⁺</text>
+      <path d={`M ${x - lumen} 392 L ${x - lumen} 584 L ${x + lumen} 584 L ${x + lumen} 392 Z`} fill="#f7f4ee" />
+      <g className="learn-junction-ion" data-home-y={488} data-span="120" opacity="1">
+        <circle cx={x} cy={488} r="18" fill={learnColors.sodium} stroke={learnColors.blueInk} />
+        <text x={x} y={494} textAnchor="middle" fontSize="13" fontWeight="700" fill={learnColors.ink}>
+          Na⁺
+        </text>
       </g>
     </g>
   );
@@ -213,7 +212,7 @@ export const ElectricalSynapseArt = forwardRef<
   const bottomHot = flow === "forward" ? shared : source;
 
   return (
-    <svg ref={ref} viewBox={`0 0 ${synapseView.width} ${synapseView.height}`} width={synapseView.width} height={synapseView.height} className="learn-electrical-art block h-auto w-full" role="group">
+    <svg ref={ref} viewBox="500 368 740 268" width={synapseView.width} height={synapseView.height} className="learn-electrical-art block h-auto w-full" role="group">
       <defs>
         <Grain id={grain} />
       </defs>
@@ -237,8 +236,8 @@ export const ElectricalSynapseArt = forwardRef<
         <rect x="80" y="600" width="1500" height="280" fill="transparent" />
       </Part>
       <Part id="junctions" label={labels?.junctions ?? "Uniones comunicantes"} selected={selectedId === "junctions"} hinted={hintId === "junctions"} onSelect={onSelect}>
-        {junctionCenters.map((x, index) => (
-          <Connexon key={x} x={x} featured={index === 1} />
+        {junctionCenters.map((x) => (
+          <Connexon key={x} x={x} />
         ))}
       </Part>
     </svg>
@@ -250,15 +249,18 @@ export function JunctionDetail({ flow }: { flow: ElectricalFlow }) {
   return (
     <svg viewBox="0 0 160 110" className="block h-auto w-full" aria-hidden="true">
       <rect width="160" height="110" fill="#eef3f6" />
-      <text x="8" y="16" fontSize="11" fontWeight="700" fill={learnColors.ink}>
+      <text x="8" y="18" fontSize="16" fontWeight="700" fill={learnColors.ink}>
         {fromTop ? "Célula 1" : "Célula 2"}
       </text>
-      <text x="8" y="104" fontSize="11" fontWeight="700" fill={learnColors.ink}>
+      <text x="8" y="102" fontSize="16" fontWeight="700" fill={learnColors.ink}>
         {fromTop ? "Célula 2" : "Célula 1"}
       </text>
       <path d="M 48 28 C 58 46, 62 50, 68 55 L 68 70 C 62 76, 58 80, 48 98 L 112 98 C 102 80, 98 76, 92 70 L 92 55 C 98 50, 102 46, 112 28 Z" fill={learnColors.collar} stroke={learnColors.collarInk} />
       <rect x="74" y="34" width="12" height="58" rx="4" fill="#f7f4ee" />
-      <circle className="learn-detail-ion" cx="80" cy={fromTop ? 40 : 84} r="5" fill={learnColors.sodium} />
+      <circle className="learn-detail-ion" cx="80" cy={fromTop ? 40 : 84} r="8" fill={learnColors.sodium} />
+      <text x="96" y="58" fontSize="14" fontWeight="700" fill={learnColors.ink}>
+        Na⁺
+      </text>
     </svg>
   );
 }

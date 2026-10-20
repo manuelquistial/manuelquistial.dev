@@ -63,12 +63,13 @@ export function Header({ locale, content }: HeaderProps) {
           <button
             ref={menuButtonRef}
             type="button"
-            className="inline-flex min-h-11 items-center justify-center rounded-[6px] border border-border px-4 text-base font-semibold text-foreground transition-colors duration-150 hover:border-foreground/40 lg:hidden"
+            className="inline-flex size-11 items-center justify-center rounded-[6px] border border-border text-foreground transition-colors duration-150 hover:border-foreground/40 lg:hidden"
             aria-expanded={open}
             aria-controls={panelId}
+            aria-label={open ? content.a11y.closeMenu : content.a11y.menu}
             onClick={() => setOpen((value) => !value)}
           >
-            {open ? content.a11y.closeMenu : content.a11y.menu}
+            {open ? <IconClose /> : <IconMenu />}
           </button>
         </div>
       </Container>
@@ -77,7 +78,7 @@ export function Header({ locale, content }: HeaderProps) {
         <div
           id={panelId}
           ref={panelRef}
-          className="border-t border-border lg:hidden"
+          className="absolute inset-x-0 top-full border-t border-border bg-background shadow-[0_12px_32px_rgba(32,32,30,0.08)] lg:hidden"
         >
           <Container className="py-4">
             <NavLinks
@@ -92,5 +93,21 @@ export function Header({ locale, content }: HeaderProps) {
         </div>
       ) : null}
     </header>
+  );
+}
+
+function IconMenu() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="size-5" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round">
+      <path d="M4 7h16M4 12h16M4 17h16" />
+    </svg>
+  );
+}
+
+function IconClose() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="size-5" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round">
+      <path d="M6 6l12 12M18 6 6 18" />
+    </svg>
   );
 }

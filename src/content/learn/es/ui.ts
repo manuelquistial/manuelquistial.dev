@@ -49,8 +49,6 @@ export const learnUi = {
   transmitterKey: "Neurotransmisor, molécula distinta del ion",
   excitatory: "Conexión excitatoria",
   inhibitory: "Conexión inhibitoria",
-  graphCaption:
-    "Voltaje en un punto de la membrana. El eje horizontal ordena las etapas de la animación y no está en milisegundos.",
-  voltageExample:
-    "Los valores, cerca de -70 mV en reposo y un pico cercano a +30 mV, son un ejemplo habitual de libro de texto. Cambian según el tipo de neurona.",
+  voltageNote:
+    "El valor compara el interior con el exterior en el punto elegido. El tiempo de la animación está ralentizado.",
 } as const;

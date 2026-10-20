@@ -24,7 +24,14 @@ import {
   networkState,
   referenceIonMotion,
   signalFrameVars,
+  axonPlaybackStages,
+  axonReadout,
+  ionPlaybackStages,
+  myelinPlaybackStages,
+  networkPlaybackStages,
+  signalPlaybackStages,
   synapseFrameVars,
+  synapsePlaybackStages,
   voltageStageAt,
 } from "@/lib/learn/physiology";
 import { chemicalPose, ionChannelState, ionInLipidOutsidePore, membraneCast } from "@/lib/learn/casts";
@@ -233,8 +240,52 @@ describe("neuron models", () => {
     expect(Number(synapseFrameVars("chemical", "diffusion", 0.5)["--diffuse"])).toBeGreaterThan(0);
   });
 
+  it("keeps scene clocks inside the didactic ranges", () => {
+    const end = (stages: readonly { end: number }[]) => stages[stages.length - 1]?.end ?? 0;
+    expect(end(signalPlaybackStages())).toBeGreaterThanOrEqual(8);
+    expect(end(signalPlaybackStages())).toBeLessThanOrEqual(10);
+    expect(end(myelinPlaybackStages())).toBeGreaterThanOrEqual(8);
+    expect(end(myelinPlaybackStages())).toBeLessThanOrEqual(10);
+    expect(end(ionPlaybackStages())).toBeGreaterThanOrEqual(8);
+    expect(end(ionPlaybackStages())).toBeLessThanOrEqual(10);
+    expect(end(networkPlaybackStages())).toBeGreaterThanOrEqual(8);
+    expect(end(networkPlaybackStages())).toBeLessThanOrEqual(10);
+    expect(end(axonPlaybackStages())).toBeGreaterThanOrEqual(8);
+    expect(end(axonPlaybackStages())).toBeLessThanOrEqual(12);
+    expect(end(synapsePlaybackStages("chemical"))).toBeGreaterThanOrEqual(10);
+    expect(end(synapsePlaybackStages("chemical"))).toBeLessThanOrEqual(12);
+    expect(end(synapsePlaybackStages("electrical"))).toBeGreaterThanOrEqual(5);
+    expect(end(synapsePlaybackStages("electrical"))).toBeLessThanOrEqual(7);
+  });
+
+  it("shows three similar action potentials along the axon", () => {
+    const peak = (from: number, to: number) => {
+      let best = -200;
+      for (let time = from; time <= to; time += 0.02) {
+        best = Math.max(best, axonReadout(time, 0.04).millivolts);
+      }
+      return best;
+    };
+    const first = peak(0, 1.2);
+    const second = peak(1.5, 2.8);
+    const third = peak(3.2, 4.6);
+    expect(first).toBeGreaterThan(20);
+    expect(first).toBeLessThan(40);
+    expect(Math.abs(first - second)).toBeLessThan(2);
+    expect(Math.abs(second - third)).toBeLessThan(2);
+    expect(axonReadout(0.35, 0.9).label).toBe("Reposo");
+    expect(axonReadout(0.35, 0.04).label).not.toBe("Reposo");
+
+    let lowest = 0;
+    for (let time = 0; time <= 1.6; time += 0.02) {
+      lowest = Math.min(lowest, axonReadout(time, 0.04).millivolts);
+    }
+    expect(lowest).toBeLessThan(-70);
+  });
+
   it("follows one controlled network sequence", () => {
-    for (const stageId of ["idle", "input", "relay", "split"]) {
+    expect(networkPlaybackStages().map((stage) => stage.id)).toEqual(["input", "relay", "split"]);
+    for (const stageId of ["input", "relay", "split"]) {
       expect(networkState(stageId).active).not.toContain("n4");
     }
     expect(networkState("split")).toEqual({

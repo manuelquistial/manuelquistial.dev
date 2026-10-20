@@ -42,8 +42,8 @@ export const voltageStages = [
   { id: "hyperpolarization", start: 0.7, end: 1 },
 ] as const;
 
-export const VOLTAGE_DURATION = 30;
-export const ION_DURATION = 24;
+export const VOLTAGE_DURATION = 10;
+export const ION_DURATION = 9;
 
 export function membraneVoltage(time: number): number {
   const x = clamp(time, 0, 1);
@@ -79,11 +79,103 @@ export function voltagePlaybackStages(): StageBound[] {
 
 export function ionPlaybackStages(): StageBound[] {
   return [
-    { id: "rest", start: 0, end: 6 },
-    { id: "depolarization", start: 6, end: 12 },
-    { id: "repolarization", start: 12, end: 18 },
-    { id: "recovery", start: 18, end: 24 },
+    { id: "depolarization", start: 0, end: 3 },
+    { id: "repolarization", start: 3, end: 6 },
+    { id: "recovery", start: 6, end: ION_DURATION },
   ];
+}
+
+/** Three didactic impulses. Starts are seconds on the axon clock. */
+const AXON_TRAVEL = 3.3;
+const AXON_LOCAL = 1.3;
+const AXON_STARTS = [-0.28, 1.42, 3.12] as const;
+
+export const AXON_DURATION = 10;
+
+export const axonStages = [
+  { id: "first", start: 0, end: 0.17 },
+  { id: "second", start: 0.17, end: 0.34 },
+  { id: "third", start: 0.34, end: 0.64 },
+  { id: "terminals", start: 0.64, end: 1 },
+] as const;
+
+export const axonNodes = [0.18, 0.4, 0.62, 0.84] as const;
+
+export const axonProbes = [
+  { id: "start", position: 0.04, label: "Segmento inicial" },
+  { id: "node-a", position: 0.18, label: "Primer nodo" },
+  { id: "node-b", position: 0.4, label: "Nodo intermedio" },
+  { id: "node-c", position: 0.62, label: "Nodo siguiente" },
+  { id: "end", position: 0.9, label: "Cerca del terminal" },
+] as const;
+
+export type AxonProbeId = (typeof axonProbes)[number]["id"];
+
+export type AxonPaint = "rest" | "regeneration" | "spread" | "recovery" | "after";
+
+export function axonPlaybackStages(): StageBound[] {
+  return scaleStages(axonStages, AXON_DURATION);
+}
+
+function axonRatio(age: number): number {
+  return 0.18 + (clamp(age, 0, AXON_LOCAL) / AXON_LOCAL) * 0.82;
+}
+
+export function axonFronts(time: number): number[] {
+  return AXON_STARTS.map((start) => (time - start) / AXON_TRAVEL).filter(
+    (position) => position >= 0 && position <= 1,
+  );
+}
+
+export function axonLocal(time: number, position: number): {
+  millivolts: number;
+  ratio: number;
+} {
+  const pos = clamp(position, 0, 1);
+  let age = Number.POSITIVE_INFINITY;
+  for (const start of AXON_STARTS) {
+    const elapsed = time - (start + pos * AXON_TRAVEL);
+    if (elapsed >= 0 && elapsed <= AXON_LOCAL && elapsed < age) age = elapsed;
+  }
+  if (!Number.isFinite(age)) return { millivolts: -70, ratio: 0 };
+  const ratio = axonRatio(age);
+  return { millivolts: membraneVoltage(ratio), ratio };
+}
+
+export function axonPaint(time: number, position: number): AxonPaint {
+  const { ratio, millivolts } = axonLocal(time, position);
+  if (ratio <= 0) return "rest";
+  const phase = voltageStageAt(ratio).id;
+  if (phase === "depolarization" && millivolts > -55) {
+    const atNode = axonNodes.some((node) => Math.abs(node - position) <= 0.04);
+    const bare = position < 0.15 || position > 0.9;
+    return atNode || bare ? "regeneration" : "spread";
+  }
+  if (phase === "repolarization") return "recovery";
+  if (phase === "hyperpolarization" && millivolts < -72) return "after";
+  return "rest";
+}
+
+const axonLabels: Record<AxonPaint, string> = {
+  rest: "Reposo",
+  regeneration: "Despolarizado",
+  spread: "Corriente local",
+  recovery: "Recuperación",
+  after: "Más negativo",
+};
+
+export function axonReadout(time: number, position: number): {
+  millivolts: number;
+  label: string;
+  paint: AxonPaint;
+} {
+  const local = axonLocal(time, position);
+  const paint = axonPaint(time, position);
+  return {
+    millivolts: Math.round(local.millivolts),
+    label: axonLabels[paint],
+    paint,
+  };
 }
 
 export type IonPoint = { x: number; y: number };
@@ -199,7 +291,7 @@ export const signalStages = [
   { id: "propagation", start: 0.67, end: 1 },
 ] as const;
 
-export const SIGNAL_DURATION = 28;
+export const SIGNAL_DURATION = 9;
 
 export function signalPlaybackStages(): StageBound[] {
   return scaleStages(signalStages, SIGNAL_DURATION);
@@ -260,16 +352,14 @@ export function signalFrameVars(
 }
 
 export const myelinStages = [
-  { id: "isolation", start: 0, end: 0.25 },
-  { id: "spread", start: 0.25, end: 0.5 },
-  { id: "regeneration", start: 0.5, end: 0.75 },
-  { id: "continuation", start: 0.75, end: 1 },
+  { id: "spread", start: 0, end: 0.34 },
+  { id: "regeneration", start: 0.34, end: 0.67 },
+  { id: "continuation", start: 0.67, end: 1 },
 ] as const;
 
-export const MYELIN_DURATION = 32;
+export const MYELIN_DURATION = 9;
 
 const myelinNodeIndex: Record<string, number> = {
-  isolation: -1,
   spread: -1,
   regeneration: 0,
   continuation: 1,
@@ -290,23 +380,26 @@ export function myelinFrame(stageId: string, progress: number): {
 }
 
 export const chemicalStages = [
-  { id: "arrival", start: 0, end: 1 / 6 },
-  { id: "calcium", start: 1 / 6, end: 2 / 6 },
-  { id: "release", start: 2 / 6, end: 3 / 6 },
-  { id: "diffusion", start: 3 / 6, end: 4 / 6 },
-  { id: "binding", start: 4 / 6, end: 5 / 6 },
-  { id: "response", start: 5 / 6, end: 1 },
+  { id: "arrival", start: 0, end: 0.08 },
+  { id: "calcium", start: 0.08, end: 0.26 },
+  { id: "release", start: 0.26, end: 0.46 },
+  { id: "diffusion", start: 0.46, end: 0.64 },
+  { id: "binding", start: 0.64, end: 0.82 },
+  { id: "response", start: 0.82, end: 1 },
 ] as const;
 
 export const electricalStages = [
-  { id: "connected", start: 0, end: 0.3 },
-  { id: "current", start: 0.3, end: 0.7 },
-  { id: "shared", start: 0.7, end: 1 },
+  { id: "connected", start: 0, end: 0.16 },
+  { id: "current", start: 0.16, end: 0.62 },
+  { id: "shared", start: 0.62, end: 1 },
 ] as const;
+
+const CHEMICAL_DURATION = 11;
+const ELECTRICAL_DURATION = 6;
 
 export function synapsePlaybackStages(mode: "chemical" | "electrical"): StageBound[] {
   const source = mode === "chemical" ? chemicalStages : electricalStages;
-  return scaleStages(source, mode === "chemical" ? 36 : 18);
+  return scaleStages(source, mode === "chemical" ? CHEMICAL_DURATION : ELECTRICAL_DURATION);
 }
 
 export function synapseFrameVars(
@@ -340,13 +433,12 @@ export function synapseFrameVars(
 }
 
 export const networkStages = [
-  { id: "idle", start: 0, end: 0.22 },
-  { id: "input", start: 0.22, end: 0.48 },
-  { id: "relay", start: 0.48, end: 0.74 },
-  { id: "split", start: 0.74, end: 1 },
+  { id: "input", start: 0, end: 0.34 },
+  { id: "relay", start: 0.34, end: 0.67 },
+  { id: "split", start: 0.67, end: 1 },
 ] as const;
 
-export const NETWORK_DURATION = 24;
+export const NETWORK_DURATION = 9;
 
 export function networkPlaybackStages(): StageBound[] {
   return scaleStages(networkStages, NETWORK_DURATION);

@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import { learnColors } from "@/components/learn/illustrations/palette";
 import { Part } from "@/components/learn/illustrations/Part";
 import { Grain, useSvgId } from "@/components/learn/illustrations/shapes";
-import { axonCurves, measurePoint, neuronView, somaCenter } from "@/components/learn/illustrations/neuronModel";
+import { axonCurves, neuronView, somaCenter } from "@/components/learn/illustrations/neuronModel";
 import { neuronNucleolus, neuronPaths, neuronSoma } from "@/components/learn/illustrations/tracedGeometry";
 
 export function NeuronArt({
@@ -13,7 +13,6 @@ export function NeuronArt({
   selectedId = null,
   hintId,
   onSelect,
-  showMeasure = false,
   children,
 }: {
   label?: string;
@@ -21,7 +20,6 @@ export function NeuronArt({
   selectedId?: string | null;
   hintId?: string;
   onSelect?: (id: string) => void;
-  showMeasure?: boolean;
   children?: ReactNode;
 }) {
   const grain = useSvgId("grain");
@@ -136,14 +134,6 @@ export function NeuronArt({
           <ellipse cx={neuronSoma.cx} cy={neuronSoma.cy} rx={neuronSoma.rx} ry={neuronSoma.ry} fill="transparent" />
         ) : null}
       </Part>
-      {showMeasure ? (
-        <g data-part-group="measure" aria-hidden="true">
-          <circle cx={measurePoint.x} cy={measurePoint.y} r="9" fill={learnColors.signal} stroke="#fff" strokeWidth="2" />
-          <text x={measurePoint.x + 14} y={measurePoint.y - 12} fill={learnColors.ink} fontSize="18" fontWeight="700">
-            Punto
-          </text>
-        </g>
-      ) : null}
       {children}
     </svg>
   );

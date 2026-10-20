@@ -310,6 +310,42 @@ body {
   height: auto;
 }
 
+.learn-meter {
+  position: absolute;
+  top: 22%;
+  left: 3%;
+  z-index: 10;
+  width: 11.5rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--surface) 94%, transparent);
+  padding: 0.75rem;
+}
+
+.learn-readout {
+  position: absolute;
+  z-index: 10;
+  width: max-content;
+  max-width: 12rem;
+  transform: translateY(-115%);
+  pointer-events: none;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--surface) 94%, transparent);
+  padding: 0.45rem 0.6rem;
+}
+
+@container scene (max-width: 40rem) {
+  .learn-meter,
+  .learn-readout {
+    position: static;
+    width: min(100% - 1rem, 18rem);
+    max-width: none;
+    margin: 0.5rem;
+    transform: none;
+  }
+}
+
 @container scene (min-width: 46rem) {
   .learn-split {
     display: grid;

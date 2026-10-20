@@ -20,11 +20,13 @@ export function StageExplanation({
   activeKey,
   onClose,
   closeRef,
+  compact = false,
 }: {
   copies: readonly ExplanationCopy[];
   activeKey: string | null;
   onClose?: () => void;
   closeRef?: Ref<HTMLButtonElement>;
+  compact?: boolean;
 }) {
   const active = copies.find((item) => item.key === activeKey) ?? null;
   if (!copies.length || !active) return null;
@@ -37,6 +39,7 @@ export function StageExplanation({
           showClose={Boolean(active.closable && onClose)}
           onClose={onClose}
           closeRef={closeRef}
+          compact={compact && !active.closable}
         />
       </div>
       {copies.map((item) =>
@@ -47,7 +50,7 @@ export function StageExplanation({
             style={{ gridArea: "1 / 1" }}
             aria-hidden="true"
           >
-            <ExplanationBody item={item} showClose={false} />
+            <ExplanationBody item={item} showClose={false} compact={compact && !item.closable} />
           </div>
         ),
       )}
@@ -60,11 +63,13 @@ function ExplanationBody({
   showClose,
   onClose,
   closeRef,
+  compact = false,
 }: {
   item: ExplanationCopy;
   showClose: boolean;
   onClose?: () => void;
   closeRef?: Ref<HTMLButtonElement>;
+  compact?: boolean;
 }) {
   const hasHeading = Boolean(item.eyebrow || item.title);
 
@@ -90,7 +95,9 @@ function ExplanationBody({
           </button>
         ) : null}
       </div>
-      <p className={`${hasHeading ? "mt-2" : ""} text-base leading-relaxed text-foreground`}>{item.text}</p>
+      {compact ? null : (
+        <p className={`${hasHeading ? "mt-2" : ""} text-base leading-relaxed text-foreground`}>{item.text}</p>
+      )}
     </>
   );
 }

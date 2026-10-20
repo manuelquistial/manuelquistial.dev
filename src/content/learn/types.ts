@@ -23,6 +23,7 @@ export type LearnScene = {
   title: string;
   textAlternative: string;
   paragraphs: readonly LearnText[];
+  prompt?: string;
   stages?: readonly LearnStageCopy[];
   parts?: readonly LearnPartCopy[];
 };

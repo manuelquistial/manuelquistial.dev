@@ -8,7 +8,6 @@ import { localizedPath } from "@/lib/localizedPath";
 import { CiteMark } from "@/components/learn/CiteMark";
 import { SceneSection } from "@/components/learn/SceneSection";
 import { SceneVisual } from "@/components/learn/SceneVisual";
-import { Section } from "@/components/layout/Section";
 
 export function LearnLesson({
   lesson,
@@ -28,7 +27,8 @@ export function LearnLesson({
   });
 
   return (
-    <Section containerClassName="overflow-x-clip">
+    <section className="overflow-x-clip bg-background">
+      <div className="learn-lesson py-14 md:py-16 lg:py-24">
       <p className="text-sm font-semibold">
         <Link
           href={localizedPath(locale, "/aprendamos")}
@@ -40,7 +40,7 @@ export function LearnLesson({
       <h1 className="mt-4 max-w-[18ch] text-[clamp(2.375rem,4vw,3.75rem)] font-semibold leading-[1.1] tracking-tight text-foreground">
         {lesson.title}
       </h1>
-      <div className="mt-6 space-y-4">
+      <div className="learn-reading mt-6 space-y-4">
         {lesson.intro.map((paragraph) => (
           <p key={paragraph.text} className="leading-relaxed text-muted">
             {paragraph.text}
@@ -53,9 +53,9 @@ export function LearnLesson({
           </p>
         ))}
       </div>
-      <nav className="mt-10 mb-12" aria-label={learnUi.scenesLabel}>
+      <nav className="mt-8" aria-label={learnUi.scenesLabel}>
         <p className="text-base font-semibold text-foreground">{learnUi.scenesLabel}</p>
-        <ol className="mt-4 grid gap-2 sm:grid-cols-2">
+        <ol className="learn-index mt-4">
           {lesson.scenes.map((scene, index) => (
             <li key={scene.id}>
               <a href={`#${scene.id}`} className="prose-link">
@@ -77,13 +77,14 @@ export function LearnLesson({
           <SceneVisual sceneId={scene.id} />
         </SceneSection>
       ))}
-      <section className="border-t border-border py-12" aria-labelledby="learn-sources">
+      <section className="learn-section scroll-mt-28" aria-labelledby="learn-sources">
         <h2
           id="learn-sources"
           className="text-[clamp(1.5rem,2.5vw,1.75rem)] font-semibold leading-[1.25] text-foreground"
         >
           {learnUi.sourcesTitle}
         </h2>
+        <div className="learn-reading">
         <ol className="mt-6 space-y-4">
           {citedSources.map((source) => (
             <li key={source.id} id={`ref-${source.id}`} className="scroll-mt-28">
@@ -113,7 +114,9 @@ export function LearnLesson({
             </a>
           </p>
         ) : null}
+        </div>
       </section>
-    </Section>
+      </div>
+    </section>
   );
 }

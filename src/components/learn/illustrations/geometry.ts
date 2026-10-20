@@ -59,6 +59,15 @@ export function curveLength(curve: Cubic): number {
   return length;
 }
 
+export function chainPath(curves: readonly Cubic[]): string {
+  return curves
+    .map((curve, index) => {
+      const move = index === 0 ? `M ${curve.x0} ${curve.y0} ` : "";
+      return `${move}C ${curve.x1} ${curve.y1}, ${curve.x2} ${curve.y2}, ${curve.x3} ${curve.y3}`;
+    })
+    .join(" ");
+}
+
 export function pointAlong(curves: readonly Cubic[], progress: number): Point {
   if (curves.length === 0) return { x: 0, y: 0 };
   const lengths = curves.map(curveLength);

@@ -21,12 +21,14 @@ export function GliaArt({
   hintId,
   onSelect,
   activeNode = -1,
+  phase = "isolation",
 }: {
   labels?: Partial<Record<"glia" | "myelin" | "nodes", string>>;
   selectedId?: string | null;
   hintId?: string;
   onSelect?: (id: string) => void;
   activeNode?: number;
+  phase?: "isolation" | "spread" | "regeneration" | "continuation";
 }) {
   const grain = useSvgId("glia-grain");
 
@@ -89,6 +91,9 @@ export function GliaArt({
           {gliaPaths.body.map((d) => (
             <path key={d.slice(0, 24)} d={d} fill={learnColors.glia} />
           ))}
+          {gliaPaths.myelin.map((d) => (
+            <path key={`sheath-${d.slice(0, 16)}`} d={d} fill={learnColors.myelin} />
+          ))}
         </g>
         {gliaPaths.body.map((d) => (
           <path key={d.slice(0, 24)} d={d} fill="transparent" />
@@ -101,16 +106,39 @@ export function GliaArt({
               className="learn-node-mark"
               cx={node.x}
               cy={node.y}
-              r="16"
+              r="18"
               fill="none"
               stroke={activeNode === index ? learnColors.signal : "transparent"}
-              strokeWidth={activeNode === index ? 3 : 2}
+              strokeWidth={activeNode === index ? 6 : 2}
             />
-            <circle cx={node.x} cy={node.y} r={activeNode === index ? 8 : 4} fill={activeNode === index ? learnColors.signal : learnColors.coral} />
+            <circle cx={node.x} cy={node.y} r="5" fill={learnColors.coral} />
             <circle cx={node.x} cy={node.y} r="88" fill="transparent" />
           </g>
         ))}
       </Part>
+      <g pointerEvents="none">
+        <line
+          className="learn-internode"
+          x1={gliaNodes[0]?.x ?? 0}
+          y1={gliaNodes[0]?.y ?? 0}
+          x2={gliaNodes[1]?.x ?? 0}
+          y2={gliaNodes[1]?.y ?? 0}
+          stroke={learnColors.signal}
+          strokeWidth="12"
+          strokeLinecap="round"
+          pathLength={1}
+          opacity={phase === "spread" || phase === "continuation" ? 0.35 : 0}
+        />
+        {phase === "isolation" ? (
+          <g>
+            <circle cx={620} cy={560} r="10" fill="none" stroke={learnColors.ink} strokeWidth="2" />
+            <path d="M 630 550 L 760 180" fill="none" stroke={learnColors.ink} strokeWidth="1.5" strokeDasharray="6 5" />
+          </g>
+        ) : null}
+        {phase === "regeneration" || phase === "continuation" ? (
+          <path d={`M ${(gliaNodes[activeNode]?.x ?? 466) + 16} ${(gliaNodes[activeNode]?.y ?? 620) - 28} L 760 160`} fill="none" stroke={learnColors.ink} strokeWidth="1.5" strokeDasharray="6 5" />
+        ) : null}
+      </g>
     </svg>
   );
 }

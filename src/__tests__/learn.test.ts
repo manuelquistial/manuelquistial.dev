@@ -27,6 +27,7 @@ import {
   synapseFrameVars,
   voltageStageAt,
 } from "@/lib/learn/physiology";
+import { chemicalPose, ionChannelState, ionInLipidOutsidePore, membraneCast } from "@/lib/learn/casts";
 import {
   readLearnProgress,
   writeLearnProgress,
@@ -172,6 +173,8 @@ describe("neuron models", () => {
   it("keeps the spike at zero until the propagation stage", () => {
     expect(signalFrameVars(6, 10)["--spike"]).toBe("0");
     expect(Number(signalFrameVars(9, 10)["--spike"])).toBeGreaterThan(0);
+    expect(signalFrameVars(9, 10, "short")["--spike"]).toBe("0");
+    expect(signalFrameVars(9, 10, "short")["--crossed"]).toBe("0");
   });
 
   it("uses approximate textbook voltages without a millisecond axis", () => {
@@ -199,6 +202,20 @@ describe("neuron models", () => {
       }
     }
 
+    const restIons = membraneCast("rest", 0);
+    const naOutside = restIons.filter((ion) => ion.species === "na" && ion.y < 382);
+    const naInside = restIons.filter((ion) => ion.species === "na" && ion.y > 528);
+    const kOutside = restIons.filter((ion) => ion.species === "k" && ion.y < 382);
+    const kInside = restIons.filter((ion) => ion.species === "k" && ion.y > 528);
+    expect(naOutside.length).toBeGreaterThan(naInside.length);
+    expect(kInside.length).toBeGreaterThan(kOutside.length);
+    expect(ionChannelState("rest").sodium).toBe("closed");
+    expect(ionChannelState("rest").potassium).toBe("closed");
+    expect(ionChannelState("depolarization").sodium).toBe("open");
+    expect(ionChannelState("repolarization").sodium).toBe("inactivated");
+    for (const ion of membraneCast("depolarization", 0.5)) {
+      expect(ionInLipidOutsidePore(ion)).toBe(false);
+    }
     const entering = ionPositions("depolarization", 0.5).na;
     expect(entering.x).toBe(118);
     expect(entering.y).toBeGreaterThan(96);
@@ -207,6 +224,11 @@ describe("neuron models", () => {
 
   it("keeps chemical and electrical synapses distinct", () => {
     expect(synapseFrameVars("electrical", "current", 0.4)["--diffuse"]).toBe("0");
+    expect(chemicalPose("arrival", 1).fusion).toBe(0);
+    expect(chemicalPose("calcium", 0.5).caOpen).toBeGreaterThan(0);
+    expect(chemicalPose("calcium", 1).fusion).toBe(0);
+    expect(chemicalPose("release", 0.2).nt).toBe(0);
+    expect(chemicalPose("release", 1).fusion).toBe(1);
     expect(synapseFrameVars("chemical", "arrival", 1)["--diffuse"]).toBe("0");
     expect(Number(synapseFrameVars("chemical", "diffusion", 0.5)["--diffuse"])).toBeGreaterThan(0);
   });

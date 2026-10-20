@@ -23,6 +23,20 @@
   --radius-image: 8px;
   --container-max: 1200px;
   --text-body-max: 65ch;
+  --learn-max: min(60rem, 960px);
+  --learn-gutter: 20px;
+  --learn-measure: var(--text-body-max);
+  --learn-panel-pad: 16px;
+  --learn-section-gap: 40px;
+  --learn-stack: 24px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --learn-gutter: 32px;
+    --learn-panel-pad: 24px;
+    --learn-section-gap: 64px;
+  }
 }
 
 @theme inline {
@@ -236,7 +250,80 @@ body {
 .learn-zoom-target > svg {
   display: block;
   width: 100%;
+  max-width: 100%;
   height: auto;
+}
+
+.learn-lesson {
+  width: min(var(--learn-max), calc(100% - 2 * var(--learn-gutter)));
+  margin-inline: auto;
+  container-type: inline-size;
+  container-name: learn;
+}
+
+.learn-reading {
+  max-width: var(--learn-measure);
+}
+
+.learn-section {
+  margin-top: calc(var(--learn-section-gap) / 2);
+  padding-top: calc(var(--learn-section-gap) / 2);
+  border-top: 1px solid var(--border);
+}
+
+.learn-follow {
+  margin-top: var(--learn-stack);
+}
+
+.learn-index {
+  display: grid;
+  gap: 8px 24px;
+}
+
+@container learn (min-width: 640px) {
+  .learn-index {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.learn-scene {
+  width: 100%;
+  max-width: none;
+  container-type: inline-size;
+  container-name: scene;
+}
+
+.learn-split-aside {
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  padding-block: 8px;
+}
+
+.learn-voltage {
+  width: 100%;
+  min-width: 0;
+}
+
+.learn-voltage svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@container scene (min-width: 46rem) {
+  .learn-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(18.5rem, 0.95fr);
+    align-items: stretch;
+  }
+
+  .learn-split-aside {
+    border-top: 0;
+    border-left: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    min-width: 0;
+  }
 }
 
 .learn-pulse,

@@ -43,7 +43,7 @@ export const voltageStages = [
 ] as const;
 
 export const VOLTAGE_DURATION = 30;
-export const ION_DURATION = 18;
+export const ION_DURATION = 24;
 
 export function membraneVoltage(time: number): number {
   const x = clamp(time, 0, 1);
@@ -82,6 +82,7 @@ export function ionPlaybackStages(): StageBound[] {
     { id: "rest", start: 0, end: 6 },
     { id: "depolarization", start: 6, end: 12 },
     { id: "repolarization", start: 12, end: 18 },
+    { id: "recovery", start: 18, end: 24 },
   ];
 }
 
@@ -171,6 +172,8 @@ export function voltageFrameVars(
     "--k-y": String(ions.k.y),
     "--dot-x": String(plotX(ratio)),
     "--dot-y": String(plotY(millivolts)),
+    "--ratio": String(ratio),
+    "--mv": String(Math.round(millivolts)),
   };
 }
 
@@ -202,47 +205,74 @@ export function signalPlaybackStages(): StageBound[] {
   return scaleStages(signalStages, SIGNAL_DURATION);
 }
 
+export type SignalExample = "reach" | "short";
+
 export function signalFrameVars(
   time: number,
   duration: number,
+  example: SignalExample = "reach",
 ): Record<string, string> {
   const ratio = duration <= 0 ? 0 : clamp(time / duration, 0, 1);
   const stage = signalStages[stageIndexAt(ratio, signalStages)] ?? signalStages[0];
   const progress = progressWithinStage(ratio, stage);
-  const traveling = stage.id === "inputs";
+  const reach = example === "reach";
+  const front = (offset: number, enabled = true) => {
+    if (!enabled) return "0";
+    if (stage.id === "inputs") return String(clamp((progress - offset) / 0.72, 0, 1));
+    return "1";
+  };
   const visible =
-    stage.id === "inputs" ? 1 : stage.id === "integration" ? 1 - progress : 0;
-  const delayed = (offset: number) =>
-    traveling ? String(clamp((progress - offset) / 0.72, 0, 1)) : "1";
+    stage.id === "inputs" || stage.id === "integration"
+      ? 1
+      : stage.id === "threshold"
+        ? 0.65
+        : 0.12;
+  const meter = reach
+    ? stage.id === "inputs"
+      ? 0.16 + progress * 0.18
+      : stage.id === "integration"
+        ? 0.36 + progress * 0.2
+        : stage.id === "threshold"
+          ? 0.58 + progress * 0.3
+          : 0.92
+    : stage.id === "inputs"
+      ? 0.12 + progress * 0.1
+      : stage.id === "integration"
+        ? 0.24 + progress * 0.16
+        : stage.id === "threshold"
+          ? 0.4 + progress * 0.1
+          : 0.36;
+  const crossed = reach && (stage.id === "propagation" || (stage.id === "threshold" && progress >= 0.62));
+  const spike = stage.id === "propagation" && reach ? Math.max(progress, 0.12) : 0;
 
   return {
-    "--p1": delayed(0),
-    "--p2": delayed(0.16),
-    "--p3": delayed(0.32),
+    "--p1": front(0),
+    "--p2": front(0.18),
+    "--p3": front(0.34, reach),
     "--p-opacity": String(visible),
+    "--meter": String(clamp(meter, 0, 1)),
+    "--crossed": crossed ? "1" : "0",
     "--integration": stage.id === "integration" || stage.id === "threshold" ? "1" : "0",
     "--threshold": stage.id === "threshold" ? "1" : "0",
-    "--spike": stage.id === "propagation" ? String(progress) : "0",
-    "--spike-opacity": stage.id === "propagation" ? "1" : "0",
+    "--spike": String(spike),
+    "--spike-opacity": spike > 0 ? "1" : "0",
   };
 }
 
 export const myelinStages = [
-  { id: "rest", start: 0, end: 0.18 },
-  { id: "node-1", start: 0.18, end: 0.385 },
-  { id: "node-2", start: 0.385, end: 0.59 },
-  { id: "node-3", start: 0.59, end: 0.795 },
-  { id: "node-4", start: 0.795, end: 1 },
+  { id: "isolation", start: 0, end: 0.25 },
+  { id: "spread", start: 0.25, end: 0.5 },
+  { id: "regeneration", start: 0.5, end: 0.75 },
+  { id: "continuation", start: 0.75, end: 1 },
 ] as const;
 
 export const MYELIN_DURATION = 32;
 
 const myelinNodeIndex: Record<string, number> = {
-  rest: -1,
-  "node-1": 0,
-  "node-2": 1,
-  "node-3": 2,
-  "node-4": 3,
+  isolation: -1,
+  spread: -1,
+  regeneration: 0,
+  continuation: 1,
 };
 
 export function myelinPlaybackStages(): StageBound[] {

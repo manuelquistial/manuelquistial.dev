@@ -24,19 +24,20 @@ export function CheckQuestion({ question }: { question: LearnQuestion }) {
 
   return (
     <form
-      className="mt-8 rounded-[8px] border border-border bg-surface p-4 sm:p-5"
+      className="rounded-[8px] border border-border bg-surface p-[var(--learn-panel-pad)]"
       onSubmit={(event) => event.preventDefault()}
     >
-      <p className="text-sm font-semibold text-muted">{learnUi.questionEyebrow}</p>
+      <div className="learn-reading">
+        <p className="text-sm font-semibold text-muted">{learnUi.questionEyebrow}</p>
       <fieldset className="mt-3">
         <legend className="text-base font-semibold text-foreground">
           {question.prompt}
         </legend>
-        <div className="mt-4 space-y-2">
+        <div className="mt-3 space-y-2">
           {question.options.map((option, index) => (
             <label
               key={option.id}
-              className="flex min-h-11 cursor-pointer items-start gap-3 rounded-[6px] border border-transparent px-1 py-2 has-[:focus-visible]:border-foreground"
+              className="flex min-h-11 cursor-pointer items-start gap-3 rounded-[6px] border border-transparent px-2 py-2 has-[:focus-visible]:border-foreground"
             >
               <input
                 ref={index === 0 ? firstOptionRef : undefined}
@@ -47,7 +48,7 @@ export function CheckQuestion({ question }: { question: LearnQuestion }) {
                 checked={choice === option.id}
                 onChange={() => answer(option.id)}
               />
-              <span className="text-base leading-snug text-foreground">
+              <span className="min-w-0 text-base leading-snug text-foreground">
                 {option.label}
               </span>
             </label>
@@ -76,6 +77,7 @@ export function CheckQuestion({ question }: { question: LearnQuestion }) {
           {learnUi.retry}
         </button>
       ) : null}
+      </div>
     </form>
   );
 }

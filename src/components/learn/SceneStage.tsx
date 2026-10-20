@@ -2,8 +2,9 @@
 
 import { useEffect, useId, useRef, type ReactNode } from "react";
 import type { LearnPartCopy, LearnStageCopy } from "@/content/learn/types";
+import { learnUi } from "@/content/learn/es/ui";
 import { PlaybackControls } from "@/components/learn/PlaybackControls";
-import { StageExplanation } from "@/components/learn/StageCaption";
+import { StageExplanation, type ExplanationCopy } from "@/components/learn/StageCaption";
 import { StageTrack } from "@/components/learn/StageTrack";
 import type { useScenePlayback } from "@/components/learn/useScenePlayback";
 
@@ -33,6 +34,9 @@ export function SceneStage({
   label,
   playback,
   stages,
+  parts,
+  idle,
+  reserves,
   card = null,
   onClose,
   leading,
@@ -43,6 +47,9 @@ export function SceneStage({
   label: string;
   playback?: Playback;
   stages?: readonly LearnStageCopy[];
+  parts?: readonly LearnPartCopy[];
+  idle?: { title?: string; text: string };
+  reserves?: readonly { title: string; text: string }[];
   card?: SceneCardAnchor | null;
   onClose?: () => void;
   leading?: ReactNode;
@@ -57,6 +64,11 @@ export function SceneStage({
   const stage =
     stages?.find((item) => item.id === playback?.snapshot.stageId) ?? null;
   const paused = Boolean(playback) && !playback?.snapshot.playing;
+  const copies = explanationCopies({ idle, stages, parts, reserves, card });
+  const activeKey = card
+    ? `part-${card.id}`
+    : stage?.id ?? (idle?.text ? "prompt" : null);
+  const hasTrack = Boolean(playback && stages && stages.length > 0);
 
   useEffect(() => {
     const open = Boolean(card);
@@ -81,11 +93,11 @@ export function SceneStage({
     action();
   };
 
-  const showFooter = Boolean(playback || stage || card);
+  const showFooter = Boolean(playback || copies.length > 0);
 
   return (
     <div
-      className={`learn-scene mx-auto w-full overflow-hidden rounded-[8px] border border-border bg-[#eef3f6] ${aside ? "max-w-5xl" : "max-w-3xl"} ${paused ? "is-paused" : ""}`}
+      className={`learn-scene w-full overflow-hidden rounded-[8px] border border-border bg-[#eef3f6] ${paused ? "is-paused" : ""}`}
       onKeyDown={(event) => {
         if (event.key === "Escape" && card) {
           event.preventDefault();
@@ -94,7 +106,7 @@ export function SceneStage({
       }}
     >
       {leading}
-      <div className={aside ? "grid lg:grid-cols-[minmax(0,1.4fr)_minmax(16rem,0.8fr)]" : undefined}>
+      <div className={aside ? "learn-split" : undefined}>
         <div
           ref={playback?.frameRef}
           className="relative min-w-0"
@@ -112,12 +124,16 @@ export function SceneStage({
             {label}
           </p>
         </div>
-        {aside ? <div className="min-w-0 border-t border-border bg-surface lg:border-t-0 lg:border-l">{aside}</div> : null}
+        {aside ? <div className="learn-split-aside min-w-0">{aside}</div> : null}
       </div>
-      {legend ? <div className="border-t border-border bg-surface px-4 py-2 text-sm text-foreground">{legend}</div> : null}
+      {legend ? (
+        <div className="border-t border-border bg-surface px-[var(--learn-panel-pad)] py-3 text-sm leading-relaxed text-foreground">
+          <div className="learn-reading">{legend}</div>
+        </div>
+      ) : null}
       {showFooter ? (
         <div className="border-t border-border bg-surface">
-          {playback && stages && stages.length > 0 ? (
+          {hasTrack && playback && stages ? (
             <StageTrack
               stages={stages}
               stageIndex={playback.snapshot.stageIndex}
@@ -125,9 +141,15 @@ export function SceneStage({
               onSeek={(index) => leaveAnd(() => playback.seek(index))}
             />
           ) : null}
-          <StageExplanation stage={card ? null : stage} card={card} onClose={close} closeRef={closeRef} />
+          {copies.length > 0 ? (
+            <div
+              className={`px-[var(--learn-panel-pad)] ${hasTrack ? "pt-3" : "pt-4"} ${playback ? "pb-2" : "pb-4"}`}
+            >
+              <StageExplanation copies={copies} activeKey={activeKey} onClose={close} closeRef={closeRef} />
+            </div>
+          ) : null}
           {playback ? (
-            <div className="px-2 pt-1 pb-2">
+            <div className="px-[var(--learn-panel-pad)] pb-3">
               <PlaybackControls
                 playing={playback.snapshot.playing}
                 speed={playback.snapshot.speed}
@@ -147,4 +169,61 @@ export function SceneStage({
       ) : null}
     </div>
   );
+}
+
+function explanationCopies({
+  idle,
+  stages,
+  parts,
+  reserves,
+  card,
+}: {
+  idle?: { title?: string; text: string };
+  stages?: readonly LearnStageCopy[];
+  parts?: readonly LearnPartCopy[];
+  reserves?: readonly { title: string; text: string }[];
+  card: SceneCardAnchor | null;
+}): ExplanationCopy[] {
+  const copies: ExplanationCopy[] = [];
+
+  if (idle?.text) {
+    copies.push({ key: "prompt", title: idle.title ?? "", text: idle.text });
+  }
+
+  for (const item of stages ?? []) {
+    copies.push({ key: item.id, title: item.title || item.label, text: item.text });
+  }
+
+  for (const part of parts ?? []) {
+    const selected = card?.id === part.id;
+    copies.push({
+      key: `part-${part.id}`,
+      eyebrow: learnUi.partEyebrow,
+      title: selected ? card.label : part.label,
+      text: selected ? card.text : part.text,
+      closable: true,
+    });
+  }
+
+  if (card && !copies.some((item) => item.key === `part-${card.id}`)) {
+    copies.push({
+      key: `part-${card.id}`,
+      eyebrow: learnUi.partEyebrow,
+      title: card.label,
+      text: card.text,
+      closable: true,
+    });
+  }
+
+  reserves?.forEach((item, index) => {
+    copies.push({
+      key: `reserve-${index}`,
+      eyebrow: learnUi.partEyebrow,
+      title: item.title,
+      text: item.text,
+      closable: true,
+    });
+  });
+
+  return copies;
 }

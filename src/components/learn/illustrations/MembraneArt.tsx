@@ -4,31 +4,30 @@ import { forwardRef } from "react";
 import { learnColors } from "@/components/learn/illustrations/palette";
 import { Part } from "@/components/learn/illustrations/Part";
 import { Grain, useSvgId } from "@/components/learn/illustrations/shapes";
+import { IonGlyph } from "@/components/learn/illustrations/species";
 import { artView, lipidHeads } from "@/components/learn/illustrations/tracedGeometry";
+import type { CastIon, ChannelState } from "@/lib/learn/casts";
+import { membraneArt } from "@/lib/learn/casts";
 
 export const membraneView = artView;
 
-const channels = [
-  { id: "sodium-channel", label: "Canal de Na+", x: 321, fill: learnColors.sodium, stroke: learnColors.blueInk },
-  { id: "potassium-channel", label: "Canal de K+", x: 661, fill: learnColors.potassium, stroke: learnColors.violetInk },
-  { id: "other-proteins", label: "Otras proteínas", x: 1008, fill: learnColors.gold, stroke: learnColors.myelinEdge },
-  { id: "other-proteins-b", label: "Otras proteínas", x: 1354, fill: learnColors.green, stroke: learnColors.blueInk },
-] as const;
+export const membraneFocus = { x: 150, y: 20, width: 760, height: 890 } as const;
 
 export const membraneAnchors = {
-  "sodium-channel": { x: 16, y: 46 },
-  "potassium-channel": { x: 36, y: 46 },
-  "other-proteins": { x: 70, y: 46 },
-  sodium: { x: 16, y: 28 },
-  potassium: { x: 36, y: 72 },
+  "sodium-channel": { x: 28, y: 46 },
+  "potassium-channel": { x: 62, y: 46 },
+  pump: { x: 84, y: 58 },
+  leak: { x: 46, y: 58 },
+  sodium: { x: 24, y: 24 },
+  potassium: { x: 62, y: 78 },
 } as const;
-
-export const ionColumns = { sodium: 321, potassium: 661 } as const;
 
 const headRows = [
   { y: 382, xs: lipidHeads[0] ?? [] },
   { y: 528, xs: lipidHeads[1] ?? [] },
 ];
+
+const proteinXs = [membraneArt.naX, membraneArt.kX, membraneArt.leakX, membraneArt.pumpX];
 
 function channelPath(x: number, pore: number) {
   const top = 358;
@@ -57,27 +56,93 @@ function tailPath(x: number, from: number, to: number, index: number) {
 }
 
 function blocked(x: number) {
-  return channels.some((channel) => Math.abs(x - channel.x) < 78);
+  return proteinXs.some((channel) => Math.abs(x - channel) < 78);
+}
+
+function poreFor(state: ChannelState) {
+  if (state === "open") return 18;
+  if (state === "inactivated") return 14;
+  return 4;
+}
+
+function Gate({ x, state, tone }: { x: number; state: ChannelState; tone: string }) {
+  if (state === "open") {
+    return (
+      <g>
+        <path d={`M ${x - 30} 418 L ${x - 18} 392 L ${x - 12} 448`} fill="none" stroke={tone} strokeWidth="6" strokeLinecap="round" />
+        <path d={`M ${x + 30} 418 L ${x + 18} 392 L ${x + 12} 448`} fill="none" stroke={tone} strokeWidth="6" strokeLinecap="round" />
+      </g>
+    );
+  }
+  if (state === "inactivated") {
+    return (
+      <g>
+        <path d={`M ${x - 28} 430 L ${x - 12} 455`} fill="none" stroke={tone} strokeWidth="5" strokeLinecap="round" />
+        <path d={`M ${x + 28} 430 L ${x + 12} 455`} fill="none" stroke={tone} strokeWidth="5" strokeLinecap="round" />
+        <circle cx={x} cy={512} r="15" fill={tone} stroke="#fff" strokeWidth="2" />
+      </g>
+    );
+  }
+  return (
+    <g>
+      <path d={`M ${x - 28} 444 L ${x - 1} 456 L ${x - 28} 468 Z`} fill={tone} />
+      <path d={`M ${x + 28} 444 L ${x + 1} 456 L ${x + 28} 468 Z`} fill={tone} />
+    </g>
+  );
 }
 
 export const MembraneArt = forwardRef<
   SVGSVGElement,
   {
-    labels?: Partial<Record<"sodium-channel" | "potassium-channel" | "other-proteins" | "sodium" | "potassium", string>>;
+    labels?: Partial<Record<"sodium-channel" | "potassium-channel" | "pump" | "leak" | "sodium" | "potassium", string>>;
     selectedId?: string | null;
     hintId?: string;
     onSelect?: (id: string) => void;
-    openChannel?: "none" | "sodium" | "potassium";
+    sodiumState?: ChannelState;
+    potassiumState?: ChannelState;
+    ions?: readonly CastIon[];
+    outsideLabel?: string;
+    insideLabel?: string;
   }
->(function MembraneArt({ labels, selectedId = null, hintId, onSelect, openChannel = "none" }, ref) {
+>(function MembraneArt(
+  {
+    labels,
+    selectedId = null,
+    hintId,
+    onSelect,
+    sodiumState = "closed",
+    potassiumState = "closed",
+    ions = [],
+    outsideLabel = "Exterior",
+    insideLabel = "Interior",
+  },
+  ref,
+) {
   const grain = useSvgId("membrane-grain");
+  const channels = [
+    { id: "sodium-channel" as const, x: membraneArt.naX, state: sodiumState, fill: learnColors.sodium, stroke: learnColors.blueInk },
+    { id: "potassium-channel" as const, x: membraneArt.kX, state: potassiumState, fill: learnColors.potassium, stroke: learnColors.violetInk },
+  ];
 
   return (
-    <svg ref={ref} viewBox={`0 0 ${membraneView.width} ${membraneView.height}`} width={membraneView.width} height={membraneView.height} className="learn-membrane-art block h-auto w-full" role="group">
+    <svg
+      ref={ref}
+      viewBox={`${membraneFocus.x} ${membraneFocus.y} ${membraneFocus.width} ${membraneFocus.height}`}
+      width={membraneFocus.width}
+      height={membraneFocus.height}
+      className="learn-membrane-art block h-auto w-full"
+      role="group"
+    >
       <defs>
         <Grain id={grain} />
       </defs>
-      <rect width={membraneView.width} height={membraneView.height} fill={learnColors.paper} />
+      <rect x={membraneFocus.x} y={membraneFocus.y} width={membraneFocus.width} height={membraneFocus.height} fill={learnColors.paper} />
+      <text x="180" y="90" fill={learnColors.ink} fontSize="32" fontWeight="700">
+        {outsideLabel}
+      </text>
+      <text x="180" y="860" fill={learnColors.ink} fontSize="32" fontWeight="700">
+        {insideLabel}
+      </text>
       <g data-part-group="bilayer" pointerEvents="none">
         <g filter={`url(#${grain})`}>
           {headRows[0]?.xs.map((x, index) =>
@@ -91,53 +156,115 @@ export const MembraneArt = forwardRef<
           {headRows[0]?.xs.map((x, index) => (blocked(x) ? null : <path key={`td-${x}`} d={tailPath(x, 398, 444, index)} />))}
           {headRows[1]?.xs.map((x, index) => (blocked(x) ? null : <path key={`bu-${x}`} d={tailPath(x, 512, 466, index + 3)} />))}
         </g>
-        <g fill="none" stroke={learnColors.coralInk} strokeWidth="1.15">
-          {headRows[0]?.xs.map((x, index) =>
-            blocked(x) ? null : <circle key={`to-${x}`} cx={x} cy={382} r={10.5 + (index % 3) * 0.4} />,
-          )}
-          {headRows[1]?.xs.map((x, index) =>
-            blocked(x) ? null : <circle key={`bo-${x}`} cx={x} cy={528} r={10.5 + (index % 3) * 0.4} />,
-          )}
-        </g>
       </g>
-      {channels.map((channel) => {
-        const partId = channel.id === "other-proteins-b" ? "other-proteins" : channel.id;
-        const open =
-          (openChannel === "sodium" && channel.id === "sodium-channel") ||
-          (openChannel === "potassium" && channel.id === "potassium-channel");
-        const d = channelPath(channel.x, open ? 20 : 13);
+      <Part id="leak" label={labels?.leak ?? "Canal de fuga"} selected={selectedId === "leak"} hinted={hintId === "leak"} onSelect={onSelect}>
+        <g className="learn-highlight">
+          <rect x={membraneArt.leakX - 28} y={390} width="56" height="130" rx="16" fill={learnColors.green} />
+        </g>
+        <rect x={membraneArt.leakX - 22} y={396} width="44" height="118" rx="14" fill={learnColors.green} stroke={learnColors.blueInk} strokeWidth="1.6" />
+        <rect x={membraneArt.leakX - 5} y={408} width="10" height="94" rx="4" fill="#f7f4ee" />
+      </Part>
+      <Part id="pump" label={labels?.pump ?? "Bomba Na+/K+"} selected={selectedId === "pump"} hinted={hintId === "pump"} onSelect={onSelect}>
+        <g className="learn-highlight">
+          <ellipse cx={membraneArt.pumpX} cy={456} rx="46" ry="58" fill={learnColors.pump} />
+        </g>
+        <ellipse cx={membraneArt.pumpX} cy={456} rx="40" ry="52" fill={learnColors.pump} stroke={learnColors.myelinEdge} strokeWidth="1.8" />
+        <path d={`M ${membraneArt.pumpX - 16} 430 L ${membraneArt.pumpX} 408 L ${membraneArt.pumpX + 8} 424`} fill="none" stroke={learnColors.ink} strokeWidth="3" strokeLinecap="round" />
+        <path d={`M ${membraneArt.pumpX + 16} 490 L ${membraneArt.pumpX} 512 L ${membraneArt.pumpX - 8} 496`} fill="none" stroke={learnColors.ink} strokeWidth="3" strokeLinecap="round" />
+      </Part>
+      {channels.map((channel) => (
+        <Part
+          key={channel.id}
+          id={channel.id}
+          label={labels?.[channel.id] ?? channel.id}
+          selected={selectedId === channel.id}
+          hinted={hintId === channel.id}
+          onSelect={onSelect}
+        >
+          <g data-channel={channel.id} data-state={channel.state}>
+            <path className="learn-highlight" d={channelPath(channel.x, poreFor(channel.state))} fill={channel.fill} fillRule="evenodd" />
+            <path d={channelPath(channel.x, poreFor(channel.state))} fill={channel.fill} fillRule="evenodd" stroke={channel.stroke} strokeWidth="1.7" />
+            <Gate x={channel.x} state={channel.state} tone={channel.stroke} />
+          </g>
+        </Part>
+      ))}
+      {(["na", "k"] as const).map((species) => {
+        const sodium = species === "na";
+        const id = sodium ? "sodium" : "potassium";
         return (
           <Part
-            key={channel.x}
-            id={partId}
-            label={labels?.[partId] ?? channel.label}
-            selected={selectedId === partId}
-            hinted={hintId === partId && channel.id !== "other-proteins-b"}
+            key={species}
+            id={id}
+            label={labels?.[id] ?? (sodium ? "Na+" : "K+")}
+            selected={selectedId === id}
+            hinted={hintId === id}
             onSelect={onSelect}
           >
-            <g data-channel={channel.id}>
-              <path className="learn-highlight" d={d} fill={channel.fill} fillRule="evenodd" />
-              <path d={d} fill={channel.fill} fillRule="evenodd" stroke={channel.stroke} strokeWidth="1.7" strokeLinejoin="round" />
-            </g>
+            {ions
+              .filter((ion) => ion.species === species)
+              .map((ion) => (
+                <g key={ion.id} className={sodium ? "learn-na-ion" : "learn-k-ion"} data-ion={ion.id} transform={`translate(${ion.x} ${ion.y})`}>
+                  <IonGlyph
+                    symbol={sodium ? "Na⁺" : "K⁺"}
+                    fill={sodium ? learnColors.sodium : learnColors.potassium}
+                    stroke={sodium ? learnColors.blueInk : learnColors.violetInk}
+                    r={20}
+                  />
+                </g>
+              ))}
           </Part>
         );
       })}
-      <Part id="sodium" label={labels?.sodium ?? "Na+"} selected={selectedId === "sodium"} hinted={hintId === "sodium"} onSelect={onSelect}>
-        <g className="learn-na-ion" transform={`translate(${ionColumns.sodium} 250)`}>
-          <circle r="18" fill={learnColors.sodium} stroke={learnColors.blueInk} strokeWidth="1.4" />
-          <text textAnchor="middle" y="5" fontSize="13" fill={learnColors.ink}>
-            Na+
-          </text>
-        </g>
-      </Part>
-      <Part id="potassium" label={labels?.potassium ?? "K+"} selected={selectedId === "potassium"} hinted={hintId === "potassium"} onSelect={onSelect}>
-        <g className="learn-k-ion" transform={`translate(${ionColumns.potassium} 690)`}>
-          <circle r="18" fill={learnColors.potassium} stroke={learnColors.violetInk} strokeWidth="1.4" />
-          <text textAnchor="middle" y="5" fontSize="13" fill={learnColors.ink}>
-            K+
-          </text>
-        </g>
-      </Part>
     </svg>
   );
 });
+
+export function ChannelDetail({
+  sodium,
+  potassium,
+  showSodiumMoving,
+  showPotassiumMoving,
+}: {
+  sodium: ChannelState;
+  potassium: ChannelState;
+  showSodiumMoving: boolean;
+  showPotassiumMoving: boolean;
+}) {
+  return (
+    <svg viewBox="0 0 160 108" className="block h-auto w-full" aria-hidden="true">
+      <rect width="160" height="108" fill="#eef3f6" />
+      <text x="8" y="16" fontSize="11" fontWeight="700" fill={learnColors.ink}>
+        Exterior
+      </text>
+      <text x="8" y="102" fontSize="11" fontWeight="700" fill={learnColors.ink}>
+        Interior
+      </text>
+      <line x1="8" x2="152" y1="40" y2="40" stroke={learnColors.lipid} strokeWidth="8" />
+      <line x1="8" x2="152" y1="68" y2="68" stroke={learnColors.lipid} strokeWidth="8" />
+      <DetailChannel x={52} state={sodium} fill={learnColors.sodium} stroke={learnColors.blueInk} />
+      <DetailChannel x={112} state={potassium} fill={learnColors.potassium} stroke={learnColors.violetInk} />
+      <g className="learn-detail-na" opacity={showSodiumMoving ? 1 : 0}>
+        <IonGlyph symbol="Na⁺" fill={learnColors.sodium} stroke={learnColors.blueInk} x={52} y={22} r={9} />
+      </g>
+      <g className="learn-detail-k" opacity={showPotassiumMoving ? 1 : 0}>
+        <IonGlyph symbol="K⁺" fill={learnColors.potassium} stroke={learnColors.violetInk} x={112} y={86} r={9} />
+      </g>
+    </svg>
+  );
+}
+
+function DetailChannel({ x, state, fill, stroke }: { x: number; state: ChannelState; fill: string; stroke: string }) {
+  return (
+    <g>
+      <rect x={x - 14} y={32} width="28" height="44" rx="8" fill={fill} stroke={stroke} strokeWidth="1.4" />
+      {state === "closed" ? <rect x={x - 12} y={50} width="24" height="6" rx="2" fill={stroke} /> : null}
+      {state === "open" ? <rect x={x - 3} y={36} width="6" height="36" rx="2" fill="#f7f4ee" /> : null}
+      {state === "inactivated" ? (
+        <>
+          <rect x={x - 3} y={36} width="6" height="28" rx="2" fill="#f7f4ee" />
+          <circle cx={x} cy={66} r="6" fill={stroke} />
+        </>
+      ) : null}
+    </g>
+  );
+}

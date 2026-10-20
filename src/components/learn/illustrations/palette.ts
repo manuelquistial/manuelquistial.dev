@@ -21,7 +21,7 @@ export const learnColors = {
   sodium: "#8eb4d4",
   potassium: "#b7a4d4",
   calcium: "#e0b15a",
-  transmitter: "#e0b15a",
+  transmitter: "#d4789a",
   signal: "#9e3b2d",
   inhibitory: "#4f678f",
   membrane: "#f3e6cf",

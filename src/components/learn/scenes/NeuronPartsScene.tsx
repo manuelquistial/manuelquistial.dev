@@ -14,6 +14,8 @@ export function NeuronPartsScene() {
   return (
     <SceneStage
       label={scene.textAlternative}
+      idle={scene.prompt ? { text: scene.prompt } : undefined}
+      parts={scene.parts}
       card={cardFor(scene.parts, neuronAnchors, selectedId)}
       onClose={() => setSelectedId(null)}
     >

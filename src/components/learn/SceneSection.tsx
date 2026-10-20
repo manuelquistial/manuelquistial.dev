@@ -22,7 +22,7 @@ export function SceneSection({
     <section
       id={scene.id}
       aria-labelledby={`${scene.id}-title`}
-      className="scroll-mt-28 border-t border-border py-12 md:py-16"
+      className="learn-section scroll-mt-28"
     >
       <h2
         id={`${scene.id}-title`}
@@ -30,21 +30,23 @@ export function SceneSection({
       >
         {scene.title}
       </h2>
-      <div className="mt-6">{children}</div>
-      <div className="mt-6 space-y-4">
-        {scene.paragraphs.map((paragraph) => (
-          <p key={paragraph.text} className="leading-relaxed text-muted">
-            {paragraph.text}
-            <CiteList cites={paragraph.cites} numbers={numbers} sources={sources} />
-          </p>
-        ))}
-      </div>
+      <div className="learn-follow">{children}</div>
+      {scene.paragraphs.length > 0 ? (
+        <div className="learn-follow learn-reading space-y-4">
+          {scene.paragraphs.map((paragraph) => (
+            <p key={paragraph.text} className="leading-relaxed text-muted">
+              {paragraph.text}
+              <CiteList cites={paragraph.cites} numbers={numbers} sources={sources} />
+            </p>
+          ))}
+        </div>
+      ) : null}
       {deepen ? (
-        <details className="mt-6 rounded-[8px] border border-border bg-surface px-4 py-3">
-          <summary className="cursor-pointer text-base font-semibold text-foreground">
+        <details className="learn-follow rounded-[8px] border border-border bg-surface p-[var(--learn-panel-pad)]">
+          <summary className="block min-h-11 cursor-pointer py-2 text-base font-semibold text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground">
             {learnUi.deepenLabel}: {deepen.title}
           </summary>
-          <div className="mt-3 space-y-3">
+          <div className="learn-reading mt-3 space-y-3">
             {deepen.paragraphs.map((paragraph) => (
               <p key={paragraph.text} className="leading-relaxed text-muted">
                 {paragraph.text}
@@ -54,7 +56,11 @@ export function SceneSection({
           </div>
         </details>
       ) : null}
-      {question ? <CheckQuestion question={question} /> : null}
+      {question ? (
+        <div className="learn-follow">
+          <CheckQuestion question={question} />
+        </div>
+      ) : null}
     </section>
   );
 }

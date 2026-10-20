@@ -36,7 +36,7 @@ export function StageTrack({
   if (count === 0) return null;
 
   return (
-    <div className="px-4 pt-4">
+    <div className="px-[var(--learn-panel-pad)] pt-4">
       <p className="text-sm font-medium text-muted">
         Etapa {current + 1} de {count}
       </p>

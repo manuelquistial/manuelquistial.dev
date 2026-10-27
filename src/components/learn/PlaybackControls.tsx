@@ -142,7 +142,7 @@ export function PlaybackControls({
               id={menuId}
               role="menu"
               aria-label={learnUi.speedLabel}
-              className="absolute right-0 bottom-full z-30 mb-1 w-36 rounded-[8px] border border-border bg-surface p-1 shadow-sm"
+              className="absolute right-0 bottom-full z-30 mb-1 max-h-[min(50vh,16rem)] w-36 overflow-y-auto overscroll-contain rounded-[8px] border border-border bg-surface p-1 shadow-sm"
             >
               {PLAYBACK_SPEEDS.map((value) => {
                 const selected = speed === value;

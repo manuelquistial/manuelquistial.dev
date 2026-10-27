@@ -12,7 +12,7 @@ export const neuronsLesson = {
   metaTitle: "¿Cómo se comunican las neuronas? · Aprendamos",
   intro: [
     {
-      text: "Seguiremos cómo una neurona integra las señales que recibe, cómo un potencial de acción se propaga por su axón y cómo su actividad puede modificar la de otra célula.",
+      text: "Seguiremos cómo una neurona integra las señales que recibe. Veremos cómo un potencial de acción se propaga por su axón y cómo su actividad puede modificar la de otra célula.",
       cites: ["tissue", "communication"],
     },
   ],
@@ -565,7 +565,7 @@ export const neuronsLesson = {
   deepen: [
     {
       afterSceneId: "recibir-y-transmitir",
-      title: "sumación espacial y temporal",
+      title: "Sumación espacial y temporal",
       paragraphs: [
         {
           text: "Las entradas que llegan a distintos lugares pueden combinarse mediante sumación espacial. Las que se suceden con suficiente proximidad temporal también pueden acumular sus efectos mediante sumación temporal.",
@@ -575,17 +575,21 @@ export const neuronsLesson = {
     },
     {
       afterSceneId: "iones-y-membrana",
-      title: "canales y bomba",
+      title: "Canales y bomba",
       paragraphs: [
         {
-          text: "Los canales permiten el paso de iones a favor de sus gradientes electroquímicos. La bomba Na⁺/K⁺ utiliza energía para mantener las diferencias de concentración. La repolarización rápida de esta escena depende principalmente de la salida de K⁺ por sus canales.",
+          text: "Los canales permiten el paso de iones a favor de sus gradientes electroquímicos. La bomba Na⁺/K⁺ utiliza energía para mantener las diferencias de concentración.",
+          cites: ["potential"],
+        },
+        {
+          text: "La repolarización rápida de esta escena depende principalmente de la salida de K⁺ por sus canales.",
           cites: ["potential"],
         },
       ],
     },
     {
       afterSceneId: "glia-y-mielina",
-      title: "células que forman mielina",
+      title: "Células que forman mielina",
       paragraphs: [
         {
           text: "En el sistema nervioso central, la mielina la forman los oligodendrocitos. En el sistema nervioso periférico, la forman las células de Schwann.",
@@ -658,4 +662,8 @@ export function getNeuronScene<Id extends NeuronSceneId>(id: Id) {
     throw new Error(`Missing neuron scene: ${id}`);
   }
   return scene as Extract<(typeof neuronsLesson.scenes)[number], { id: Id }>;
+}
+
+export function getNeuronQuestion(id: string) {
+  return neuronsLesson.questions.find((item) => item.id === id);
 }

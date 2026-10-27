@@ -104,7 +104,7 @@ export function MyelinScene() {
         ion.setAttribute("opacity", moving ? "1" : "0");
       }
     });
-  }, [playback.controller, playback.snapshot.stageId, playback.snapshot.time]);
+  }, [playback.controller]);
 
   return (
     <SceneStage

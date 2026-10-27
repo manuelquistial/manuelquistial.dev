@@ -42,10 +42,11 @@ export function Header({ locale, content }: HeaderProps) {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/80 bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/90">
+    <header className="sticky top-0 z-50 border-b border-border/80 bg-background/95 pt-[env(safe-area-inset-top)] backdrop-blur-md supports-[backdrop-filter]:bg-background/90">
       <Container className="flex h-16 items-center justify-between gap-4 lg:h-[4.25rem]">
         <Link
           href={localizedPath(locale)}
+          translate="no"
           className="text-base font-semibold tracking-tight text-foreground transition-colors duration-150 hover:text-accent"
         >
           {profile.shortName}
@@ -63,7 +64,7 @@ export function Header({ locale, content }: HeaderProps) {
           <button
             ref={menuButtonRef}
             type="button"
-            className="inline-flex size-11 items-center justify-center rounded-[6px] border border-border text-foreground transition-colors duration-150 hover:border-foreground/40 lg:hidden"
+            className="inline-flex size-11 items-center justify-center rounded-[6px] border border-border text-foreground transition-colors duration-150 hover:border-foreground/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground lg:hidden"
             aria-expanded={open}
             aria-controls={panelId}
             aria-label={open ? content.a11y.closeMenu : content.a11y.menu}
@@ -78,7 +79,7 @@ export function Header({ locale, content }: HeaderProps) {
         <div
           id={panelId}
           ref={panelRef}
-          className="absolute inset-x-0 top-full border-t border-border bg-background shadow-[0_12px_32px_rgba(32,32,30,0.08)] lg:hidden"
+          className="absolute inset-x-0 top-full overflow-y-auto overscroll-contain border-t border-border bg-background shadow-[0_12px_32px_rgba(32,32,30,0.08)] lg:hidden"
         >
           <Container className="py-4">
             <NavLinks

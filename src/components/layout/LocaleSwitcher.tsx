@@ -47,10 +47,10 @@ export function LocaleSwitcher({
             title={target.fallback ? labels.unavailableHere : undefined}
             aria-current={isActive ? "true" : undefined}
             className={cn(
-              "rounded-[6px] px-2.5 py-1.5 text-sm font-semibold uppercase tracking-wide transition-colors duration-150",
+              "inline-flex min-h-11 min-w-11 items-center justify-center rounded-[6px] px-2.5 text-sm font-semibold uppercase tracking-wide transition-colors duration-150",
               isActive
                 ? "bg-surface-soft text-foreground"
-                : "text-muted hover:text-foreground",
+                : "text-muted hover:bg-surface-soft hover:text-foreground",
             )}
           >
             {item}

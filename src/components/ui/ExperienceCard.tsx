@@ -1,35 +1,36 @@
 import type { Experience } from "@/data/experience";
 import { cn } from "@/lib/utils";
 
+type ExperienceCardVariant = "preview" | "detail";
+
 interface ExperienceCardProps {
   item: Experience;
   className?: string;
-  compact?: boolean;
-  showTechnologies?: boolean;
+  variant?: ExperienceCardVariant;
 }
 
 export function ExperienceCard({
   item,
   className,
-  compact = false,
-  showTechnologies = true,
+  variant = "detail",
 }: ExperienceCardProps) {
-  const bullets = compact ? [] : item.highlights ?? [];
+  const preview = variant === "preview";
+  const bullets = preview ? [] : item.highlights ?? [];
 
   return (
     <article className={cn("min-w-0", className)}>
       <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-        <h3 className="min-w-0 flex-1 text-lg font-semibold text-foreground">
+        <h3 className="min-w-0 flex-1 text-balance text-lg font-semibold text-foreground">
           {item.company}
         </h3>
         <p className="shrink-0 text-sm text-muted">{item.period}</p>
       </div>
       <p className="mt-1.5 text-base font-medium text-foreground">{item.role}</p>
-      {!compact && item.location ? (
+      {!preview && item.location ? (
         <p className="mt-1 text-sm text-muted">{item.location}</p>
       ) : null}
 
-      {!compact && item.description ? (
+      {!preview && item.description ? (
         <p className="mt-4 max-w-[65ch] text-base leading-relaxed text-muted">
           {item.description}
         </p>
@@ -45,14 +46,14 @@ export function ExperienceCard({
         </ul>
       ) : null}
 
-      {showTechnologies && !compact && item.technologies?.length ? (
+      {!preview && item.technologies?.length ? (
         <TechnologyLine
           label={item.technologiesLabel}
           technologies={item.technologies}
         />
       ) : null}
 
-      {!compact && item.engagements?.length ? (
+      {!preview && item.engagements?.length ? (
         <div className="mt-8 space-y-8">
           {item.engagements.map((engagement) => (
             <section key={engagement.id} className="border-t border-border pt-6">
@@ -74,7 +75,7 @@ export function ExperienceCard({
                   </li>
                 ))}
               </ul>
-              {showTechnologies && engagement.technologies.length ? (
+              {engagement.technologies.length ? (
                 <TechnologyLine
                   label={engagement.technologiesLabel}
                   technologies={engagement.technologies}

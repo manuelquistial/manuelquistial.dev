@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Locale } from "@/i18n/config";
-import type { CaseStudyContent } from "@/content";
-import { getCaseStudySections } from "@/content";
+import type { CaseStudyContent } from "@/content/case-study-types";
+import { getCaseStudySections } from "@/content/case-study-types";
 import type { Project } from "@/data/projects";
 import { localizedPath } from "@/lib/localizedPath";
 import { Section } from "@/components/layout/Section";

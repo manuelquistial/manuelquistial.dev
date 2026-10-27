@@ -13,7 +13,7 @@ export const about = {
 export const aboutPage = {
   title: "Trayectoria",
   intro:
-    "Mi experiencia combina desarrollo full-stack, modernización de aplicaciones e integración de servicios. He trabajado en plataformas empresariales y en herramientas de administración para equipos de marketing, operaciones y áreas académicas.",
+    "Mi experiencia se centra en desarrollo full-stack y modernización de aplicaciones. He trabajado en plataformas empresariales y en herramientas de administración para equipos de marketing, operaciones y áreas académicas.",
   engineering: {
     title: "Ingeniería de software",
     paragraphs: [],
@@ -74,11 +74,11 @@ export const researchPage = {
   previewTagline:
     "Investigación de maestría en decodificación de imaginación motora con EEG de ocho canales, control de contaminación muscular mediante EMG y retroalimentación visual en lazo cerrado.",
   summary:
-    "Mi investigación aborda la decodificación de imaginación motora del miembro superior mediante una interfaz cerebro-computador híbrida EEG–EMG. La propuesta combina EEG de ocho canales, control de contaminación muscular mediante EMG y retroalimentación visual adaptativa para evaluar la interacción entre el participante y el sistema en lazo cerrado.",
+    "Mi investigación aborda la decodificación de imaginación motora del miembro superior mediante una interfaz cerebro-computador híbrida de electroencefalografía–electromiografía (EEG–EMG). La propuesta combina EEG de ocho canales, control de contaminación muscular mediante EMG y retroalimentación visual adaptativa. Evalúa la interacción entre el participante y el sistema en lazo cerrado.",
   objective: {
     title: "Objetivo de investigación",
     paragraphs: [
-      "Evaluar el desempeño de la decodificación en línea de imaginación motora con un montaje EEG de baja densidad, considerando la precisión de clasificación y la latencia durante la interacción con retroalimentación visual.",
+      "Evaluar el desempeño de la decodificación en línea de imaginación motora con un montaje EEG de baja densidad. Considerar la precisión de clasificación y la latencia durante la interacción con retroalimentación visual.",
     ],
   },
   system: {
@@ -87,25 +87,25 @@ export const researchPage = {
       {
         title: "Decodificación EEG",
         description:
-          "El diseño contempla ocho canales EEG sobre regiones sensoriomotoras para procesar la actividad cerebral asociada a tareas de imaginación motora del miembro superior.",
+          "El diseño contempla ocho canales EEG sobre regiones sensoriomotoras. Procesa la actividad cerebral asociada a tareas de imaginación motora del miembro superior.",
       },
       {
         title: "Control de contaminación muscular",
         description:
-          "El EMG de antebrazo se plantea como una señal de control para detectar actividad muscular no intencionada y rechazar segmentos contaminados. No se utiliza como una entrada adicional del clasificador ni como un canal independiente de control.",
+          "El EMG de antebrazo detecta actividad muscular no intencionada y rechaza segmentos contaminados. No se utiliza como entrada adicional del clasificador ni como canal independiente de control.",
       },
       {
         title: "Retroalimentación visual adaptativa",
         description:
-          "La propuesta incorpora una respuesta visual vinculada a la salida del sistema durante la tarea. Esta interacción permite evaluar la decodificación en lazo cerrado, con el participante recibiendo retroalimentación mientras realiza el experimento.",
+          "El sistema vincula una respuesta visual a su salida durante la tarea. El participante recibe esta retroalimentación mientras realiza el experimento, lo que permite evaluar la decodificación en lazo cerrado.",
       },
     ],
   },
   design: {
     title: "Diseño experimental",
     paragraphs: [
-      "El estudio contempla 15 participantes sanos, de 18 a 45 años, y dos sesiones en días separados. La primera se destina a la adquisición de señales, la calibración offline y la familiarización con la tarea. La segunda se orienta a la evaluación online en lazo cerrado con los mismos participantes.",
-      "La calibración y la evaluación offline se plantean con los datos adquiridos en el estudio, no con bases de datos públicas.",
+      "El estudio incluye 15 participantes sanos, de 18 a 45 años, y dos sesiones en días separados. La primera cubre la adquisición de señales, la calibración offline y la familiarización con la tarea. La segunda se centra en la evaluación online en lazo cerrado con los mismos participantes.",
+      "La calibración y la evaluación offline usan los datos adquiridos en el estudio, no bases de datos públicas.",
     ],
   },
   evaluation: {

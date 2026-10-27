@@ -74,11 +74,11 @@ export const researchPage = {
   previewTagline:
     "Master’s research on motor imagery decoding with eight-channel EEG, EMG-based muscular contamination control, and closed-loop visual feedback.",
   summary:
-    "My research addresses upper-limb motor imagery decoding through a hybrid EEG–EMG brain-computer interface. The proposed approach combines eight-channel EEG, EMG-based muscular contamination control, and adaptive visual feedback to evaluate closed-loop interaction between the participant and the system.",
+    "My research addresses upper-limb motor imagery decoding through a hybrid electroencephalography–electromyography (EEG–EMG) brain-computer interface. The approach combines eight-channel EEG, EMG-based muscular contamination control, and adaptive visual feedback. It evaluates closed-loop interaction between the participant and the system.",
   objective: {
     title: "Research objective",
     paragraphs: [
-      "To evaluate online motor imagery decoding with a low-density EEG setup, considering classification accuracy and latency during interaction with visual feedback.",
+      "Evaluate online motor imagery decoding with a low-density EEG setup. Consider classification accuracy and latency during interaction with visual feedback.",
     ],
   },
   system: {
@@ -87,25 +87,25 @@ export const researchPage = {
       {
         title: "EEG decoding",
         description:
-          "The design uses eight EEG channels over sensorimotor regions to process brain activity associated with upper-limb motor imagery tasks.",
+          "The design uses eight EEG channels over sensorimotor regions. It processes brain activity associated with upper-limb motor imagery tasks.",
       },
       {
         title: "Muscular contamination control",
         description:
-          "Forearm EMG is intended to detect unintended muscle activity and reject contaminated segments. It is not used as an additional classifier input or as an independent control channel.",
+          "Forearm EMG detects unintended muscle activity and rejects contaminated segments. It is not an additional classifier input or an independent control channel.",
       },
       {
         title: "Adaptive visual feedback",
         description:
-          "The proposed system provides a visual response linked to its output during the task. This interaction enables closed-loop evaluation, with the participant receiving feedback throughout the experiment.",
+          "The system links a visual response to its output during the task. Participants receive this feedback throughout the experiment, which enables closed-loop evaluation.",
       },
     ],
   },
   design: {
     title: "Experimental design",
     paragraphs: [
-      "The study is designed for 15 healthy participants aged 18–45, with two sessions on separate days. The first session covers signal acquisition, offline calibration, and task familiarization. The second focuses on online closed-loop evaluation with the same participants.",
-      "Calibration and offline evaluation are planned using data acquired in the study, rather than public datasets.",
+      "The study includes 15 healthy participants aged 18–45, with two sessions on separate days. The first session covers signal acquisition, offline calibration, and task familiarization. The second focuses on online closed-loop evaluation with the same participants.",
+      "Calibration and offline evaluation use data acquired in the study, rather than public datasets.",
     ],
   },
   evaluation: {

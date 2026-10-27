@@ -48,7 +48,14 @@ export default async function LocaleLayout({
       <SetHtmlLang locale={locale} />
       <HashScroll />
       <SkipLink label={content.a11y.skipToContent} />
-      <Header locale={locale} content={content} />
+      <Header
+        locale={locale}
+        content={{
+          nav: content.nav,
+          a11y: content.a11y,
+          languageSwitcher: content.languageSwitcher,
+        }}
+      />
       <main id="main-content" className="flex-1">
         {children}
         <ContactCTA locale={locale} content={content.contactCta} />

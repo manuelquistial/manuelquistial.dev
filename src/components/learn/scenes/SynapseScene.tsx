@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { learnUi } from "@/content/learn/es/ui";
-import { getNeuronScene, neuronsLesson } from "@/content/learn/es/neurons";
+import { getNeuronScene, getNeuronQuestion } from "@/content/learn/es/neurons";
 import { DetailInset } from "@/components/learn/DetailInset";
 import {
   ChemicalSynapseArt,
@@ -168,9 +168,7 @@ export function SynapseScene() {
     text: notes[playback.snapshot.stageId]?.[part.id] ?? part.text,
   }));
   const modeNote = scene.variantNotes?.[mode];
-  const question = neuronsLesson.questions.find(
-    (item) => item.afterSceneId === "sinapsis" && item.visibleIn === "chemical",
-  );
+  const question = getNeuronQuestion("sinapsis-quimica");
 
   useEffect(() => {
     return playback.controller.onFrame((snapshot) => {
@@ -253,7 +251,7 @@ export function SynapseScene() {
         detail.setAttribute("cy", String(start + (end - start) * frame.current));
       }
     });
-  }, [mode, playback.controller, playback.snapshot.stageId, playback.snapshot.time]);
+  }, [mode, playback.controller]);
 
   const switchMode = (next: "chemical" | "electrical") => {
     if (next === mode) return;
@@ -289,7 +287,7 @@ export function SynapseScene() {
                     type="button"
                     role="tab"
                     aria-selected={selected}
-                    className={`min-h-11 rounded-full px-4 text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-foreground ${selected ? "bg-surface text-foreground shadow-sm" : "text-muted"}`}
+                    className={`min-h-11 rounded-full px-4 text-sm font-semibold transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-foreground ${selected ? "bg-surface text-foreground shadow-sm" : "text-muted hover:bg-surface hover:text-foreground"}`}
                     onClick={() => switchMode(item)}
                   >
                     {item === "chemical" ? learnUi.chemical : learnUi.electrical}

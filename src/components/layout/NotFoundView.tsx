@@ -7,24 +7,26 @@ import { Container } from "@/components/layout/Container";
 interface NotFoundViewProps {
   locale: Locale;
   notFound: SiteContent["notFound"];
-  centered?: boolean;
+  layout?: "centered" | "page";
 }
 
 export function NotFoundView({
   locale,
   notFound,
-  centered = true,
+  layout = "centered",
 }: NotFoundViewProps) {
   return (
     <Container
       as="section"
       className={
-        centered
+        layout === "centered"
           ? "flex min-h-[50vh] flex-col items-center justify-center py-20 text-center"
           : "py-20"
       }
     >
-      <h1 className="text-3xl font-semibold text-foreground">{notFound.title}</h1>
+      <h1 className="text-balance text-3xl font-semibold text-foreground">
+        {notFound.title}
+      </h1>
       <p className="mt-4 max-w-md text-muted">{notFound.description}</p>
       <Link
         href={localizedPath(locale)}

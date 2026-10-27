@@ -38,7 +38,7 @@ export function LearnLesson({
               {learnUi.backToIndex}
             </Link>
           </p>
-          <h1 className="mt-4 max-w-[18ch] text-[clamp(2.375rem,4vw,3.75rem)] font-semibold leading-[1.1] tracking-tight text-foreground">
+          <h1 className="mt-4 max-w-[18ch] text-balance text-[clamp(2.375rem,4vw,3.75rem)] font-semibold leading-[1.1] tracking-tight text-foreground">
             {lesson.title}
           </h1>
           <div className="learn-reading mt-6 space-y-4">
@@ -61,7 +61,7 @@ export function LearnLesson({
               ))}
             </ol>
           </nav>
-          {lesson.scenes.map((scene) => (
+          {lesson.scenes.map((scene, index) => (
             <SceneSection
               key={scene.id}
               scene={scene}
@@ -70,13 +70,13 @@ export function LearnLesson({
                 (item) => item.afterSceneId === scene.id && !item.visibleIn,
               )}
             >
-              <SceneVisual sceneId={scene.id} />
+              <SceneVisual sceneId={scene.id} eager={index === 0} />
             </SceneSection>
           ))}
           <section className="learn-section scroll-mt-28" aria-labelledby="learn-sources">
             <h2
               id="learn-sources"
-              className="text-[clamp(1.5rem,2.5vw,1.75rem)] font-semibold leading-[1.25] text-foreground"
+              className="text-balance text-[clamp(1.5rem,2.5vw,1.75rem)] font-semibold leading-[1.25] text-foreground"
             >
               {learnUi.sourcesTitle}
             </h2>

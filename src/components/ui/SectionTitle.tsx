@@ -7,7 +7,8 @@ interface SectionTitleProps {
   className?: string;
   align?: "left" | "center";
   as?: "h1" | "h2";
-  spaced?: boolean;
+  /** Extra bottom margin under the header block. */
+  spacing?: "default" | "none";
 }
 
 export function SectionTitle({
@@ -17,12 +18,12 @@ export function SectionTitle({
   className,
   align = "left",
   as: Heading = "h2",
-  spaced = true,
+  spacing = "default",
 }: SectionTitleProps) {
   return (
     <header
       className={cn(
-        spaced && "mb-6 sm:mb-8",
+        spacing === "default" && "mb-6 sm:mb-8",
         align === "center" && "text-center",
         className,
       )}
@@ -32,7 +33,7 @@ export function SectionTitle({
       ) : null}
       <Heading
         className={cn(
-          "font-semibold tracking-tight text-foreground",
+          "text-balance font-semibold tracking-tight text-foreground",
           Heading === "h1"
             ? "text-[clamp(2.375rem,4vw,3.75rem)] leading-[1.1]"
             : "text-[clamp(1.75rem,3vw,2.25rem)] leading-[1.2]",

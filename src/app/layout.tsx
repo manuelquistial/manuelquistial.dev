@@ -27,7 +27,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full" suppressHydrationWarning>
+    <html
+      lang="en"
+      className="h-full"
+      style={{ colorScheme: "light" }}
+      suppressHydrationWarning
+    >
       <body
         className={`${manrope.variable} ${jetbrainsMono.variable} flex min-h-full flex-col antialiased`}
       >

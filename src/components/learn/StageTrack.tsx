@@ -51,7 +51,7 @@ export function StageTrack({
               role="tab"
               aria-selected={selected}
               aria-label={`${stage.label}. Etapa ${index + 1} de ${count}`}
-              className="flex min-h-11 min-w-0 flex-1 flex-col justify-center rounded-[6px] px-1 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-foreground"
+              className="flex min-h-11 min-w-0 flex-1 flex-col justify-center rounded-[6px] px-1 text-left transition-colors duration-150 hover:bg-surface-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-foreground"
               onClick={() => onSeek(index)}
             >
               <span className="block h-1 overflow-hidden rounded-full bg-foreground/15" aria-hidden="true">

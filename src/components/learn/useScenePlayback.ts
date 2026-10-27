@@ -16,6 +16,19 @@ import {
 import { usePrefersReducedMotion } from "@/components/learn/usePrefersReducedMotion";
 import { usePrimaryFrame } from "@/components/learn/usePrimaryFrame";
 
+function sameUi(a: PlaybackSnapshot, b: PlaybackSnapshot): boolean {
+  return (
+    a.playing === b.playing &&
+    a.speed === b.speed &&
+    a.stageIndex === b.stageIndex &&
+    a.stageId === b.stageId &&
+    a.stageCount === b.stageCount &&
+    a.duration === b.duration &&
+    a.stageStart === b.stageStart &&
+    a.stageEnd === b.stageEnd
+  );
+}
+
 export function useScenePlayback(
   stages: readonly StageBound[],
   temporal = true,
@@ -52,7 +65,24 @@ export function useScenePlayback(
     [controller, primary, reducedMotion],
   );
 
-  useEffect(() => controller.subscribe(() => setSnapshot(controller.getSnapshot())), [controller]);
+  useEffect(() => {
+    return controller.subscribe(() => {
+      const next = controller.getSnapshot();
+      setSnapshot((prev) => (sameUi(prev, next) ? prev : next));
+    });
+  }, [controller]);
+
+  useEffect(() => {
+    return controller.onFrame((next) => {
+      const ended =
+        wasPlayingRef.current &&
+        !next.playing &&
+        next.duration > 0 &&
+        next.time >= next.duration - 0.001;
+      wasPlayingRef.current = next.playing;
+      if (ended) apply("ended");
+    });
+  }, [apply, controller]);
 
   useEffect(() => {
     if (!temporal) return;
@@ -65,17 +95,6 @@ export function useScenePlayback(
     document.addEventListener("visibilitychange", onHide);
     return () => document.removeEventListener("visibilitychange", onHide);
   }, [apply, primary, temporal]);
-
-  useEffect(() => {
-    const playing = snapshot.playing;
-    const ended =
-      wasPlayingRef.current &&
-      !playing &&
-      snapshot.duration > 0 &&
-      snapshot.time >= snapshot.duration - 0.001;
-    wasPlayingRef.current = playing;
-    if (ended) apply("ended");
-  }, [apply, snapshot.playing, snapshot.duration, snapshot.time]);
 
   useEffect(() => {
     if (!snapshot.playing || reducedMotion) return;
@@ -128,6 +147,7 @@ export function useScenePlayback(
         suspended: false,
         resumeAfterSuspend: false,
       };
+      setSnapshot(controller.getSnapshot());
     },
     suspend: () => apply("suspend"),
     release: () => apply("release"),

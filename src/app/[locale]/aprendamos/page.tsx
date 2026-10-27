@@ -53,7 +53,7 @@ export default async function LearnIndexPage({ params }: LearnIndexPageProps) {
 
   return (
     <Section containerClassName="overflow-x-clip">
-      <h1 className="max-w-[16ch] text-[clamp(2.375rem,4vw,3.75rem)] font-semibold leading-[1.1] tracking-tight text-foreground">
+      <h1 className="max-w-[16ch] text-balance text-[clamp(2.375rem,4vw,3.75rem)] font-semibold leading-[1.1] tracking-tight text-foreground">
         {learnUi.indexTitle}
       </h1>
       <p className="mt-6 leading-relaxed text-muted">{learnUi.indexIntro}</p>

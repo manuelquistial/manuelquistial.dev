@@ -4,39 +4,41 @@ import type { Project } from "@/data/projects";
 import type { SiteContent } from "@/content";
 import { cn } from "@/lib/utils";
 
+type ProjectCardMeta = "auto" | "agency" | "design" | "reserved" | "hidden";
+
 interface ProjectCardProps {
   project: Project;
   labels: SiteContent["projectCard"];
-  showCategory?: boolean;
-  showAgency?: boolean;
-  designCredit?: boolean;
-  uniform?: boolean;
+  /** Whether to show the category eyebrow. */
+  withCategory?: boolean;
+  /** How project meta (agency / client / design credit) is presented. */
+  meta?: ProjectCardMeta;
+  priority?: boolean;
   className?: string;
 }
 
 function ProjectMeta({
   project,
   labels,
-  showAgency,
-  designCredit,
-  reserveSpace,
+  meta,
 }: {
   project: Project;
   labels: SiteContent["projectCard"];
-  showAgency: boolean;
-  designCredit: boolean;
-  reserveSpace: boolean;
+  meta: ProjectCardMeta;
 }) {
+  if (meta === "hidden") return null;
+
   let text: string | null = null;
 
-  if (designCredit && project.agency) {
+  if (meta === "design" && project.agency) {
     text = `${labels.designBy} ${project.agency}`;
-  } else if (showAgency && project.category === "agency-web" && project.agency) {
+  } else if (meta === "agency" && project.category === "agency-web" && project.agency) {
     text = `${labels.deliveredThrough} ${project.agency}`;
   } else if (project.category !== "agency-web" && project.clientType) {
     text = project.clientType;
   }
 
+  const reserveSpace = meta === "reserved" || meta === "design";
   if (!text && !reserveSpace) return null;
 
   return (
@@ -49,10 +51,9 @@ function ProjectMeta({
 export function ProjectCard({
   project,
   labels,
-  showCategory = false,
-  showAgency = false,
-  designCredit = false,
-  uniform = false,
+  withCategory = false,
+  meta = "auto",
+  priority = false,
   className,
 }: ProjectCardProps) {
   const detailHref = project.caseStudyUrl;
@@ -75,13 +76,14 @@ export function ProjectCard({
             src={project.image}
             alt={project.imageAlt ?? ""}
             fill
+            priority={priority}
             sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
             className="object-cover object-top"
           />
         </div>
       ) : null}
       <div className="mt-0 flex flex-1 flex-col">
-        {showCategory ? (
+        {withCategory ? (
           <p className="mb-2 text-sm text-muted">
             {project.category === "agency-web"
               ? labels.webSelection
@@ -90,20 +92,12 @@ export function ProjectCard({
                 : labels.softwareLabel}
           </p>
         ) : null}
-        <h3 className="text-xl font-semibold leading-snug text-foreground">
+        <h3 className="text-balance text-xl font-semibold leading-snug text-foreground">
           {titleContent}
         </h3>
-        <ProjectMeta
-          project={project}
-          labels={labels}
-          showAgency={showAgency}
-          designCredit={designCredit}
-          reserveSpace={uniform}
-        />
+        <ProjectMeta project={project} labels={labels} meta={meta} />
         {project.description ? (
-          <p
-            className="mt-3 max-w-[65ch] text-base leading-relaxed text-muted"
-          >
+          <p className="mt-3 max-w-[65ch] text-base leading-relaxed text-muted">
             {project.description}
           </p>
         ) : null}

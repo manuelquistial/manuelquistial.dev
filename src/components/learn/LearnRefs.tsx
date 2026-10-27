@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, type ReactNode } from "react";
+import { createContext, use, type ReactNode } from "react";
 import type { LearnSource } from "@/content/learn/types";
 import { CiteMark } from "@/components/learn/CiteMark";
 
@@ -24,7 +24,7 @@ export function LearnRefsProvider({
 }
 
 export function useLearnRefs() {
-  return useContext(LearnRefsContext);
+  return use(LearnRefsContext);
 }
 
 export function CiteList({ cites }: { cites?: readonly string[] }) {

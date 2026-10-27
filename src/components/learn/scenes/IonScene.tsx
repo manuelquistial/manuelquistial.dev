@@ -10,6 +10,14 @@ import { progressWithinStage } from "@/lib/learn/playback";
 import { ionChannelState, membraneCast } from "@/lib/learn/casts";
 import { ionPlaybackStages } from "@/lib/learn/physiology";
 
+const ionLegend = (
+  <ul className="flex flex-wrap gap-x-4 gap-y-1">
+    <li>{learnUi.sodium}</li>
+    <li>{learnUi.potassium}</li>
+    <li>{learnUi.pumpLegend}</li>
+  </ul>
+);
+
 const moment: Record<string, Record<string, string>> = {
   depolarization: {
     "sodium-channel": "El canal está abierto y permite la entrada de Na⁺.",
@@ -53,7 +61,7 @@ export function IonScene() {
         art.querySelector(`[data-ion="${ion.id}"]`)?.setAttribute("transform", `translate(${ion.x} ${ion.y})`);
       }
     });
-  }, [playback.controller, playback.snapshot.stageId, playback.snapshot.time]);
+  }, [playback.controller]);
 
   return (
     <SceneStage
@@ -70,13 +78,7 @@ export function IonScene() {
       )}
       card={cardFor(parts, membraneAnchors, selectedId)}
       onClose={() => setSelectedId(null)}
-      legend={
-        <ul className="flex flex-wrap gap-x-4 gap-y-1">
-          <li>{learnUi.sodium}</li>
-          <li>{learnUi.potassium}</li>
-          <li>{learnUi.pumpLegend}</li>
-        </ul>
-      }
+      legend={ionLegend}
     >
       <div className="relative">
         <p className="px-3 pt-2 text-[15px] leading-tight font-semibold text-foreground">{learnUi.outside}</p>

@@ -34,23 +34,20 @@ export function CiteMark({
 
   return (
     <span ref={rootRef} className="relative inline-block">
-      <a
-        href={`#ref-${source.id}`}
+      <button
+        type="button"
         className="prose-link ml-0.5 align-super text-[0.75em] font-semibold"
         aria-label={`${learnUi.sourcesTitle} ${number}. ${source.authors}, ${source.year}`}
         aria-expanded={open}
-        onClick={(event) => {
-          event.preventDefault();
-          setOpen((value) => !value);
-        }}
+        onClick={() => setOpen((value) => !value)}
       >
         {number}
-      </a>
+      </button>
       {open ? (
         <span
           role="dialog"
           aria-labelledby={titleId}
-          className="absolute left-0 z-30 mt-1 w-64 rounded-[8px] border border-border bg-surface p-3 text-left text-sm text-foreground shadow-sm not-italic"
+          className="absolute left-0 z-30 mt-1 max-h-[min(70vh,24rem)] w-64 overflow-y-auto overscroll-contain rounded-[8px] border border-border bg-surface p-3 text-left text-sm text-foreground shadow-sm not-italic"
         >
           <span className="flex items-start justify-between gap-2">
             <span id={titleId} className="font-semibold leading-snug">
@@ -58,7 +55,7 @@ export function CiteMark({
             </span>
             <button
               type="button"
-              className="inline-flex size-9 shrink-0 items-center justify-center rounded-[6px] border border-border"
+              className="inline-flex size-9 shrink-0 items-center justify-center rounded-[6px] border border-border transition-colors duration-150 hover:border-foreground/40 hover:bg-surface-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-foreground"
               aria-label={learnUi.closeCard}
               onClick={() => setOpen(false)}
             >

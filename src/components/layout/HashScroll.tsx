@@ -13,8 +13,13 @@ export function HashScroll() {
     const target = document.querySelector(hash);
     if (!target) return;
 
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     requestAnimationFrame(() => {
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      target.scrollIntoView({
+        behavior: reduced ? "auto" : "smooth",
+        block: "start",
+      });
     });
   }, [pathname]);
 

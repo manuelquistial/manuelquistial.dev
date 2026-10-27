@@ -62,7 +62,7 @@ export function CheckQuestion({ question }: { question: LearnQuestion }) {
             ref={feedbackRef}
             tabIndex={-1}
             aria-live="polite"
-            className="mt-4 text-base leading-relaxed text-foreground outline-none"
+            className="mt-4 text-base leading-relaxed text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
           >
             {result === "correct" ? (
               <span className="font-semibold">{learnUi.correct} </span>
@@ -74,7 +74,7 @@ export function CheckQuestion({ question }: { question: LearnQuestion }) {
         {result ? (
           <button
             type="button"
-            className="mt-4 inline-flex min-h-11 items-center justify-center rounded-[6px] border border-border bg-surface px-4 text-base font-semibold text-foreground"
+            className="mt-4 inline-flex min-h-11 items-center justify-center rounded-[6px] border border-border bg-surface px-4 text-base font-semibold text-foreground transition-colors duration-150 hover:border-foreground/40 hover:bg-surface-soft"
             onClick={retry}
           >
             {learnUi.retry}

@@ -47,7 +47,7 @@ export const a11y = {
 export const hero = {
   title: "Ingeniero de software full-stack",
   subtitle:
-    "7 años de experiencia en desarrollo de plataformas empresariales, integración de servicios y modernización de aplicaciones. He trabajado en Anthology / Blackboard y desarrollado soluciones para Babel Scores, Sal & Picciotto y la Universidad de Antioquia.",
+    "Desarrollo plataformas empresariales, integraciones de servicios y aplicaciones modernizadas. He trabajado en Anthology / Blackboard y para Babel Scores, Sal & Picciotto y la Universidad de Antioquia.",
   viewProjects: "Ver proyectos",
   viewExperience: "Ver trayectoria",
   learnLabel: "Aprendamos",

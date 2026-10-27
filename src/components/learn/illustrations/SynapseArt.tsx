@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef } from "react";
+import type { Ref } from "react";
 import { learnColors } from "@/components/learn/illustrations/palette";
 import { Part } from "@/components/learn/illustrations/Part";
 import { Grain, useSvgId } from "@/components/learn/illustrations/shapes";
@@ -61,16 +61,21 @@ function Vesicle({ cx, cy, r }: { cx: number; cy: number; r: number }) {
   );
 }
 
-export const ChemicalSynapseArt = forwardRef<
-  SVGSVGElement,
-  {
-    labels?: Partial<Record<"vesicles" | "transmitters" | "receptors" | "calcium-channel" | "cleft", string>>;
-    selectedId?: string | null;
-    hintId?: string;
-    onSelect?: (id: string) => void;
-    pose?: ChemicalPose;
-  }
->(function ChemicalSynapseArt({ labels, selectedId = null, hintId, onSelect, pose }, ref) {
+export function ChemicalSynapseArt({
+  labels,
+  selectedId = null,
+  hintId,
+  onSelect,
+  pose,
+  ref,
+}: {
+  labels?: Partial<Record<"vesicles" | "transmitters" | "receptors" | "calcium-channel" | "cleft", string>>;
+  selectedId?: string | null;
+  hintId?: string;
+  onSelect?: (id: string) => void;
+  pose?: ChemicalPose;
+  ref?: Ref<SVGSVGElement>;
+}) {
   const grain = useSvgId("chem-grain");
   const coral = chemicalPaths.coral;
   const fusion = chemicalVesicles.reduce((best, vesicle) => (vesicle.cy > best.cy ? vesicle : best), chemicalVesicles[0]);
@@ -165,7 +170,7 @@ export const ChemicalSynapseArt = forwardRef<
       </g>
     </svg>
   );
-});
+}
 
 function Connexon({ x }: { x: number }) {
   const lumen = 20;
@@ -195,18 +200,25 @@ function Connexon({ x }: { x: number }) {
   );
 }
 
-export const ElectricalSynapseArt = forwardRef<
-  SVGSVGElement,
-  {
-    labels?: Partial<Record<"junctions" | "cell-1" | "cell-2", string>>;
-    selectedId?: string | null;
-    hintId?: string;
-    onSelect?: (id: string) => void;
-    flow?: ElectricalFlow;
-    source?: number;
-    shared?: number;
-  }
->(function ElectricalSynapseArt({ labels, selectedId = null, hintId, onSelect, flow = "forward", source = 0, shared = 0 }, ref) {
+export function ElectricalSynapseArt({
+  labels,
+  selectedId = null,
+  hintId,
+  onSelect,
+  flow = "forward",
+  source = 0,
+  shared = 0,
+  ref,
+}: {
+  labels?: Partial<Record<"junctions" | "cell-1" | "cell-2", string>>;
+  selectedId?: string | null;
+  hintId?: string;
+  onSelect?: (id: string) => void;
+  flow?: ElectricalFlow;
+  source?: number;
+  shared?: number;
+  ref?: Ref<SVGSVGElement>;
+}) {
   const grain = useSvgId("elec-grain");
   const topHot = flow === "forward" ? source : shared;
   const bottomHot = flow === "forward" ? shared : source;
@@ -242,7 +254,7 @@ export const ElectricalSynapseArt = forwardRef<
       </Part>
     </svg>
   );
-});
+}
 
 export function JunctionDetail({ flow }: { flow: ElectricalFlow }) {
   const fromTop = flow === "forward";

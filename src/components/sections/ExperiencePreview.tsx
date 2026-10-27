@@ -27,7 +27,7 @@ export function ExperiencePreview({
       <ul className="divide-y divide-border border-y border-border">
         {items.map((item) => (
           <li key={item.id} className="py-6 first:pt-0 last:pb-0 sm:py-8">
-            <ExperienceCard item={item} compact />
+            <ExperienceCard item={item} variant="preview" />
           </li>
         ))}
       </ul>

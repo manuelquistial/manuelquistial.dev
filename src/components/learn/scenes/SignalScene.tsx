@@ -82,7 +82,7 @@ export function SignalScene() {
       const mark = root?.querySelector<HTMLElement>("[data-meter-state]");
       if (mark) mark.textContent = vars["--crossed"] === "1" ? "Por encima" : "Por debajo";
     });
-  }, [example, playback.controller, playback.snapshot.stageId, playback.snapshot.time]);
+  }, [example, playback.controller]);
 
   return (
     <SceneStage
@@ -100,7 +100,7 @@ export function SignalScene() {
                   type="button"
                   role="tab"
                   aria-selected={selected}
-                  className={`min-h-11 rounded-full px-4 text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-foreground ${selected ? "bg-surface text-foreground shadow-sm" : "text-muted"}`}
+                  className={`min-h-11 rounded-full px-4 text-sm font-semibold transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-foreground ${selected ? "bg-surface text-foreground shadow-sm" : "text-muted hover:bg-surface hover:text-foreground"}`}
                   onClick={() => {
                     if (item === example) return;
                     setExample(item);

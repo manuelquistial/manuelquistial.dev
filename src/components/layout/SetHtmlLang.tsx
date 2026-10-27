@@ -1,16 +1,16 @@
-"use client";
-
-import { useEffect } from "react";
 import type { Locale } from "@/i18n/config";
 
 interface SetHtmlLangProps {
   locale: Locale;
 }
 
+/** Sets <html lang> as early as the streamed script runs (before useEffect). */
 export function SetHtmlLang({ locale }: SetHtmlLangProps) {
-  useEffect(() => {
-    document.documentElement.lang = locale;
-  }, [locale]);
-
-  return null;
+  return (
+    <script
+      dangerouslySetInnerHTML={{
+        __html: `document.documentElement.lang=${JSON.stringify(locale)};`,
+      }}
+    />
+  );
 }

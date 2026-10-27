@@ -68,6 +68,7 @@ export function SceneStage({
   const closeRef = useRef<HTMLButtonElement>(null);
   const artRef = useRef<HTMLDivElement>(null);
   const openRef = useRef(false);
+  const playbackRef = useRef(playback);
   const stage =
     stages?.find((item) => item.id === playback?.snapshot.stageId) ?? null;
   const paused = Boolean(playback) && !playback?.snapshot.playing;
@@ -76,16 +77,21 @@ export function SceneStage({
     ? `part-${card.id}`
     : stage?.id ?? (idle?.text ? "prompt" : null);
   const hasTrack = Boolean(playback && stages && stages.length > 0);
+  const cardId = card?.id ?? null;
 
   useEffect(() => {
-    const open = Boolean(card);
+    playbackRef.current = playback;
+  }, [playback]);
+
+  useEffect(() => {
+    const open = Boolean(cardId);
     if (open && !openRef.current) {
-      playback?.suspend();
+      playbackRef.current?.suspend();
       requestAnimationFrame(() => closeRef.current?.focus());
     }
-    if (!open && openRef.current) playback?.release();
+    if (!open && openRef.current) playbackRef.current?.release();
     openRef.current = open;
-  }, [playback, card]);
+  }, [cardId]);
 
   const close = () => {
     const current = card?.id;

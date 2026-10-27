@@ -6,7 +6,7 @@ export const data: LocaleData = {
       title: "SITA",
       clientType: "Universidad de Antioquia",
       description:
-        "Desarrollo de una aplicación para gestionar trámites administrativos de la Facultad de Comunicaciones y Filología.",
+        "Desarrollé una aplicación para gestionar trámites administrativos de la Facultad de Comunicaciones y Filología.",
       imageAlt:
         "Página principal de SITA para preparar un trámite administrativo.",
     },
@@ -14,7 +14,7 @@ export const data: LocaleData = {
       title: "SIAR",
       clientType: "Universidad de Antioquia",
       description:
-        "Desarrollo del sistema de reservas de espacios y equipos, con registro de novedades para la administración de recursos de la Facultad de Comunicaciones y Filología.",
+        "Desarrollé el sistema de reservas de espacios y equipos, con registro de novedades para la administración de recursos de la Facultad de Comunicaciones y Filología.",
       imageAlt:
         "Página principal de SIAR para reservar espacios, reservar equipos y reportar novedades.",
     },
@@ -22,14 +22,14 @@ export const data: LocaleData = {
       title: "Finanzas",
       clientType: "Universidad de Antioquia",
       description:
-        "Desarrollo de una aplicación de consulta presupuestal y financiera para apoyar el trabajo administrativo de la Facultad de Comunicaciones y Filología.",
+        "Desarrollé una aplicación de consulta presupuestal y financiera para apoyar el trabajo administrativo de la Facultad de Comunicaciones y Filología.",
       imageAlt: "Página principal de Finanzas con las categorías de presupuesto.",
     },
     conciliacion: {
       title: "Conciliación",
       clientType: "Universidad de Antioquia",
       description:
-        "Desarrollo de una herramienta para comparar movimientos contables y apoyar su revisión por el equipo administrativo.",
+        "Desarrollé una herramienta para comparar movimientos contables y apoyar su revisión por el equipo administrativo.",
       imageAlt:
         "Página principal de Conciliación para comparar movimientos contables.",
     },
@@ -48,42 +48,42 @@ export const data: LocaleData = {
     "sal-picciotto-website": {
       title: "Sal & Picciotto",
       description:
-        "Implementación del sitio corporativo que presenta los servicios y el portafolio de la agencia.",
+        "Implementé el sitio corporativo que presenta los servicios y el portafolio de la agencia.",
       imageAlt:
         "Página de inicio de Sal & Picciotto con una cuadrícula de proyectos de marca.",
     },
     "trapatsa-eye-center": {
       title: "Trapatsas Eye Center",
       description:
-        "Desarrollo del sitio web para presentar los servicios de atención de un centro oftalmológico.",
+        "Desarrollé el sitio web para presentar los servicios de atención de un centro oftalmológico.",
       imageAlt:
         "Página de inicio de Trapatsas Eye Center con su navegación y una imagen de cirugía ocular.",
     },
     "giving-tuesday-panama": {
       title: "Giving Tuesday Panamá",
       description:
-        "Desarrollo del sitio de comunicación de la campaña Giving Tuesday en Panamá.",
+        "Desarrollé el sitio de comunicación de la campaña Giving Tuesday en Panamá.",
       imageAlt:
         "Página de inicio de Giving Tuesday Panamá con su navegación y el horizonte de la ciudad.",
     },
     "barrio-alto-panama": {
       title: "Barrio Alto Panamá",
       description:
-        "Desarrollo de un sitio inmobiliario multilingüe para presentar el proyecto residencial y recibir consultas de personas interesadas.",
+        "Desarrollé un sitio inmobiliario multilingüe para presentar el proyecto residencial y recibir consultas de personas interesadas.",
       imageAlt:
         "Página de Barrio Alto con imagen de acceso al proyecto y formulario de contacto.",
     },
     "fci-pty-box": {
       title: "FCI PTY Box",
       description:
-        "Desarrollo de la página de FCI Box para presentar su servicio de casillero internacional y las opciones de envío a Panamá.",
+        "Desarrollé la página de FCI Box para presentar su servicio de casillero internacional y las opciones de envío a Panamá.",
       imageAlt:
         "Página de FCI Box con su navegación y la imagen principal del servicio.",
     },
     "pdc-colombia": {
       title: "PDC Colombia",
       description:
-        "Implementación de sitio corporativo con WordPress y Elementor Pro.",
+        "Implementé el sitio corporativo con WordPress y Elementor Pro.",
     },
   },
   experience: {

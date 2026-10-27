@@ -9,6 +9,13 @@ import { useScenePlayback } from "@/components/learn/useScenePlayback";
 import { progressWithinStage } from "@/lib/learn/playback";
 import { networkPlaybackStages, networkState } from "@/lib/learn/physiology";
 
+const networkLegend = (
+  <ul className="flex flex-wrap gap-x-4 gap-y-1">
+    <li className="learn-key-excitatory">{learnUi.excitatory}</li>
+    <li className="learn-key-inhibitory">{learnUi.inhibitory}</li>
+  </ul>
+);
+
 const linkFor: Record<string, string> = {
   input: "ab",
   relay: "bc",
@@ -43,7 +50,7 @@ export function NetworkScene() {
         path.setAttribute("stroke-dashoffset", String(on ? 1 - Math.max(amount, 0.16) : 1));
       });
     });
-  }, [playback.controller, playback.snapshot.stageId, playback.snapshot.time]);
+  }, [playback.controller]);
 
   return (
     <SceneStage
@@ -53,12 +60,7 @@ export function NetworkScene() {
       parts={scene.parts}
       card={cardFor(scene.parts, networkAnchors, selectedId)}
       onClose={() => setSelectedId(null)}
-      legend={
-        <ul className="flex flex-wrap gap-x-4 gap-y-1">
-          <li className="learn-key-excitatory">{learnUi.excitatory}</li>
-          <li className="learn-key-inhibitory">{learnUi.inhibitory}</li>
-        </ul>
-      }
+      legend={networkLegend}
     >
       <div ref={rootRef} className="relative">
         <NetworkArt

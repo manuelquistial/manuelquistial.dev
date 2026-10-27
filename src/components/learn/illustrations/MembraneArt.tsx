@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef } from "react";
+import type { Ref } from "react";
 import { learnColors } from "@/components/learn/illustrations/palette";
 import { Part } from "@/components/learn/illustrations/Part";
 import { Grain, useSvgId } from "@/components/learn/illustrations/shapes";
@@ -104,29 +104,25 @@ function Gate({ x, state, tone }: { x: number; state: ChannelState; tone: string
   );
 }
 
-export const MembraneArt = forwardRef<
-  SVGSVGElement,
-  {
-    labels?: Partial<Record<"sodium-channel" | "potassium-channel" | "pump" | "leak" | "sodium" | "potassium", string>>;
-    selectedId?: string | null;
-    hintId?: string;
-    onSelect?: (id: string) => void;
-    sodiumState?: ChannelState;
-    potassiumState?: ChannelState;
-    ions?: readonly CastIon[];
-  }
->(function MembraneArt(
-  {
-    labels,
-    selectedId = null,
-    hintId,
-    onSelect,
-    sodiumState = "closed",
-    potassiumState = "closed",
-    ions = [],
-  },
+export function MembraneArt({
+  labels,
+  selectedId = null,
+  hintId,
+  onSelect,
+  sodiumState = "closed",
+  potassiumState = "closed",
+  ions = [],
   ref,
-) {
+}: {
+  labels?: Partial<Record<"sodium-channel" | "potassium-channel" | "pump" | "leak" | "sodium" | "potassium", string>>;
+  selectedId?: string | null;
+  hintId?: string;
+  onSelect?: (id: string) => void;
+  sodiumState?: ChannelState;
+  potassiumState?: ChannelState;
+  ions?: readonly CastIon[];
+  ref?: Ref<SVGSVGElement>;
+}) {
   const grain = useSvgId("membrane-grain");
   const channels = [
     { id: "sodium-channel" as const, x: membraneArt.naX, state: sodiumState, fill: learnColors.sodium, stroke: learnColors.blueInk },
@@ -227,5 +223,5 @@ export const MembraneArt = forwardRef<
       })}
     </svg>
   );
-});
+}
 

@@ -22,7 +22,7 @@ export function SceneSection({
     >
       <h2
         id={`${scene.id}-title`}
-        className="text-[clamp(1.5rem,2.5vw,1.75rem)] font-semibold leading-[1.25] text-foreground"
+        className="text-balance text-[clamp(1.5rem,2.5vw,1.75rem)] font-semibold leading-[1.25] text-foreground"
       >
         {scene.title}
       </h2>
@@ -52,7 +52,7 @@ export function SceneSection({
       ) : null}
       {deepen ? (
         <details className="learn-follow rounded-[8px] border border-border bg-surface p-[var(--learn-panel-pad)]">
-          <summary className="block min-h-11 cursor-pointer py-2 text-base font-semibold text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground">
+          <summary className="block min-h-11 cursor-pointer py-2 text-base font-semibold text-foreground transition-colors duration-150 hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground">
             {learnUi.deepenLabel}: {deepen.title}
           </summary>
           <div className="learn-reading mt-3 space-y-3">

@@ -47,7 +47,7 @@ export const a11y = {
 export const hero = {
   title: "Full-Stack Software Engineer",
   subtitle:
-    "7 years of experience in enterprise platform development, service integration, and application modernization. I have worked at Anthology / Blackboard and developed solutions for Babel Scores, Sal & Picciotto, and Universidad de Antioquia.",
+    "I build enterprise platforms, service integrations, and modernized applications. I have worked at Anthology / Blackboard and for Babel Scores, Sal & Picciotto, and Universidad de Antioquia.",
   viewProjects: "View projects",
   viewExperience: "View experience",
   learnLabel: "Aprendamos",
@@ -71,7 +71,7 @@ export const sections = {
 };
 
 export const agencyWebProjectsIntro =
-  "Web development in collaboration with Sal & Picciotto. Visual design by the agency; implementation and functionality developed by me.";
+  "I developed websites in collaboration with Sal & Picciotto. The agency handled visual design; I built the implementation and functionality.";
 
 export const footer = {
   rights: "All rights reserved.",

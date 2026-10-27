@@ -43,7 +43,7 @@ export function VoltageScene() {
       if (!root) return;
       applySpikes(root, snapshot.time);
     });
-  }, [playback.controller, playback.snapshot.stageId, playback.snapshot.time]);
+  }, [playback.controller]);
 
   return (
     <SceneStage label={scene.textAlternative} playback={playback} stages={scene.stages}>

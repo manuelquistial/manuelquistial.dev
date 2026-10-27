@@ -24,7 +24,7 @@ export function SelectedProjects({
   return (
     <Section id={pageSections.selectedProjects}>
       <div className="mb-6 flex items-center justify-between gap-4 sm:mb-8">
-        <SectionTitle title={title} spaced={false} />
+        <SectionTitle title={title} spacing="none" />
         <ViewAllLink href={viewAllHref} className="shrink-0">
           {viewAllLabel}
         </ViewAllLink>
@@ -36,8 +36,10 @@ export function SelectedProjects({
             key={project.id}
             project={project}
             labels={projectCard}
-            designCredit={project.id === "sal-picciotto-website"}
-            uniform
+            meta={
+              project.id === "sal-picciotto-website" ? "design" : "reserved"
+            }
+            priority
           />
         ))}
       </div>

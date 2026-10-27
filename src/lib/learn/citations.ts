@@ -5,23 +5,44 @@ export function citationOrder(
   sourceIds: readonly string[],
 ): string[] {
   const known = new Set(sourceIds);
-  const order: string[] = [];
+  const cited = new Set<string>();
 
   for (const text of texts) {
     for (const id of text.cites ?? []) {
-      if (!known.has(id) || order.includes(id)) continue;
-      order.push(id);
+      if (known.has(id)) cited.add(id);
     }
   }
 
-  return order;
+  return sourceIds.filter((id) => cited.has(id));
 }
 
 export function lessonTexts(lesson: LearnLessonContent): LearnText[] {
+  const fromScenes = lesson.scenes.flatMap((scene) => [
+    ...scene.paragraphs,
+    ...(scene.closing ?? []),
+    ...Object.values(scene.variantNotes ?? {}),
+    ...(scene.stages ?? []).map((stage) => ({
+      text: stage.text,
+      cites: stage.cites,
+    })),
+    ...(scene.parts ?? []).map((part) => ({
+      text: part.text,
+      cites: part.cites,
+    })),
+  ]);
+
+  const fromQuestions = lesson.questions.flatMap((question) =>
+    question.options.map((option) => ({
+      text: option.feedback,
+      cites: option.cites,
+    })),
+  );
+
   return [
     ...lesson.intro,
-    ...lesson.scenes.flatMap((scene) => scene.paragraphs),
+    ...fromScenes,
     ...lesson.deepen.flatMap((block) => block.paragraphs),
+    ...fromQuestions,
   ];
 }
 

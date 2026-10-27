@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { learnUi } from "@/content/learn/es/ui";
-import { neuronsLesson } from "@/content/learn/es/neurons";
+import { getNeuronScene } from "@/content/learn/es/neurons";
 import { MembraneArt, membraneAnchors } from "@/components/learn/illustrations/MembraneArt";
 import { SceneStage, cardFor } from "@/components/learn/SceneStage";
 import { useScenePlayback } from "@/components/learn/useScenePlayback";
@@ -12,28 +12,23 @@ import { ionPlaybackStages } from "@/lib/learn/physiology";
 
 const moment: Record<string, Record<string, string>> = {
   depolarization: {
-    "sodium-channel": "La compuerta se abre y el Na⁺ entra por este poro. El K⁺ no usa este canal.",
-    "potassium-channel": "Durante esta entrada de sodio, el canal de K⁺ del ejemplo sigue cerrado.",
-    sodium: "Un Na⁺ cruza el canal abierto. El resto sigue más concentrado fuera.",
-    potassium: "El potasio no atraviesa el canal de sodio.",
+    "sodium-channel": "El canal está abierto y permite la entrada de Na⁺.",
+    "potassium-channel":
+      "Al comienzo de esta fase, el canal de K⁺ dependiente de voltaje todavía está cerrado.",
   },
   repolarization: {
-    "sodium-channel": "El canal de Na⁺ queda inactivado: una bola bloquea la boca interna.",
-    "potassium-channel": "Su compuerta se abre y el K⁺ sale por este poro.",
-    sodium: "El sodio que entró permanece dentro. No vuelve a cruzar la membrana en este paso.",
-    potassium: "Un K⁺ sale por su canal. Sigue habiendo más potasio dentro.",
+    "sodium-channel": "El canal está inactivado y deja de conducir Na⁺.",
+    "potassium-channel": "El canal está abierto y permite la salida de K⁺.",
   },
   recovery: {
-    "sodium-channel": "El canal de Na⁺ vuelve a cerrarse. El episodio rápido ya pasó.",
-    "potassium-channel": "El canal de K⁺ vuelve a cerrarse.",
-    pump: "La bomba sigue encargada de los gradientes, en un tiempo más largo que esta bajada.",
-    sodium: "La distribución no se invierte: sigue habiendo más Na⁺ fuera.",
-    potassium: "Sigue habiendo más K⁺ dentro. Un solo potencial no intercambia los compartimentos.",
+    "sodium-channel":
+      "El canal sale de la inactivación y recupera su disponibilidad para responder.",
+    "potassium-channel": "El canal vuelve a cerrarse.",
   },
 };
 
 export function IonScene() {
-  const scene = neuronsLesson.scenes[5];
+  const scene = getNeuronScene("iones-y-membrana");
   const playback = useScenePlayback(ionPlaybackStages());
   const artRef = useRef<SVGSVGElement>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -70,6 +65,7 @@ export function IonScene() {
         Object.entries(entry).map(([id, text]) => ({
           title: labels[id] ?? "",
           text,
+          cites: scene.parts?.find((part) => part.id === id)?.cites,
         })),
       )}
       card={cardFor(parts, membraneAnchors, selectedId)}

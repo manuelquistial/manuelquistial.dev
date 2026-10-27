@@ -1,11 +1,11 @@
 "use client";
 
-import { neuronsLesson } from "@/content/learn/es/neurons";
+import { getNeuronScene } from "@/content/learn/es/neurons";
 import { NeuronArt } from "@/components/learn/illustrations/NeuronArt";
 import { SceneStage } from "@/components/learn/SceneStage";
 
 export function NeuronOverviewScene() {
-  const scene = neuronsLesson.scenes[0];
+  const scene = getNeuronScene("una-neurona");
 
   return (
     <SceneStage label={scene.textAlternative}>

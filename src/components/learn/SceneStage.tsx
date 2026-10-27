@@ -2,7 +2,6 @@
 
 import { useEffect, useId, useRef, type ReactNode } from "react";
 import type { LearnPartCopy, LearnStageCopy } from "@/content/learn/types";
-import { learnUi } from "@/content/learn/es/ui";
 import { PlaybackControls } from "@/components/learn/PlaybackControls";
 import { StageExplanation, type ExplanationCopy } from "@/components/learn/StageCaption";
 import { StageTrack } from "@/components/learn/StageTrack";
@@ -14,6 +13,7 @@ export type SceneCardAnchor = {
   id: string;
   label: string;
   text: string;
+  cites?: readonly string[];
   x: number;
   y: number;
 };
@@ -27,7 +27,14 @@ export function cardFor(
   const part = parts?.find((item) => item.id === selectedId);
   const anchor = anchors[selectedId];
   if (!part || !anchor) return null;
-  return { id: part.id, label: part.label, text: part.text, x: anchor.x, y: anchor.y };
+  return {
+    id: part.id,
+    label: part.label,
+    text: part.text,
+    cites: part.cites,
+    x: anchor.x,
+    y: anchor.y,
+  };
 }
 
 export function SceneStage({
@@ -49,7 +56,7 @@ export function SceneStage({
   stages?: readonly LearnStageCopy[];
   parts?: readonly LearnPartCopy[];
   idle?: { title?: string; text: string };
-  reserves?: readonly { title: string; text: string }[];
+  reserves?: readonly { title: string; text: string; cites?: readonly string[] }[];
   card?: SceneCardAnchor | null;
   onClose?: () => void;
   leading?: ReactNode;
@@ -187,7 +194,7 @@ function explanationCopies({
   idle?: { title?: string; text: string };
   stages?: readonly LearnStageCopy[];
   parts?: readonly LearnPartCopy[];
-  reserves?: readonly { title: string; text: string }[];
+  reserves?: readonly { title: string; text: string; cites?: readonly string[] }[];
   card: SceneCardAnchor | null;
 }): ExplanationCopy[] {
   const copies: ExplanationCopy[] = [];
@@ -197,16 +204,21 @@ function explanationCopies({
   }
 
   for (const item of stages ?? []) {
-    copies.push({ key: item.id, title: item.title || item.label, text: item.text });
+    copies.push({
+      key: item.id,
+      title: item.title || item.label,
+      text: item.text,
+      cites: item.cites,
+    });
   }
 
   for (const part of parts ?? []) {
     const selected = card?.id === part.id;
     copies.push({
       key: `part-${part.id}`,
-      eyebrow: learnUi.partEyebrow,
       title: selected ? card.label : part.label,
       text: selected ? card.text : part.text,
+      cites: selected ? card.cites : part.cites,
       closable: true,
     });
   }
@@ -214,9 +226,9 @@ function explanationCopies({
   if (card && !copies.some((item) => item.key === `part-${card.id}`)) {
     copies.push({
       key: `part-${card.id}`,
-      eyebrow: learnUi.partEyebrow,
       title: card.label,
       text: card.text,
+      cites: card.cites,
       closable: true,
     });
   }
@@ -224,9 +236,9 @@ function explanationCopies({
   reserves?.forEach((item, index) => {
     copies.push({
       key: `reserve-${index}`,
-      eyebrow: learnUi.partEyebrow,
       title: item.title,
       text: item.text,
+      cites: item.cites,
       closable: true,
     });
   });

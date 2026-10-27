@@ -51,6 +51,7 @@ const verifiedSources = [
   "https://openstax.org/books/anatomy-and-physiology-2e/pages/12-5-communication-between-neurons",
   "https://www.ncbi.nlm.nih.gov/books/NBK10921/",
   "https://www.ncbi.nlm.nih.gov/books/NBK11009/",
+  "https://www.ncbi.nlm.nih.gov/books/NBK11164/",
 ];
 
 describe("learn catalog", () => {
@@ -84,6 +85,7 @@ describe("learn catalog", () => {
       "myelin",
       "chemical",
       "potential",
+      "electrical",
     ]);
     const copy = JSON.stringify(neuronsLesson);
     expect(copy).not.toContain("\u2014");

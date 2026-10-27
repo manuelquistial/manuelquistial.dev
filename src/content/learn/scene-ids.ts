@@ -2,10 +2,10 @@ export const neuronSceneIds = [
   "una-neurona",
   "partes",
   "recibir-y-transmitir",
-  "glia-y-mielina",
-  "sinapsis",
   "iones-y-membrana",
   "diferencia-de-potencial",
+  "glia-y-mielina",
+  "sinapsis",
   "red-neuronal",
 ] as const;
 

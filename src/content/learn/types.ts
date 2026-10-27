@@ -10,12 +10,14 @@ export type LearnStageCopy = {
   label: string;
   title: string;
   text: string;
+  cites?: readonly string[];
 };
 
 export type LearnPartCopy = {
   id: string;
   label: string;
   text: string;
+  cites?: readonly string[];
 };
 
 export type LearnScene = {
@@ -24,17 +26,29 @@ export type LearnScene = {
   textAlternative: string;
   paragraphs: readonly LearnText[];
   prompt?: string;
+  badge?: string;
+  closing?: readonly LearnText[];
+  variantNotes?: Partial<
+    Record<"chemical" | "electrical", LearnText>
+  >;
   stages?: readonly LearnStageCopy[];
   parts?: readonly LearnPartCopy[];
+};
+
+export type LearnQuestionOption = {
+  id: string;
+  label: string;
+  feedback: string;
+  cites?: readonly string[];
 };
 
 export type LearnQuestion = {
   id: string;
   afterSceneId: string;
   prompt: string;
-  options: readonly { id: string; label: string }[];
+  options: readonly LearnQuestionOption[];
   correctId: string;
-  feedback: string;
+  visibleIn?: "chemical";
 };
 
 export type LearnDeepen = {

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { learnUi } from "@/content/learn/es/ui";
-import { neuronsLesson } from "@/content/learn/es/neurons";
+import { getNeuronScene, neuronsLesson } from "@/content/learn/es/neurons";
 import { DetailInset } from "@/components/learn/DetailInset";
 import {
   ChemicalSynapseArt,
@@ -10,6 +10,8 @@ import {
   JunctionDetail,
   synapseAnchors,
 } from "@/components/learn/illustrations/SynapseArt";
+import { CheckQuestion } from "@/components/learn/CheckQuestion";
+import { CiteList } from "@/components/learn/LearnRefs";
 import { SceneStage, cardFor } from "@/components/learn/SceneStage";
 import { useScenePlayback } from "@/components/learn/useScenePlayback";
 import { progressWithinStage } from "@/lib/learn/playback";
@@ -28,60 +30,66 @@ import { synapsePlaybackStages } from "@/lib/learn/physiology";
 
 const chemicalMoment: Record<string, Record<string, string>> = {
   arrival: {
-    vesicles: "Las vesículas siguen cerradas. El impulso acaba de llegar al terminal y todavía no hay fusión.",
-    "calcium-channel": "Los canales de Ca²⁺ están cerrados. El calcio aún no entra.",
-    transmitters: "El neurotransmisor sigue dentro de las vesículas.",
-    cleft: "La hendidura está vacía de mensajero en este instante.",
-    receptors: "Los receptores siguen en reposo, integrados en la membrana de enfrente.",
+    "calcium-channel":
+      "La despolarización del terminal precede a la apertura de estos canales.",
+    vesicles: "La vesícula contiene el neurotransmisor que se liberará durante la fusión.",
+    transmitters: "El neurotransmisor se encuentra almacenado en las vesículas.",
   },
   calcium: {
-    "calcium-channel": "El canal se abre y el Ca²⁺ entra desde el exterior del terminal. No es el neurotransmisor.",
-    vesicles: "La vesícula preparada sigue cerrada. El calcio aún no ha abierto la fusión.",
-    transmitters: "Las moléculas siguen dentro. El punto dorado con Ca²⁺ es un ion, no el mensajero.",
+    "calcium-channel": "El canal está abierto y permite la entrada de Ca²⁺ al terminal.",
+    vesicles: "La vesícula contiene el neurotransmisor que se liberará durante la fusión.",
+    transmitters: "El neurotransmisor se encuentra almacenado en las vesículas.",
   },
   release: {
-    vesicles: "La vesícula cambia de contorno: el círculo cerrado se abre y se continúa con la membrana.",
-    transmitters: "El contenido sale solo después de que aparece la abertura.",
-    "calcium-channel": "El calcio que ya entró desencadena esta fusión. El canal vuelve a cerrarse.",
+    "calcium-channel":
+      "El aumento de calcio dentro del terminal desencadena la fusión vesicular.",
+    vesicles:
+      "La membrana de la vesícula se fusiona con la membrana presináptica y libera su contenido.",
+    transmitters: "La fusión vesicular libera el neurotransmisor en la hendidura.",
   },
   diffusion: {
-    transmitters: "Unas pocas moléculas se difunden por trayectorias distintas. No van en fila hacia un imán.",
-    cleft: "El mensajero permanece en la hendidura mientras se dispersa.",
-    receptors: "Todavía no hay unión. Los receptores siguen cerrados.",
+    transmitters:
+      "Las moléculas se difunden por la hendidura y algunas alcanzan los receptores.",
   },
   binding: {
-    receptors: "En este ejemplo el receptor es ionotrópico: al unirse el mensajero, sus lóbulos se separan y aparece un poro. No describe todos los receptores.",
-    transmitters: "Algunas moléculas contactan el receptor. No atraviesan la membrana como si fueran el ion.",
-    cleft: "Otras moléculas siguen en la hendidura, sin unirse.",
+    receptors: "La unión del neurotransmisor abre el canal del receptor ionotrópico.",
+    transmitters: "La unión del neurotransmisor activa el receptor postsináptico.",
   },
   response: {
-    receptors: "El poro deja pasar Na⁺. El cambio de voltaje es local y no inicia aquí un potencial de acción.",
-    transmitters: "El mensajero permanece fuera. Quien cruza la membrana es el ion.",
+    receptors:
+      "El canal abierto permite una corriente iónica que modifica el potencial postsináptico.",
+    transmitters: "La unión del neurotransmisor activa el receptor postsináptico.",
   },
 };
 
 const electricalMoment: Record<string, Record<string, string>> = {
   connected: {
-    junctions: "El poro comunica los dos interiores. No es una tapa cerrada.",
-    "cell-1": "La célula de arriba. En este ejemplo el cambio empieza aquí.",
-    "cell-2": "La célula de abajo. Recibe la corriente que cruza el poro.",
+    junctions:
+      "Canales que conectan los interiores celulares y permiten el paso directo de corriente iónica.",
+    "cell-1": "En esta secuencia, el cambio de potencial comienza en esta célula.",
+    "cell-2":
+      "Su potencial de membrana cambia por la corriente que atraviesa la unión comunicante.",
   },
   current: {
-    junctions: "Los iones cruzan el poro abierto, de la célula de arriba a la de abajo. No hay vesículas ni hendidura química.",
-    "cell-1": "Esta célula cambia primero. La corriente sale hacia el poro.",
-    "cell-2": "Todavía no ha cambiado. Los iones van hacia su interior.",
+    junctions:
+      "Canales que conectan los interiores celulares y permiten el paso directo de corriente iónica.",
+    "cell-1": "En esta secuencia, el cambio de potencial comienza en esta célula.",
+    "cell-2":
+      "Su potencial de membrana cambia por la corriente que atraviesa la unión comunicante.",
   },
   shared: {
-    junctions: "El paso de iones cambia el voltaje de la célula de abajo.",
-    "cell-1": "Sigue siendo el origen de este ejemplo.",
-    "cell-2": "Su voltaje cambia de forma local. No hay un mensajero químico.",
+    junctions:
+      "Canales que conectan los interiores celulares y permiten el paso directo de corriente iónica.",
+    "cell-1": "En esta secuencia, el cambio de potencial comienza en esta célula.",
+    "cell-2":
+      "Su potencial de membrana cambia por la corriente que atraviesa la unión comunicante.",
   },
 };
 
 function ChemicalInset({ stageId, pose }: { stageId: string; pose: ChemicalPose }) {
   if (stageId === "binding" || stageId === "response") {
     return (
-      <DetailInset title="Receptor de este ejemplo" source="Un receptor ionotrópico de la membrana postsináptica. El mensajero queda en la hendidura.">
+      <DetailInset title="Receptor de este ejemplo" source="Un receptor ionotrópico de la membrana postsináptica.">
         <svg viewBox="0 0 160 120" className="block h-auto w-full" aria-hidden="true">
           <text x="8" y="16" fontSize="14" fill="#20201e">Hendidura</text>
           <rect x="16" y="48" width="128" height="14" rx="3" fill="#e7a090" />
@@ -142,7 +150,7 @@ function ChemicalInset({ stageId, pose }: { stageId: string; pose: ChemicalPose 
 }
 
 export function SynapseScene() {
-  const scene = neuronsLesson.scenes[4];
+  const scene = getNeuronScene("sinapsis");
   const [mode, setMode] = useState<"chemical" | "electrical">("chemical");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const playback = useScenePlayback(synapsePlaybackStages(mode));
@@ -159,6 +167,10 @@ export function SynapseScene() {
     ...part,
     text: notes[playback.snapshot.stageId]?.[part.id] ?? part.text,
   }));
+  const modeNote = scene.variantNotes?.[mode];
+  const question = neuronsLesson.questions.find(
+    (item) => item.afterSceneId === "sinapsis" && item.visibleIn === "chemical",
+  );
 
   useEffect(() => {
     return playback.controller.onFrame((snapshot) => {
@@ -251,82 +263,94 @@ export function SynapseScene() {
   };
 
   return (
-    <SceneStage
-      label={scene.textAlternative}
-      playback={playback}
-      stages={stages}
-      parts={scene.parts}
-      reserves={Object.values(notes).flatMap((entry) =>
-        Object.entries(entry).map(([id, text]) => ({
-          title: labels[id] ?? "",
-          text,
-        })),
-      )}
-      card={cardFor(parts, synapseAnchors, selectedId)}
-      onClose={() => setSelectedId(null)}
-      leading={
-        <div className="flex flex-wrap items-center gap-2 px-[var(--learn-panel-pad)] pt-[var(--learn-panel-pad)]">
-          <div role="tablist" aria-label={learnUi.synapseModes} className="inline-flex rounded-full bg-surface-soft p-1">
-            {(["chemical", "electrical"] as const).map((item) => {
-              const selected = mode === item;
-              return (
-                <button
-                  key={item}
-                  type="button"
-                  role="tab"
-                  aria-selected={selected}
-                  className={`min-h-11 rounded-full px-4 text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-foreground ${selected ? "bg-surface text-foreground shadow-sm" : "text-muted"}`}
-                  onClick={() => switchMode(item)}
-                >
-                  {item === "chemical" ? learnUi.chemical : learnUi.electrical}
-                </button>
-              );
-            })}
+    <>
+      <SceneStage
+        label={scene.textAlternative}
+        playback={playback}
+        stages={stages}
+        parts={scene.parts}
+        reserves={Object.values(notes).flatMap((entry) =>
+          Object.entries(entry).map(([id, text]) => ({
+            title: labels[id] ?? "",
+            text,
+            cites: scene.parts?.find((part) => part.id === id)?.cites,
+          })),
+        )}
+        card={cardFor(parts, synapseAnchors, selectedId)}
+        onClose={() => setSelectedId(null)}
+        leading={
+          <div className="flex flex-col gap-3 px-[var(--learn-panel-pad)] pt-[var(--learn-panel-pad)]">
+            <div role="tablist" aria-label={learnUi.synapseModes} className="inline-flex rounded-full bg-surface-soft p-1">
+              {(["chemical", "electrical"] as const).map((item) => {
+                const selected = mode === item;
+                return (
+                  <button
+                    key={item}
+                    type="button"
+                    role="tab"
+                    aria-selected={selected}
+                    className={`min-h-11 rounded-full px-4 text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-foreground ${selected ? "bg-surface text-foreground shadow-sm" : "text-muted"}`}
+                    onClick={() => switchMode(item)}
+                  >
+                    {item === "chemical" ? learnUi.chemical : learnUi.electrical}
+                  </button>
+                );
+              })}
+            </div>
+            {modeNote ? (
+              <p className="learn-reading text-sm leading-relaxed text-muted">
+                {modeNote.text}
+                <CiteList cites={modeNote.cites} />
+              </p>
+            ) : null}
           </div>
-        </div>
-      }
-      legend={
-        mode === "chemical" ? (
-          <ul className="flex flex-wrap gap-x-4 gap-y-1">
-            <li>{learnUi.calcium}</li>
-            <li>{learnUi.transmitterKey}</li>
-          </ul>
+        }
+        legend={
+          mode === "chemical" ? (
+            <ul className="flex flex-wrap gap-x-4 gap-y-1">
+              <li>{learnUi.calcium}</li>
+              <li>{learnUi.transmitterKey}</li>
+            </ul>
+          ) : null
+        }
+      >
+        {mode === "chemical" ? (
+          <div className="relative">
+            <ChemicalSynapseArt
+              ref={artRef}
+              labels={labels}
+              selectedId={selectedId}
+              hintId="vesicles"
+              pose={pose}
+              onSelect={(id) => setSelectedId((current) => (current === id ? null : id))}
+            />
+            <ChemicalInset stageId={playback.snapshot.stageId} pose={pose} />
+          </div>
         ) : (
-          <p>{learnUi.electricalNote}</p>
-        )
-      }
-    >
-      {mode === "chemical" ? (
-        <div className="relative">
-          <ChemicalSynapseArt
-            ref={artRef}
-            labels={labels}
-            selectedId={selectedId}
-            hintId="vesicles"
-            pose={pose}
-            onSelect={(id) => setSelectedId((current) => (current === id ? null : id))}
-          />
-          <ChemicalInset stageId={playback.snapshot.stageId} pose={pose} />
+          <div className="relative">
+            <ElectricalSynapseArt
+              ref={artRef}
+              labels={labels}
+              selectedId={selectedId}
+              hintId="junctions"
+              flow={flow}
+              source={electric.source}
+              shared={electric.shared}
+              onSelect={(id) => setSelectedId((current) => (current === id ? null : id))}
+            />
+            {selectedId === "junctions" ? (
+              <DetailInset title="Poro de la unión" source="Tomada de la unión central. El lumen sigue abierto.">
+                <JunctionDetail flow={flow} />
+              </DetailInset>
+            ) : null}
+          </div>
+        )}
+      </SceneStage>
+      {question ? (
+        <div className="learn-follow" hidden={mode !== "chemical"}>
+          <CheckQuestion question={question} />
         </div>
-      ) : (
-        <div className="relative">
-          <ElectricalSynapseArt
-            ref={artRef}
-            labels={labels}
-            selectedId={selectedId}
-            hintId="junctions"
-            flow={flow}
-            source={electric.source}
-            shared={electric.shared}
-            onSelect={(id) => setSelectedId((current) => (current === id ? null : id))}
-          />
-          {selectedId === "junctions" ? (
-            <DetailInset title="Poro de la unión" source="Tomada de la unión central. El lumen sigue abierto.">
-              <JunctionDetail flow={flow} />
-            </DetailInset>
-          ) : null}
-        </div>
-      )}
-    </SceneStage>
+      ) : null}
+    </>
   );
 }

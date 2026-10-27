@@ -2,6 +2,7 @@
 
 import type { Ref } from "react";
 import { learnUi } from "@/content/learn/es/ui";
+import { CiteList } from "@/components/learn/LearnRefs";
 import { IconClose } from "@/components/learn/icons";
 
 const closeButtonClass =
@@ -12,6 +13,7 @@ export type ExplanationCopy = {
   eyebrow?: string;
   title: string;
   text: string;
+  cites?: readonly string[];
   closable?: boolean;
 };
 
@@ -96,7 +98,10 @@ function ExplanationBody({
         ) : null}
       </div>
       {compact ? null : (
-        <p className={`${hasHeading ? "mt-2" : ""} text-base leading-relaxed text-foreground`}>{item.text}</p>
+        <p className={`${hasHeading ? "mt-2" : ""} text-base leading-relaxed text-foreground`}>
+          {item.text}
+          <CiteList cites={item.cites} />
+        </p>
       )}
     </>
   );

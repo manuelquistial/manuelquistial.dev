@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { learnUi } from "@/content/learn/es/ui";
-import { neuronsLesson } from "@/content/learn/es/neurons";
+import { getNeuronScene } from "@/content/learn/es/neurons";
 import { NetworkArt, networkAnchors } from "@/components/learn/illustrations/NetworkArt";
 import { SceneStage, cardFor } from "@/components/learn/SceneStage";
 import { useScenePlayback } from "@/components/learn/useScenePlayback";
@@ -21,33 +21,13 @@ const localFor: Record<string, "n2" | "n3" | "n4" | null> = {
   split: "n4",
 };
 
-const moment: Record<string, Record<string, string>> = {
-  input: {
-    "cell-a": "A inicia el episodio. La señal recorre su axón hasta B.",
-    "cell-b": "B muestra una respuesta local. Aún no dispara.",
-  },
-  relay: {
-    "cell-b": "B dispara. Su axón lleva la señal hasta C.",
-    "cell-c": "C recibe una respuesta local excitatoria.",
-  },
-  split: {
-    "cell-a": "Desde A también baja una rama inhibitoria hasta D.",
-    "cell-c": "C dispara. La entrada que llegó desde B era excitatoria.",
-    "cell-d": "D recibe esa rama inhibitoria. Hay respuesta local, pero no dispara.",
-  },
-};
-
 export function NetworkScene() {
-  const scene = neuronsLesson.scenes[7];
+  const scene = getNeuronScene("red-neuronal");
   const playback = useScenePlayback(networkPlaybackStages());
   const rootRef = useRef<HTMLDivElement>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const state = networkState(playback.snapshot.stageId);
   const labels = Object.fromEntries((scene.parts ?? []).map((part) => [part.id, part.label]));
-  const parts = (scene.parts ?? []).map((part) => ({
-    ...part,
-    text: moment[playback.snapshot.stageId]?.[part.id] ?? part.text,
-  }));
 
   useEffect(() => {
     return playback.controller.onFrame((snapshot) => {
@@ -70,7 +50,8 @@ export function NetworkScene() {
       label={scene.textAlternative}
       playback={playback}
       stages={scene.stages}
-      card={cardFor(parts, networkAnchors, selectedId)}
+      parts={scene.parts}
+      card={cardFor(scene.parts, networkAnchors, selectedId)}
       onClose={() => setSelectedId(null)}
       legend={
         <ul className="flex flex-wrap gap-x-4 gap-y-1">

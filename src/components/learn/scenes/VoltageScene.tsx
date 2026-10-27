@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { neuronsLesson } from "@/content/learn/es/neurons";
+import { getNeuronScene } from "@/content/learn/es/neurons";
 import { NeuronArt } from "@/components/learn/illustrations/NeuronArt";
 import { pointAlong } from "@/components/learn/illustrations/geometry";
 import { axonCurves } from "@/components/learn/illustrations/neuronModel";
@@ -32,7 +32,7 @@ function applySpikes(root: HTMLElement, time: number) {
 }
 
 export function VoltageScene() {
-  const scene = neuronsLesson.scenes[6];
+  const scene = getNeuronScene("diferencia-de-potencial");
   const playback = useScenePlayback(axonPlaybackStages());
   const rootRef = useRef<HTMLDivElement>(null);
   const fronts = axonFronts(playback.snapshot.time);

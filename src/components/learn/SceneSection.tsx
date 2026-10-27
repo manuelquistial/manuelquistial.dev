@@ -1,22 +1,18 @@
 import { learnUi } from "@/content/learn/es/ui";
-import type { LearnDeepen, LearnQuestion, LearnScene, LearnSource } from "@/content/learn/types";
+import type { LearnDeepen, LearnQuestion, LearnScene } from "@/content/learn/types";
 import { CheckQuestion } from "@/components/learn/CheckQuestion";
-import { CiteMark } from "@/components/learn/CiteMark";
+import { CiteList } from "@/components/learn/LearnRefs";
 
 export function SceneSection({
   scene,
   children,
   deepen,
   question,
-  numbers,
-  sources,
 }: {
   scene: LearnScene;
   children: React.ReactNode;
   deepen?: LearnDeepen;
   question?: LearnQuestion;
-  numbers: Record<string, number>;
-  sources: readonly LearnSource[];
 }) {
   return (
     <section
@@ -30,13 +26,26 @@ export function SceneSection({
       >
         {scene.title}
       </h2>
-      <div className="learn-follow">{children}</div>
+      {scene.badge ? (
+        <p className="mt-2 text-sm font-semibold text-muted">{scene.badge}</p>
+      ) : null}
       {scene.paragraphs.length > 0 ? (
         <div className="learn-follow learn-reading space-y-4">
           {scene.paragraphs.map((paragraph) => (
             <p key={paragraph.text} className="leading-relaxed text-muted">
               {paragraph.text}
-              <CiteList cites={paragraph.cites} numbers={numbers} sources={sources} />
+              <CiteList cites={paragraph.cites} />
+            </p>
+          ))}
+        </div>
+      ) : null}
+      <div className="learn-follow">{children}</div>
+      {scene.closing && scene.closing.length > 0 ? (
+        <div className="learn-follow learn-reading space-y-4">
+          {scene.closing.map((paragraph) => (
+            <p key={paragraph.text} className="leading-relaxed text-muted">
+              {paragraph.text}
+              <CiteList cites={paragraph.cites} />
             </p>
           ))}
         </div>
@@ -50,7 +59,7 @@ export function SceneSection({
             {deepen.paragraphs.map((paragraph) => (
               <p key={paragraph.text} className="leading-relaxed text-muted">
                 {paragraph.text}
-                <CiteList cites={paragraph.cites} numbers={numbers} sources={sources} />
+                <CiteList cites={paragraph.cites} />
               </p>
             ))}
           </div>
@@ -62,27 +71,5 @@ export function SceneSection({
         </div>
       ) : null}
     </section>
-  );
-}
-
-function CiteList({
-  cites,
-  numbers,
-  sources,
-}: {
-  cites?: readonly string[];
-  numbers: Record<string, number>;
-  sources: readonly LearnSource[];
-}) {
-  if (!cites?.length) return null;
-  return (
-    <>
-      {cites.map((id) => {
-        const source = sources.find((item) => item.id === id);
-        const number = numbers[id];
-        if (!source || !number) return null;
-        return <CiteMark key={id} source={source} number={number} />;
-      })}
-    </>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { learnUi } from "@/content/learn/es/ui";
-import { neuronsLesson } from "@/content/learn/es/neurons";
+import { getNeuronScene } from "@/content/learn/es/neurons";
 import { NeuronArt } from "@/components/learn/illustrations/NeuronArt";
 import { chainPath } from "@/components/learn/illustrations/geometry";
 import { axonCurves, signalChains } from "@/components/learn/illustrations/neuronModel";
@@ -14,22 +14,37 @@ const axonPath = chainPath(axonCurves);
 const dendritePaths = signalChains.map((chain) => chainPath(chain));
 const nodeStops = [0.18, 0.4, 0.62, 0.84];
 
-const shortCopy: Record<string, { title: string; text: string }> = {
+const accessibleCopy = {
+  reach:
+    "Entradas locales se integran en una neurona y alcanzan el umbral en el segmento inicial. Se genera un potencial de acción que se propaga por el axón.",
+  short:
+    "Entradas locales se integran en una neurona sin alcanzar el umbral en el segmento inicial. No se genera un potencial de acción.",
+} as const;
+
+const shortCopy: Record<
+  string,
+  { label: string; title: string; text: string; cites: readonly string[] }
+> = {
   threshold: {
-    title: "El segmento inicial no alcanza el umbral",
-    text: "En este ejemplo las entradas se suman, pero el indicador queda por debajo de la marca.",
+    label: "Umbral",
+    title: "Las entradas no alcanzan el umbral",
+    text: "La suma de estas entradas no lleva al segmento inicial al umbral necesario para iniciar un potencial de acción.",
+    cites: ["communication"],
   },
   propagation: {
-    title: "No sale un potencial de acción",
-    text: "El axón permanece en reposo. Una entrada más intensa no agranda un impulso que no llegó a empezar.",
+    label: "Resultado",
+    title: "No se genera un potencial de acción",
+    text: "Los cambios locales disminuyen con el tiempo sin desencadenar un potencial de acción.",
+    cites: ["communication"],
   },
 };
 
 export function SignalScene() {
-  const scene = neuronsLesson.scenes[2];
+  const scene = getNeuronScene("recibir-y-transmitir");
   const [example, setExample] = useState<SignalExample>("reach");
   const rootRef = useRef<HTMLDivElement>(null);
   const playback = useScenePlayback(signalPlaybackStages());
+  const label = accessibleCopy[example];
   const stages = scene.stages?.map((stage) => {
     const alt = example === "short" ? shortCopy[stage.id] : undefined;
     return alt ? { ...stage, ...alt } : stage;
@@ -71,7 +86,7 @@ export function SignalScene() {
 
   return (
     <SceneStage
-      label={scene.textAlternative}
+      label={label}
       playback={playback}
       stages={stages}
       leading={
@@ -101,7 +116,7 @@ export function SignalScene() {
       }
     >
       <div ref={rootRef} className="relative">
-        <NeuronArt label={scene.textAlternative}>
+        <NeuronArt label={label}>
           <g className="learn-signal" pointerEvents="none">
             {dendritePaths.map((d, index) => (
               <path

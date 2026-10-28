@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Locale } from "@/i18n/config";
 import { localizedPathForAvailableContent } from "@/lib/localizedPath";
+import { pageSections } from "@/lib/pageSections";
 import { Section } from "@/components/layout/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { NeuronArt } from "@/components/learn/illustrations/NeuronArt";
@@ -8,7 +9,6 @@ import { NeuronArt } from "@/components/learn/illustrations/NeuronArt";
 interface AprendamosLessonItem {
   slug: string;
   title: string;
-  description: string;
   imageLabel: string;
 }
 
@@ -28,11 +28,11 @@ export function AprendamosPreview({
   lessons,
 }: AprendamosPreviewProps) {
   return (
-    <Section variant="bordered">
+    <Section id={pageSections.learn} variant="bordered">
       <SectionHeader number="03" label={sectionLabel} description={intro} />
 
       <div className="mt-12 md:mt-16">
-        {lessons.map((lesson, index) => {
+        {lessons.slice(0, 3).map((lesson, index) => {
           const href = localizedPathForAvailableContent(
             locale,
             `/aprendamos/${lesson.slug}`,
@@ -51,12 +51,11 @@ export function AprendamosPreview({
                   {String(index + 1).padStart(2, "0")}
                 </span>
               </div>
-              <div className="overflow-hidden border border-border bg-[#eef3f6] md:col-span-4">
+              <div className="overflow-hidden border border-border bg-[#eef3f6] md:col-span-3">
                 <NeuronArt label={lesson.imageLabel} />
               </div>
-              <div className="min-w-0 md:col-span-7">
-                <p className="text-overline text-muted">{sectionLabel}</p>
-                <h3 className="mt-3 max-w-[22ch] text-[length:var(--heading-2)] font-semibold leading-[1.15] tracking-[-0.03em] text-foreground">
+              <div className="min-w-0 md:col-span-8">
+                <h3 className="max-w-[22ch] text-[length:var(--heading-2)] font-semibold leading-[1.15] tracking-[-0.03em] text-foreground">
                   <Link
                     href={href.href}
                     lang={href.lang}
@@ -66,10 +65,7 @@ export function AprendamosPreview({
                     {lesson.title}
                   </Link>
                 </h3>
-                <p className="mt-4 max-w-[48ch] text-[length:var(--body)] leading-[1.45] text-muted">
-                  {lesson.description}
-                </p>
-                <p className="mt-5">
+                <p className="mt-4">
                   <Link
                     href={href.href}
                     lang={href.lang}

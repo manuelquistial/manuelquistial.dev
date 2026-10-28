@@ -1,6 +1,8 @@
 import type { Locale } from "@/i18n/config";
 import type { SiteContent } from "@/content";
+import { profile } from "@/data/profile";
 import { localizedPath } from "@/lib/localizedPath";
+import { pageSections } from "@/lib/pageSections";
 import { Section } from "@/components/layout/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { ViewAllLink } from "@/components/ui/ViewAllLink";
@@ -11,6 +13,8 @@ interface AboutPreviewProps {
   education: SiteContent["aboutPage"]["education"];
   sectionLabel: string;
   viewAllLabel: string;
+  roleLabel: string;
+  researcherLabel: string;
 }
 
 export function AboutPreview({
@@ -19,26 +23,34 @@ export function AboutPreview({
   education,
   sectionLabel,
   viewAllLabel,
+  roleLabel,
+  researcherLabel,
 }: AboutPreviewProps) {
+  const featuredDegrees = education.items.slice(0, 2);
+
   return (
-    <Section variant="bordered">
+    <Section id={pageSections.about} variant="bordered">
       <SectionHeader number="05" label={sectionLabel} />
 
       <div className="mt-12 grid gap-10 lg:mt-16 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-5">
-          <ul className="space-y-4">
-            {education.items.map((item) => (
+          <ul className="space-y-3">
+            <li className="text-[length:var(--heading-3)] font-semibold text-foreground">
+              {roleLabel}
+            </li>
+            <li className="text-[length:var(--heading-3)] font-semibold text-foreground">
+              {researcherLabel}
+            </li>
+            {featuredDegrees.map((item) => (
               <li key={item.degree}>
-                <p className="text-[length:var(--heading-3)] font-semibold leading-snug text-foreground">
+                <p className="text-[length:var(--body)] font-semibold leading-snug text-foreground">
                   {item.degree}
                 </p>
-                <p className="mt-1 text-sm text-muted">
-                  {item.institution}
-                  {item.period ? ` · ${item.period}` : null}
-                </p>
+                <p className="mt-1 text-sm text-muted">{item.institution}</p>
               </li>
             ))}
           </ul>
+          <p className="mt-6 text-overline text-muted">{profile.location}</p>
         </div>
 
         <div className="lg:col-span-6 lg:col-start-7">

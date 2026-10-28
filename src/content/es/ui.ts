@@ -28,10 +28,11 @@ export const meta = {
 
 export const nav = {
   home: "Inicio",
-  about: "Trayectoria",
-  projects: "Proyectos",
+  about: "Sobre mí",
+  projects: "Trabajo",
   research: "Investigación",
   learn: "Aprendamos",
+  experience: "Experiencia",
   contact: "Contacto",
 };
 
@@ -45,9 +46,11 @@ export const a11y = {
 };
 
 export const hero = {
-  title: "Ingeniero de software full-stack",
+  title: "Ingeniero de software",
+  overlinePrimary: "Ingeniero de software",
+  overlineSecondary: "Investigador en neuroingeniería",
   subtitle:
-    "Desarrollo plataformas empresariales, integraciones de servicios y aplicaciones modernizadas. He trabajado en Anthology / Blackboard y para Babel Scores, Sal & Picciotto y la Universidad de Antioquia.",
+    "Desarrollo plataformas empresariales, integraciones de servicios y aplicaciones modernizadas. También trabajo en decodificación de imaginación motora con interfaces cerebro-computador EEG–EMG.",
   viewProjects: "Ver proyectos",
   viewExperience: "Ver trayectoria",
   learnLabel: "Aprendamos",
@@ -56,10 +59,11 @@ export const hero = {
 
 export const sections = {
   about: "Sobre mí",
-  experience: "Experiencia profesional",
+  experience: "Experiencia",
   teaching: "Docencia y formación tecnológica",
   skills: "Competencias",
   projects: "Proyectos",
+  selectedWork: "Trabajo seleccionado",
   engineeringProjects: "Aplicaciones y plataformas",
   researchProjects: "Investigación",
   agencyWebProjects: "Sitios web",

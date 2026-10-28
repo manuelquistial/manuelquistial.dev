@@ -34,14 +34,17 @@ export function NavLinks({
     <nav className={className} aria-label={ariaLabel}>
       {navItems.map((item) => {
         const { href, lang } = localizedPathForAvailableContent(locale, item.path);
+        const hash = "hash" in item ? item.hash : undefined;
+        const fullHref = hash ? `${href}#${hash}` : href;
         const isActive =
-          pathname === href || pathname.startsWith(`${href}/`);
+          !hash &&
+          (pathname === href || pathname.startsWith(`${href}/`));
         const label = nav[item.key];
 
         return (
           <Link
             key={item.key}
-            href={href}
+            href={fullHref}
             lang={lang}
             hrefLang={lang}
             aria-label={

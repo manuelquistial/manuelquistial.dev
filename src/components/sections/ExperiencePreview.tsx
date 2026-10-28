@@ -21,7 +21,7 @@ export function ExperiencePreview({
   viewAllLabel,
 }: ExperiencePreviewProps) {
   return (
-    <Section variant="bordered">
+    <Section id={pageSections.experience} variant="bordered">
       <SectionHeader number="04" label={sectionLabel} />
 
       <ul className="mt-12 divide-y divide-border border-y border-border md:mt-16">

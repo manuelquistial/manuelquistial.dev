@@ -4,6 +4,7 @@ export const pageSections = {
   selectedProjects: "projects",
   engineering: "engineering",
   research: "research",
+  learn: "aprendamos",
   agencyWeb: "agency-web",
   researchOverview: "overview",
   contact: "contact",

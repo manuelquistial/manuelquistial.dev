@@ -28,10 +28,11 @@ export const meta = {
 
 export const nav = {
   home: "Home",
-  about: "Experience",
-  projects: "Projects",
+  about: "About",
+  projects: "Work",
   research: "Research",
   learn: "Aprendamos",
+  experience: "Experience",
   contact: "Contact",
 };
 
@@ -45,9 +46,11 @@ export const a11y = {
 };
 
 export const hero = {
-  title: "Full-Stack Software Engineer",
+  title: "Software Engineer",
+  overlinePrimary: "Software Engineer",
+  overlineSecondary: "Neuroengineering researcher",
   subtitle:
-    "I build enterprise platforms, service integrations, and modernized applications. I have worked at Anthology / Blackboard and for Babel Scores, Sal & Picciotto, and Universidad de Antioquia.",
+    "I build enterprise platforms, service integrations, and modernized applications. I also work on motor imagery decoding with EEG–EMG brain-computer interfaces.",
   viewProjects: "View projects",
   viewExperience: "View experience",
   learnLabel: "Aprendamos",
@@ -56,10 +59,11 @@ export const hero = {
 
 export const sections = {
   about: "About",
-  experience: "Professional experience",
+  experience: "Experience",
   teaching: "Teaching and technical training",
   skills: "Skills",
   projects: "Projects",
+  selectedWork: "Selected work",
   engineeringProjects: "Applications and platforms",
   researchProjects: "Research",
   agencyWebProjects: "Websites",

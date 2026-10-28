@@ -14,7 +14,6 @@ import { Container } from "@/components/layout/Container";
 interface HeroProps {
   locale: Locale;
   content: SiteContent["hero"];
-  affiliation?: string;
   imageSrc?: string;
   imageAlt?: string;
 }
@@ -22,7 +21,6 @@ interface HeroProps {
 export function Hero({
   locale,
   content,
-  affiliation,
   imageSrc = "/images/projects/babel-scores.jpg",
   imageAlt = "",
 }: HeroProps) {
@@ -35,10 +33,8 @@ export function Hero({
       <Container className="grid min-h-[min(90vh,56rem)] gap-10 pb-16 pt-10 md:gap-12 md:pb-20 md:pt-12 lg:grid-cols-12 lg:items-stretch lg:gap-12 lg:pb-24 lg:pt-16">
         <div className="flex flex-col justify-center lg:col-span-5">
           <p className="text-overline text-muted">
-            <span className="block">{profile.role}</span>
-            {affiliation ? (
-              <span className="mt-1 block max-w-[28ch]">{affiliation}</span>
-            ) : null}
+            <span className="block">{content.overlinePrimary}</span>
+            <span className="mt-1 block">{content.overlineSecondary}</span>
           </p>
 
           <h1

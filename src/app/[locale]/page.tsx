@@ -59,12 +59,11 @@ export default async function HomePage({ params }: HomePageProps) {
       <Hero
         locale={locale}
         content={content.hero}
-        affiliation={content.researchPage.affiliation}
         imageSrc={babel?.image}
         imageAlt={babel?.imageAlt}
       />
       <SelectedProjects
-        title={content.sections.projects}
+        title={content.sections.selectedWork}
         projects={selectedProjects}
         projectCard={content.projectCard}
         viewAllHref={localizedPath(locale, "/projects")}
@@ -76,8 +75,9 @@ export default async function HomePage({ params }: HomePageProps) {
         viewAllLabel={content.sections.viewResearch}
         projectTitle={content.researchPage.projectTitle}
         affiliation={content.researchPage.affiliation}
-        summary={content.researchPage.previewTagline}
+        summary={content.researchPage.summary}
         tags={localizedResearch?.tags}
+        systemItems={content.researchPage.system.items}
       />
       {publishedLessons.length > 0 ? (
         <AprendamosPreview
@@ -88,7 +88,6 @@ export default async function HomePage({ params }: HomePageProps) {
           lessons={publishedLessons.map((lesson) => ({
             slug: lesson.slug,
             title: lesson.title,
-            description: lesson.cardDescription,
             imageLabel: lesson.scenes[0]?.textAlternative ?? lesson.title,
           }))}
         />
@@ -105,6 +104,8 @@ export default async function HomePage({ params }: HomePageProps) {
         education={content.aboutPage.education}
         sectionLabel={content.sections.about}
         viewAllLabel={content.aboutPage.title}
+        roleLabel={content.hero.overlinePrimary}
+        researcherLabel={content.hero.overlineSecondary}
       />
     </>
   );

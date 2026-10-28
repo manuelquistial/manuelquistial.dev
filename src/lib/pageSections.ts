@@ -6,6 +6,7 @@ export const pageSections = {
   research: "research",
   agencyWeb: "agency-web",
   researchOverview: "overview",
+  contact: "contact",
 } as const;
 
 export type PageSectionId = (typeof pageSections)[keyof typeof pageSections];

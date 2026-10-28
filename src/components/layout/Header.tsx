@@ -42,29 +42,31 @@ export function Header({ locale, content }: HeaderProps) {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/80 bg-background/95 pt-[env(safe-area-inset-top)] backdrop-blur-md supports-[backdrop-filter]:bg-background/90">
-      <Container className="flex h-16 items-center justify-between gap-4 lg:h-[4.25rem]">
+    <header className="sticky top-0 z-50 border-b border-border bg-background pt-[env(safe-area-inset-top)]">
+      <Container className="flex h-16 items-center justify-between gap-4 lg:h-[4.5rem]">
         <Link
           href={localizedPath(locale)}
           translate="no"
-          className="text-base font-semibold tracking-tight text-foreground transition-colors duration-150 hover:text-accent"
+          className="flex min-w-0 items-baseline gap-3 text-foreground transition-colors duration-200 hover:text-accent"
         >
-          {profile.shortName}
+          <span className="text-overline shrink-0">MQ</span>
+          <span className="hidden truncate text-overline sm:inline">
+            {profile.shortName}
+          </span>
         </Link>
 
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-3 sm:gap-5">
           <NavLinks
             locale={locale}
             nav={content.nav}
             ariaLabel={content.a11y.mainNav}
-            className="hidden items-center gap-1 lg:flex"
-            linkClassName="rounded-[6px] px-3 py-2 text-base font-medium transition-colors duration-150"
+            className="hidden items-center gap-5 xl:gap-6 lg:flex"
           />
           <LocaleSwitcher locale={locale} labels={content.languageSwitcher} />
           <button
             ref={menuButtonRef}
             type="button"
-            className="inline-flex size-11 items-center justify-center rounded-[6px] border border-border text-foreground transition-colors duration-150 hover:border-foreground/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground lg:hidden"
+            className="inline-flex size-11 items-center justify-center border border-border text-foreground transition-colors duration-200 hover:border-border-strong hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent lg:hidden"
             aria-expanded={open}
             aria-controls={panelId}
             aria-label={open ? content.a11y.closeMenu : content.a11y.menu}
@@ -79,7 +81,7 @@ export function Header({ locale, content }: HeaderProps) {
         <div
           id={panelId}
           ref={panelRef}
-          className="absolute inset-x-0 top-full overflow-y-auto overscroll-contain border-t border-border bg-background shadow-[0_12px_32px_rgba(32,32,30,0.08)] lg:hidden"
+          className="absolute inset-x-0 top-full overflow-y-auto overscroll-contain border-t border-border bg-background lg:hidden"
         >
           <Container className="py-4">
             <NavLinks
@@ -87,7 +89,7 @@ export function Header({ locale, content }: HeaderProps) {
               nav={content.nav}
               ariaLabel={content.a11y.mobileNav}
               className="flex flex-col gap-1"
-              linkClassName="rounded-[6px] px-3 py-3 text-base font-medium transition-colors duration-150"
+              linkClassName="px-1 py-3"
               onNavigate={() => setOpen(false)}
             />
           </Container>

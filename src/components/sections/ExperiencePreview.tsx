@@ -3,7 +3,7 @@ import type { Experience } from "@/data/experience";
 import { localizedSectionPath } from "@/lib/localizedPath";
 import { pageSections } from "@/lib/pageSections";
 import { Section } from "@/components/layout/Section";
-import { SectionTitle } from "@/components/ui/SectionTitle";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 import { ExperienceCard } from "@/components/ui/ExperienceCard";
 import { ViewAllLink } from "@/components/ui/ViewAllLink";
 
@@ -21,12 +21,12 @@ export function ExperiencePreview({
   viewAllLabel,
 }: ExperiencePreviewProps) {
   return (
-    <Section variant="muted">
-      <SectionTitle title={sectionLabel} />
+    <Section variant="bordered">
+      <SectionHeader number="04" label={sectionLabel} />
 
-      <ul className="divide-y divide-border border-y border-border">
+      <ul className="mt-12 divide-y divide-border border-y border-border md:mt-16">
         {items.map((item) => (
-          <li key={item.id} className="py-6 first:pt-0 last:pb-0 sm:py-8">
+          <li key={item.id} className="py-8 md:py-10">
             <ExperienceCard item={item} variant="preview" />
           </li>
         ))}

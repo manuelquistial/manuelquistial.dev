@@ -70,7 +70,7 @@ export function CaseStudyView({
     <Section>
       <Link
         href={localizedPath(locale, "/projects")}
-        className="text-base font-semibold text-accent transition-colors duration-150 hover:text-accent-hover"
+        className="text-base font-semibold text-foreground transition-colors duration-200 hover:text-accent"
       >
         {caseStudy.backLabel}
       </Link>
@@ -89,7 +89,7 @@ export function CaseStudyView({
             alt={project.imageAlt ?? ""}
             fill
             sizes="(min-width: 768px) 768px, 100vw"
-            className="object-cover object-top"
+            className="editorial-image object-cover object-top"
             priority
           />
         </div>
@@ -110,7 +110,7 @@ export function CaseStudyView({
             href={project.liveUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-base font-semibold text-accent transition-colors duration-150 hover:text-accent-hover"
+            className="text-base font-semibold text-foreground transition-colors duration-200 hover:text-accent"
           >
             {liveHost}
           </a>

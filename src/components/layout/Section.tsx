@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Container } from "@/components/layout/Container";
 
-type SectionVariant = "default" | "muted";
+type SectionVariant = "default" | "muted" | "bordered";
 
 interface SectionProps {
   children: React.ReactNode;
@@ -13,7 +13,8 @@ interface SectionProps {
 
 const variantStyles: Record<SectionVariant, string> = {
   default: "bg-background",
-  muted: "bg-surface-soft/60",
+  muted: "bg-surface",
+  bordered: "border-t border-border bg-background",
 };
 
 export function Section({
@@ -27,7 +28,7 @@ export function Section({
     <section id={id} className={cn(variantStyles[variant], className)}>
       <Container
         className={cn(
-          "py-14 md:py-16 lg:py-24",
+          "py-16 md:py-24 lg:py-[clamp(7.5rem,12vw,10rem)]",
           containerClassName,
         )}
       >

@@ -1,7 +1,7 @@
 import type { Project } from "@/data/projects";
 import type { SiteContent } from "@/content";
 import { Section } from "@/components/layout/Section";
-import { SectionTitle } from "@/components/ui/SectionTitle";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { ViewAllLink } from "@/components/ui/ViewAllLink";
 import { pageSections } from "@/lib/pageSections";
@@ -12,6 +12,12 @@ interface SelectedProjectsProps {
   projectCard: SiteContent["projectCard"];
   viewAllHref: string;
   viewAllLabel: string;
+  description?: string;
+}
+
+function padIndex(index: number, total: number): string {
+  const width = Math.max(2, String(total).length);
+  return `${String(index).padStart(width, "0")} / ${String(total).padStart(width, "0")}`;
 }
 
 export function SelectedProjects({
@@ -20,28 +26,68 @@ export function SelectedProjects({
   projectCard,
   viewAllHref,
   viewAllLabel,
+  description,
 }: SelectedProjectsProps) {
-  return (
-    <Section id={pageSections.selectedProjects}>
-      <div className="mb-6 flex items-center justify-between gap-4 sm:mb-8">
-        <SectionTitle title={title} spacing="none" />
-        <ViewAllLink href={viewAllHref} className="shrink-0">
-          {viewAllLabel}
-        </ViewAllLink>
-      </div>
+  const [primary, secondary, ...rest] = projects;
+  const total = projects.length;
 
-      <div className="grid auto-rows-fr grid-cols-1 gap-10 md:grid-cols-2 md:gap-8">
-        {projects.map((project) => (
-          <ProjectCard
-            key={project.id}
-            project={project}
-            labels={projectCard}
-            meta={
-              project.id === "sal-picciotto-website" ? "design" : "reserved"
-            }
-            priority
-          />
-        ))}
+  return (
+    <Section id={pageSections.selectedProjects} variant="bordered">
+      <SectionHeader number="01" label={title} description={description} />
+
+      {primary ? (
+        <div className="mt-12 grid gap-10 lg:mt-16 lg:grid-cols-12 lg:gap-12">
+          <div className="lg:col-span-7">
+            <ProjectCard
+              project={primary}
+              labels={projectCard}
+              layout="featured"
+              indexLabel={padIndex(1, total)}
+              showTags
+              meta={primary.id === "sal-picciotto-website" ? "design" : "hidden"}
+              withCategory
+              priority
+            />
+          </div>
+          {secondary ? (
+            <div className="lg:col-span-5 lg:pt-16">
+              <ProjectCard
+                project={secondary}
+                labels={projectCard}
+                layout="compact"
+                indexLabel={padIndex(2, total)}
+                showTags
+                meta={
+                  secondary.id === "sal-picciotto-website" ? "design" : "hidden"
+                }
+                withCategory
+                priority
+              />
+            </div>
+          ) : null}
+        </div>
+      ) : null}
+
+      {rest.length > 0 ? (
+        <div className="mt-4 md:mt-8">
+          {rest.map((project, index) => (
+            <ProjectCard
+              key={project.id}
+              project={project}
+              labels={projectCard}
+              layout="list"
+              indexLabel={padIndex(index + 3, total)}
+              meta={
+                project.id === "sal-picciotto-website" ? "design" : "reserved"
+              }
+              withCategory
+            />
+          ))}
+        </div>
+      ) : null}
+
+      <div className="mt-10 border-t border-border pt-6">
+        <ViewAllLink href={viewAllHref}>{viewAllLabel}</ViewAllLink>
       </div>
     </Section>
   );

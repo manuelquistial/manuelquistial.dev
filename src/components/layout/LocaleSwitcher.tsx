@@ -26,11 +26,11 @@ export function LocaleSwitcher({
       role="group"
       aria-label={labels.label}
       className={cn(
-        "inline-flex shrink-0 items-center rounded-[6px] border border-border bg-surface p-0.5",
+        "inline-flex shrink-0 items-center gap-1 text-overline",
         className,
       )}
     >
-      {locales.map((item) => {
+      {locales.map((item, index) => {
         const isActive = item === locale;
         const target = switchLocaleHref(pathname, item);
         const ariaLabel = target.fallback
@@ -38,23 +38,32 @@ export function LocaleSwitcher({
           : localeLabels[item];
 
         return (
-          <Link
-            key={item}
-            href={target.href}
-            hrefLang={item}
-            lang={item}
-            aria-label={ariaLabel}
-            title={target.fallback ? labels.unavailableHere : undefined}
-            aria-current={isActive ? "true" : undefined}
-            className={cn(
-              "inline-flex min-h-11 min-w-11 items-center justify-center rounded-[6px] px-2.5 text-sm font-semibold uppercase tracking-wide transition-colors duration-150",
-              isActive
-                ? "bg-surface-soft text-foreground"
-                : "text-muted hover:bg-surface-soft hover:text-foreground",
-            )}
-          >
-            {item}
-          </Link>
+          <span key={item} className="inline-flex items-center gap-1">
+            {index > 0 ? (
+              <span className="text-muted" aria-hidden="true">
+                /
+              </span>
+            ) : null}
+            <Link
+              href={target.href}
+              hrefLang={item}
+              lang={item}
+              aria-label={ariaLabel}
+              title={target.fallback ? labels.unavailableHere : undefined}
+              aria-current={isActive ? "true" : undefined}
+              className={cn(
+                "inline-flex min-h-11 items-center px-1 uppercase transition-colors duration-200",
+                isActive
+                  ? "text-accent"
+                  : "text-foreground hover:text-accent",
+              )}
+            >
+              {isActive ? (
+                <span className="mr-1.5 inline-block size-1.5 rounded-full bg-accent" aria-hidden="true" />
+              ) : null}
+              {item}
+            </Link>
+          </span>
         );
       })}
     </div>

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
-type ButtonVariant = "primary" | "secondary" | "ghost" | "outline";
+type ButtonVariant = "primary" | "secondary" | "ghost" | "outline" | "editorial";
 type ButtonSize = "sm" | "md" | "lg";
 
 interface ButtonProps {
@@ -25,19 +25,21 @@ const variantStyles: Record<ButtonVariant, string> = {
     "bg-accent text-white hover:bg-accent-hover border border-accent",
   secondary:
     "bg-surface text-foreground border border-border hover:border-foreground/30",
-  ghost: "text-muted hover:text-foreground hover:bg-surface-soft",
+  ghost: "text-muted hover:text-foreground",
   outline:
-    "border border-border text-foreground hover:border-foreground/40 hover:text-foreground bg-transparent",
+    "border border-border text-foreground hover:border-border-strong hover:text-accent bg-transparent",
+  editorial:
+    "gap-3 border-0 bg-transparent p-0 text-foreground hover:text-accent font-semibold",
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
-  sm: "min-h-11 px-4 py-2 text-base",
-  md: "min-h-12 px-5 py-2.5 text-base",
-  lg: "min-h-12 px-6 py-3 text-base",
+  sm: "min-h-11 px-4 py-2 text-sm",
+  md: "min-h-11 px-5 py-2.5 text-[length:var(--body)]",
+  lg: "min-h-12 px-6 py-3 text-[length:var(--body)]",
 };
 
 const baseStyles =
-  "inline-flex items-center justify-center rounded-[6px] font-semibold transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50";
+  "inline-flex items-center justify-center rounded-[var(--radius-button)] font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50";
 
 export function Button({
   children,
@@ -57,7 +59,7 @@ export function Button({
   const styles = cn(
     baseStyles,
     variantStyles[variant],
-    sizeStyles[size],
+    variant === "editorial" ? "min-h-0 px-0 py-0" : sizeStyles[size],
     className,
   );
 

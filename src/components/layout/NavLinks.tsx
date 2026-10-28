@@ -16,6 +16,7 @@ interface NavLinksProps {
   className?: string;
   linkClassName?: string;
   onNavigate?: () => void;
+  numbered?: boolean;
 }
 
 export function NavLinks({
@@ -25,6 +26,7 @@ export function NavLinks({
   className,
   linkClassName,
   onNavigate,
+  numbered = true,
 }: NavLinksProps) {
   const pathname = usePathname();
 
@@ -48,13 +50,23 @@ export function NavLinks({
             aria-current={isActive ? "page" : undefined}
             onClick={onNavigate}
             className={cn(
+              "text-overline transition-colors duration-200",
               linkClassName,
               isActive
                 ? "text-accent"
-                : "text-muted hover:text-foreground",
+                : "text-foreground hover:text-accent",
             )}
           >
-            {label}
+            {numbered ? (
+              <span className="inline-flex items-baseline gap-1">
+                <span aria-hidden="true" className="text-muted">
+                  {item.number}.
+                </span>
+                <span>{label}</span>
+              </span>
+            ) : (
+              label
+            )}
           </Link>
         );
       })}

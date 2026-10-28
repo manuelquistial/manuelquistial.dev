@@ -38,7 +38,7 @@ export function LearnLesson({
               {learnUi.backToIndex}
             </Link>
           </p>
-          <h1 className="mt-4 max-w-[18ch] text-balance text-[clamp(2.375rem,4vw,3.75rem)] font-semibold leading-[1.1] tracking-tight text-foreground">
+          <h1 className="mt-4 max-w-[18ch] text-balance font-display text-[length:var(--heading-1)] text-foreground">
             {lesson.title}
           </h1>
           <div className="learn-reading mt-6 space-y-4">

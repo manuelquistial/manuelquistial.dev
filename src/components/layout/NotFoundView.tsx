@@ -24,13 +24,13 @@ export function NotFoundView({
           : "py-20"
       }
     >
-      <h1 className="text-balance text-3xl font-semibold text-foreground">
+      <h1 className="text-balance text-[length:var(--heading-2)] font-semibold tracking-[-0.03em] text-foreground">
         {notFound.title}
       </h1>
       <p className="mt-4 max-w-md text-muted">{notFound.description}</p>
       <Link
         href={localizedPath(locale)}
-        className="mt-8 inline-flex min-h-12 items-center rounded-[6px] bg-accent px-5 py-2.5 text-base font-semibold text-white transition-colors duration-150 hover:bg-accent-hover"
+        className="mt-8 inline-flex min-h-11 items-center border border-border px-5 py-2.5 text-base font-semibold text-foreground transition-colors duration-200 hover:border-border-strong hover:text-accent"
       >
         {notFound.backHome}
       </Link>

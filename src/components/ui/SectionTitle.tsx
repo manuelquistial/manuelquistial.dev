@@ -29,14 +29,14 @@ export function SectionTitle({
       )}
     >
       {eyebrow ? (
-        <p className="text-sm font-medium text-muted">{eyebrow}</p>
+        <p className="text-overline text-muted">{eyebrow}</p>
       ) : null}
       <Heading
         className={cn(
           "text-balance font-semibold tracking-tight text-foreground",
           Heading === "h1"
-            ? "text-[clamp(2.375rem,4vw,3.75rem)] leading-[1.1]"
-            : "text-[clamp(1.75rem,3vw,2.25rem)] leading-[1.2]",
+            ? "font-display text-[length:var(--heading-1)]"
+            : "text-[length:var(--heading-2)] leading-[1.1] tracking-[-0.03em]",
           eyebrow && "mt-2",
           align === "center" && "mx-auto",
         )}
@@ -46,7 +46,7 @@ export function SectionTitle({
       {subtitle ? (
         <p
           className={cn(
-            "mt-4 max-w-[65ch] text-[clamp(1.125rem,1.5vw,1.25rem)] leading-[1.5] text-muted",
+            "mt-4 max-w-[65ch] text-[length:var(--body-lg)] leading-[1.45] text-muted",
             align === "center" && "mx-auto",
           )}
         >

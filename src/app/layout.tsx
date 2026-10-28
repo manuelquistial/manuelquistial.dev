@@ -1,13 +1,20 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Manrope } from "next/font/google";
+import { Instrument_Serif, Inter_Tight, JetBrains_Mono } from "next/font/google";
 import { site } from "@/config/site";
 import { PersonJsonLd } from "@/components/seo/PersonJsonLd";
 import { SiteAnalytics } from "@/components/analytics/SiteAnalytics";
 import "./globals.css";
 
-const manrope = Manrope({
-  variable: "--font-manrope",
+const interTight = Inter_Tight({
+  variable: "--font-inter-tight",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
+  subsets: ["latin"],
+  weight: "400",
   display: "swap",
 });
 
@@ -34,7 +41,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body
-        className={`${manrope.variable} ${jetbrainsMono.variable} flex min-h-full flex-col antialiased`}
+        className={`${interTight.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} flex min-h-full flex-col antialiased`}
       >
         <PersonJsonLd />
         <SiteAnalytics />

@@ -1,15 +1,22 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f7f5f0;
-  --foreground: #20201e;
-  --muted: #5f5c56;
-  --surface: #ffffff;
-  --surface-soft: #eee9e1;
-  --border: #d8d2c8;
-  --accent: #9e3b2d;
-  --accent-hover: #7f2f24;
-  --focus-ring: #20201e;
+  --background: #f5f3ec;
+  --surface: #f8f7f2;
+  --surface-soft: #f8f7f2;
+  --foreground: #111111;
+  --text-primary: #111111;
+  --text-secondary: #686865;
+  --text-muted: #8b8a84;
+  --muted: #686865;
+  --border: #d9d6cc;
+  --border-strong: #bbb7ac;
+  --accent: #2457f5;
+  --accent-hover: #1746d8;
+  --focus-ring: #2457f5;
+  --footer-background: #111111;
+  --footer-text: #f5f3ec;
+  --footer-muted: #aaa8a0;
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
@@ -19,10 +26,22 @@
   --space-12: 3rem;
   --space-16: 4rem;
   --space-24: 6rem;
-  --radius-button: 6px;
-  --radius-image: 8px;
-  --container-max: 1200px;
+  --space-32: 8rem;
+  --space-40: 10rem;
+  --radius-button: 2px;
+  --radius-image: 0px;
+  --container-max: 1440px;
   --text-body-max: 65ch;
+  --display-xl: clamp(5rem, 8vw, 7.5rem);
+  --display-lg: clamp(3.75rem, 5vw, 5rem);
+  --heading-1: clamp(3rem, 4vw, 4rem);
+  --heading-2: clamp(2rem, 3vw, 2.75rem);
+  --heading-3: 1.5rem;
+  --body-lg: 1.25rem;
+  --body: 1.0625rem;
+  --small: 0.875rem;
+  --caption: 0.75rem;
+  --overline: 0.6875rem;
   --learn-max: min(60rem, 960px);
   --learn-gutter: 20px;
   --learn-measure: var(--text-body-max);
@@ -46,9 +65,14 @@
   --color-surface: var(--surface);
   --color-surface-soft: var(--surface-soft);
   --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
   --color-accent: var(--accent);
   --color-accent-hover: var(--accent-hover);
-  --font-sans: var(--font-manrope);
+  --color-footer-background: var(--footer-background);
+  --color-footer-text: var(--footer-text);
+  --color-footer-muted: var(--footer-muted);
+  --font-sans: var(--font-inter-tight);
+  --font-serif: var(--font-instrument-serif);
   --font-mono: var(--font-jetbrains-mono);
   --radius-button: var(--radius-button);
   --radius-image: var(--radius-image);
@@ -80,9 +104,10 @@ body {
   background: var(--background);
   color: var(--foreground);
   color-scheme: light;
-  font-family: var(--font-manrope), system-ui, sans-serif;
-  font-size: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
-  line-height: 1.55;
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
+  font-size: var(--body);
+  line-height: 1.45;
+  letter-spacing: -0.01em;
   min-height: 100vh;
   touch-action: manipulation;
   -webkit-tap-highlight-color: color-mix(in srgb, var(--accent) 18%, transparent);
@@ -91,7 +116,7 @@ body {
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--accent) 28%, transparent);
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
 }
 
 :focus-visible {
@@ -107,16 +132,69 @@ body {
   max-width: var(--text-body-max);
 }
 
-.prose-link {
+.font-display {
+  font-weight: 650;
+  letter-spacing: -0.045em;
+  line-height: 0.88;
+}
+
+.text-overline {
+  font-size: var(--overline);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.editorial-image {
+  border-radius: var(--radius-image);
+  filter: saturate(0.85) contrast(1.02);
+}
+
+.editorial-link {
+  color: var(--foreground);
+  text-decoration: none;
+  transition: color 200ms ease;
+}
+
+.editorial-link:hover {
   color: var(--accent);
+}
+
+.prose-link {
+  color: var(--foreground);
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.2em;
-  transition: color 150ms ease;
+  transition: color 200ms ease;
 }
 
 .prose-link:hover {
-  color: var(--accent-hover);
+  color: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-fade-up {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .motion-fade-up {
+    animation: fade-up 280ms ease both;
+  }
 }
 
 .learn-hit {

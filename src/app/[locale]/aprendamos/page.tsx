@@ -53,35 +53,47 @@ export default async function LearnIndexPage({ params }: LearnIndexPageProps) {
 
   return (
     <Section containerClassName="overflow-x-clip">
-      <h1 className="max-w-[16ch] text-balance text-[clamp(2.375rem,4vw,3.75rem)] font-semibold leading-[1.1] tracking-tight text-foreground">
+      <p className="text-overline text-muted">03</p>
+      <h1 className="mt-4 max-w-[16ch] text-balance font-display text-[length:var(--heading-1)] text-foreground">
         {learnUi.indexTitle}
       </h1>
-      <p className="mt-6 leading-relaxed text-muted">{learnUi.indexIntro}</p>
-      <div className="mt-12 grid gap-10">
-        {lessons.map((lesson) => (
+      <p className="mt-6 max-w-[55ch] text-[length:var(--body-lg)] leading-[1.45] text-muted">
+        {learnUi.indexIntro}
+      </p>
+      <div className="mt-12 md:mt-16">
+        {lessons.map((lesson, index) => (
           <article
             key={lesson.slug}
-            className="grid gap-6 border-t border-border pt-10 md:grid-cols-[minmax(0,18rem)_minmax(0,1fr)] md:items-center"
+            className="grid gap-6 border-t border-border py-10 md:grid-cols-12 md:items-center md:gap-8"
           >
-            <div className="mx-auto w-full max-w-sm overflow-hidden rounded-[8px] border border-border bg-[#eef3f6]">
+            <div className="md:col-span-1">
+              <span
+                className="font-display text-[clamp(2rem,4vw,3rem)] text-foreground"
+                aria-hidden="true"
+              >
+                {String(index + 1).padStart(2, "0")}
+              </span>
+            </div>
+            <div className="overflow-hidden border border-border bg-[#eef3f6] md:col-span-4">
               <NeuronArt label={lesson.scenes[0]?.textAlternative ?? lesson.title} />
             </div>
-            <div className="min-w-0">
-              <h2 className="text-[clamp(1.5rem,2.5vw,1.75rem)] font-semibold leading-[1.25] text-foreground">
+            <div className="min-w-0 md:col-span-7">
+              <p className="text-overline text-muted">{learnUi.indexTitle}</p>
+              <h2 className="mt-3 max-w-[22ch] text-[length:var(--heading-2)] font-semibold leading-[1.15] tracking-[-0.03em] text-foreground">
                 <Link
                   href={localizedPath(locale, `/aprendamos/${lesson.slug}`)}
-                  className="transition-colors duration-150 hover:text-accent"
+                  className="transition-colors duration-200 hover:text-accent"
                 >
                   {lesson.title}
                 </Link>
               </h2>
-              <p className="mt-4 leading-relaxed text-muted">
+              <p className="mt-4 max-w-[48ch] leading-[1.45] text-muted">
                 {lesson.cardDescription}
               </p>
               <p className="mt-5">
                 <Link
                   href={localizedPath(locale, `/aprendamos/${lesson.slug}`)}
-                  className="prose-link font-semibold"
+                  className="text-[length:var(--small)] font-semibold text-foreground transition-colors duration-200 hover:text-accent"
                 >
                   {learnUi.explore}
                 </Link>

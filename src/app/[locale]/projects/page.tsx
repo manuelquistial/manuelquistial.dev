@@ -54,7 +54,7 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
           if (items.length === 0) return null;
 
           return (
-            <section key={category} id={category}>
+            <section key={category} id={category} className="border-t border-border pt-10">
               <SectionTitle
                 title={content.projectCategories[category]}
                 subtitle={categorySubtitles[category]}
@@ -67,6 +67,7 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
                     key={project.id}
                     project={project}
                     labels={content.projectCard}
+                    showTags
                   />
                 ))}
               </div>

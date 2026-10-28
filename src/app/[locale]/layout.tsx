@@ -5,7 +5,6 @@ import { parseLocale } from "@/i18n/parseLocale";
 import { buildPageMetadata } from "@/lib/metadata";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { ContactCTA } from "@/components/sections/ContactCTA";
 import { SkipLink } from "@/components/layout/SkipLink";
 import { SetHtmlLang } from "@/components/layout/SetHtmlLang";
 import { HashScroll } from "@/components/layout/HashScroll";
@@ -58,9 +57,14 @@ export default async function LocaleLayout({
       />
       <main id="main-content" className="flex-1">
         {children}
-        <ContactCTA locale={locale} content={content.contactCta} />
       </main>
-      <Footer content={content} />
+      <Footer
+        content={{
+          footer: content.footer,
+          contactPage: content.contactPage,
+          contactCta: content.contactCta,
+        }}
+      />
     </>
   );
 }

@@ -1,4 +1,6 @@
 import { getSiteContent } from "@/content/getSiteContent";
+import { learnLessons } from "@/content/learn/catalog";
+import { learnUi } from "@/content/learn/es/ui";
 import { getFeaturedExperience } from "@/data/experience";
 import { getProjectById } from "@/data/projects";
 import { parseLocale } from "@/i18n/parseLocale";
@@ -9,8 +11,10 @@ import {
 import { localizedPath } from "@/lib/localizedPath";
 import { Hero } from "@/components/sections/Hero";
 import { SelectedProjects } from "@/components/sections/SelectedProjects";
-import { ExperiencePreview } from "@/components/sections/ExperiencePreview";
 import { ResearchPreview } from "@/components/sections/ResearchPreview";
+import { AprendamosPreview } from "@/components/sections/AprendamosPreview";
+import { ExperiencePreview } from "@/components/sections/ExperiencePreview";
+import { AboutPreview } from "@/components/sections/AboutPreview";
 
 interface HomePageProps {
   params: Promise<{ locale: string }>;
@@ -26,6 +30,7 @@ export default async function HomePage({ params }: HomePageProps) {
   const finanzas = getProjectById("finanzas");
   const conciliacion = getProjectById("conciliacion");
   const sal = getProjectById("sal-picciotto-website");
+  const researchProject = getProjectById("eeg-motor-imagery-pipeline");
 
   const withHomeCopy = (project: ReturnType<typeof localizeProject>) =>
     project.homeDescription
@@ -41,9 +46,23 @@ export default async function HomePage({ params }: HomePageProps) {
     locale,
   );
 
+  const localizedResearch = researchProject
+    ? localizeProject(researchProject, locale)
+    : null;
+
+  const publishedLessons = learnLessons.filter(
+    (lesson) => lesson.locales.length > 0,
+  );
+
   return (
     <>
-      <Hero locale={locale} content={content.hero} />
+      <Hero
+        locale={locale}
+        content={content.hero}
+        affiliation={content.researchPage.affiliation}
+        imageSrc={babel?.image}
+        imageAlt={babel?.imageAlt}
+      />
       <SelectedProjects
         title={content.sections.projects}
         projects={selectedProjects}
@@ -51,17 +70,41 @@ export default async function HomePage({ params }: HomePageProps) {
         viewAllHref={localizedPath(locale, "/projects")}
         viewAllLabel={content.sections.viewAll}
       />
+      <ResearchPreview
+        locale={locale}
+        sectionLabel={content.sections.research}
+        viewAllLabel={content.sections.viewResearch}
+        projectTitle={content.researchPage.projectTitle}
+        affiliation={content.researchPage.affiliation}
+        summary={content.researchPage.previewTagline}
+        tags={localizedResearch?.tags}
+      />
+      {publishedLessons.length > 0 ? (
+        <AprendamosPreview
+          locale={locale}
+          sectionLabel={content.nav.learn}
+          intro={learnUi.indexIntro}
+          exploreLabel={learnUi.explore}
+          lessons={publishedLessons.map((lesson) => ({
+            slug: lesson.slug,
+            title: lesson.title,
+            description: lesson.cardDescription,
+            imageLabel: lesson.scenes[0]?.textAlternative ?? lesson.title,
+          }))}
+        />
+      ) : null}
       <ExperiencePreview
         locale={locale}
         items={experiencePreview}
         sectionLabel={content.sections.experience}
         viewAllLabel={content.sections.viewAllExperience}
       />
-      <ResearchPreview
+      <AboutPreview
         locale={locale}
-        sectionLabel={content.sections.research}
-        viewAllLabel={content.sections.viewResearch}
-        summary={content.researchPage.previewTagline}
+        intro={content.aboutPage.intro}
+        education={content.aboutPage.education}
+        sectionLabel={content.sections.about}
+        viewAllLabel={content.aboutPage.title}
       />
     </>
   );

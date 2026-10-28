@@ -12,7 +12,7 @@ export function ViewAllLink({ href, children, className }: ViewAllLinkProps) {
     <Link
       href={href}
       className={cn(
-        "inline-flex min-h-11 items-center text-base font-semibold text-accent transition-colors duration-150 hover:text-accent-hover",
+        "inline-flex min-h-11 items-center text-[length:var(--body)] font-semibold text-foreground transition-colors duration-200 hover:text-accent",
         className,
       )}
     >

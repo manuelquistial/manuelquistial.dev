@@ -60,16 +60,16 @@ export default async function AboutPage({ params }: AboutPageProps) {
       </div>
 
       <div className="mt-4">
-        <Button href={getCvUrl(locale)} download={getCvDownloadName(locale)}>
+        <Button href={getCvUrl(locale)} download={getCvDownloadName(locale)} variant="outline">
           {content.contactPage.cv}
         </Button>
       </div>
 
-      <section id={pageSections.experience} className="mt-16">
+      <section id={pageSections.experience} className="mt-16 border-t border-border pt-10 md:mt-24">
         <SectionTitle title={content.sections.experience} />
         <ul className="divide-y divide-border border-y border-border">
           {professional.map((item) => (
-            <li key={item.id} className="py-8">
+            <li key={item.id} className="py-8 md:py-10">
               <ExperienceCard item={item} />
             </li>
           ))}
@@ -77,11 +77,11 @@ export default async function AboutPage({ params }: AboutPageProps) {
       </section>
 
       {teaching.length > 0 ? (
-        <section className="mt-16">
+        <section className="mt-16 border-t border-border pt-10 md:mt-24">
           <SectionTitle title={content.sections.teaching} />
           <ul className="divide-y divide-border border-y border-border">
             {teaching.map((item) => (
-              <li key={item.id} className="py-8">
+              <li key={item.id} className="py-8 md:py-10">
                 <ExperienceCard item={item} />
               </li>
             ))}
@@ -89,31 +89,31 @@ export default async function AboutPage({ params }: AboutPageProps) {
         </section>
       ) : null}
 
-      <section className="mt-16">
-        <h2 className="text-[clamp(1.5rem,2.5vw,1.75rem)] font-semibold text-foreground">
+      <section className="mt-16 border-t border-border pt-10 md:mt-24">
+        <h2 className="text-[length:var(--heading-2)] font-semibold tracking-[-0.03em] text-foreground">
           {aboutPage.education.title}
         </h2>
-        <div className="mt-6 space-y-8">
+        <div className="mt-8 space-y-8">
           {aboutPage.education.items.map((item) => (
-            <article key={item.degree}>
-              <h3 className="text-lg font-semibold text-foreground">
+            <article key={item.degree} className="border-t border-border pt-6 first:border-t-0 first:pt-0">
+              <h3 className="text-[length:var(--heading-3)] font-semibold text-foreground">
                 {item.degree}
               </h3>
               <p className="mt-2 text-base text-muted">{item.institution}</p>
-              <p className="mt-1 text-sm text-muted">{item.period}</p>
+              <p className="mt-1 text-overline text-muted">{item.period}</p>
             </article>
           ))}
         </div>
       </section>
 
-      <section className="mt-16">
-        <h2 className="text-[clamp(1.5rem,2.5vw,1.75rem)] font-semibold text-foreground">
+      <section className="mt-16 border-t border-border pt-10 md:mt-24">
+        <h2 className="text-[length:var(--heading-2)] font-semibold tracking-[-0.03em] text-foreground">
           {content.sections.skills}
         </h2>
-        <div className="mt-6 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid gap-8 border-t border-border pt-8 sm:grid-cols-2 lg:grid-cols-3">
           {skills.map((category) => (
             <div key={category.id}>
-              <h3 className="text-base font-semibold text-foreground">
+              <h3 className="text-overline text-foreground">
                 {category.name}
               </h3>
               <ul className="mt-3 space-y-1.5">
@@ -128,22 +128,22 @@ export default async function AboutPage({ params }: AboutPageProps) {
         </div>
       </section>
 
-      <section className="mt-16">
-        <h2 className="text-[clamp(1.5rem,2.5vw,1.75rem)] font-semibold text-foreground">
+      <section className="mt-16 border-t border-border pt-10 md:mt-24">
+        <h2 className="text-[length:var(--heading-2)] font-semibold tracking-[-0.03em] text-foreground">
           {aboutPage.researchOutputs.title}
         </h2>
         <p className="mt-4">
           <a
             href={localizedPath(locale, "/research")}
-            className="text-base font-semibold text-accent transition-colors duration-150 hover:text-accent-hover"
+            className="text-base font-semibold text-foreground transition-colors duration-200 hover:text-accent"
           >
             {content.sections.viewResearch}
           </a>
         </p>
       </section>
 
-      <section className="mt-16">
-        <h2 className="text-[clamp(1.5rem,2.5vw,1.75rem)] font-semibold text-foreground">
+      <section className="mt-16 border-t border-border pt-10 md:mt-24">
+        <h2 className="text-[length:var(--heading-2)] font-semibold tracking-[-0.03em] text-foreground">
           {aboutPage.languages.title}
         </h2>
         <ul className="mt-6 space-y-2">

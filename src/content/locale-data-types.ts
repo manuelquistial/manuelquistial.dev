@@ -16,6 +16,7 @@ export type LocaleData = {
         imageAlt?: string;
         longDescription?: string;
         clientType?: string;
+        tags?: readonly string[];
       }
     >
   >;

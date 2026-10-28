@@ -13,7 +13,7 @@ export const about = {
 export const aboutPage = {
   title: "Experience",
   intro: [
-    "I am an electronic engineer and software developer. My work has focused on building web applications and systems, while my academic training has increasingly led me toward artificial intelligence and neuroengineering.",
+    "I am an electronic engineer and work as a software engineer. My experience has focused on building web applications and systems, while my academic training has led me toward artificial intelligence and neuroengineering.",
     "I am currently pursuing a master's degree in Engineering at Universidad de Antioquia, where I research EEG- and EMG-based brain-computer interfaces.",
   ],
   engineering: {
@@ -89,17 +89,17 @@ export const researchPage = {
       {
         title: "EEG decoding",
         description:
-          "The design uses eight EEG channels over sensorimotor regions. It processes brain activity associated with upper-limb motor imagery tasks.",
+          "The system uses eight EEG channels placed over sensorimotor regions. It processes brain activity associated with upper-limb motor imagery tasks.",
       },
       {
         title: "Muscular contamination control",
         description:
-          "Forearm EMG detects unintended muscle activity and rejects contaminated segments. It is not an additional classifier input or an independent control channel.",
+          "The forearm EMG signal is used to detect unintended muscle activity and reject contaminated segments. It is not an additional classifier input or an independent control channel.",
       },
       {
         title: "Adaptive visual feedback",
         description:
-          "The system links a visual response to its output during the task. Participants receive this feedback throughout the experiment, which enables closed-loop evaluation.",
+          "The classifier output is translated into a visual response during the task. The participant receives this feedback while performing the experiment, which enables closed-loop evaluation of the decoding.",
       },
     ],
   },

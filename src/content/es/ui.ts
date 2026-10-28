@@ -58,7 +58,7 @@ export const hero = {
   viewExperience: "Ver trayectoria",
   learnLabel: "Aprendamos",
   learnNote:
-    "Ideas de tecnología, inteligencia artificial y neurociencia que exploro con más detalle.",
+    "Tecnología, inteligencia artificial y neurociencia que exploro con más detalle.",
 };
 
 export const sections = {
@@ -71,7 +71,7 @@ export const sections = {
   selectedWorkIntro:
     "Una selección de proyectos en los que he participado como ingeniero de software.",
   aprendamosIntro:
-    "Un espacio donde exploro con más detalle temas de tecnología, inteligencia artificial y neurociencia que voy aprendiendo.",
+    "Un espacio donde exploro y explico temas de tecnología, inteligencia artificial y neurociencia que voy aprendiendo.",
   exploreTopic: "Explorar tema",
   engineeringProjects: "Aplicaciones y plataformas",
   researchProjects: "Investigación",

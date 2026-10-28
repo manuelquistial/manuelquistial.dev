@@ -2,7 +2,7 @@ export const experience = [
   {
     id: "independent-consulting",
     company: "Independent Software Engineering and Consulting",
-    role: "Software Engineer and Consultant",
+    role: "Software Engineer",
     description:
       "I develop applications and integrations for business and institutional clients. I focus on the tools their teams use to manage content, products, and workflows.",
     highlights: [

@@ -13,7 +13,7 @@ export const about = {
 export const aboutPage = {
   title: "Trayectoria",
   intro: [
-    "Soy ingeniero electrónico y desarrollador de software. Mi trabajo se ha concentrado en construir aplicaciones y sistemas web, mientras mi formación académica me ha llevado hacia la inteligencia artificial y la neuroingeniería.",
+    "Soy ingeniero electrónico y trabajo como ingeniero de software. Mi experiencia se ha concentrado en construir aplicaciones y sistemas web, mientras mi formación académica me ha llevado hacia la inteligencia artificial y la neuroingeniería.",
     "Actualmente curso una maestría en Ingeniería en la Universidad de Antioquia, donde investigo interfaces cerebro-computador basadas en EEG y EMG.",
   ],
   engineering: {
@@ -89,17 +89,17 @@ export const researchPage = {
       {
         title: "Decodificación EEG",
         description:
-          "El diseño contempla ocho canales EEG sobre regiones sensoriomotoras. Procesa la actividad cerebral asociada a tareas de imaginación motora del miembro superior.",
+          "El sistema utiliza ocho canales EEG ubicados sobre regiones sensoriomotoras. Procesa la actividad cerebral asociada a tareas de imaginación motora del miembro superior.",
       },
       {
         title: "Control de contaminación muscular",
         description:
-          "El EMG de antebrazo detecta actividad muscular no intencionada y rechaza segmentos contaminados. No se utiliza como entrada adicional del clasificador ni como canal independiente de control.",
+          "La señal EMG del antebrazo permite detectar actividad muscular no intencionada y rechazar los segmentos contaminados. No se utiliza como entrada adicional del clasificador ni como canal independiente de control.",
       },
       {
         title: "Retroalimentación visual adaptativa",
         description:
-          "El sistema vincula una respuesta visual a su salida durante la tarea. El participante recibe esta retroalimentación mientras realiza el experimento, lo que permite evaluar la decodificación en lazo cerrado.",
+          "La salida del clasificador se traduce en una respuesta visual durante la tarea. El participante recibe esta retroalimentación mientras realiza el experimento, lo que permite evaluar la decodificación en lazo cerrado.",
       },
     ],
   },

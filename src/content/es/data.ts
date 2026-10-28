@@ -9,6 +9,7 @@ export const data: LocaleData = {
         "Aplicación para gestionar trámites administrativos de una facultad universitaria. La desarrollé para que el equipo administrativo pudiera preparar y dar seguimiento a solicitudes de forma centralizada.",
       imageAlt:
         "Página principal de SITA para preparar un trámite administrativo.",
+      tags: ["Aplicación web"],
     },
     siar: {
       title: "SIAR",
@@ -17,6 +18,7 @@ export const data: LocaleData = {
         "Sistema para reservar espacios y equipos, y registrar novedades sobre esos recursos. Centraliza su disponibilidad, reservas y seguimiento para el equipo administrativo.",
       imageAlt:
         "Página principal de SIAR para reservar espacios, reservar equipos y reportar novedades.",
+      tags: ["Aplicación web"],
     },
     finanzas: {
       title: "Finanzas",
@@ -24,6 +26,7 @@ export const data: LocaleData = {
       description:
         "Aplicación para consultar información presupuestal y financiera utilizada en procesos administrativos de una facultad universitaria.",
       imageAlt: "Página principal de Finanzas con las categorías de presupuesto.",
+      tags: ["Aplicación web"],
     },
     conciliacion: {
       title: "Conciliación",
@@ -32,6 +35,7 @@ export const data: LocaleData = {
         "Herramienta para comparar movimientos contables y detectar diferencias durante el proceso de revisión administrativa.",
       imageAlt:
         "Página principal de Conciliación para comparar movimientos contables.",
+      tags: ["Aplicación web"],
     },
     "babel-scores": {
       title: "Babel Scores",
@@ -89,7 +93,7 @@ export const data: LocaleData = {
   experience: {
     "independent-consulting": {
       company: "Ingeniería de software y consultoría independiente",
-      role: "Ingeniero de software y consultor",
+      role: "Ingeniero de software",
       period: "may. 2022 – Presente",
       description:
         "Desarrollo aplicaciones e integraciones para clientes empresariales e institucionales. Me centro en las herramientas que sus equipos usan para administrar contenidos, productos y procesos.",

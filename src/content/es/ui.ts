@@ -49,12 +49,16 @@ export const hero = {
   title: "Ingeniero de software",
   overlinePrimary: "Ingeniero de software",
   overlineSecondary: "Investigador en neuroingeniería",
-  subtitle:
-    "Desarrollo software y estudio cómo podemos utilizar señales cerebrales para interactuar con tecnología. Tengo experiencia construyendo productos y sistemas web con React, TypeScript, Java y Python, y actualmente curso una maestría en Ingeniería enfocada en interfaces cerebro-computador.",
+  subtitle: [
+    "Desarrollo software y estudio cómo podemos utilizar señales cerebrales para interactuar con tecnología.",
+    "Tengo experiencia construyendo productos y sistemas web con React, TypeScript, Java y Python.",
+    "Actualmente curso una maestría en Ingeniería enfocada en interfaces cerebro-computador.",
+  ],
   viewProjects: "Ver proyectos",
   viewExperience: "Ver trayectoria",
   learnLabel: "Aprendamos",
-  learnNote: "Tecnología, inteligencia artificial y neurociencia, con más detalle.",
+  learnNote:
+    "Ideas de tecnología, inteligencia artificial y neurociencia que exploro con más detalle.",
 };
 
 export const sections = {
@@ -67,7 +71,8 @@ export const sections = {
   selectedWorkIntro:
     "Una selección de proyectos en los que he participado como ingeniero de software.",
   aprendamosIntro:
-    "Un espacio donde desarrollo con más detalle temas de tecnología, inteligencia artificial y neurociencia que voy aprendiendo.",
+    "Un espacio donde exploro con más detalle temas de tecnología, inteligencia artificial y neurociencia que voy aprendiendo.",
+  exploreTopic: "Explorar tema",
   engineeringProjects: "Aplicaciones y plataformas",
   researchProjects: "Investigación",
   agencyWebProjects: "Sitios web",

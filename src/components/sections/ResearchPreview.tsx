@@ -40,8 +40,11 @@ export function ResearchPreview({
         <div className="flex flex-col border border-border bg-surface p-6 md:p-8 lg:col-span-6 lg:p-10">
           <div>
             <p className="text-overline text-muted">{affiliation}</p>
-            <p className="mt-6 font-display text-[clamp(2rem,4vw,3.5rem)] leading-[0.95] tracking-[-0.04em] text-foreground md:mt-8">
+            <h3 className="mt-6 font-display text-[clamp(2rem,4vw,3.5rem)] leading-[0.95] tracking-[-0.04em] text-foreground md:mt-8">
               {projectTitle}
+            </h3>
+            <p className="mt-6 max-w-[42ch] text-[length:var(--body-lg)] leading-[1.45] text-muted md:mt-8">
+              {summary}
             </p>
           </div>
           {systemItems.length > 0 ? (
@@ -66,12 +69,8 @@ export function ResearchPreview({
         </div>
 
         <div className="flex flex-col justify-center lg:col-span-5 lg:col-start-8">
-          <h3 className="sr-only">{projectTitle}</h3>
-          <p className="max-w-[42ch] text-[length:var(--body-lg)] leading-[1.45] text-muted">
-            {summary}
-          </p>
           {tags.length > 0 ? (
-            <ul className="mt-8 flex flex-wrap gap-2">
+            <ul className="flex flex-wrap gap-2">
               {tags.map((tag) => (
                 <li key={tag}>
                   <TagChip>{tag}</TagChip>
@@ -79,7 +78,7 @@ export function ResearchPreview({
               ))}
             </ul>
           ) : null}
-          <div className="mt-8">
+          <div className={tags.length > 0 ? "mt-8" : undefined}>
             <ViewAllLink href={localizedPath(locale, "/research")}>
               {viewAllLabel}
             </ViewAllLink>

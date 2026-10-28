@@ -17,7 +17,7 @@ export type EducationItem = {
 
 export type AboutPageContent = {
   title: string;
-  intro: string;
+  intro: string | readonly string[];
   engineering: ContentSection;
   research: ContentSection;
   focus: {

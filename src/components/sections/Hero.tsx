@@ -45,9 +45,14 @@ export function Hero({
             {lastName ? <span className="block">{lastName}</span> : null}
           </h1>
 
-          <p className="mt-8 max-w-[32rem] text-[length:var(--body)] leading-[1.45] text-muted md:mt-10">
-            {content.subtitle}
-          </p>
+          <div className="mt-8 max-w-[32rem] space-y-4 text-[length:var(--body)] leading-[1.45] text-muted md:mt-10">
+            {(Array.isArray(content.subtitle)
+              ? content.subtitle
+              : [content.subtitle]
+            ).map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
 
           <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
             <Link

@@ -12,8 +12,10 @@ export const about = {
 
 export const aboutPage = {
   title: "Trayectoria",
-  intro:
-    "Soy ingeniero electrónico y desarrollador de software. Durante los últimos años he trabajado construyendo aplicaciones y sistemas web, mientras continúo mi formación en inteligencia artificial y neuroingeniería. Actualmente curso una maestría en Ingeniería en la Universidad de Antioquia, donde investigo interfaces cerebro-computador basadas en EEG y EMG.",
+  intro: [
+    "Soy ingeniero electrónico y desarrollador de software. Mi trabajo se ha concentrado en construir aplicaciones y sistemas web, mientras mi formación académica me ha llevado hacia la inteligencia artificial y la neuroingeniería.",
+    "Actualmente curso una maestría en Ingeniería en la Universidad de Antioquia, donde investigo interfaces cerebro-computador basadas en EEG y EMG.",
+  ],
   engineering: {
     title: "Ingeniería de software",
     paragraphs: [],

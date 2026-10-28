@@ -49,12 +49,16 @@ export const hero = {
   title: "Software Engineer",
   overlinePrimary: "Software Engineer",
   overlineSecondary: "Neuroengineering Researcher",
-  subtitle:
-    "I build software and study how brain signals can be used to interact with technology. I have experience building web products and systems with React, TypeScript, Java, and Python, and I am currently pursuing a master's degree in Engineering focused on brain-computer interfaces.",
+  subtitle: [
+    "I build software and study how brain signals can be used to interact with technology.",
+    "I have experience building web products and systems with React, TypeScript, Java, and Python.",
+    "I am currently pursuing a master's degree in Engineering focused on brain-computer interfaces.",
+  ],
   viewProjects: "View projects",
   viewExperience: "View experience",
-  learnLabel: "Aprendamos",
-  learnNote: "Technology, AI, and neuroscience topics in more detail. In Spanish.",
+  learnLabel: "Learn",
+  learnNote:
+    "Ideas in technology, artificial intelligence, and neuroscience that I explore in more detail.",
 };
 
 export const sections = {
@@ -68,6 +72,7 @@ export const sections = {
     "A selection of projects I have worked on as a software engineer.",
   aprendamosIntro:
     "A space where I explore technology, artificial intelligence, and neuroscience topics in more detail as I learn about them.",
+  exploreTopic: "Explore topic",
   engineeringProjects: "Applications and platforms",
   researchProjects: "Research",
   agencyWebProjects: "Websites",

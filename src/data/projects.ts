@@ -21,7 +21,7 @@ export const projects = [
     category: "engineering",
     clientType: "Universidad de Antioquia",
     description:
-      "A system for booking rooms and equipment and reporting issues with those resources. I built it to support resource management at a university faculty.",
+      "A system for booking spaces and equipment, and recording issues with those resources. It centralizes their availability, reservations, and follow-up for the administrative team.",
     image: "/images/projects/siar.jpg",
     imageAlt:
       "SIAR main page for space reservations, equipment reservations, and incident reports.",
@@ -38,7 +38,7 @@ export const projects = [
     category: "engineering",
     clientType: "Universidad de Antioquia",
     description:
-      "An application for consulting budget and financial information. I built it to support administrative work at a university faculty.",
+      "An application for consulting budget and financial information used in administrative processes at a university faculty.",
     image: "/images/projects/finanzas.jpg",
     imageAlt: "Finanzas main page showing budget categories.",
     imageWidth: 1348,
@@ -54,7 +54,7 @@ export const projects = [
     category: "engineering",
     clientType: "Universidad de Antioquia",
     description:
-      "A tool for comparing accounting entries and supporting their review. I built it to help the administrative team verify that information.",
+      "A tool for comparing accounting movements and detecting differences during the administrative review process.",
     image: "/images/projects/conciliacion.jpg",
     imageAlt: "Conciliación main page for comparing accounting movements.",
     imageWidth: 1348,

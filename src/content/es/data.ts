@@ -14,7 +14,7 @@ export const data: LocaleData = {
       title: "SIAR",
       clientType: "Universidad de Antioquia",
       description:
-        "Sistema para reservar espacios y equipos, y registrar novedades sobre esos recursos. Lo desarrollé para apoyar la administración de recursos de una facultad universitaria.",
+        "Sistema para reservar espacios y equipos, y registrar novedades sobre esos recursos. Centraliza su disponibilidad, reservas y seguimiento para el equipo administrativo.",
       imageAlt:
         "Página principal de SIAR para reservar espacios, reservar equipos y reportar novedades.",
     },
@@ -22,14 +22,14 @@ export const data: LocaleData = {
       title: "Finanzas",
       clientType: "Universidad de Antioquia",
       description:
-        "Aplicación para consultar información presupuestal y financiera. La desarrollé para apoyar el trabajo administrativo de una facultad universitaria.",
+        "Aplicación para consultar información presupuestal y financiera utilizada en procesos administrativos de una facultad universitaria.",
       imageAlt: "Página principal de Finanzas con las categorías de presupuesto.",
     },
     conciliacion: {
       title: "Conciliación",
       clientType: "Universidad de Antioquia",
       description:
-        "Herramienta para comparar movimientos contables y facilitar su revisión. La desarrollé para apoyar al equipo administrativo en la verificación de esa información.",
+        "Herramienta para comparar movimientos contables y detectar diferencias durante el proceso de revisión administrativa.",
       imageAlt:
         "Página principal de Conciliación para comparar movimientos contables.",
     },
@@ -89,7 +89,7 @@ export const data: LocaleData = {
   experience: {
     "independent-consulting": {
       company: "Ingeniería de software y consultoría independiente",
-      role: "Ingeniero full-stack y consultor de plataformas web",
+      role: "Ingeniero de software y consultor",
       period: "may. 2022 – Presente",
       description:
         "Desarrollo aplicaciones e integraciones para clientes empresariales e institucionales. Me centro en las herramientas que sus equipos usan para administrar contenidos, productos y procesos.",

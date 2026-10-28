@@ -9,7 +9,7 @@ import { ViewAllLink } from "@/components/ui/ViewAllLink";
 
 interface AboutPreviewProps {
   locale: Locale;
-  intro: string;
+  intro: string | readonly string[];
   education: SiteContent["aboutPage"]["education"];
   sectionLabel: string;
   viewAllLabel: string;
@@ -54,9 +54,11 @@ export function AboutPreview({
         </div>
 
         <div className="lg:col-span-6 lg:col-start-7">
-          <p className="max-w-[42ch] text-[length:var(--body-lg)] leading-[1.45] text-muted">
-            {intro}
-          </p>
+          <div className="max-w-[42ch] space-y-4 text-[length:var(--body-lg)] leading-[1.45] text-muted">
+            {(Array.isArray(intro) ? intro : [intro]).map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
           <div className="mt-8">
             <ViewAllLink href={localizedPath(locale, "/about")}>
               {viewAllLabel}

@@ -55,7 +55,11 @@ export default async function AboutPage({ params }: AboutPageProps) {
         <SectionTitle
           as="h1"
           title={aboutPage.title}
-          subtitle={aboutPage.intro}
+          subtitle={
+            typeof aboutPage.intro === "string"
+              ? aboutPage.intro
+              : aboutPage.intro.join(" ")
+          }
         />
       </div>
 

@@ -12,8 +12,10 @@ export const about = {
 
 export const aboutPage = {
   title: "Experience",
-  intro:
-    "I am an electronic engineer and software developer. Over the past several years, I have worked building web applications and systems while continuing my training in artificial intelligence and neuroengineering. I am currently pursuing a master's degree in Engineering at Universidad de Antioquia, where I research EEG- and EMG-based brain-computer interfaces.",
+  intro: [
+    "I am an electronic engineer and software developer. My work has focused on building web applications and systems, while my academic training has increasingly led me toward artificial intelligence and neuroengineering.",
+    "I am currently pursuing a master's degree in Engineering at Universidad de Antioquia, where I research EEG- and EMG-based brain-computer interfaces.",
+  ],
   engineering: {
     title: "Software engineering",
     paragraphs: [],

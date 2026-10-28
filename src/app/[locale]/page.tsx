@@ -1,6 +1,5 @@
 import { getSiteContent } from "@/content/getSiteContent";
 import { learnLessons } from "@/content/learn/catalog";
-import { learnUi } from "@/content/learn/es/ui";
 import { getFeaturedExperience } from "@/data/experience";
 import { getProjectById } from "@/data/projects";
 import { parseLocale } from "@/i18n/parseLocale";
@@ -85,7 +84,7 @@ export default async function HomePage({ params }: HomePageProps) {
           locale={locale}
           sectionLabel={content.nav.learn}
           intro={content.sections.aprendamosIntro}
-          exploreLabel={learnUi.explore}
+          exploreLabel={content.sections.exploreTopic}
           lessons={publishedLessons.map((lesson) => ({
             slug: lesson.slug,
             title: lesson.title,

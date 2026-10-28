@@ -13,7 +13,7 @@ export const about = {
 export const aboutPage = {
   title: "Experience",
   intro:
-    "My experience combines full-stack development, application modernization, and service integration. I have worked on enterprise platforms and administrative tools for marketing, operations, and academic teams.",
+    "I am an electronic engineer and software developer. Over the past several years, I have worked building web applications and systems while continuing my training in artificial intelligence and neuroengineering. I am currently pursuing a master's degree in Engineering at Universidad de Antioquia, where I research EEG- and EMG-based brain-computer interfaces.",
   engineering: {
     title: "Software engineering",
     paragraphs: [],
@@ -72,9 +72,9 @@ export const researchPage = {
     "Closed-loop motor imagery decoding with a low-density EEG–EMG interface",
   affiliation: "Master’s in Engineering · Universidad de Antioquia",
   previewTagline:
-    "Master’s research on motor imagery decoding with eight-channel EEG, EMG-based muscular contamination control, and closed-loop visual feedback.",
+    "I study how brain signals related to imagined movement can be interpreted.",
   summary:
-    "My research addresses upper-limb motor imagery decoding through a hybrid electroencephalography–electromyography (EEG–EMG) brain-computer interface. The approach combines eight-channel EEG, EMG-based muscular contamination control, and adaptive visual feedback. It evaluates closed-loop interaction between the participant and the system.",
+    "I study how brain signals related to imagined movement can be interpreted. My master's research focuses on motor imagery decoding using low-density EEG, EMG-based control of muscular contamination, and real-time visual feedback.",
   objective: {
     title: "Research objective",
     paragraphs: [

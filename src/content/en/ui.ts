@@ -29,9 +29,9 @@ export const meta = {
 export const nav = {
   home: "Home",
   about: "About",
-  projects: "Work",
+  projects: "Projects",
   research: "Research",
-  learn: "Aprendamos",
+  learn: "Learn",
   experience: "Experience",
   contact: "Contact",
 };
@@ -48,13 +48,13 @@ export const a11y = {
 export const hero = {
   title: "Software Engineer",
   overlinePrimary: "Software Engineer",
-  overlineSecondary: "Neuroengineering researcher",
+  overlineSecondary: "Neuroengineering Researcher",
   subtitle:
-    "I build enterprise platforms, service integrations, and modernized applications. I also work on motor imagery decoding with EEG–EMG brain-computer interfaces.",
+    "I build software and study how brain signals can be used to interact with technology. I have experience building web products and systems with React, TypeScript, Java, and Python, and I am currently pursuing a master's degree in Engineering focused on brain-computer interfaces.",
   viewProjects: "View projects",
   viewExperience: "View experience",
   learnLabel: "Aprendamos",
-  learnNote: "Social-media topics, in more detail. In Spanish.",
+  learnNote: "Technology, AI, and neuroscience topics in more detail. In Spanish.",
 };
 
 export const sections = {
@@ -63,7 +63,11 @@ export const sections = {
   teaching: "Teaching and technical training",
   skills: "Skills",
   projects: "Projects",
-  selectedWork: "Selected work",
+  selectedWork: "Selected Projects",
+  selectedWorkIntro:
+    "A selection of projects I have worked on as a software engineer.",
+  aprendamosIntro:
+    "A space where I explore technology, artificial intelligence, and neuroscience topics in more detail as I learn about them.",
   engineeringProjects: "Applications and platforms",
   researchProjects: "Research",
   agencyWebProjects: "Websites",
@@ -105,9 +109,9 @@ export const projectCard = {
 };
 
 export const contactCta = {
-  title: "Contact",
+  title: "Let's talk",
   description:
-    "Professional inquiries about software engineering roles, development projects, and research collaborations.",
+    "I'm open to conversations about software opportunities, development projects, and research collaborations.",
   button: "Contact me on LinkedIn",
 };
 

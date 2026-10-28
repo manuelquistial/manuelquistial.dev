@@ -64,6 +64,7 @@ export default async function HomePage({ params }: HomePageProps) {
       />
       <SelectedProjects
         title={content.sections.selectedWork}
+        description={content.sections.selectedWorkIntro}
         projects={selectedProjects}
         projectCard={content.projectCard}
         viewAllHref={localizedPath(locale, "/projects")}
@@ -83,7 +84,7 @@ export default async function HomePage({ params }: HomePageProps) {
         <AprendamosPreview
           locale={locale}
           sectionLabel={content.nav.learn}
-          intro={learnUi.indexIntro}
+          intro={content.sections.aprendamosIntro}
           exploreLabel={learnUi.explore}
           lessons={publishedLessons.map((lesson) => ({
             slug: lesson.slug,

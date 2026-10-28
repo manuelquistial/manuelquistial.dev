@@ -4,7 +4,7 @@ export const learnUi = {
   indexDescription:
     "Explicaciones visuales para ampliar temas de redes: leer, observar y usar controles. La primera trata de cómo se comunican las neuronas.",
   indexIntro:
-    "Aquí puedes explorar con más detalle algunos temas que comento en redes. Cada explicación se puede leer, mirar y recorrer con controles.",
+    "Un espacio donde desarrollo con más detalle temas de tecnología, inteligencia artificial y neurociencia que voy aprendiendo.",
   explore: "Explorar explicación",
   scenesLabel: "Escenas",
   questionEyebrow: "Pregunta",

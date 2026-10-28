@@ -29,7 +29,7 @@ export const meta = {
 export const nav = {
   home: "Inicio",
   about: "Sobre mí",
-  projects: "Trabajo",
+  projects: "Proyectos",
   research: "Investigación",
   learn: "Aprendamos",
   experience: "Experiencia",
@@ -50,20 +50,24 @@ export const hero = {
   overlinePrimary: "Ingeniero de software",
   overlineSecondary: "Investigador en neuroingeniería",
   subtitle:
-    "Desarrollo plataformas empresariales, integraciones de servicios y aplicaciones modernizadas. También trabajo en decodificación de imaginación motora con interfaces cerebro-computador EEG–EMG.",
+    "Desarrollo software y estudio cómo podemos utilizar señales cerebrales para interactuar con tecnología. Tengo experiencia construyendo productos y sistemas web con React, TypeScript, Java y Python, y actualmente curso una maestría en Ingeniería enfocada en interfaces cerebro-computador.",
   viewProjects: "Ver proyectos",
   viewExperience: "Ver trayectoria",
   learnLabel: "Aprendamos",
-  learnNote: "Temas de las redes, con más detalle.",
+  learnNote: "Tecnología, inteligencia artificial y neurociencia, con más detalle.",
 };
 
 export const sections = {
   about: "Sobre mí",
-  experience: "Experiencia",
+  experience: "Experiencia profesional",
   teaching: "Docencia y formación tecnológica",
   skills: "Competencias",
   projects: "Proyectos",
-  selectedWork: "Trabajo seleccionado",
+  selectedWork: "Proyectos destacados",
+  selectedWorkIntro:
+    "Una selección de proyectos en los que he participado como ingeniero de software.",
+  aprendamosIntro:
+    "Un espacio donde desarrollo con más detalle temas de tecnología, inteligencia artificial y neurociencia que voy aprendiendo.",
   engineeringProjects: "Aplicaciones y plataformas",
   researchProjects: "Investigación",
   agencyWebProjects: "Sitios web",
@@ -105,9 +109,9 @@ export const projectCard = {
 };
 
 export const contactCta = {
-  title: "Contacto",
+  title: "¿Hablamos?",
   description:
-    "Contacto profesional para posiciones de ingeniería de software, proyectos de desarrollo y colaboraciones de investigación.",
+    "Estoy abierto a conversar sobre oportunidades de software, proyectos de desarrollo y colaboraciones de investigación.",
   button: "Contactar por LinkedIn",
 };
 

@@ -13,7 +13,7 @@ export const about = {
 export const aboutPage = {
   title: "Trayectoria",
   intro:
-    "Mi experiencia se centra en desarrollo full-stack y modernización de aplicaciones. He trabajado en plataformas empresariales y en herramientas de administración para equipos de marketing, operaciones y áreas académicas.",
+    "Soy ingeniero electrónico y desarrollador de software. Durante los últimos años he trabajado construyendo aplicaciones y sistemas web, mientras continúo mi formación en inteligencia artificial y neuroingeniería. Actualmente curso una maestría en Ingeniería en la Universidad de Antioquia, donde investigo interfaces cerebro-computador basadas en EEG y EMG.",
   engineering: {
     title: "Ingeniería de software",
     paragraphs: [],
@@ -72,9 +72,9 @@ export const researchPage = {
     "Decodificación de imaginación motora en lazo cerrado con una interfaz EEG–EMG de baja densidad",
   affiliation: "Maestría en Ingeniería · Universidad de Antioquia",
   previewTagline:
-    "Investigación de maestría en decodificación de imaginación motora con EEG de ocho canales, control de contaminación muscular mediante EMG y retroalimentación visual en lazo cerrado.",
+    "Investigo cómo podemos interpretar señales cerebrales relacionadas con la imaginación de movimiento.",
   summary:
-    "Mi investigación aborda la decodificación de imaginación motora del miembro superior mediante una interfaz cerebro-computador híbrida de electroencefalografía–electromiografía (EEG–EMG). La propuesta combina EEG de ocho canales, control de contaminación muscular mediante EMG y retroalimentación visual adaptativa. Evalúa la interacción entre el participante y el sistema en lazo cerrado.",
+    "Investigo cómo podemos interpretar señales cerebrales relacionadas con la imaginación de movimiento. Mi investigación de maestría estudia la decodificación de imaginación motora utilizando EEG de baja densidad, control de contaminación muscular mediante EMG y retroalimentación visual en tiempo real.",
   objective: {
     title: "Objetivo de investigación",
     paragraphs: [

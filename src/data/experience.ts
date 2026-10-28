@@ -4,7 +4,7 @@ export const experience = [
     company: "Independent Software Engineering and Consulting",
     role: "Full-Stack Engineer and Web Platform Consultant",
     description:
-      "I develop applications and integrations for business and institutional clients, with a focus on the tools their teams use to manage content, products, and workflows.",
+      "I develop applications and integrations for business and institutional clients. I focus on the tools their teams use to manage content, products, and workflows.",
     highlights: [
       "Built interfaces that enabled non-technical teams to manage pages, program information, galleries, multilingual content, and product data without developer support for each update.",
       "Implemented authentication integrations, reporting automation, and administrative functionality tailored to each client’s needs.",
@@ -60,7 +60,7 @@ export const experience = [
     company: "Anthology / Blackboard",
     role: "Software Engineer",
     description:
-      "Full-stack development of enterprise functionality, covering administrative interfaces, backend services, and frontend modernization.",
+      "I contributed to the evolution of web products used by educational institutions. I worked on administrative interfaces, Java backend services, and migrating functionality from Angular to React.",
     highlights: [
       "Developed React and TypeScript modules within a modular architecture, using reusable components to maintain consistency across interfaces.",
       "Extended and maintained REST APIs and business logic in Java and Spring Boot to support frontend integrations and platform workflows.",
@@ -88,7 +88,7 @@ export const experience = [
     company: "Digital Americas Pipeline Initiative",
     role: "Backend Developer",
     description:
-      "Development of services and operational tools for distributed applications on AWS.",
+      "I developed services and operational tools for distributed applications. I worked on microservices and asynchronous workflows on AWS for data processing and operational monitoring.",
     highlights: [
       "Developed microservices with Node.js and Express to support data processing and integration between components.",
       "Implemented distributed processing and notification workflows with AWS services for asynchronous task execution.",

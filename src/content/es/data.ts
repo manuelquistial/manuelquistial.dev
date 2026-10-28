@@ -6,7 +6,7 @@ export const data: LocaleData = {
       title: "SITA",
       clientType: "Universidad de Antioquia",
       description:
-        "Desarrollé una aplicación para gestionar trámites administrativos de la Facultad de Comunicaciones y Filología.",
+        "Aplicación para gestionar trámites administrativos de una facultad universitaria. La desarrollé para que el equipo administrativo pudiera preparar y dar seguimiento a solicitudes de forma centralizada.",
       imageAlt:
         "Página principal de SITA para preparar un trámite administrativo.",
     },
@@ -14,7 +14,7 @@ export const data: LocaleData = {
       title: "SIAR",
       clientType: "Universidad de Antioquia",
       description:
-        "Desarrollé el sistema de reservas de espacios y equipos, con registro de novedades para la administración de recursos de la Facultad de Comunicaciones y Filología.",
+        "Sistema para reservar espacios y equipos, y registrar novedades sobre esos recursos. Lo desarrollé para apoyar la administración de recursos de una facultad universitaria.",
       imageAlt:
         "Página principal de SIAR para reservar espacios, reservar equipos y reportar novedades.",
     },
@@ -22,33 +22,33 @@ export const data: LocaleData = {
       title: "Finanzas",
       clientType: "Universidad de Antioquia",
       description:
-        "Desarrollé una aplicación de consulta presupuestal y financiera para apoyar el trabajo administrativo de la Facultad de Comunicaciones y Filología.",
+        "Aplicación para consultar información presupuestal y financiera. La desarrollé para apoyar el trabajo administrativo de una facultad universitaria.",
       imageAlt: "Página principal de Finanzas con las categorías de presupuesto.",
     },
     conciliacion: {
       title: "Conciliación",
       clientType: "Universidad de Antioquia",
       description:
-        "Desarrollé una herramienta para comparar movimientos contables y apoyar su revisión por el equipo administrativo.",
+        "Herramienta para comparar movimientos contables y facilitar su revisión. La desarrollé para apoyar al equipo administrativo en la verificación de esa información.",
       imageAlt:
         "Página principal de Conciliación para comparar movimientos contables.",
     },
     "babel-scores": {
       title: "Babel Scores",
       description:
-        "Plataforma de publicación, consulta y venta de partituras digitales, con lector web de partituras.",
+        "Plataforma para publicar, consultar y vender partituras digitales. Desarrollé el lector web de partituras y trabajé en funcionalidades de administración, comercio electrónico e integraciones de almacenamiento y autenticación.",
       imageAlt:
         "Página de inicio de Babel Scores con su navegación y una imagen de unas manos sobre un teclado.",
     },
     "eeg-motor-imagery-pipeline": {
       title: "Interfaces cerebro-computador e imaginación motora",
       description:
-        "Investigación de maestría en decodificación de imaginación motora con EEG de ocho canales, control de contaminación muscular mediante EMG y retroalimentación visual en lazo cerrado.",
+        "Investigación sobre cómo interpretar señales cerebrales relacionadas con la imaginación de movimiento, con EEG de ocho canales, control de contaminación muscular mediante EMG y retroalimentación visual en lazo cerrado.",
     },
     "sal-picciotto-website": {
       title: "Sal & Picciotto",
       description:
-        "Implementé el sitio corporativo que presenta los servicios y el portafolio de la agencia.",
+        "Sitio web corporativo de una agencia de diseño. Implementé la página que presenta sus servicios y portafolio, a partir del diseño visual de la agencia.",
       imageAlt:
         "Página de inicio de Sal & Picciotto con una cuadrícula de proyectos de marca.",
     },
@@ -92,7 +92,7 @@ export const data: LocaleData = {
       role: "Ingeniero full-stack y consultor de plataformas web",
       period: "may. 2022 – Presente",
       description:
-        "Desarrollo aplicaciones e integraciones para clientes empresariales e institucionales, con especial atención a las herramientas que sus equipos utilizan para administrar contenidos, productos y procesos.",
+        "Desarrollo aplicaciones e integraciones para clientes empresariales e institucionales. Me centro en las herramientas que sus equipos usan para administrar contenidos, productos y procesos.",
       highlights: [
         "Construí interfaces para que equipos no técnicos administraran páginas, información de programas, galerías, contenidos multilingües y datos de productos sin depender de un desarrollador para cada actualización.",
         "Implementé integraciones de autenticación, automatización de reportes y funcionalidades de administración adaptadas a las necesidades de cada cliente.",
@@ -131,7 +131,7 @@ export const data: LocaleData = {
       period: "nov. 2021 – may. 2026",
       location: "Bogotá, Colombia",
       description:
-        "Desarrollo full-stack de funcionalidades empresariales, con trabajo en interfaces administrativas, servicios backend y modernización de frontend.",
+        "Participé en la evolución de productos web utilizados por instituciones educativas. Trabajé en interfaces administrativas, servicios backend en Java y en la migración de funcionalidades de Angular a React.",
       technologiesLabel: "Tecnologías",
       highlights: [
         "Desarrollé módulos en React y TypeScript dentro de una arquitectura modular, con componentes reutilizables para mantener consistencia entre las interfaces.",
@@ -146,7 +146,7 @@ export const data: LocaleData = {
       period: "feb. 2020 – nov. 2021",
       location: "Medellín, Colombia",
       description:
-        "Desarrollo de servicios y herramientas de operación para aplicaciones distribuidas en AWS.",
+        "Desarrollé servicios y herramientas de operación para aplicaciones distribuidas. Trabajé en microservicios y flujos asíncronos sobre AWS para el procesamiento de datos y el monitoreo operativo.",
       technologiesLabel: "Tecnologías",
       highlights: [
         "Desarrollé microservicios con Node.js y Express para soportar el procesamiento de datos y la integración entre componentes.",

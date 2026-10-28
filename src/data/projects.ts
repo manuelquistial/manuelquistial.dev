@@ -5,7 +5,7 @@ export const projects = [
     category: "engineering",
     clientType: "Universidad de Antioquia",
     description:
-      "Development of an application for administrative procedures at the Faculty of Communications and Philology.",
+      "An application for managing administrative procedures at a university faculty. I built it so administrative teams could prepare and track requests in one place.",
     image: "/images/projects/sita.jpg",
     imageAlt: "SITA main page for preparing an administrative request.",
     imageWidth: 1348,
@@ -21,7 +21,7 @@ export const projects = [
     category: "engineering",
     clientType: "Universidad de Antioquia",
     description:
-      "Development of a room and equipment booking system with issue reporting for resource management at the Faculty of Communications and Philology.",
+      "A system for booking rooms and equipment and reporting issues with those resources. I built it to support resource management at a university faculty.",
     image: "/images/projects/siar.jpg",
     imageAlt:
       "SIAR main page for space reservations, equipment reservations, and incident reports.",
@@ -38,7 +38,7 @@ export const projects = [
     category: "engineering",
     clientType: "Universidad de Antioquia",
     description:
-      "Development of a budget and financial information application to support administrative work at the Faculty of Communications and Philology.",
+      "An application for consulting budget and financial information. I built it to support administrative work at a university faculty.",
     image: "/images/projects/finanzas.jpg",
     imageAlt: "Finanzas main page showing budget categories.",
     imageWidth: 1348,
@@ -54,7 +54,7 @@ export const projects = [
     category: "engineering",
     clientType: "Universidad de Antioquia",
     description:
-      "Development of a tool for comparing accounting entries and supporting their review by the administrative team.",
+      "A tool for comparing accounting entries and supporting their review. I built it to help the administrative team verify that information.",
     image: "/images/projects/conciliacion.jpg",
     imageAlt: "Conciliación main page for comparing accounting movements.",
     imageWidth: 1348,
@@ -69,7 +69,7 @@ export const projects = [
     title: "Babel Scores",
     category: "engineering",
     description:
-      "Platform for publishing, browsing, and selling digital sheet music, with a web sheet music reader.",
+      "A platform for publishing, browsing, and selling digital sheet music. I developed the web sheet music reader and worked on administration features, e-commerce functionality, and storage and authentication integrations.",
     image: "/images/projects/babel-scores.jpg",
     imageAlt:
       "Babel Scores homepage showing its navigation and a green-tinted image of hands on a keyboard.",
@@ -86,7 +86,7 @@ export const projects = [
     title: "Brain-computer interfaces and motor imagery",
     category: "research",
     description:
-      "Master’s research on motor imagery decoding with eight-channel EEG, EMG-based muscular contamination control, and closed-loop visual feedback.",
+      "Research on how brain signals related to imagined movement can be interpreted, using eight-channel EEG, EMG-based muscular contamination control, and closed-loop visual feedback.",
     tags: ["Python", "EEG", "BCI"],
     status: "in-progress",
     featured: false,
@@ -97,7 +97,7 @@ export const projects = [
     category: "agency-web",
     agency: "Sal & Picciotto",
     description:
-      "Implementation of the agency’s corporate website presenting its services and portfolio.",
+      "Corporate website for a design agency. I implemented the site that presents its services and portfolio, based on the agency’s visual design.",
     tags: ["WordPress", "Elementor Pro"],
     status: "live",
     image: "/images/projects/sal-picciotto.jpg",

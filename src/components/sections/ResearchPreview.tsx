@@ -36,16 +36,16 @@ export function ResearchPreview({
     <Section id={pageSections.research} variant="bordered">
       <SectionHeader number="02" label={sectionLabel} />
 
-      <div className="mt-12 grid gap-10 lg:mt-16 lg:grid-cols-12 lg:gap-12">
-        <div className="flex flex-col justify-between border border-border bg-surface p-6 md:p-8 lg:col-span-6 lg:min-h-[28rem] lg:p-10">
+      <div className="mt-[var(--section-heading-gap)] grid gap-10 lg:grid-cols-12 lg:gap-12">
+        <div className="flex flex-col border border-border bg-surface p-6 md:p-8 lg:col-span-6 lg:p-10">
           <div>
             <p className="text-overline text-muted">{affiliation}</p>
-            <p className="mt-8 font-display text-[clamp(2rem,4vw,3.5rem)] leading-[0.95] tracking-[-0.04em] text-foreground">
+            <p className="mt-6 font-display text-[clamp(2rem,4vw,3.5rem)] leading-[0.95] tracking-[-0.04em] text-foreground md:mt-8">
               {projectTitle}
             </p>
           </div>
           {systemItems.length > 0 ? (
-            <ul className="mt-10 space-y-4 border-t border-border pt-6">
+            <ul className="mt-8 space-y-4 border-t border-border pt-6">
               {systemItems.map((item, index) => (
                 <li key={item.title} className="grid grid-cols-[auto_1fr] gap-3">
                   <span className="text-overline text-muted" aria-hidden="true">

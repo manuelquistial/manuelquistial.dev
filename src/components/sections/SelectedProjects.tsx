@@ -66,7 +66,7 @@ export function SelectedProjects({
     <Section id={pageSections.selectedProjects} variant="bordered">
       <SectionHeader number="01" label={title} description={description} />
 
-      <div className="mt-12 space-y-0 md:mt-16">
+      <div className="mt-[var(--section-heading-gap)] space-y-0">
         {projects.map((project, index) => {
           const imageLeft = index % 2 === 0;
           const detailHref = project.caseStudyUrl;
@@ -102,7 +102,7 @@ export function SelectedProjects({
           return (
             <article
               key={project.id}
-              className="grid gap-6 border-t border-border py-10 md:gap-8 md:py-14 lg:grid-cols-12 lg:items-center lg:gap-12"
+              className="grid gap-6 border-t border-border py-8 last:pb-0 md:gap-8 md:py-12 md:last:pb-0 lg:grid-cols-12 lg:items-center lg:gap-12"
             >
               {project.image ? (
                 <div
@@ -161,7 +161,7 @@ export function SelectedProjects({
         })}
       </div>
 
-      <div className="mt-4 border-t border-border pt-6 md:mt-6">
+      <div className="mt-8 border-t border-border pt-6 md:mt-10">
         <ViewAllLink href={viewAllHref}>{viewAllLabel}</ViewAllLink>
       </div>
     </Section>

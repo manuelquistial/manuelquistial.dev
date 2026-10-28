@@ -18,7 +18,7 @@ export function SectionHeader({
   return (
     <div
       className={cn(
-        "grid gap-6 border-t border-border pt-8 md:grid-cols-12 md:gap-8 md:pt-10",
+        "grid gap-6 md:grid-cols-12 md:gap-8",
         className,
       )}
     >

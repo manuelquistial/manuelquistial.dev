@@ -29,10 +29,10 @@ export function AboutPreview({
   const featuredDegrees = education.items.slice(0, 2);
 
   return (
-    <Section id={pageSections.about} variant="bordered">
+    <Section id={pageSections.about} variant="bordered" spacing="footer-adjacent">
       <SectionHeader number="05" label={sectionLabel} />
 
-      <div className="mt-12 grid gap-10 lg:mt-16 lg:grid-cols-12 lg:gap-12">
+      <div className="mt-[var(--section-heading-gap)] grid gap-10 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-5">
           <ul className="space-y-3">
             <li className="text-[length:var(--heading-3)] font-semibold text-foreground">

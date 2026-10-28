@@ -24,15 +24,15 @@ export function ExperiencePreview({
     <Section id={pageSections.experience} variant="bordered">
       <SectionHeader number="04" label={sectionLabel} />
 
-      <ul className="mt-12 divide-y divide-border border-y border-border md:mt-16">
+      <ul className="mt-[var(--section-heading-gap)] divide-y divide-border border-y border-border">
         {items.map((item) => (
-          <li key={item.id} className="py-8 md:py-10">
+          <li key={item.id} className="py-8 last:pb-0 md:py-10 md:last:pb-0">
             <ExperienceCard item={item} variant="preview" />
           </li>
         ))}
       </ul>
 
-      <div className="mt-8">
+      <div className="mt-8 md:mt-10">
         <ViewAllLink
           href={localizedSectionPath(locale, "/about", pageSections.experience)}
         >

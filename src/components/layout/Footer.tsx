@@ -16,7 +16,7 @@ export function Footer({ content }: FooterProps) {
       id={pageSections.contact}
       className="mt-auto bg-footer-background text-footer-text"
     >
-      <Container className="grid gap-12 py-16 md:grid-cols-12 md:gap-8 md:py-20 lg:min-h-[20rem] lg:py-24">
+      <Container className="grid gap-12 py-16 md:grid-cols-12 md:gap-8 md:py-20 lg:py-24">
         <div className="md:col-span-5 lg:col-span-4">
           <h2 className="font-display text-[clamp(2.5rem,5vw,4rem)] uppercase text-footer-text">
             {contactCta.title}

@@ -28,6 +28,12 @@
   --space-24: 6rem;
   --space-32: 8rem;
   --space-40: 10rem;
+  /* Single source of truth for home section rhythm */
+  --section-space: 4.5rem; /* 72px mobile */
+  --section-pad-bottom: 2.75rem; /* ~44px before the next rule */
+  --section-pad-top: 1.75rem; /* ~28px after the rule → title */
+  --section-heading-gap: 2.5rem; /* 40px heading → content */
+  --section-pad-bottom-footer: 5rem; /* 80px before dark footer */
   --radius-button: 2px;
   --radius-image: 0px;
   --container-max: 1440px;
@@ -55,6 +61,21 @@
     --learn-gutter: 32px;
     --learn-panel-pad: 24px;
     --learn-section-gap: 64px;
+    --section-space: 5.5rem; /* 88px tablet */
+    --section-pad-bottom: 3.5rem; /* 56px */
+    --section-pad-top: 2rem; /* 32px */
+    --section-heading-gap: 2.75rem; /* 44px */
+    --section-pad-bottom-footer: 5.5rem; /* 88px */
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --section-space: clamp(6rem, 8vw, 8rem); /* 96–128px */
+    --section-pad-bottom: clamp(4rem, 5vw, 5rem); /* 64–80px */
+    --section-pad-top: clamp(2rem, 2.5vw, 2.5rem); /* 32–40px */
+    --section-heading-gap: clamp(2.5rem, 3vw, 3.5rem); /* 40–56px */
+    --section-pad-bottom-footer: clamp(8rem, 9vw, 9rem); /* 128–144px */
   }
 }
 

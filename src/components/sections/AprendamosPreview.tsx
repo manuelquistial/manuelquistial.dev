@@ -31,7 +31,7 @@ export function AprendamosPreview({
     <Section id={pageSections.learn} variant="bordered">
       <SectionHeader number="03" label={sectionLabel} description={intro} />
 
-      <div className="mt-12 md:mt-16">
+      <div className="mt-[var(--section-heading-gap)]">
         {lessons.slice(0, 3).map((lesson, index) => {
           const href = localizedPathForAvailableContent(
             locale,
@@ -41,7 +41,7 @@ export function AprendamosPreview({
           return (
             <article
               key={lesson.slug}
-              className="grid gap-6 border-t border-border py-8 md:grid-cols-12 md:items-center md:gap-8 md:py-10"
+              className="grid gap-6 border-t border-border py-8 last:pb-0 md:grid-cols-12 md:items-center md:gap-8 md:py-10 md:last:pb-0"
             >
               <div className="md:col-span-1">
                 <span

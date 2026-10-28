@@ -41,7 +41,7 @@ export function LearnLesson({
           <h1 className="mt-4 max-w-[18ch] text-balance font-display text-[length:var(--heading-1)] text-foreground">
             {lesson.title}
           </h1>
-          <div className="learn-reading mt-6 space-y-4">
+          <div className="learn-lead mt-6 space-y-4">
             {lesson.intro.map((paragraph) => (
               <p key={paragraph.text} className="leading-relaxed text-muted">
                 {paragraph.text}

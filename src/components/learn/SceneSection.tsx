@@ -39,7 +39,7 @@ export function SceneSection({
           ))}
         </div>
       ) : null}
-      <div className="learn-follow">{children}</div>
+      <div className="learn-follow learn-visual-full">{children}</div>
       {scene.closing && scene.closing.length > 0 ? (
         <div className="learn-follow learn-reading space-y-4">
           {scene.closing.map((paragraph) => (

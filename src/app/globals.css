@@ -48,9 +48,11 @@
   --small: 0.875rem;
   --caption: 0.75rem;
   --overline: 0.6875rem;
-  --learn-max: min(60rem, 960px);
+  --learn-max: min(75rem, 1200px);
   --learn-gutter: 20px;
-  --learn-measure: var(--text-body-max);
+  --learn-measure: 68ch; /* narrative reading width */
+  --learn-lead: min(48.75rem, 100%); /* ~780px introductions */
+  --learn-split-measure: 52ch; /* copy beside a visualization */
   --learn-panel-pad: 16px;
   --learn-section-gap: 40px;
   --learn-stack: 24px;
@@ -363,8 +365,22 @@ body {
   container-name: learn;
 }
 
+/* reading: full-width block; measure applied to narrative children only */
 .learn-reading {
+  width: 100%;
+  max-width: none;
+}
+
+.learn-reading > :is(p, ol, ul, fieldset),
+.learn-reading > .learn-stage-copy,
+p.learn-reading {
   max-width: var(--learn-measure);
+}
+
+/* lead: slightly wider opening copy */
+.learn-lead {
+  width: 100%;
+  max-width: var(--learn-lead);
 }
 
 .learn-section {
@@ -393,6 +409,11 @@ body {
   max-width: none;
   container-type: inline-size;
   container-name: scene;
+}
+
+.learn-visual-full {
+  width: 100%;
+  max-width: var(--learn-max);
 }
 
 .learn-split-aside {
@@ -449,9 +470,10 @@ body {
 }
 
 @container scene (min-width: 46rem) {
+  /* ~58% visual / ~42% copy — not a flat 50/50 */
   .learn-split {
     display: grid;
-    grid-template-columns: minmax(0, 1.2fr) minmax(18.5rem, 0.95fr);
+    grid-template-columns: minmax(0, 7fr) minmax(17rem, 5fr);
     align-items: stretch;
   }
 
@@ -461,6 +483,26 @@ body {
     display: flex;
     align-items: center;
     min-width: 0;
+  }
+
+  .learn-split-aside .learn-reading > :is(p, ol, ul, fieldset),
+  .learn-split-aside .learn-reading > .learn-stage-copy,
+  .learn-split-aside p.learn-reading {
+    max-width: min(100%, var(--learn-split-measure));
+  }
+}
+
+@media (max-width: 767px) {
+  .learn-reading > :is(p, ol, ul, fieldset),
+  .learn-reading > .learn-stage-copy,
+  p.learn-reading,
+  .learn-lead {
+    width: 100%;
+    max-width: none;
+  }
+
+  .learn-split {
+    grid-template-columns: 1fr;
   }
 }
 

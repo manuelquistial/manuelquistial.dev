@@ -102,6 +102,8 @@ export const projects = [
     status: "live",
     image: "/images/projects/sal-picciotto.jpg",
     imageAlt: "Sal & Picciotto homepage with a grid of branding projects.",
+    imageWidth: 1348,
+    imageHeight: 926,
     liveUrl: "https://salypicciotto.com/",
     featured: true,
   },
@@ -151,6 +153,8 @@ export const projects = [
     image: "/images/projects/barrio-alto-panama.jpg",
     imageAlt:
       "Barrio Alto page showing the property entrance and a contact form.",
+    imageWidth: 1348,
+    imageHeight: 926,
     liveUrl: "https://barrioaltopanama.com/es/inicio/",
   },
   {
@@ -162,6 +166,8 @@ export const projects = [
       "Development of the FCI Box page presenting its international package forwarding service and shipping options to Panama.",
     image: "/images/projects/fci-box.jpg",
     imageAlt: "FCI Box page showing its navigation and main service image.",
+    imageWidth: 1348,
+    imageHeight: 926,
     tags: ["WordPress", "Elementor Pro"],
     status: "live",
     liveUrl: "https://fcipty.com/box/",

@@ -5,9 +5,10 @@ import type { CaseStudyContent } from "@/content/case-study-types";
 import { getCaseStudySections } from "@/content/case-study-types";
 import type { Project } from "@/data/projects";
 import { localizedPath } from "@/lib/localizedPath";
+import { projectImageFrame } from "@/lib/projectImage";
 import { Section } from "@/components/layout/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
-import { getUrlHost } from "@/lib/utils";
+import { cn, getUrlHost } from "@/lib/utils";
 
 function CaseStudyBlock({
   title,
@@ -65,6 +66,7 @@ export function CaseStudyView({
 }: CaseStudyViewProps) {
   const sections = getCaseStudySections(caseStudy);
   const liveHost = project.liveUrl ? getUrlHost(project.liveUrl) : null;
+  const imageFrame = projectImageFrame(project);
 
   return (
     <Section>
@@ -83,13 +85,21 @@ export function CaseStudyView({
       />
 
       {project.image ? (
-        <div className="relative mb-10 aspect-[8/5] w-full max-w-3xl overflow-hidden bg-surface">
+        <div
+          className={cn(
+            "mb-10 max-w-3xl",
+            imageFrame.style
+              ? imageFrame.className
+              : "relative aspect-[8/5] w-full overflow-hidden bg-surface",
+          )}
+          style={imageFrame.style}
+        >
           <Image
             src={project.image}
             alt={project.imageAlt ?? ""}
             fill
             sizes="(min-width: 768px) 768px, 100vw"
-            className="editorial-image object-cover object-top"
+            className="editorial-image object-contain object-center"
             priority
           />
         </div>

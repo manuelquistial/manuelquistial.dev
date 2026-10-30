@@ -100,14 +100,14 @@ export function Hero({
           </p>
         </div>
 
-        <div className="relative min-h-[22rem] w-full overflow-hidden bg-surface lg:col-span-7 lg:min-h-[min(72vh,42rem)]">
+        <div className="relative aspect-[8/5] w-full overflow-hidden bg-surface lg:col-span-7 lg:self-center">
           <Image
             src={imageSrc}
             alt={imageAlt}
             fill
             priority
             sizes="(min-width: 1024px) 55vw, 100vw"
-            className="editorial-image object-cover object-center"
+            className="editorial-image object-contain object-center"
           />
         </div>
       </Container>

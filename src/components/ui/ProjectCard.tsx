@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { Project } from "@/data/projects";
 import type { SiteContent } from "@/content";
 import { TagChip } from "@/components/ui/TagChip";
+import { projectImageFrame } from "@/lib/projectImage";
 import { cn } from "@/lib/utils";
 
 type ProjectCardMeta = "auto" | "agency" | "design" | "reserved" | "hidden";
@@ -138,7 +139,8 @@ export function ProjectCard({
     );
   }
 
-  const imageAspect =
+  const imageFrame = projectImageFrame(project);
+  const imageFallbackAspect =
     layout === "featured"
       ? "aspect-[4/3] md:aspect-[5/4]"
       : layout === "compact"
@@ -148,7 +150,15 @@ export function ProjectCard({
   return (
     <article className={cn("flex h-full min-w-0 flex-col", className)}>
       {project.image ? (
-        <div className={cn("relative mb-5 w-full overflow-hidden bg-surface", imageAspect)}>
+        <div
+          className={cn(
+            "mb-5",
+            imageFrame.style
+              ? imageFrame.className
+              : cn("relative w-full overflow-hidden bg-surface", imageFallbackAspect),
+          )}
+          style={imageFrame.style}
+        >
           <Image
             src={project.image}
             alt={project.imageAlt ?? ""}
@@ -159,7 +169,7 @@ export function ProjectCard({
                 ? "(min-width: 1024px) 55vw, 100vw"
                 : "(min-width: 1024px) 35vw, (min-width: 640px) 50vw, 100vw"
             }
-            className="editorial-image object-cover object-top"
+            className="editorial-image object-contain object-center"
           />
         </div>
       ) : null}

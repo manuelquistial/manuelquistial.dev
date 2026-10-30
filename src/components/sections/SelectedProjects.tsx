@@ -7,6 +7,7 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { TagChip } from "@/components/ui/TagChip";
 import { ViewAllLink } from "@/components/ui/ViewAllLink";
 import { pageSections } from "@/lib/pageSections";
+import { projectImageFrame } from "@/lib/projectImage";
 import { cn } from "@/lib/utils";
 
 interface SelectedProjectsProps {
@@ -69,6 +70,7 @@ export function SelectedProjects({
       <div className="mt-[var(--section-heading-gap)] space-y-0">
         {projects.map((project, index) => {
           const imageLeft = index % 2 === 0;
+          const imageFrame = projectImageFrame(project);
           const detailHref = project.caseStudyUrl;
           const indexLabel = padIndex(index + 1, total);
           const titleContent = detailHref ? (
@@ -107,9 +109,10 @@ export function SelectedProjects({
               {project.image ? (
                 <div
                   className={cn(
-                    "relative aspect-[4/3] w-full overflow-hidden bg-surface lg:aspect-[5/4]",
+                    imageFrame.className,
                     imageLeft ? "lg:col-span-7" : "lg:order-2 lg:col-span-7",
                   )}
+                  style={imageFrame.style}
                 >
                   <Image
                     src={project.image}
@@ -117,7 +120,7 @@ export function SelectedProjects({
                     fill
                     priority={index < 2}
                     sizes="(min-width: 1024px) 55vw, 100vw"
-                    className="editorial-image object-cover object-top"
+                    className="editorial-image object-contain object-center"
                   />
                 </div>
               ) : null}

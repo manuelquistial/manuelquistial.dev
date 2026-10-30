@@ -40,20 +40,20 @@ export const neuronsLesson = {
         {
           id: "dendrites",
           label: "Dendritas",
-          text: "Reciben muchas de las entradas sinápticas de otras neuronas y participan en su integración.",
+          text: "Reciben gran parte de las entradas sinápticas de otras neuronas. Los potenciales postsinápticos locales se suman e influyen en si el segmento inicial del axón alcanza el umbral de disparo.",
           cites: ["tissue", "communication"],
         },
         {
           id: "soma",
           label: "Soma",
-          text: "Contiene el núcleo y gran parte de la maquinaria celular. También recibe e integra entradas sinápticas.",
+          text: "Contiene el núcleo y gran parte de la maquinaria metabólica de la neurona. También recibe e integra entradas sinápticas junto con las dendritas.",
           cites: ["tissue", "communication"],
         },
         {
           id: "axon",
           label: "Axón",
-          text: "Conduce los potenciales de acción hasta los terminales, donde la neurona establece conexiones con otras células.",
-          cites: ["tissue", "communication"],
+          text: "Conduce potenciales de acción desde el segmento inicial hasta los terminales. En axones mielinizados, la señal se regenera en los nodos de Ranvier a lo largo del recorrido.",
+          cites: ["tissue", "communication", "myelin"],
         },
       ],
     },
@@ -104,6 +104,8 @@ export const neuronsLesson = {
       title: "Iones y membrana",
       textAlternative:
         "Membrana con el exterior arriba y el interior abajo. Hay más Na⁺ fuera y más K⁺ dentro. Los canales de la fase rápida se cierran, se abren o se inactivan.",
+      prompt:
+        "Selecciona un canal, la bomba o un ion para ver su papel en esta fase.",
       paragraphs: [
         {
           text: "La apertura y el cierre de canales cambian el movimiento de iones a través de la membrana y, con ello, su voltaje.",
@@ -114,37 +116,37 @@ export const neuronsLesson = {
         {
           id: "sodium-channel",
           label: "Canal de Na⁺",
-          text: "El canal está abierto y permite la entrada de Na⁺.",
+          text: "Canal dependiente de voltaje. Cuando se abre permite la entrada de Na⁺; después puede inactivarse y dejar de conducir.",
           cites: ["potential"],
         },
         {
           id: "potassium-channel",
           label: "Canal de K⁺",
-          text: "Al comienzo de esta fase, el canal de K⁺ dependiente de voltaje todavía está cerrado.",
+          text: "Canal dependiente de voltaje. Su apertura permite la salida de K⁺ y contribuye a devolver el potencial de membrana hacia valores negativos.",
           cites: ["potential"],
         },
         {
           id: "pump",
           label: "Bomba Na⁺/K⁺",
-          text: "Utiliza energía para transportar Na⁺ hacia fuera y K⁺ hacia dentro, manteniendo sus diferencias de concentración.",
+          text: "Utiliza energía para transportar Na⁺ hacia fuera y K⁺ hacia dentro. Mantiene los gradientes iónicos que sustentan el potencial de membrana.",
           cites: ["potential"],
         },
         {
           id: "leak",
           label: "Canal de fuga",
-          text: "Permite el paso de iones y contribuye al potencial de membrana en reposo.",
+          text: "Permite un paso continuo de iones a favor de sus gradientes y contribuye al potencial de membrana en reposo.",
           cites: ["potential"],
         },
         {
           id: "sodium",
           label: "Na⁺",
-          text: "El sodio está más concentrado en el exterior. Su entrada contribuye a la despolarización.",
+          text: "El sodio está más concentrado en el exterior. Su entrada a través de canales abiertos contribuye a la despolarización.",
           cites: ["potential"],
         },
         {
           id: "potassium",
           label: "K⁺",
-          text: "El potasio está más concentrado en el interior. Su salida contribuye a la repolarización.",
+          text: "El potasio está más concentrado en el interior. Su salida a través de canales abiertos contribuye a la repolarización.",
           cites: ["potential"],
         },
       ],
@@ -219,6 +221,8 @@ export const neuronsLesson = {
       title: "Glía y mielina",
       textAlternative:
         "Axón con cuatro segmentos de mielina y un oligodendrocito del sistema nervioso central que contacta esos segmentos.",
+      prompt:
+        "Selecciona la mielina, el oligodendrocito o un nodo para conocer su función.",
       paragraphs: [
         {
           text: "La mielina favorece una conducción rápida. Entre sus segmentos se encuentran los nodos de Ranvier, donde se regenera el potencial de acción.",
@@ -229,19 +233,19 @@ export const neuronsLesson = {
         {
           id: "myelin",
           label: "Mielina",
-          text: "Vaina que envuelve segmentos del axón y favorece la conducción rápida del potencial de acción.",
+          text: "Vaina aislante que reduce la pérdida de corriente a través de la membrana axonal. Facilita que la despolarización se propague con mayor eficacia entre nodos.",
           cites: ["myelin"],
         },
         {
           id: "glia",
           label: "Oligodendrocito",
-          text: "Los oligodendrocitos forman mielina en el sistema nervioso central. Una misma célula puede envolver varios segmentos axonales.",
+          text: "Célula glial del sistema nervioso central que forma mielina. Una misma célula puede envolver varios segmentos axonales.",
           cites: ["tissue"],
         },
         {
           id: "nodes",
           label: "Nodos de Ranvier",
-          text: "Regiones del axón situadas entre las vainas de mielina. En ellas se regenera el potencial de acción.",
+          text: "Zonas de membrana axonal expuesta entre vainas de mielina. Allí se regenera el potencial de acción mediante canales de sodio dependientes de voltaje.",
           cites: ["myelin"],
         },
       ],
@@ -274,6 +278,7 @@ export const neuronsLesson = {
       title: "Sinapsis química y eléctrica",
       textAlternative:
         "Dos esquemas separados. En la sinapsis química hay vesículas, hendidura y receptores. En la eléctrica, uniones comunicantes dejan pasar iones de una célula a la otra.",
+      prompt: "Selecciona un elemento de la sinapsis para conocer su función.",
       paragraphs: [
         {
           text: "Las sinapsis químicas transmiten mediante neurotransmisores que actúan sobre receptores. Las eléctricas permiten el paso directo de corriente iónica entre células conectadas por uniones comunicantes.",
@@ -412,6 +417,7 @@ export const neuronsLesson = {
       textAlternative:
         "Esquema ilustrativo con neuronas A, B, C y D. La conexión hacia D es inhibitoria. En esta secuencia C genera un potencial de acción y D permanece por debajo del umbral.",
       badge: "Esquema ilustrativo",
+      prompt: "Selecciona una célula para ver su papel en esta secuencia.",
       paragraphs: [
         {
           text: "Las entradas excitatorias favorecen el disparo y las inhibitorias reducen su probabilidad. La respuesta de cada neurona depende de cómo se integran sus entradas.",
@@ -495,7 +501,7 @@ export const neuronsLesson = {
           id: "axon",
           label: "El axón",
           feedback:
-            "El axón conduce los potenciales de acción hasta sus terminales.",
+            "El axón conduce los potenciales de acción desde el segmento inicial hasta los terminales, donde la neurona puede comunicar su actividad a otras células.",
           cites: ["tissue"],
         },
       ],

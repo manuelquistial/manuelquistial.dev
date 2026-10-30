@@ -163,7 +163,6 @@ export function SceneStage({
                 activeKey={activeKey}
                 onClose={close}
                 closeRef={closeRef}
-                compact={Boolean(playback?.snapshot.playing) && !card}
               />
             </div>
           ) : null}

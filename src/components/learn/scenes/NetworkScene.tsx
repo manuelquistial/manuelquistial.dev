@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { learnUi } from "@/content/learn/es/ui";
 import { getNeuronScene } from "@/content/learn/es/neurons";
 import { NetworkArt, networkAnchors } from "@/components/learn/illustrations/NetworkArt";
+import { ScenePrompt } from "@/components/learn/ScenePrompt";
 import { SceneStage, cardFor } from "@/components/learn/SceneStage";
 import { useScenePlayback } from "@/components/learn/useScenePlayback";
 import { progressWithinStage } from "@/lib/learn/playback";
@@ -61,6 +62,11 @@ export function NetworkScene() {
       card={cardFor(scene.parts, networkAnchors, selectedId)}
       onClose={() => setSelectedId(null)}
       legend={networkLegend}
+      leading={
+        !selectedId && scene.prompt ? (
+          <ScenePrompt title={learnUi.exploreNetwork} text={scene.prompt} />
+        ) : null
+      }
     >
       <div ref={rootRef} className="relative">
         <NetworkArt

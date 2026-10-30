@@ -1,11 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { learnUi } from "@/content/learn/es/ui";
 import { getNeuronScene } from "@/content/learn/es/neurons";
 import { DetailInset } from "@/components/learn/DetailInset";
 import { GliaArt, gliaAnchors } from "@/components/learn/illustrations/GliaArt";
 import { learnColors } from "@/components/learn/illustrations/palette";
 import { IonGlyph } from "@/components/learn/illustrations/species";
+import { ScenePrompt } from "@/components/learn/ScenePrompt";
 import { SceneStage, cardFor } from "@/components/learn/SceneStage";
 import { useScenePlayback } from "@/components/learn/useScenePlayback";
 import { progressWithinStage } from "@/lib/learn/playback";
@@ -114,12 +116,17 @@ export function MyelinScene() {
       parts={scene.parts}
       card={cardFor(scene.parts, gliaAnchors, selectedId)}
       onClose={() => setSelectedId(null)}
+      leading={
+        !selectedId && scene.prompt ? (
+          <ScenePrompt title={learnUi.exploreMyelin} text={scene.prompt} />
+        ) : null
+      }
     >
       <div ref={rootRef} className="relative">
         <GliaArt
           labels={labels}
           selectedId={selectedId}
-          hintId={scene.parts?.[0]?.id}
+          hintId={selectedId ? undefined : scene.parts?.[0]?.id}
           activeNode={activeNode}
           phase={phase}
           markSheath={selectedId === "myelin"}

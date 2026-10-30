@@ -277,7 +277,7 @@ export function SynapseScene() {
         card={cardFor(parts, synapseAnchors, selectedId)}
         onClose={() => setSelectedId(null)}
         leading={
-          <div className="flex flex-col gap-3 px-[var(--learn-panel-pad)] pt-[var(--learn-panel-pad)]">
+          <div className="flex flex-col gap-3 border-b border-border bg-surface px-[var(--learn-panel-pad)] py-3">
             <div role="tablist" aria-label={learnUi.synapseModes} className="inline-flex rounded-full bg-surface-soft p-1">
               {(["chemical", "electrical"] as const).map((item) => {
                 const selected = mode === item;
@@ -301,6 +301,12 @@ export function SynapseScene() {
                 <CiteList cites={modeNote.cites} />
               </p>
             ) : null}
+            {!selectedId && scene.prompt ? (
+              <p className="text-sm leading-relaxed text-muted">
+                <span className="font-semibold text-foreground">{learnUi.exploreSynapse}. </span>
+                {scene.prompt}
+              </p>
+            ) : null}
           </div>
         }
         legend={
@@ -318,7 +324,7 @@ export function SynapseScene() {
               ref={artRef}
               labels={labels}
               selectedId={selectedId}
-              hintId="vesicles"
+              hintId={selectedId ? undefined : "vesicles"}
               pose={pose}
               onSelect={(id) => setSelectedId((current) => (current === id ? null : id))}
             />
@@ -330,7 +336,7 @@ export function SynapseScene() {
               ref={artRef}
               labels={labels}
               selectedId={selectedId}
-              hintId="junctions"
+              hintId={selectedId ? undefined : "junctions"}
               flow={flow}
               source={electric.source}
               shared={electric.shared}

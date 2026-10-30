@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { learnUi } from "@/content/learn/es/ui";
 import { getNeuronScene } from "@/content/learn/es/neurons";
 import { MembraneArt, membraneAnchors } from "@/components/learn/illustrations/MembraneArt";
+import { ScenePrompt } from "@/components/learn/ScenePrompt";
 import { SceneStage, cardFor } from "@/components/learn/SceneStage";
 import { useScenePlayback } from "@/components/learn/useScenePlayback";
 import { progressWithinStage } from "@/lib/learn/playback";
@@ -68,7 +69,7 @@ export function IonScene() {
       label={scene.textAlternative}
       playback={playback}
       stages={scene.stages}
-      parts={scene.parts}
+      parts={parts}
       reserves={Object.values(moment).flatMap((entry) =>
         Object.entries(entry).map(([id, text]) => ({
           title: labels[id] ?? "",
@@ -79,6 +80,11 @@ export function IonScene() {
       card={cardFor(parts, membraneAnchors, selectedId)}
       onClose={() => setSelectedId(null)}
       legend={ionLegend}
+      leading={
+        !selectedId && scene.prompt ? (
+          <ScenePrompt title={learnUi.exploreMembrane} text={scene.prompt} />
+        ) : null
+      }
     >
       <div className="relative">
         <p className="px-3 pt-2 text-[15px] leading-tight font-semibold text-foreground">{learnUi.outside}</p>
@@ -86,7 +92,7 @@ export function IonScene() {
           ref={artRef}
           labels={labels}
           selectedId={selectedId}
-          hintId={scene.parts?.[0]?.id}
+          hintId={selectedId ? undefined : scene.parts?.[0]?.id}
           sodiumState={channels.sodium}
           potassiumState={channels.potassium}
           ions={ions}

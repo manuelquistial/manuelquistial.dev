@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { learnUi } from "@/content/learn/es/ui";
 import { getNeuronScene } from "@/content/learn/es/neurons";
 import { NeuronArt } from "@/components/learn/illustrations/NeuronArt";
 import { neuronAnchors } from "@/components/learn/illustrations/neuronModel";
+import { ScenePrompt } from "@/components/learn/ScenePrompt";
 import { SceneStage, cardFor } from "@/components/learn/SceneStage";
 
 export function NeuronPartsScene() {
@@ -14,15 +16,19 @@ export function NeuronPartsScene() {
   return (
     <SceneStage
       label={scene.textAlternative}
-      idle={scene.prompt ? { text: scene.prompt } : undefined}
       parts={scene.parts}
       card={cardFor(scene.parts, neuronAnchors, selectedId)}
       onClose={() => setSelectedId(null)}
+      leading={
+        !selectedId && scene.prompt ? (
+          <ScenePrompt title={learnUi.exploreNeuron} text={scene.prompt} />
+        ) : null
+      }
     >
       <NeuronArt
         labels={labels}
         selectedId={selectedId}
-        hintId={scene.parts?.[0]?.id}
+        hintId={selectedId ? undefined : scene.parts?.[0]?.id}
         onSelect={(id) => setSelectedId((current) => (current === id ? null : id))}
       />
     </SceneStage>

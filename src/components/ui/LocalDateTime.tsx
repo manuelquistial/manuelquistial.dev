@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { formatLocalDate, formatUtcDate, isUtcIsoString } from "@/lib/dates";
 import { cn } from "@/lib/utils";
 
@@ -12,10 +12,14 @@ type LocalDateTimeProps = {
   className?: string;
 };
 
+function subscribe() {
+  return () => {};
+}
+
 /**
  * Keeps the original UTC instant in `datetime` and shows the visitor's local
- * calendar date after hydration. SSR falls back to an explicit UTC date so the
- * first paint does not depend on the server timezone.
+ * calendar date on the client. SSR uses an explicit UTC date so the first paint
+ * does not depend on the server timezone.
  */
 export function LocalDateTime({
   dateTime,
@@ -24,14 +28,11 @@ export function LocalDateTime({
   className,
 }: LocalDateTimeProps) {
   const valid = isUtcIsoString(dateTime);
-  const [text, setText] = useState(() =>
-    valid ? formatUtcDate(dateTime, locale) : dateTime,
+  const text = useSyncExternalStore(
+    subscribe,
+    () => (valid ? formatLocalDate(dateTime, locale) : dateTime),
+    () => (valid ? formatUtcDate(dateTime, locale) : dateTime),
   );
-
-  useEffect(() => {
-    if (!valid) return;
-    setText(formatLocalDate(dateTime, locale));
-  }, [dateTime, locale, valid]);
 
   if (!valid) return null;
 

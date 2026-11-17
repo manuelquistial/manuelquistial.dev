@@ -1,15 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { learnUi } from "@/content/learn/es/ui";
-import { getNeuronScene } from "@/content/learn/es/neurons";
+import { useLearnUi, useNeuronScene } from "@/components/learn/LearnContent";
 import { NeuronArt } from "@/components/learn/illustrations/NeuronArt";
 import { neuronAnchors } from "@/components/learn/illustrations/neuronModel";
 import { ScenePrompt } from "@/components/learn/ScenePrompt";
 import { SceneStage, cardFor } from "@/components/learn/SceneStage";
 
 export function NeuronPartsScene() {
-  const scene = getNeuronScene("partes");
+  const learnUi = useLearnUi();
+  const scene = useNeuronScene("partes");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const labels = Object.fromEntries((scene.parts ?? []).map((part) => [part.id, part.label]));
 

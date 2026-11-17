@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { learnUi } from "@/content/learn/es/ui";
-import { getNeuronScene } from "@/content/learn/es/neurons";
+import { useLearnContent, useLearnUi, useNeuronScene } from "@/components/learn/LearnContent";
 import { MembraneArt, membraneAnchors } from "@/components/learn/illustrations/MembraneArt";
 import { ScenePrompt } from "@/components/learn/ScenePrompt";
 import { SceneStage, cardFor } from "@/components/learn/SceneStage";
@@ -11,15 +10,7 @@ import { progressWithinStage } from "@/lib/learn/playback";
 import { ionChannelState, membraneCast } from "@/lib/learn/casts";
 import { ionPlaybackStages } from "@/lib/learn/physiology";
 
-const ionLegend = (
-  <ul className="flex flex-wrap gap-x-4 gap-y-1">
-    <li>{learnUi.sodium}</li>
-    <li>{learnUi.potassium}</li>
-    <li>{learnUi.pumpLegend}</li>
-  </ul>
-);
-
-const moment: Record<string, Record<string, string>> = {
+const momentEs: Record<string, Record<string, string>> = {
   depolarization: {
     "sodium-channel": "El canal está abierto y permite la entrada de Na⁺.",
     "potassium-channel":
@@ -36,8 +27,35 @@ const moment: Record<string, Record<string, string>> = {
   },
 };
 
+const momentEn: Record<string, Record<string, string>> = {
+  depolarization: {
+    "sodium-channel": "The channel is open and allows Na⁺ to enter.",
+    "potassium-channel":
+      "At the start of this phase, the voltage-gated K⁺ channel is still closed.",
+  },
+  repolarization: {
+    "sodium-channel": "The channel is inactivated and stops conducting Na⁺.",
+    "potassium-channel": "The channel is open and allows K⁺ to exit.",
+  },
+  recovery: {
+    "sodium-channel":
+      "The channel recovers from inactivation and becomes available to respond again.",
+    "potassium-channel": "The channel closes again.",
+  },
+};
+
 export function IonScene() {
-  const scene = getNeuronScene("iones-y-membrana");
+  const learnUi = useLearnUi();
+  const { locale } = useLearnContent();
+  const moment = locale === "en" ? momentEn : momentEs;
+  const ionLegend = (
+    <ul className="flex flex-wrap gap-x-4 gap-y-1">
+      <li>{learnUi.sodium}</li>
+      <li>{learnUi.potassium}</li>
+      <li>{learnUi.pumpLegend}</li>
+    </ul>
+  );
+  const scene = useNeuronScene("iones-y-membrana");
   const playback = useScenePlayback(ionPlaybackStages());
   const artRef = useRef<SVGSVGElement>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);

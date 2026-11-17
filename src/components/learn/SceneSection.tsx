@@ -1,4 +1,6 @@
-import { learnUi } from "@/content/learn/es/ui";
+"use client";
+
+import { useLearnUi } from "@/components/learn/LearnContent";
 import type { LearnDeepen, LearnQuestion, LearnScene } from "@/content/learn/types";
 import { CheckQuestion } from "@/components/learn/CheckQuestion";
 import { CiteList } from "@/components/learn/LearnRefs";
@@ -17,6 +19,8 @@ export function SceneSection({
   deepen?: LearnDeepen;
   question?: LearnQuestion;
 }) {
+  const learnUi = useLearnUi();
+
   return (
     <section
       id={scene.id}

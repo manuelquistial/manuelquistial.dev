@@ -1,21 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { learnUi } from "@/content/learn/es/ui";
-import { getNeuronScene } from "@/content/learn/es/neurons";
+import { useLearnUi, useNeuronScene } from "@/components/learn/LearnContent";
 import { NetworkArt, networkAnchors } from "@/components/learn/illustrations/NetworkArt";
 import { ScenePrompt } from "@/components/learn/ScenePrompt";
 import { SceneStage, cardFor } from "@/components/learn/SceneStage";
 import { useScenePlayback } from "@/components/learn/useScenePlayback";
 import { progressWithinStage } from "@/lib/learn/playback";
 import { networkPlaybackStages, networkState } from "@/lib/learn/physiology";
-
-const networkLegend = (
-  <ul className="flex flex-wrap gap-x-4 gap-y-1">
-    <li className="learn-key-excitatory">{learnUi.excitatory}</li>
-    <li className="learn-key-inhibitory">{learnUi.inhibitory}</li>
-  </ul>
-);
 
 const linkFor: Record<string, string> = {
   input: "ab",
@@ -30,7 +22,14 @@ const localFor: Record<string, "n2" | "n3" | "n4" | null> = {
 };
 
 export function NetworkScene() {
-  const scene = getNeuronScene("red-neuronal");
+  const learnUi = useLearnUi();
+  const networkLegend = (
+    <ul className="flex flex-wrap gap-x-4 gap-y-1">
+      <li className="learn-key-excitatory">{learnUi.excitatory}</li>
+      <li className="learn-key-inhibitory">{learnUi.inhibitory}</li>
+    </ul>
+  );
+  const scene = useNeuronScene("red-neuronal");
   const playback = useScenePlayback(networkPlaybackStages());
   const rootRef = useRef<HTMLDivElement>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);

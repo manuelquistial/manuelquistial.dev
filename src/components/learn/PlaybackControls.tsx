@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
-import { learnUi } from "@/content/learn/es/ui";
+import { useLearnUi } from "@/components/learn/LearnContent";
 import { PLAYBACK_SPEEDS } from "@/lib/learn/playback";
 import {
   IconPause,
@@ -60,6 +60,7 @@ export function PlaybackControls({
   onStepBack,
   onSpeed,
 }: PlaybackControlsProps) {
+  const learnUi = useLearnUi();
   const [open, setOpen] = useState(false);
   const menuId = useId();
   const rootRef = useRef<HTMLDivElement>(null);

@@ -1,4 +1,3 @@
-import { learnUi } from "@/content/learn/es/ui";
 import { learnColors } from "@/components/learn/illustrations/palette";
 import { membrane as membraneLayout } from "@/lib/learn/physiology";
 
@@ -14,7 +13,7 @@ function LipidRow({ y, skip }: { y: number; skip: readonly [number, number][] })
   return <g>{heads}</g>;
 }
 
-export function MembraneFigure({ label }: { label: string }) {
+export function MembraneFigure({ label, outside, inside }: { label: string; outside: string; inside: string }) {
   const channels: [number, number][] = [
     [membraneLayout.naX - 22, membraneLayout.naX + 22],
     [membraneLayout.kX - 22, membraneLayout.kX + 22],
@@ -69,10 +68,10 @@ export function MembraneFigure({ label }: { label: string }) {
         </g>
       </g>
       <text x="16" y="22" fill={learnColors.muted} fontSize="14">
-        {learnUi.outside}
+        {outside}
       </text>
       <text x="16" y="228" fill={learnColors.muted} fontSize="14">
-        {learnUi.inside}
+        {inside}
       </text>
     </svg>
   );

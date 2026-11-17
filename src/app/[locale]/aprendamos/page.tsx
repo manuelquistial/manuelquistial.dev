@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { learnLessons } from "@/content/learn/catalog";
-import { learnUi } from "@/content/learn/es/ui";
+import { getLearnLessonsForLocale } from "@/content/learn/catalog";
+import { getLearnUi } from "@/content/learn/ui";
 import { learnIndexLocales } from "@/content/learn/routes";
 import { parseLocale } from "@/i18n/parseLocale";
 import type { Locale } from "@/i18n/config";
@@ -30,6 +30,7 @@ export async function generateMetadata({
   params,
 }: LearnIndexPageProps): Promise<Metadata> {
   const locale = publishedLocale(parseLocale((await params).locale));
+  const learnUi = getLearnUi(locale);
 
   return buildPageMetadata({
     title: learnUi.indexMetaTitle,
@@ -48,9 +49,8 @@ export default async function LearnIndexPage({ params }: LearnIndexPageProps) {
     redirect(localizedPath(learnIndexLocales[0], "/aprendamos"));
   }
 
-  const lessons = learnLessons.filter((lesson) =>
-    lesson.locales.some((item) => item === locale),
-  );
+  const learnUi = getLearnUi(locale);
+  const lessons = getLearnLessonsForLocale(locale);
 
   return (
     <Section containerClassName="overflow-x-clip">

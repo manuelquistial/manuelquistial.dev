@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
-import { learnUi } from "@/content/learn/es/ui";
+import { useLearnUi } from "@/components/learn/LearnContent";
 import type { LearnSource } from "@/content/learn/types";
 import { IconClose } from "@/components/learn/icons";
 
@@ -12,6 +12,7 @@ export function CiteMark({
   source: LearnSource;
   number: number;
 }) {
+  const learnUi = useLearnUi();
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLSpanElement>(null);
   const titleId = useId();

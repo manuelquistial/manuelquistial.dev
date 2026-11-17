@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { learnUi } from "@/content/learn/es/ui";
-import { getNeuronScene } from "@/content/learn/es/neurons";
+import { useLearnUi, useNeuronScene } from "@/components/learn/LearnContent";
 import { DetailInset } from "@/components/learn/DetailInset";
 import { GliaArt, gliaAnchors } from "@/components/learn/illustrations/GliaArt";
 import { learnColors } from "@/components/learn/illustrations/palette";
@@ -74,7 +73,8 @@ function NodeLongitudinal({ open, spread }: { open: boolean; spread: number }) {
 }
 
 export function MyelinScene() {
-  const scene = getNeuronScene("glia-y-mielina");
+  const learnUi = useLearnUi();
+  const scene = useNeuronScene("glia-y-mielina");
   const playback = useScenePlayback(myelinPlaybackStages());
   const rootRef = useRef<HTMLDivElement>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);

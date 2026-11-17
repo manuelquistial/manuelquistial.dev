@@ -25,8 +25,8 @@ export async function generateMetadata({
   params,
 }: LearnLessonPageProps): Promise<Metadata> {
   const { locale: localeParam, slug } = await params;
-  const lesson = getLearnLesson(slug);
   const locale = parseLocale(localeParam);
+  const lesson = getLearnLesson(slug, locale) ?? getLearnLesson(slug);
   const published = lesson?.locales.includes(locale)
     ? locale
     : lesson?.locales[0];
@@ -35,26 +35,28 @@ export async function generateMetadata({
     return {};
   }
 
+  const localized = getLearnLesson(slug, published) ?? lesson;
+
   return buildPageMetadata({
-    title: lesson.metaTitle,
-    description: lesson.description,
-    path: `/aprendamos/${lesson.slug}`,
+    title: localized.metaTitle,
+    description: localized.description,
+    path: `/aprendamos/${localized.slug}`,
     fullTitle: true,
     locale: published,
-    availableLocales: lesson.locales,
+    availableLocales: learnRoutes.find((route) => route.slug === slug)?.locales ?? lesson.locales,
   });
 }
 
 export default async function LearnLessonPage({ params }: LearnLessonPageProps) {
   const { locale: localeParam, slug } = await params;
   const locale = parseLocale(localeParam);
-  const lesson = getLearnLesson(slug);
+  const lesson = getLearnLesson(slug, locale);
 
-  if (!lesson) notFound();
-
-  if (!lesson.locales.includes(locale)) {
-    const available = lesson.locales[0] as Locale;
-    redirect(localizedPath(available, `/aprendamos/${lesson.slug}`));
+  if (!lesson) {
+    const fallback = getLearnLesson(slug);
+    if (!fallback) notFound();
+    const available = fallback.locales[0] as Locale;
+    redirect(localizedPath(available, `/aprendamos/${fallback.slug}`));
   }
 
   return <LearnLesson lesson={lesson} locale={locale} />;

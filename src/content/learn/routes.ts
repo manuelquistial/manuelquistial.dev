@@ -1,11 +1,11 @@
 import type { Locale } from "@/i18n/config";
 
-export const learnIndexLocales = ["es"] as const satisfies readonly Locale[];
+export const learnIndexLocales = ["es", "en"] as const satisfies readonly Locale[];
 
 export const learnRoutes = [
   {
     slug: "como-se-comunican-las-neuronas",
-    locales: ["es"],
+    locales: ["es", "en"],
   },
 ] as const satisfies readonly { slug: string; locales: readonly Locale[] }[];
 

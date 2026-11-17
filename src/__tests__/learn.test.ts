@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { learnLessons } from "@/content/learn/catalog";
-import { neuronsLesson } from "@/content/learn/es/neurons";
+import { getLearnLesson, learnLessons } from "@/content/learn/catalog";
+import { neuronsLesson as neuronsLessonEn } from "@/content/learn/en/neurons";
+import { neuronsLesson as neuronsLessonEs } from "@/content/learn/es/neurons";
 import { neuronSceneIds } from "@/content/learn/scene-ids";
 import {
   getLearnLocaleAvailability,
@@ -56,78 +57,94 @@ const verifiedSources = [
 ];
 
 describe("learn catalog", () => {
-  it("publishes one spanish lesson with seven stable scenes", () => {
-    expect(learnLessons).toHaveLength(1);
-    expect(neuronsLesson.locales).toEqual(["es"]);
-    expect("originalPostUrl" in neuronsLesson).toBe(false);
-    expect(neuronsLesson.scenes.map((scene) => scene.id)).toEqual([
+  it("publishes spanish and english lessons with seven stable scenes", () => {
+    expect(learnLessons).toHaveLength(2);
+    expect(neuronsLessonEs.locales).toEqual(["es"]);
+    expect(neuronsLessonEn.locales).toEqual(["en"]);
+    expect(neuronsLessonEs.slug).toBe(neuronsLessonEn.slug);
+    expect("originalPostUrl" in neuronsLessonEs).toBe(false);
+    expect(neuronsLessonEs.scenes.map((scene) => scene.id)).toEqual([
+      ...neuronSceneIds,
+    ]);
+    expect(neuronsLessonEn.scenes.map((scene) => scene.id)).toEqual([
       ...neuronSceneIds,
     ]);
     expect(learnRoutes).toEqual([
-      { slug: neuronsLesson.slug, locales: [...neuronsLesson.locales] },
+      { slug: neuronsLessonEs.slug, locales: ["es", "en"] },
     ]);
+    expect(getLearnLesson(neuronsLessonEs.slug, "en")?.title).toBe(
+      neuronsLessonEn.title,
+    );
   });
 
   it("keeps questions, sources and copy tied to real scenes", () => {
-    expect(neuronsLesson.questions).toHaveLength(3);
-    for (const question of neuronsLesson.questions) {
-      expect(neuronSceneIds).toContain(question.afterSceneId);
-      expect(question.options.map((option) => option.id)).toContain(question.correctId);
+    for (const lesson of [neuronsLessonEs, neuronsLessonEn]) {
+      expect(lesson.questions).toHaveLength(3);
+      for (const question of lesson.questions) {
+        expect(neuronSceneIds).toContain(question.afterSceneId);
+        expect(question.options.map((option) => option.id)).toContain(
+          question.correctId,
+        );
+      }
+      for (const block of lesson.deepen) {
+        expect(neuronSceneIds).toContain(block.afterSceneId);
+      }
+      expect(lesson.sources.map((source) => source.href).sort()).toEqual(
+        [...verifiedSources].sort(),
+      );
+      expect(lessonCitationOrder(lesson)).toEqual([
+        "tissue",
+        "nucleus",
+        "communication",
+        "myelin",
+        "chemical",
+        "potential",
+        "electrical",
+      ]);
+      const copy = JSON.stringify(lesson);
+      expect(copy).not.toContain("\u2014");
+      expect(copy).not.toMatch(/\d+\s*ms/);
     }
-    for (const block of neuronsLesson.deepen) {
-      expect(neuronSceneIds).toContain(block.afterSceneId);
-    }
-    expect(neuronsLesson.sources.map((source) => source.href).sort()).toEqual(
-      [...verifiedSources].sort(),
-    );
-    expect(lessonCitationOrder(neuronsLesson)).toEqual([
-      "tissue",
-      "nucleus",
-      "communication",
-      "myelin",
-      "chemical",
-      "potential",
-      "electrical",
-    ]);
-    const copy = JSON.stringify(neuronsLesson);
-    expect(copy).not.toContain("\u2014");
-    expect(copy).not.toMatch(/\d+\s*ms/);
   });
 
-  it("lists only spanish urls for the sitemap and language switcher", () => {
+  it("lists spanish and english urls for the sitemap and language switcher", () => {
     expect(getLearnSitemapEntries()).toEqual([
       { locale: "es", path: "/aprendamos" },
+      { locale: "en", path: "/aprendamos" },
       {
         locale: "es",
         path: "/aprendamos/como-se-comunican-las-neuronas",
       },
+      {
+        locale: "en",
+        path: "/aprendamos/como-se-comunican-las-neuronas",
+      },
     ]);
-    expect(getLearnLocaleAvailability("/aprendamos")).toEqual(["es"]);
+    expect(getLearnLocaleAvailability("/aprendamos")).toEqual(["es", "en"]);
     expect(getLearnLocaleAvailability("/about")).toBeNull();
     expect(switchLocaleHref("/es/aprendamos", "en")).toEqual({
-      href: "/en",
-      fallback: true,
+      href: "/en/aprendamos",
+      fallback: false,
     });
     expect(switchLocaleHref("/es/about", "en")).toEqual({
       href: "/en/about",
       fallback: false,
     });
     expect(localizedPathForAvailableContent("en", "/aprendamos")).toEqual({
-      href: "/es/aprendamos",
-      lang: "es",
+      href: "/en/aprendamos",
     });
   });
 });
 
 describe("unlocalized aprendamos redirect", () => {
-  it("sends /aprendamos to spanish before the locale cookie", () => {
-    expect(resolveUnlocalizedRedirect("/aprendamos", "en")).toBe("/es/aprendamos");
+  it("sends /aprendamos to the resolved locale", () => {
+    expect(resolveUnlocalizedRedirect("/aprendamos", "en")).toBe("/en/aprendamos");
     expect(
       resolveUnlocalizedRedirect(
         "/aprendamos/como-se-comunican-las-neuronas",
         "en",
       ),
-    ).toBe("/es/aprendamos/como-se-comunican-las-neuronas");
+    ).toBe("/en/aprendamos/como-se-comunican-las-neuronas");
     expect(resolveUnlocalizedRedirect("/es/aprendamos", "en")).toBeNull();
     expect(resolveUnlocalizedRedirect("/about", "en")).toBe("/en/about");
     expect(resolveUnlocalizedRedirect("/", "es")).toBe("/es");

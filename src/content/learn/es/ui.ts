@@ -51,4 +51,11 @@ export const learnUi = {
   inhibitory: "Conexión inhibitoria",
   voltageNote:
     "El valor compara el interior con el exterior en el punto elegido. El tiempo de la animación está ralentizado.",
+  axonRest: "Reposo",
+  axonDepolarized: "Despolarizado",
+  axonLocalCurrent: "Corriente local",
+  axonRecovery: "Recuperación",
+  axonAfter: "Más negativo",
+  stageProgress: "Etapa {current} de {count}",
+  stagesLabel: "Etapas de la animación",
 } as const;

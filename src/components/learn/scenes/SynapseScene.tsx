@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { learnUi } from "@/content/learn/es/ui";
-import { getNeuronScene, getNeuronQuestion } from "@/content/learn/es/neurons";
+import { useLearnContent, useLearnUi, useNeuronScene, useNeuronQuestion } from "@/components/learn/LearnContent";
 import { DetailInset } from "@/components/learn/DetailInset";
 import {
   ChemicalSynapseArt,
@@ -28,7 +27,7 @@ import {
 } from "@/lib/learn/casts";
 import { synapsePlaybackStages } from "@/lib/learn/physiology";
 
-const chemicalMoment: Record<string, Record<string, string>> = {
+const chemicalMomentEs: Record<string, Record<string, string>> = {
   arrival: {
     "calcium-channel":
       "La despolarización del terminal precede a la apertura de estos canales.",
@@ -62,7 +61,7 @@ const chemicalMoment: Record<string, Record<string, string>> = {
   },
 };
 
-const electricalMoment: Record<string, Record<string, string>> = {
+const electricalMomentEs: Record<string, Record<string, string>> = {
   connected: {
     junctions:
       "Canales que conectan los interiores celulares y permiten el paso directo de corriente iónica.",
@@ -86,14 +85,92 @@ const electricalMoment: Record<string, Record<string, string>> = {
   },
 };
 
+const chemicalMomentEn: Record<string, Record<string, string>> = {
+  arrival: {
+    "calcium-channel": "Depolarization of the terminal precedes the opening of these channels.",
+    vesicles: "The vesicle holds the neurotransmitter that will be released during fusion.",
+    transmitters: "The neurotransmitter is stored in the vesicles.",
+  },
+  calcium: {
+    "calcium-channel": "The channel is open and allows Ca²⁺ to enter the terminal.",
+    vesicles: "The vesicle holds the neurotransmitter that will be released during fusion.",
+    transmitters: "The neurotransmitter is stored in the vesicles.",
+  },
+  release: {
+    "calcium-channel": "The rise in calcium inside the terminal triggers vesicle fusion.",
+    vesicles:
+      "The vesicle membrane fuses with the presynaptic membrane and releases its contents.",
+    transmitters: "Vesicle fusion releases the neurotransmitter into the cleft.",
+  },
+  diffusion: {
+    transmitters:
+      "The molecules diffuse across the cleft and some reach the receptors.",
+  },
+  binding: {
+    receptors: "Neurotransmitter binding opens the ionotropic receptor channel.",
+    transmitters: "Neurotransmitter binding activates the postsynaptic receptor.",
+  },
+  response: {
+    receptors:
+      "The open channel allows an ionic current that changes the postsynaptic potential.",
+    transmitters: "Neurotransmitter binding activates the postsynaptic receptor.",
+  },
+};
+
+const electricalEnEntry: Record<string, string> = {
+  junctions:
+    "Channels that connect the cell interiors and allow ionic current to pass directly.",
+  "cell-1": "In this sequence, the change in potential starts in this cell.",
+  "cell-2": "Its membrane potential changes because of the current passing through the gap junction.",
+};
+
+const electricalMomentEn: Record<string, Record<string, string>> = {
+  connected: electricalEnEntry,
+  current: electricalEnEntry,
+  shared: electricalEnEntry,
+};
+
+const insetCopy = {
+  es: {
+    receptorTitle: "Receptor de este ejemplo",
+    receptorSource: "Un receptor ionotrópico de la membrana postsináptica.",
+    cleft: "Hendidura",
+    interior: "Interior",
+    exterior: "Exterior",
+    releaseTitle: "Zona de liberación",
+    releaseSource: "La ampliación corresponde a la vesícula preparada.",
+    calciumTitle: "Canal de calcio",
+    calciumSource:
+      "Misma orientación que la membrana presináptica: el calcio entra desde la hendidura hacia el terminal.",
+    junctionTitle: "Poro de la unión",
+    junctionSource: "Tomada de la unión central. El lumen sigue abierto.",
+  },
+  en: {
+    receptorTitle: "Receptor in this example",
+    receptorSource: "An ionotropic receptor in the postsynaptic membrane.",
+    cleft: "Cleft",
+    interior: "Inside",
+    exterior: "Outside",
+    releaseTitle: "Release zone",
+    releaseSource: "The magnified view shows the primed vesicle.",
+    calciumTitle: "Calcium channel",
+    calciumSource:
+      "Same orientation as the presynaptic membrane: calcium enters from the cleft into the terminal.",
+    junctionTitle: "Junction pore",
+    junctionSource: "Taken from the central junction. The lumen remains open.",
+  },
+} as const;
+
 function ChemicalInset({ stageId, pose }: { stageId: string; pose: ChemicalPose }) {
+  const { locale } = useLearnContent();
+  const copy = insetCopy[locale === "en" ? "en" : "es"];
   if (stageId === "binding" || stageId === "response") {
     return (
-      <DetailInset title="Receptor de este ejemplo" source="Un receptor ionotrópico de la membrana postsináptica.">
+      <DetailInset title={copy.receptorTitle} source={copy.receptorSource}>
         <svg viewBox="0 0 160 120" className="block h-auto w-full" aria-hidden="true">
-          <text x="8" y="16" fontSize="14" fill="#20201e">Hendidura</text>
+          <text x="8" y="16" fontSize="14" fill="#20201e">{copy.cleft}</text>
           <rect x="16" y="48" width="128" height="14" rx="3" fill="#e7a090" />
-          <text x="8" y="112" fontSize="14" fill="#20201e">Interior</text>
+          <text x="8" y="112" fontSize="14" fill="#20201e">{copy.interior}</text>
           <path d="M 58 40 C 50 62, 52 78, 62 86 C 70 90, 78 84, 76 72 C 82 58, 74 44, 66 40 Z" fill="#8eb4d4" stroke="#3d5f86" />
           <path d="M 102 40 C 94 62, 96 78, 106 86 C 114 90, 122 84, 120 72 C 126 58, 118 44, 110 40 Z" fill="#8eb4d4" stroke="#3d5f86" />
           <rect x="74" y="62" width="12" height="28" rx="3" fill="#f7f4ee" stroke="#3d5f86" />
@@ -113,7 +190,7 @@ function ChemicalInset({ stageId, pose }: { stageId: string; pose: ChemicalPose 
 
   if (stageId === "release" || stageId === "diffusion") {
     return (
-      <DetailInset title="Zona de liberación" source="La ampliación corresponde a la vesícula preparada.">
+      <DetailInset title={copy.releaseTitle} source={copy.releaseSource}>
         <svg viewBox="720 300 220 270" className="block h-auto w-full" aria-hidden="true">
           <rect x="720" y="300" width="220" height="270" fill="#eef0f8" />
           <path d="M 730 492 H 930" fill="none" stroke="#e7a090" strokeWidth="8" />
@@ -127,15 +204,15 @@ function ChemicalInset({ stageId, pose }: { stageId: string; pose: ChemicalPose 
   const open = pose.caOpen > 0.2;
   const swung = pose.caOpen > 0.45;
   return (
-    <DetailInset title="Canal de calcio" source="Misma orientación que la membrana presináptica: el calcio entra desde la hendidura hacia el terminal.">
+    <DetailInset title={copy.calciumTitle} source={copy.calciumSource}>
       <svg viewBox="0 0 180 150" className="block h-auto w-full" aria-hidden="true">
-        <text x="8" y="18" fontSize="14" fontWeight="700" fill="#20201e">Interior</text>
+        <text x="8" y="18" fontSize="14" fontWeight="700" fill="#20201e">{copy.interior}</text>
         <circle cx="132" cy="28" r="16" fill="#f6f1f6" stroke="#7d5d86" strokeWidth="1.6" />
         <circle cx="126" cy="28" r="4" fill="#d4789a" />
         <circle cx="138" cy="28" r="4" fill="#d4789a" />
         <rect x="18" y="48" width="144" height="12" fill="#e7a090" />
         <rect x="18" y="96" width="144" height="12" fill="#e7a090" />
-        <text x="8" y="140" fontSize="14" fontWeight="700" fill="#20201e">Exterior</text>
+        <text x="8" y="140" fontSize="14" fontWeight="700" fill="#20201e">{copy.exterior}</text>
         <rect x="68" y="40" width="44" height="76" rx="16" fill="#e0b15a" stroke="#a89880" />
         <rect className="learn-inset-pore" x={open ? 84 : 87} y="52" width={open ? 12 : 6} height="52" rx="3" fill={open ? "#f7f4ee" : "#a89880"} />
         <path className="learn-inset-gate" data-side="left" d="M 76 70 L 86 82 L 78 94" fill="#a89880" transform={swung ? "rotate(-60 82 82)" : undefined} />
@@ -150,7 +227,12 @@ function ChemicalInset({ stageId, pose }: { stageId: string; pose: ChemicalPose 
 }
 
 export function SynapseScene() {
-  const scene = getNeuronScene("sinapsis");
+  const learnUi = useLearnUi();
+  const { locale } = useLearnContent();
+  const copy = insetCopy[locale === "en" ? "en" : "es"];
+  const chemicalMoment = locale === "en" ? chemicalMomentEn : chemicalMomentEs;
+  const electricalMoment = locale === "en" ? electricalMomentEn : electricalMomentEs;
+  const scene = useNeuronScene("sinapsis");
   const [mode, setMode] = useState<"chemical" | "electrical">("chemical");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const playback = useScenePlayback(synapsePlaybackStages(mode));
@@ -168,7 +250,7 @@ export function SynapseScene() {
     text: notes[playback.snapshot.stageId]?.[part.id] ?? part.text,
   }));
   const modeNote = scene.variantNotes?.[mode];
-  const question = getNeuronQuestion("sinapsis-quimica");
+  const question = useNeuronQuestion("sinapsis-quimica");
 
   useEffect(() => {
     return playback.controller.onFrame((snapshot) => {
@@ -343,7 +425,7 @@ export function SynapseScene() {
               onSelect={(id) => setSelectedId((current) => (current === id ? null : id))}
             />
             {selectedId === "junctions" ? (
-              <DetailInset title="Poro de la unión" source="Tomada de la unión central. El lumen sigue abierto.">
+              <DetailInset title={copy.junctionTitle} source={copy.junctionSource}>
                 <JunctionDetail flow={flow} />
               </DetailInset>
             ) : null}

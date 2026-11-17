@@ -1,12 +1,13 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { learnUi } from "@/content/learn/es/ui";
+import { useLearnUi } from "@/components/learn/LearnContent";
 import type { LearnQuestion } from "@/content/learn/types";
 import { CiteList } from "@/components/learn/LearnRefs";
 import { learnControlClass } from "@/components/learn/controlClass";
 
 export function CheckQuestion({ question }: { question: LearnQuestion }) {
+  const learnUi = useLearnUi();
   const [choice, setChoice] = useState<string | null>(null);
   const [result, setResult] = useState<"correct" | "review" | null>(null);
   const feedbackRef = useRef<HTMLParagraphElement>(null);

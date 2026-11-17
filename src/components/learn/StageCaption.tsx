@@ -1,7 +1,7 @@
 "use client";
 
 import type { Ref } from "react";
-import { learnUi } from "@/content/learn/es/ui";
+import { useLearnUi } from "@/components/learn/LearnContent";
 import { CiteList } from "@/components/learn/LearnRefs";
 import { IconClose } from "@/components/learn/icons";
 
@@ -73,6 +73,7 @@ function ExplanationBody({
   closeRef?: Ref<HTMLButtonElement>;
   compact?: boolean;
 }) {
+  const learnUi = useLearnUi();
   const hasHeading = Boolean(item.eyebrow || item.title);
 
   return (

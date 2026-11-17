@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { learnUi } from "@/content/learn/es/ui";
-import { getNeuronScene } from "@/content/learn/es/neurons";
+import { useLearnContent, useLearnUi, useNeuronScene } from "@/components/learn/LearnContent";
 import { NeuronArt } from "@/components/learn/illustrations/NeuronArt";
 import { chainPath } from "@/components/learn/illustrations/geometry";
 import { axonCurves, signalChains } from "@/components/learn/illustrations/neuronModel";
@@ -14,17 +13,26 @@ const axonPath = chainPath(axonCurves);
 const dendritePaths = signalChains.map((chain) => chainPath(chain));
 const nodeStops = [0.18, 0.4, 0.62, 0.84];
 
-const accessibleCopy = {
+const accessibleCopyEs = {
   reach:
     "Entradas locales se integran en una neurona y alcanzan el umbral en el segmento inicial. Se genera un potencial de acción que se propaga por el axón.",
   short:
     "Entradas locales se integran en una neurona sin alcanzar el umbral en el segmento inicial. No se genera un potencial de acción.",
 } as const;
 
-const shortCopy: Record<
+const accessibleCopyEn = {
+  reach:
+    "Local inputs are integrated in a neuron and reach threshold at the initial segment. An action potential is generated and propagates along the axon.",
+  short:
+    "Local inputs are integrated in a neuron without reaching threshold at the initial segment. No action potential is generated.",
+} as const;
+
+type ShortCopy = Record<
   string,
   { label: string; title: string; text: string; cites: readonly string[] }
-> = {
+>;
+
+const shortCopyEs: ShortCopy = {
   threshold: {
     label: "Umbral",
     title: "Las entradas no alcanzan el umbral",
@@ -39,8 +47,33 @@ const shortCopy: Record<
   },
 };
 
+const shortCopyEn: ShortCopy = {
+  threshold: {
+    label: "Threshold",
+    title: "The inputs do not reach threshold",
+    text: "The sum of these inputs does not bring the initial segment to the threshold needed to initiate an action potential.",
+    cites: ["communication"],
+  },
+  propagation: {
+    label: "Result",
+    title: "No action potential is generated",
+    text: "The local changes fade over time without triggering an action potential.",
+    cites: ["communication"],
+  },
+};
+
+const meterStateCopy = {
+  es: { above: "Por encima", below: "Por debajo" },
+  en: { above: "Above", below: "Below" },
+} as const;
+
 export function SignalScene() {
-  const scene = getNeuronScene("recibir-y-transmitir");
+  const learnUi = useLearnUi();
+  const { locale } = useLearnContent();
+  const accessibleCopy = locale === "en" ? accessibleCopyEn : accessibleCopyEs;
+  const shortCopy = locale === "en" ? shortCopyEn : shortCopyEs;
+  const meterState = locale === "en" ? meterStateCopy.en : meterStateCopy.es;
+  const scene = useNeuronScene("recibir-y-transmitir");
   const [example, setExample] = useState<SignalExample>("reach");
   const rootRef = useRef<HTMLDivElement>(null);
   const playback = useScenePlayback(signalPlaybackStages());
@@ -80,9 +113,9 @@ export function SignalScene() {
       const dot = root?.querySelector<HTMLElement>("[data-meter-dot]");
       if (dot) dot.style.top = `${(1 - Number(vars["--meter"] ?? 0)) * 100}%`;
       const mark = root?.querySelector<HTMLElement>("[data-meter-state]");
-      if (mark) mark.textContent = vars["--crossed"] === "1" ? "Por encima" : "Por debajo";
+      if (mark) mark.textContent = vars["--crossed"] === "1" ? meterState.above : meterState.below;
     });
-  }, [example, playback.controller]);
+  }, [example, playback.controller, meterState]);
 
   return (
     <SceneStage
@@ -144,7 +177,7 @@ export function SignalScene() {
           </div>
           <p className="mt-2 text-sm text-muted">{learnUi.meterMark}</p>
           <p data-meter-state="" className="text-base font-semibold text-foreground">
-            Por debajo
+            {meterState.below}
           </p>
         </div>
       </div>

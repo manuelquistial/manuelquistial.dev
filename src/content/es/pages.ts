@@ -13,7 +13,7 @@ export const about = {
 } satisfies AboutPreviewContent;
 
 export const aboutPage = {
-  title: "Trayectoria",
+  title: "Sobre mí",
   intro: [
     "Soy ingeniero electrónico y trabajo como ingeniero de software. Mi experiencia se ha concentrado en construir aplicaciones y sistemas web, mientras mi formación académica me ha llevado hacia la inteligencia artificial y la neuroingeniería.",
     "Actualmente curso una maestría en Ingeniería en la Universidad de Antioquia, donde investigo interfaces cerebro-computador basadas en EEG y EMG.",

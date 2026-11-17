@@ -15,7 +15,7 @@ const ghostButtonClass =
   "group relative inline-flex size-11 items-center justify-center rounded-full bg-transparent text-foreground transition-colors duration-150 hover:bg-surface-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-foreground disabled:cursor-not-allowed disabled:opacity-40";
 
 const playButtonClass =
-  "group relative inline-flex size-12 items-center justify-center rounded-full bg-accent text-white transition-colors duration-150 hover:bg-accent-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-white disabled:cursor-not-allowed disabled:opacity-45";
+  "group relative inline-flex size-12 items-center justify-center rounded-full bg-brand text-white transition-colors duration-200 hover:bg-brand-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-violet disabled:cursor-not-allowed disabled:opacity-45";
 
 function formatSpeed(value: number) {
   return `${value.toLocaleString("es-CO")}×`;
@@ -142,7 +142,7 @@ export function PlaybackControls({
               id={menuId}
               role="menu"
               aria-label={learnUi.speedLabel}
-              className="absolute right-0 bottom-full z-30 mb-1 max-h-[min(50vh,16rem)] w-36 overflow-y-auto overscroll-contain rounded-[8px] border border-border bg-surface p-1 shadow-sm"
+              className="absolute right-0 bottom-full z-30 mb-1 max-h-[min(50vh,16rem)] w-36 overflow-y-auto overscroll-contain rounded-[var(--radius-module)] border border-border bg-surface p-1 shadow-sm"
             >
               {PLAYBACK_SPEEDS.map((value) => {
                 const selected = speed === value;

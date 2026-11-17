@@ -28,34 +28,34 @@ export function CheckQuestion({ question }: { question: LearnQuestion }) {
 
   return (
     <form
-      className="rounded-[8px] border border-border bg-surface p-[var(--learn-panel-pad)]"
+      className="gp-module border border-border bg-surface p-[var(--learn-panel-pad)] md:p-7"
       onSubmit={(event) => {
         event.preventDefault();
         if (!checked) check();
       }}
     >
       <div className="learn-reading">
-        <p className="text-sm font-semibold text-muted">{learnUi.questionEyebrow}</p>
+        <p className="text-overline text-muted">{learnUi.questionEyebrow}</p>
         <fieldset className="mt-3" disabled={checked}>
-          <legend className="text-base font-semibold text-foreground">
+          <legend className="text-[length:var(--body-lg)] font-semibold text-brand">
             {question.prompt}
           </legend>
-          <div className="mt-3 space-y-2">
+          <div className="mt-4 space-y-2">
             {question.options.map((option, index) => (
               <label
                 key={option.id}
-                className="flex min-h-11 cursor-pointer items-start gap-3 rounded-[6px] border border-transparent px-2 py-2 has-[:focus-visible]:border-foreground has-[:disabled]:cursor-default"
+                className="flex min-h-12 cursor-pointer items-start gap-3 rounded-[calc(var(--radius-module)-0.35rem)] border border-transparent bg-surface-soft/60 px-3 py-2.5 transition-colors duration-200 hover:border-brand/20 has-[:checked]:border-brand/35 has-[:checked]:bg-[color-mix(in_srgb,var(--accent-yellow)_18%,var(--surface))] has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-accent-violet has-[:disabled]:cursor-default"
               >
                 <input
                   ref={index === 0 ? firstOptionRef : undefined}
-                  className="mt-1 size-4 accent-[var(--accent)]"
+                  className="mt-1 size-4 accent-[var(--accent-violet)]"
                   type="radio"
                   name={question.id}
                   value={option.id}
                   checked={choice === option.id}
                   onChange={() => setChoice(option.id)}
                 />
-                <span className="min-w-0 text-base leading-snug text-foreground">
+                <span className="min-w-0 text-[length:var(--body)] leading-snug text-foreground">
                   {option.label}
                 </span>
               </label>
@@ -67,12 +67,12 @@ export function CheckQuestion({ question }: { question: LearnQuestion }) {
             ref={feedbackRef}
             tabIndex={-1}
             aria-live="polite"
-            className="mt-4 text-base leading-relaxed text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+            className="mt-5 rounded-[calc(var(--radius-module)-0.35rem)] bg-surface-soft px-4 py-3 text-[length:var(--body)] leading-relaxed text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-violet"
           >
             {result === "correct" ? (
-              <span className="font-semibold">{learnUi.correct} </span>
+              <span className="font-semibold text-accent-green">{learnUi.correct} </span>
             ) : (
-              <span className="font-semibold">{learnUi.incorrect} </span>
+              <span className="font-semibold text-accent-coral">{learnUi.incorrect} </span>
             )}
             {selected.feedback}
             <CiteList cites={selected.cites} />
@@ -81,7 +81,7 @@ export function CheckQuestion({ question }: { question: LearnQuestion }) {
         {checked ? (
           <button
             type="button"
-            className={`${learnControlClass} mt-4`}
+            className={`${learnControlClass} mt-5`}
             onClick={retry}
           >
             {learnUi.retry}
@@ -89,7 +89,7 @@ export function CheckQuestion({ question }: { question: LearnQuestion }) {
         ) : (
           <button
             type="submit"
-            className={`${learnControlClass} mt-4`}
+            className={`${learnControlClass} mt-5`}
             disabled={!choice}
           >
             {learnUi.check}

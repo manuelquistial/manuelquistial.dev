@@ -115,7 +115,7 @@ function ChemicalInset({ stageId, pose }: { stageId: string; pose: ChemicalPose 
     return (
       <DetailInset title="Zona de liberación" source="La ampliación corresponde a la vesícula preparada.">
         <svg viewBox="720 300 220 270" className="block h-auto w-full" aria-hidden="true">
-          <rect x="720" y="300" width="220" height="270" fill="#eef3f6" />
+          <rect x="720" y="300" width="220" height="270" fill="#eef0f8" />
           <path d="M 730 492 H 930" fill="none" stroke="#e7a090" strokeWidth="8" />
           <path className="learn-fusion-detail" d={fusionOutline(pose.fusion)} fill="#f6f1f6" stroke="#7d5d86" strokeWidth="2.2" />
         </svg>

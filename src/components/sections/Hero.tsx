@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Locale } from "@/i18n/config";
 import type { SiteContent } from "@/content";
 import { IconArrowRight } from "@/components/icons";
+import { SpotIllustration } from "@/components/ui/SpotIllustration";
 import { localizedSectionPath } from "@/lib/localizedPath";
 import { pageSections } from "@/lib/pageSections";
 import { Container } from "@/components/layout/Container";
@@ -14,8 +15,8 @@ interface HeroProps {
 export function Hero({ locale, content }: HeroProps) {
   return (
     <section className="relative overflow-hidden bg-background">
-      <Container className="grid items-center gap-10 py-[var(--section-y)] lg:grid-cols-12 lg:gap-8">
-        <div className="relative z-[1] lg:col-span-7">
+      <Container className="grid items-center gap-8 py-[var(--section-y)] lg:grid-cols-12 lg:gap-10">
+        <div className="relative z-[1] lg:col-span-6">
           <p className="text-[length:var(--body-lg)] font-medium text-muted">
             {content.greeting}
           </p>
@@ -45,13 +46,20 @@ export function Hero({ locale, content }: HeroProps) {
           </div>
         </div>
 
-        <div
-          className="relative hidden min-h-[14rem] lg:col-span-5 lg:block"
-          aria-hidden
-        >
-          <div className="absolute left-[8%] top-[10%] h-48 w-48 rounded-full bg-accent-yellow" />
-          <div className="absolute right-[4%] top-[28%] h-40 w-40 rounded-full bg-accent-coral" />
-          <div className="absolute bottom-[8%] left-[28%] h-28 w-28 rounded-full bg-accent-violet/40" />
+        <div className="relative flex min-h-[18rem] items-center justify-center lg:col-span-6 lg:min-h-[24rem] lg:justify-end">
+          <div aria-hidden className="pointer-events-none absolute inset-0">
+            <div className="absolute left-[6%] top-[8%] h-44 w-44 rounded-full bg-accent-yellow sm:h-52 sm:w-52 lg:left-[4%] lg:top-[4%] lg:h-56 lg:w-56" />
+            <div className="absolute right-[2%] top-[22%] h-36 w-36 rounded-full bg-accent-coral sm:h-44 sm:w-44 lg:right-0 lg:top-[18%] lg:h-48 lg:w-48" />
+            <div className="absolute bottom-[6%] left-[28%] h-24 w-24 rounded-full bg-accent-violet/45 sm:h-28 sm:w-28 lg:bottom-[8%] lg:left-[24%] lg:h-32 lg:w-32" />
+          </div>
+          <SpotIllustration
+            id="wave"
+            alt=""
+            priority
+            size="hero"
+            sizes="(min-width: 1280px) 384px, (min-width: 1024px) 352px, 288px"
+            className="relative z-[1] drop-shadow-[0_18px_40px_rgba(26,35,78,0.16)]"
+          />
         </div>
       </Container>
     </section>

@@ -4,9 +4,9 @@ export const meta = {
     "Full-stack engineering, enterprise applications, and backend services. Experience at Anthology / Blackboard, frontend migration, and automated testing.",
   pages: {
     about: {
-      title: "Experience · Manuel Quistial",
+      title: "About · Manuel Quistial",
       description:
-        "Experience in full-stack development, APIs, application modernization, and administrative tools for businesses and institutional teams.",
+        "Background, education, and interests of Manuel Quistial: software engineering, neuroengineering research, and teaching.",
     },
     projects: {
       title: "Projects · Manuel Quistial",
@@ -51,7 +51,7 @@ export const hero = {
   headline: "Ideas that connect",
   descriptor:
     "Software Engineer · Neuroengineering Research · Education",
-  note: "Technology + Science + People",
+  note: "Technology + Science",
   overlinePrimary: "Software Engineer",
   overlineSecondary: "Neuroengineering Researcher",
   subtitle: [
@@ -95,6 +95,7 @@ export const agencyWebProjectsIntro =
 
 export const footer = {
   rights: "All rights reserved.",
+  social: "Connect",
 };
 
 export const experiencePreview = {

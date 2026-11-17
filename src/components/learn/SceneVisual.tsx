@@ -40,7 +40,7 @@ function isNeuronSceneId(value: string): value is NeuronSceneId {
 function SceneFallback() {
   return (
     <div
-      className="min-h-[16rem] w-full animate-pulse rounded-[8px] border border-border bg-[#eef3f6]"
+      className="gp-module min-h-[16rem] w-full animate-pulse border border-border bg-surface-soft"
       aria-hidden="true"
     />
   );

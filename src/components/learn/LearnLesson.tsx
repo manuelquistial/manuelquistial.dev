@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { isSafeHttpUrl } from "@/content/learn/catalog";
 import { learnUi } from "@/content/learn/es/ui";
 import type { LearnLessonContent } from "@/content/learn/types";
@@ -8,6 +7,8 @@ import { localizedPath } from "@/lib/localizedPath";
 import { CiteList, LearnRefsProvider } from "@/components/learn/LearnRefs";
 import { SceneSection } from "@/components/learn/SceneSection";
 import { SceneVisual } from "@/components/learn/SceneVisual";
+import { Section } from "@/components/layout/Section";
+import { PageHero } from "@/components/ui/PageHero";
 
 export function LearnLesson({
   lesson,
@@ -28,43 +29,60 @@ export function LearnLesson({
 
   return (
     <LearnRefsProvider value={{ numbers, sources: lesson.sources }}>
-      <section className="overflow-x-clip bg-background">
-        <div className="learn-lesson py-[var(--section-y)]">
-          <p className="text-sm font-semibold">
-            <Link
-              href={localizedPath(locale, "/aprendamos")}
-              className="prose-link"
-            >
-              {learnUi.backToIndex}
-            </Link>
-          </p>
-          <h1 className="mt-4 max-w-[18ch] text-balance font-display text-[length:var(--heading-1)] text-foreground">
-            {lesson.title}
-          </h1>
-          <div className="learn-lead mt-6 space-y-4">
+      <Section containerClassName="overflow-x-clip">
+        <PageHero
+          tone="learn"
+          illustration="learn"
+          eyebrow={learnUi.backToIndex}
+          eyebrowHref={localizedPath(locale, "/aprendamos")}
+          title={lesson.title}
+          description={lesson.description}
+        />
+
+        {lesson.intro.length > 0 ? (
+          <div className="learn-lead mt-10 space-y-4">
             {lesson.intro.map((paragraph) => (
-              <p key={paragraph.text} className="leading-relaxed text-muted">
+              <p
+                key={paragraph.text}
+                className="text-[length:var(--body-lg)] leading-relaxed text-muted"
+              >
                 {paragraph.text}
                 <CiteList cites={paragraph.cites} />
               </p>
             ))}
           </div>
-          <nav className="mt-8" aria-label={learnUi.scenesLabel}>
-            <p className="text-base font-semibold text-foreground">{learnUi.scenesLabel}</p>
-            <ol className="learn-index mt-4">
-              {lesson.scenes.map((scene, index) => (
-                <li key={scene.id}>
-                  <a href={`#${scene.id}`} className="prose-link">
-                    {index + 1}. {scene.title}
-                  </a>
-                </li>
-              ))}
-            </ol>
-          </nav>
+        ) : null}
+
+        <nav className="mt-12" aria-label={learnUi.scenesLabel}>
+          <p className="text-overline text-muted">{learnUi.scenesLabel}</p>
+          <ol className="mt-5 grid gap-2 sm:grid-cols-2">
+            {lesson.scenes.map((scene, index) => (
+              <li key={scene.id}>
+                <a
+                  href={`#${scene.id}`}
+                  className="group flex min-h-12 items-baseline gap-3 rounded-[var(--radius-module)] px-3 py-2.5 transition-colors duration-200 hover:bg-surface-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-violet"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="font-display text-[length:var(--heading-3)] leading-none text-brand/35 transition-colors duration-200 group-hover:text-accent-coral"
+                  >
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span className="text-[length:var(--body)] font-semibold text-brand transition-colors duration-200 group-hover:text-accent-violet">
+                    {scene.title}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+
+        <div className="learn-lesson mt-[var(--section-y)]">
           {lesson.scenes.map((scene, index) => (
             <SceneSection
               key={scene.id}
               scene={scene}
+              index={index}
               deepen={lesson.deepen.find((item) => item.afterSceneId === scene.id)}
               question={lesson.questions.find(
                 (item) => item.afterSceneId === scene.id && !item.visibleIn,
@@ -73,47 +91,56 @@ export function LearnLesson({
               <SceneVisual sceneId={scene.id} eager={index === 0} />
             </SceneSection>
           ))}
-          <section className="learn-section scroll-mt-28" aria-labelledby="learn-sources">
+
+          <section
+            className="learn-section scroll-mt-28"
+            aria-labelledby="learn-sources"
+          >
             <h2
               id="learn-sources"
-              className="text-balance text-[clamp(1.5rem,2.5vw,1.75rem)] font-semibold leading-[1.25] text-foreground"
+              className="font-display text-[length:var(--heading-2)] text-brand"
             >
               {learnUi.sourcesTitle}
             </h2>
-            <div className="learn-reading">
-              <ol className="mt-6 space-y-4">
-                {citedSources.map((source) => (
-                  <li key={source.id} id={`ref-${source.id}`} className="scroll-mt-28">
-                    <p className="text-sm font-semibold text-foreground">
-                      {numbers[source.id]}. {source.authors}, {source.year}
-                    </p>
-                    <a
-                      href={source.href}
-                      className="prose-link mt-1 inline-block text-sm leading-relaxed"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {source.edition}
-                    </a>
-                  </li>
-                ))}
-              </ol>
-              {originalPost ? (
-                <p className="mt-4">
+            <ol className="mt-[var(--section-heading-gap)] space-y-5">
+              {citedSources.map((source) => (
+                <li
+                  key={source.id}
+                  id={`ref-${source.id}`}
+                  className="scroll-mt-28 border-t border-border pt-5 first:border-t-0 first:pt-0"
+                >
+                  <p className="text-sm font-semibold text-brand">
+                    <span className="font-display text-brand/40">
+                      {numbers[source.id]}.
+                    </span>{" "}
+                    {source.authors}, {source.year}
+                  </p>
                   <a
-                    href={originalPost}
-                    className="prose-link font-semibold"
+                    href={source.href}
+                    className="mt-1 inline-block max-w-[65ch] text-sm leading-relaxed text-muted transition-colors duration-200 hover:text-accent-violet"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {learnUi.originalPost}
+                    {source.edition}
                   </a>
-                </p>
-              ) : null}
-            </div>
+                </li>
+              ))}
+            </ol>
+            {originalPost ? (
+              <p className="mt-8">
+                <a
+                  href={originalPost}
+                  className="inline-flex min-h-11 items-center text-sm font-semibold text-brand transition-colors duration-200 hover:text-accent-violet"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {learnUi.originalPost}
+                </a>
+              </p>
+            ) : null}
           </section>
         </div>
-      </section>
+      </Section>
     </LearnRefsProvider>
   );
 }

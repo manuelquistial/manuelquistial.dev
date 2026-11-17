@@ -47,7 +47,7 @@ export function CiteMark({
         <span
           role="dialog"
           aria-labelledby={titleId}
-          className="absolute left-0 z-30 mt-1 max-h-[min(70vh,24rem)] w-64 overflow-y-auto overscroll-contain rounded-[8px] border border-border bg-surface p-3 text-left text-sm text-foreground shadow-sm not-italic"
+          className="absolute left-0 z-30 mt-1 max-h-[min(70vh,24rem)] w-64 overflow-y-auto overscroll-contain rounded-[var(--radius-module)] border border-border bg-surface p-3 text-left text-sm text-foreground shadow-sm not-italic"
         >
           <span className="flex items-start justify-between gap-2">
             <span id={titleId} className="font-semibold leading-snug">

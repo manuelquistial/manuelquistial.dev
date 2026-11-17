@@ -260,7 +260,7 @@ export function JunctionDetail({ flow }: { flow: ElectricalFlow }) {
   const fromTop = flow === "forward";
   return (
     <svg viewBox="0 0 160 110" className="block h-auto w-full" aria-hidden="true">
-      <rect width="160" height="110" fill="#eef3f6" />
+      <rect width="160" height="110" fill="#eef0f8" />
       <text x="8" y="18" fontSize="16" fontWeight="700" fill={learnColors.ink}>
         {fromTop ? "Célula 1" : "Célula 2"}
       </text>

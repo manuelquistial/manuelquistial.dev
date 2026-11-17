@@ -1,7 +1,7 @@
 export const learnColors = {
   ink: "#3a342f",
   muted: "#6b6560",
-  paper: "#eef3f6",
+  paper: "#eef0f8",
   coral: "#f4947c",
   coralDeep: "#e07f6c",
   coralInk: "#7d4a42",

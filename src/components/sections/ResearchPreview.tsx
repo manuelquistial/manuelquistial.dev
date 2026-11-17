@@ -1,5 +1,6 @@
 import type { Locale } from "@/i18n/config";
 import { IconArrowRight } from "@/components/icons";
+import { SpotIllustration } from "@/components/ui/SpotIllustration";
 import { localizedPath } from "@/lib/localizedPath";
 import { pageSections } from "@/lib/pageSections";
 import { Section } from "@/components/layout/Section";
@@ -59,10 +60,19 @@ export function ResearchPreview({
             <p className="sr-only">{projectTitle}</p>
           </div>
 
-          <div className="relative hidden min-h-[12rem] lg:col-span-5 lg:block" aria-hidden>
-            <div className="absolute right-0 top-0 h-36 w-36 rounded-full bg-accent-yellow/80" />
-            <div className="absolute bottom-4 right-16 h-28 w-28 rounded-full bg-accent-coral/80" />
-            <div className="absolute left-8 top-16 h-24 w-24 rounded-full bg-accent-violet/50" />
+          <div className="relative flex min-h-[14rem] items-center justify-center lg:col-span-5 lg:justify-end">
+            <div aria-hidden className="pointer-events-none absolute inset-0">
+              <div className="absolute right-0 top-0 h-32 w-32 rounded-full bg-accent-yellow/80 lg:h-36 lg:w-36" />
+              <div className="absolute bottom-2 right-14 h-24 w-24 rounded-full bg-accent-coral/80 lg:bottom-4 lg:right-16 lg:h-28 lg:w-28" />
+              <div className="absolute left-6 top-12 h-20 w-20 rounded-full bg-accent-violet/50 lg:left-8 lg:h-24 lg:w-24" />
+            </div>
+            <SpotIllustration
+              id="research"
+              alt=""
+              size="xl"
+              sizes="(min-width: 1024px) 256px, 208px"
+              className="relative z-[1]"
+            />
           </div>
         </div>
       </div>

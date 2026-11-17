@@ -16,6 +16,7 @@ import { pageSections } from "@/lib/pageSections";
 import { buildPageMetadata } from "@/lib/metadata";
 import { Section } from "@/components/layout/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
+import { PageHero } from "@/components/ui/PageHero";
 import { ExperienceCard } from "@/components/ui/ExperienceCard";
 import { Button } from "@/components/ui/Button";
 
@@ -51,32 +52,40 @@ export default async function AboutPage({ params }: AboutPageProps) {
 
   return (
     <Section>
-      <div id={pageSections.about} className="relative overflow-hidden">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -right-10 top-0 h-36 w-36 rounded-full bg-accent-yellow/70"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute right-24 top-24 h-24 w-24 rounded-full bg-accent-coral/60"
-        />
-        <SectionTitle
-          as="h1"
+      <div id={pageSections.about}>
+        <PageHero
+          tone="wave"
           title={aboutPage.title}
-          subtitle={
+          description={
             typeof aboutPage.intro === "string"
               ? aboutPage.intro
-              : aboutPage.intro.join(" ")
+              : aboutPage.intro[0]
           }
-          className="relative z-[1]"
-        />
+          illustration="wave"
+        >
+          <Button
+            href={getCvUrl(locale)}
+            download={getCvDownloadName(locale)}
+            variant="outline"
+            className="border-brand/25 text-brand hover:border-brand hover:bg-brand/5"
+          >
+            {content.contactPage.cv}
+          </Button>
+        </PageHero>
       </div>
 
-      <div className="mt-4">
-        <Button href={getCvUrl(locale)} download={getCvDownloadName(locale)} variant="outline">
-          {content.contactPage.cv}
-        </Button>
-      </div>
+      {Array.isArray(aboutPage.intro) && aboutPage.intro.length > 1 ? (
+        <div className="mt-[var(--section-heading-gap)] max-w-[65ch] space-y-4">
+          {aboutPage.intro.slice(1).map((paragraph) => (
+            <p
+              key={paragraph}
+              className="text-[length:var(--body-lg)] leading-[1.45] text-muted"
+            >
+              {paragraph}
+            </p>
+          ))}
+        </div>
+      ) : null}
 
       <section
         id={pageSections.experience}

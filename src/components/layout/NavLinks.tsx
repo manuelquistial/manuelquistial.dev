@@ -37,8 +37,7 @@ export function NavLinks({
         const hash = "hash" in item ? item.hash : undefined;
         const fullHref = hash ? `${href}#${hash}` : href;
         const isActive =
-          !hash &&
-          (pathname === href || pathname.startsWith(`${href}/`));
+          pathname === href || pathname.startsWith(`${href}/`);
         const label = nav[item.key];
 
         return (
@@ -51,13 +50,32 @@ export function NavLinks({
               lang && lang !== locale ? `${label} (${localeLabels[lang]})` : undefined
             }
             aria-current={isActive ? "page" : undefined}
-            onClick={onNavigate}
+            onClick={() => {
+              onNavigate?.();
+              if (!hash || pathname !== href) return;
+              // Same-route hash links: ensure scroll even if the router skips navigation.
+              requestAnimationFrame(() => {
+                const target = document.getElementById(hash);
+                if (!target) return;
+                const reduced = window.matchMedia(
+                  "(prefers-reduced-motion: reduce)",
+                ).matches;
+                target.scrollIntoView({
+                  behavior: reduced ? "auto" : "smooth",
+                  block: "start",
+                });
+              });
+            }}
             className={cn(
-              "text-overline transition-colors duration-200",
-              linkClassName,
-              isActive
-                ? "text-brand underline decoration-2 underline-offset-8"
-                : "text-foreground hover:text-accent-violet",
+              "transition-colors duration-200",
+              linkClassName
+                ? linkClassName
+                : cn(
+                    "text-overline",
+                    isActive
+                      ? "text-brand underline decoration-2 underline-offset-8"
+                      : "text-foreground hover:text-accent-violet",
+                  ),
             )}
           >
             {numbered ? (

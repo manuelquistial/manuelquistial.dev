@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import type { Locale } from "@/i18n/config";
 import type { CaseStudyContent } from "@/content/case-study-types";
 import { getCaseStudySections } from "@/content/case-study-types";
@@ -7,7 +6,7 @@ import type { Project } from "@/data/projects";
 import { localizedPath } from "@/lib/localizedPath";
 import { projectImageFrame } from "@/lib/projectImage";
 import { Section } from "@/components/layout/Section";
-import { SectionTitle } from "@/components/ui/SectionTitle";
+import { PageHero } from "@/components/ui/PageHero";
 import { cn, getUrlHost } from "@/lib/utils";
 
 function CaseStudyBlock({
@@ -70,24 +69,19 @@ export function CaseStudyView({
 
   return (
     <Section>
-      <Link
-        href={localizedPath(locale, "/projects")}
-        className="text-base font-semibold text-foreground transition-colors duration-200 hover:text-accent-violet"
-      >
-        {caseStudy.backLabel}
-      </Link>
-
-      <SectionTitle
-        as="h1"
+      <PageHero
+        tone="coding"
+        eyebrow={caseStudy.backLabel}
+        eyebrowHref={localizedPath(locale, "/projects")}
         title={caseStudy.title}
-        subtitle={caseStudy.subtitle}
-        className="mt-6"
+        description={caseStudy.subtitle}
+        illustration="coding"
       />
 
       {project.image ? (
         <div
           className={cn(
-            "mb-10 max-w-3xl",
+            "mt-[var(--section-heading-gap)] mb-10 max-w-3xl",
             imageFrame.style
               ? imageFrame.className
               : "relative aspect-[8/5] w-full overflow-hidden bg-surface",

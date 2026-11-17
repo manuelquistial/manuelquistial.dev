@@ -13,7 +13,7 @@ export const about = {
 } satisfies AboutPreviewContent;
 
 export const aboutPage = {
-  title: "Experience",
+  title: "About",
   intro: [
     "I am an electronic engineer and work as a software engineer. My experience has focused on building web applications and systems, while my academic training has led me toward artificial intelligence and neuroengineering.",
     "I am currently pursuing a master's degree in Engineering at Universidad de Antioquia, where I research EEG- and EMG-based brain-computer interfaces.",

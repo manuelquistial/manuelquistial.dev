@@ -9,6 +9,7 @@ import { localizeProjects } from "@/lib/localize";
 import { buildPageMetadata } from "@/lib/metadata";
 import { Section } from "@/components/layout/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
+import { PageHero } from "@/components/ui/PageHero";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 
 interface ProjectsPageProps {
@@ -42,9 +43,14 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
 
   return (
     <Section>
-      <SectionTitle as="h1" title={content.sections.projects} />
+      <PageHero
+        tone="coding"
+        title={content.sections.projects}
+        description={content.sections.selectedWorkIntro}
+        illustration="coding"
+      />
 
-      <div className="space-y-[var(--section-y)]">
+      <div className="mt-[var(--section-y)] space-y-[var(--section-y)]">
         {categoryOrder.map((category) => {
           const items = localizeProjects(
             getProjectsByCategory(category),

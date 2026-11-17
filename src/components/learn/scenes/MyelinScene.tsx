@@ -18,7 +18,7 @@ const phases = ["spread", "regeneration", "continuation"] as const;
 function SheathDetail() {
   return (
     <svg viewBox="0 0 320 170" className="block h-auto w-full" aria-hidden="true">
-      <rect width="320" height="170" fill="#eef3f6" />
+      <rect width="320" height="170" fill="#eef0f8" />
       <circle cx="78" cy="86" r="54" fill={learnColors.myelin} stroke={learnColors.myelinEdge} strokeWidth="2" />
       <circle cx="78" cy="86" r="42" fill="none" stroke="#efe6d4" strokeWidth="4" />
       <circle cx="78" cy="86" r="30" fill="none" stroke={learnColors.myelinEdge} strokeWidth="2" />
@@ -44,7 +44,7 @@ function NodeLongitudinal({ open, spread }: { open: boolean; spread: number }) {
   const tip = 96 + Math.max(0.35, spread) * 150;
   return (
     <svg viewBox="0 0 420 168" className="block h-auto w-full" aria-hidden="true">
-      <rect width="420" height="168" fill="#eef3f6" />
+      <rect width="420" height="168" fill="#eef0f8" />
       <text x="12" y="20" fontSize="15" fontWeight="700" fill={learnColors.ink}>
         Exterior
       </text>

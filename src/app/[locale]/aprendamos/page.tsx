@@ -9,6 +9,7 @@ import type { Locale } from "@/i18n/config";
 import { buildPageMetadata } from "@/lib/metadata";
 import { localizedPath } from "@/lib/localizedPath";
 import { Section } from "@/components/layout/Section";
+import { PageHero } from "@/components/ui/PageHero";
 import { NeuronArt } from "@/components/learn/illustrations/NeuronArt";
 
 interface LearnIndexPageProps {
@@ -53,13 +54,13 @@ export default async function LearnIndexPage({ params }: LearnIndexPageProps) {
 
   return (
     <Section containerClassName="overflow-x-clip">
-      <h1 className="max-w-[16ch] text-balance font-display text-[length:var(--heading-1)] text-brand">
-        {learnUi.indexTitle}
-      </h1>
-      <p className="mt-6 max-w-[55ch] text-[length:var(--body-lg)] leading-[1.45] text-muted">
-        {learnUi.indexIntro}
-      </p>
-      <div className="mt-[var(--section-heading-gap)]">
+      <PageHero
+        tone="learn"
+        title={learnUi.indexTitle}
+        description={learnUi.indexIntro}
+        illustration="learn"
+      />
+      <div className="mt-[var(--section-y)]">
         {lessons.map((lesson, index) => (
           <article
             key={lesson.slug}
@@ -78,21 +79,21 @@ export default async function LearnIndexPage({ params }: LearnIndexPageProps) {
             </div>
             <div className="min-w-0 md:col-span-7">
               <p className="text-overline text-muted">{learnUi.indexTitle}</p>
-              <h2 className="mt-3 max-w-[22ch] text-[length:var(--heading-2)] font-semibold leading-[1.15] tracking-[-0.03em] text-foreground">
+              <h2 className="font-display mt-3 max-w-[22ch] text-[length:var(--heading-2)] leading-[1.1] text-brand">
                 <Link
                   href={localizedPath(locale, `/aprendamos/${lesson.slug}`)}
-                  className="transition-colors duration-200 hover:text-accent"
+                  className="transition-colors duration-200 hover:text-accent-violet"
                 >
                   {lesson.title}
                 </Link>
               </h2>
-              <p className="mt-4 max-w-[48ch] leading-[1.45] text-muted">
+              <p className="mt-4 max-w-[48ch] text-[length:var(--body)] leading-relaxed text-muted">
                 {lesson.cardDescription}
               </p>
               <p className="mt-5">
                 <Link
                   href={localizedPath(locale, `/aprendamos/${lesson.slug}`)}
-                  className="text-[length:var(--small)] font-semibold text-foreground transition-colors duration-200 hover:text-accent"
+                  className="inline-flex min-h-11 items-center text-sm font-semibold text-brand transition-colors duration-200 hover:text-accent-violet"
                 >
                   {learnUi.explore}
                 </Link>

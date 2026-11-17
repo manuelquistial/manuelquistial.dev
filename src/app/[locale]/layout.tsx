@@ -59,10 +59,13 @@ export default async function LocaleLayout({
         {children}
       </main>
       <Footer
+        locale={locale}
         content={{
           footer: content.footer,
           contactPage: content.contactPage,
           contactCta: content.contactCta,
+          nav: content.nav,
+          a11y: content.a11y,
         }}
       />
     </>

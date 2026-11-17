@@ -4,9 +4,9 @@ export const meta = {
     "Ingeniería full-stack, aplicaciones empresariales y servicios backend. Experiencia en Anthology / Blackboard, migración de frontend y pruebas automatizadas.",
   pages: {
     about: {
-      title: "Trayectoria · Manuel Quistial",
+      title: "Sobre mí · Manuel Quistial",
       description:
-        "Experiencia en desarrollo full-stack, APIs, modernización de aplicaciones y herramientas de administración para empresas y equipos institucionales.",
+        "Trayectoria, formación e intereses de Manuel Quistial: ingeniería de software, investigación en neuroingeniería y docencia.",
     },
     projects: {
       title: "Proyectos · Manuel Quistial",
@@ -51,7 +51,7 @@ export const hero = {
   headline: "Ideas que conectan",
   descriptor:
     "Ingeniero de Software · Investigación en Neuroingeniería · Educación",
-  note: "Tecnología + Ciencia + Personas",
+  note: "Tecnología + Ciencia",
   overlinePrimary: "Ingeniero de software",
   overlineSecondary: "Investigador en neuroingeniería",
   subtitle: [
@@ -95,6 +95,7 @@ export const agencyWebProjectsIntro =
 
 export const footer = {
   rights: "Todos los derechos reservados.",
+  social: "Conectar",
 };
 
 export const experiencePreview = {

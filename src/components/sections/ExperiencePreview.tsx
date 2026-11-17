@@ -20,7 +20,7 @@ export function ExperiencePreview({
   viewAllLabel,
 }: ExperiencePreviewProps) {
   return (
-    <Section id={pageSections.experience} variant="bordered">
+    <Section variant="bordered">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <h2 className="font-display text-[length:var(--heading-1)] text-brand">
           {sectionLabel}

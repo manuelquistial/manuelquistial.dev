@@ -110,7 +110,7 @@ export function SceneStage({
 
   return (
     <div
-      className={`learn-scene w-full overflow-hidden rounded-[8px] border border-border bg-[#eef3f6] ${paused ? "is-paused" : ""}`}
+      className={`learn-scene gp-module w-full border border-border bg-surface-soft ${paused ? "is-paused" : ""}`}
       onKeyDown={(event) => {
         if (event.key === "Escape" && card) {
           event.preventDefault();

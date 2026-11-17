@@ -1,6 +1,7 @@
 export const navItems = [
   { key: "projects", path: "/projects", number: "01" },
   { key: "research", path: "/research", number: "02" },
+  // Path is Spanish; localizedPathForAvailableContent maps it per locale.
   { key: "learn", path: "/aprendamos", number: "03" },
   { key: "about", path: "/about", hash: "about", number: "04" },
 ] as const;

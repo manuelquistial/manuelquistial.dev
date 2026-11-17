@@ -3,6 +3,7 @@ import { getLearnUi } from "@/content/learn/ui";
 import type { LearnLessonContent } from "@/content/learn/types";
 import type { Locale } from "@/i18n/config";
 import { lessonCitationOrder } from "@/lib/learn/citations";
+import { getLearnBasePath } from "@/content/learn/routes";
 import { localizedPath } from "@/lib/localizedPath";
 import { LearnContentProvider } from "@/components/learn/LearnContent";
 import { CiteList, LearnRefsProvider } from "@/components/learn/LearnRefs";
@@ -37,7 +38,7 @@ export function LearnLesson({
             tone="learn"
             illustration="learn"
             eyebrow={learnUi.backToIndex}
-            eyebrowHref={localizedPath(locale, "/aprendamos")}
+            eyebrowHref={localizedPath(locale, getLearnBasePath(locale))}
             title={lesson.title}
             description={lesson.description}
           />

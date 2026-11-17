@@ -2,7 +2,7 @@ import type { LearnLessonContent } from "@/content/learn/types";
 import type { NeuronSceneId } from "@/content/learn/scene-ids";
 
 export const neuronsLesson = {
-  slug: "como-se-comunican-las-neuronas",
+  slug: "how-do-neurons-communicate",
   locales: ["en"],
   title: "How do neurons communicate?",
   description:

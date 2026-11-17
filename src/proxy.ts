@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { resolveLearnCanonicalRedirect } from "./content/learn/routes";
 import { defaultLocale, locales, type Locale } from "./i18n/config";
 import { resolveUnlocalizedRedirect } from "./lib/unlocalizedRedirect";
 
@@ -48,9 +49,17 @@ export function proxy(request: NextRequest) {
     return;
   }
 
-  const learnAlias =
-    pathname === "/aprendamos" || pathname.startsWith("/aprendamos/");
-  const locale = learnAlias ? "es" : resolveLocale(request);
+  const canonicalLearn = resolveLearnCanonicalRedirect(pathname);
+  if (canonicalLearn) {
+    const url = request.nextUrl.clone();
+    url.pathname = canonicalLearn;
+    const response = NextResponse.redirect(url);
+    const destinationLocale = canonicalLearn.split("/")[1] as Locale;
+    response.cookies.set(LOCALE_COOKIE, destinationLocale, { path: "/" });
+    return response;
+  }
+
+  const locale = resolveLocale(request);
   const target = resolveUnlocalizedRedirect(pathname, locale);
 
   if (!target) {

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { locales, openGraphLocales, type Locale } from "@/i18n/config";
+import { translateLearnPath } from "@/content/learn/routes";
 import { localizedPath } from "@/lib/localizedPath";
 import { site } from "@/config/site";
 
@@ -12,19 +13,36 @@ interface PageMetadataInput {
   availableLocales?: readonly Locale[];
 }
 
+function pathForLocale(path: string, locale: Locale): string {
+  return translateLearnPath(path, locale) ?? path;
+}
+
 export function buildPageMetadata(page: PageMetadataInput): Metadata {
   const locale = page.locale ?? "en";
   const normalizedPath = page.path.startsWith("/") ? page.path : `/${page.path}`;
-  const canonicalPath = localizedPath(locale, normalizedPath === "/" ? "" : normalizedPath);
+  const localePath = pathForLocale(
+    normalizedPath === "/" ? "" : normalizedPath,
+    locale,
+  );
+  const canonicalPath = localizedPath(
+    locale,
+    localePath === "/" ? "" : localePath,
+  );
   const canonicalUrl = `${site.url}${canonicalPath}`;
   const fullTitle = page.fullTitle ? page.title : `${page.title} | ${site.name}`;
 
   const languageLocales = page.availableLocales ?? locales;
   const languages = Object.fromEntries(
-    languageLocales.map((item) => [
-      item,
-      `${site.url}${localizedPath(item, normalizedPath === "/" ? "" : normalizedPath)}`,
-    ]),
+    languageLocales.map((item) => {
+      const itemPath = pathForLocale(
+        normalizedPath === "/" ? "" : normalizedPath,
+        item,
+      );
+      return [
+        item,
+        `${site.url}${localizedPath(item, itemPath === "/" ? "" : itemPath)}`,
+      ];
+    }),
   );
 
   return {

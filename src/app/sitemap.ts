@@ -2,7 +2,10 @@ import type { MetadataRoute } from "next";
 import { locales } from "@/i18n/config";
 import { getCaseStudyProjects } from "@/data/projects";
 import { localizedPath } from "@/lib/localizedPath";
-import { getLearnSitemapEntries } from "@/content/learn/routes";
+import {
+  getLearnBasePath,
+  getLearnSitemapEntries,
+} from "@/content/learn/routes";
 import { site, staticRoutes } from "@/config/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -28,7 +31,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${site.url}${localizedPath(entry.locale, entry.path)}`,
     lastModified,
     changeFrequency: "monthly" as const,
-    priority: entry.path === "/aprendamos" ? 0.6 : 0.5,
+    priority: entry.path === getLearnBasePath(entry.locale) ? 0.6 : 0.5,
   }));
 
   return [...localizedRoutes, ...learnRoutes];

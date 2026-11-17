@@ -1,5 +1,5 @@
 import { getSiteContent } from "@/content/getSiteContent";
-import { learnLessons } from "@/content/learn/catalog";
+import { getLearnLessonsForLocale } from "@/content/learn/catalog";
 import { getFeaturedExperience } from "@/data/experience";
 import { getProjectById } from "@/data/projects";
 import { parseLocale } from "@/i18n/parseLocale";
@@ -47,9 +47,7 @@ export default async function HomePage({ params }: HomePageProps) {
     ? localizeProject(researchProject, locale)
     : null;
 
-  const publishedLessons = learnLessons.filter(
-    (lesson) => lesson.locales.length > 0,
-  );
+  const publishedLessons = getLearnLessonsForLocale(locale);
 
   const aboutIntro =
     content.about.previewParagraphs[0] ??

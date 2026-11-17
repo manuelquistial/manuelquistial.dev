@@ -1,8 +1,12 @@
 import Link from "next/link";
 import type { Locale } from "@/i18n/config";
+import {
+  getLearnBasePath,
+  getLearnLessonPath,
+} from "@/content/learn/routes";
 import { IconArrowRight } from "@/components/icons";
 import { SpotIllustration } from "@/components/ui/SpotIllustration";
-import { localizedPathForAvailableContent } from "@/lib/localizedPath";
+import { localizedPath } from "@/lib/localizedPath";
 import { pageSections } from "@/lib/pageSections";
 
 interface AprendamosLessonItem {
@@ -28,15 +32,13 @@ export function AprendamosPreview({
 }: AprendamosPreviewProps) {
   const primary = lessons[0];
   const href = primary
-    ? localizedPathForAvailableContent(locale, `/aprendamos/${primary.slug}`)
-    : localizedPathForAvailableContent(locale, "/aprendamos");
+    ? localizedPath(locale, getLearnLessonPath(locale, primary.slug))
+    : localizedPath(locale, getLearnBasePath(locale));
 
   return (
     <section id={pageSections.learn} className="h-full">
       <Link
-        href={href.href}
-        lang={href.lang}
-        hrefLang={href.lang}
+        href={href}
         className="gp-module group relative flex h-full min-h-[18rem] flex-col overflow-hidden border border-border bg-surface transition-transform duration-200 hover:-translate-y-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-violet"
       >
         <div className="relative flex justify-center overflow-hidden bg-surface-soft px-4 py-5 md:py-6">

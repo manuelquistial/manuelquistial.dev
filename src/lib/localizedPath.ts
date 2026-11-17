@@ -1,4 +1,7 @@
-import { getLearnLocaleAvailability } from "@/content/learn/routes";
+import {
+  getLearnLocaleAvailability,
+  translateLearnPath,
+} from "@/content/learn/routes";
 import { defaultLocale, locales, type Locale } from "@/i18n/config";
 
 export function localizedPath(locale: Locale, path = ""): string {
@@ -33,27 +36,42 @@ export function switchLocaleHref(
   targetLocale: Locale,
 ): { href: string; fallback: boolean } {
   const pathWithoutLocale = stripLocale(pathname);
-  const availability = getLearnLocaleAvailability(pathWithoutLocale);
-
-  if (availability === null || availability.includes(targetLocale)) {
+  const learnTarget = translateLearnPath(pathWithoutLocale, targetLocale);
+  if (learnTarget) {
     return {
-      href: localizedPath(targetLocale, pathWithoutLocale),
+      href: localizedPath(targetLocale, learnTarget),
       fallback: false,
     };
   }
 
-  return { href: localizedPath(targetLocale), fallback: true };
+  const availability = getLearnLocaleAvailability(pathWithoutLocale);
+  if (availability !== null) {
+    return { href: localizedPath(targetLocale), fallback: true };
+  }
+
+  return {
+    href: localizedPath(targetLocale, pathWithoutLocale),
+    fallback: false,
+  };
 }
 
 export function localizedPathForAvailableContent(
   locale: Locale,
   path: string,
 ): { href: string; lang?: Locale } {
+  const learnTarget = translateLearnPath(path, locale);
+  if (learnTarget) {
+    return { href: localizedPath(locale, learnTarget) };
+  }
+
   const availability = getLearnLocaleAvailability(path);
   if (availability && availability.length > 0 && !availability.includes(locale)) {
+    const fallbackLocale = availability[0];
+    const fallbackPath =
+      translateLearnPath(path, fallbackLocale) ?? path;
     return {
-      href: localizedPath(availability[0], path),
-      lang: availability[0],
+      href: localizedPath(fallbackLocale, fallbackPath),
+      lang: fallbackLocale,
     };
   }
 

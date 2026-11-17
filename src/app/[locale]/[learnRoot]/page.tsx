@@ -1,9 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { getLearnLessonsForLocale } from "@/content/learn/catalog";
 import { getLearnUi } from "@/content/learn/ui";
-import { learnIndexLocales } from "@/content/learn/routes";
+import {
+  getLearnBasePath,
+  getLearnLessonPath,
+  isLearnBaseSegment,
+  learnIndexLocales,
+  resolveLearnCanonicalRedirect,
+} from "@/content/learn/routes";
 import { parseLocale } from "@/i18n/parseLocale";
 import type { Locale } from "@/i18n/config";
 import { buildPageMetadata } from "@/lib/metadata";
@@ -13,7 +19,7 @@ import { PageHero } from "@/components/ui/PageHero";
 import { NeuronArt } from "@/components/learn/illustrations/NeuronArt";
 
 interface LearnIndexPageProps {
-  params: Promise<{ locale: string }>;
+  params: Promise<{ locale: string; learnRoot: string }>;
 }
 
 function publishedLocale(locale: Locale): Locale {
@@ -23,19 +29,25 @@ function publishedLocale(locale: Locale): Locale {
 }
 
 export function generateStaticParams() {
-  return learnIndexLocales.map((locale) => ({ locale }));
+  return learnIndexLocales.map((locale) => ({
+    locale,
+    learnRoot: getLearnBasePath(locale).slice(1),
+  }));
 }
 
 export async function generateMetadata({
   params,
 }: LearnIndexPageProps): Promise<Metadata> {
-  const locale = publishedLocale(parseLocale((await params).locale));
+  const { locale: localeParam, learnRoot } = await params;
+  if (!isLearnBaseSegment(learnRoot)) return {};
+
+  const locale = publishedLocale(parseLocale(localeParam));
   const learnUi = getLearnUi(locale);
 
   return buildPageMetadata({
     title: learnUi.indexMetaTitle,
     description: learnUi.indexDescription,
-    path: "/aprendamos",
+    path: getLearnBasePath(locale),
     fullTitle: true,
     locale,
     availableLocales: learnIndexLocales,
@@ -43,10 +55,17 @@ export async function generateMetadata({
 }
 
 export default async function LearnIndexPage({ params }: LearnIndexPageProps) {
-  const locale = parseLocale((await params).locale);
+  const { locale: localeParam, learnRoot } = await params;
+  if (!isLearnBaseSegment(learnRoot)) notFound();
+
+  const locale = parseLocale(localeParam);
+  const canonical = resolveLearnCanonicalRedirect(
+    `/${localeParam}/${learnRoot}`,
+  );
+  if (canonical) redirect(canonical);
 
   if (!learnIndexLocales.some((item) => item === locale)) {
-    redirect(localizedPath(learnIndexLocales[0], "/aprendamos"));
+    redirect(localizedPath(learnIndexLocales[0], getLearnBasePath(learnIndexLocales[0])));
   }
 
   const learnUi = getLearnUi(locale);
@@ -81,7 +100,7 @@ export default async function LearnIndexPage({ params }: LearnIndexPageProps) {
               <p className="text-overline text-muted">{learnUi.indexTitle}</p>
               <h2 className="font-display mt-3 max-w-[22ch] text-[length:var(--heading-2)] leading-[1.1] text-brand">
                 <Link
-                  href={localizedPath(locale, `/aprendamos/${lesson.slug}`)}
+                  href={localizedPath(locale, getLearnLessonPath(locale, lesson.slug))}
                   className="transition-colors duration-200 hover:text-accent-violet"
                 >
                   {lesson.title}
@@ -92,7 +111,7 @@ export default async function LearnIndexPage({ params }: LearnIndexPageProps) {
               </p>
               <p className="mt-5">
                 <Link
-                  href={localizedPath(locale, `/aprendamos/${lesson.slug}`)}
+                  href={localizedPath(locale, getLearnLessonPath(locale, lesson.slug))}
                   className="inline-flex min-h-11 items-center text-sm font-semibold text-brand transition-colors duration-200 hover:text-accent-violet"
                 >
                   {learnUi.explore}

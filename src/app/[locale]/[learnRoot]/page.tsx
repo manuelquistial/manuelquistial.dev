@@ -15,6 +15,7 @@ import type { Locale } from "@/i18n/config";
 import { buildPageMetadata } from "@/lib/metadata";
 import { localizedPath } from "@/lib/localizedPath";
 import { Section } from "@/components/layout/Section";
+import { LocalDateTime } from "@/components/ui/LocalDateTime";
 import { PageHero } from "@/components/ui/PageHero";
 import { NeuronArt } from "@/components/learn/illustrations/NeuronArt";
 
@@ -106,6 +107,12 @@ export default async function LearnIndexPage({ params }: LearnIndexPageProps) {
                   {lesson.title}
                 </Link>
               </h2>
+              <LocalDateTime
+                className="mt-3"
+                dateTime={lesson.publishedAt}
+                locale={locale}
+                label={`${learnUi.publishedLabel}:`}
+              />
               <p className="mt-4 max-w-[48ch] text-[length:var(--body)] leading-relaxed text-muted">
                 {lesson.cardDescription}
               </p>

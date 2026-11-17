@@ -79,10 +79,11 @@ export type LearnLessonContent = {
   description: string;
   cardDescription: string;
   metaTitle: string;
+  /** Absolute publication instant in UTC (ISO-8601 ending in Z). */
+  publishedAt: string;
   intro: readonly LearnText[];
   scenes: readonly LearnScene[];
   questions: readonly LearnQuestion[];
   deepen: readonly LearnDeepen[];
   sources: readonly LearnSource[];
-  originalPostUrl?: string;
 };

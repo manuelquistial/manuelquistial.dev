@@ -1,4 +1,3 @@
-import { isSafeHttpUrl } from "@/content/learn/catalog";
 import { getLearnUi } from "@/content/learn/ui";
 import type { LearnLessonContent } from "@/content/learn/types";
 import type { Locale } from "@/i18n/config";
@@ -10,6 +9,7 @@ import { CiteList, LearnRefsProvider } from "@/components/learn/LearnRefs";
 import { SceneSection } from "@/components/learn/SceneSection";
 import { SceneVisual } from "@/components/learn/SceneVisual";
 import { Section } from "@/components/layout/Section";
+import { LocalDateTime } from "@/components/ui/LocalDateTime";
 import { PageHero } from "@/components/ui/PageHero";
 
 export function LearnLesson({
@@ -20,9 +20,6 @@ export function LearnLesson({
   locale: Locale;
 }) {
   const learnUi = getLearnUi(locale);
-  const originalPost = isSafeHttpUrl(lesson.originalPostUrl)
-    ? lesson.originalPostUrl
-    : null;
   const order = lessonCitationOrder(lesson);
   const numbers = Object.fromEntries(order.map((id, index) => [id, index + 1]));
   const citedSources = order.flatMap((id) => {
@@ -41,6 +38,13 @@ export function LearnLesson({
             eyebrowHref={localizedPath(locale, getLearnBasePath(locale))}
             title={lesson.title}
             description={lesson.description}
+          />
+
+          <LocalDateTime
+            className="mt-5"
+            dateTime={lesson.publishedAt}
+            locale={locale}
+            label={`${learnUi.publishedLabel}:`}
           />
 
           {lesson.intro.length > 0 ? (
@@ -130,18 +134,6 @@ export function LearnLesson({
                   </li>
                 ))}
               </ol>
-              {originalPost ? (
-                <p className="mt-8">
-                  <a
-                    href={originalPost}
-                    className="inline-flex min-h-11 items-center text-sm font-semibold text-brand transition-colors duration-200 hover:text-accent-violet"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {learnUi.originalPost}
-                  </a>
-                </p>
-              ) : null}
             </section>
           </div>
         </Section>

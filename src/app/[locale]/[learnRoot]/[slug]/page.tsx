@@ -56,6 +56,7 @@ export async function generateMetadata({
     fullTitle: true,
     locale: published,
     availableLocales: route?.locales ?? lesson.locales,
+    publishedAt: localized.publishedAt,
   });
 }
 

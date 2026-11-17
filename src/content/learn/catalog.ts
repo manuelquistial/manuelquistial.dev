@@ -37,13 +37,3 @@ export function getLearnLessonsForLocale(locale: Locale): LearnLessonContent[] {
     lesson.locales.some((item) => item === locale),
   );
 }
-
-export function isSafeHttpUrl(value: string | undefined): value is string {
-  if (!value) return false;
-  try {
-    const url = new URL(value);
-    return url.protocol === "https:" || url.protocol === "http:";
-  } catch {
-    return false;
-  }
-}

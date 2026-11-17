@@ -10,6 +10,7 @@ export const neuronsLesson = {
   cardDescription:
     "Un recorrido por la neurona, la mielina, la sinapsis y una red. Las figuras son esquemas para seguir el proceso.",
   metaTitle: "¿Cómo se comunican las neuronas? · Aprendamos",
+  publishedAt: "2026-10-19T19:25:25.000Z",
   intro: [
     {
       text: "Seguiremos cómo una neurona integra las señales que recibe. Veremos cómo un potencial de acción se propaga por su axón y cómo su actividad puede modificar la de otra célula.",

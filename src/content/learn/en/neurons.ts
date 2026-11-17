@@ -10,6 +10,7 @@ export const neuronsLesson = {
   cardDescription:
     "A tour of the neuron, myelin, the synapse, and a network. The figures are diagrams to help you follow the process.",
   metaTitle: "How do neurons communicate? · Learn",
+  publishedAt: "2026-11-17T07:03:34.000Z",
   intro: [
     {
       text: "We will follow how a neuron integrates the signals it receives. We will see how an action potential propagates along its axon and how its activity can change the activity of another cell.",

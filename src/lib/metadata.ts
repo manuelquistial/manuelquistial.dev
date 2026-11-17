@@ -11,6 +11,8 @@ interface PageMetadataInput {
   fullTitle?: boolean;
   locale?: Locale;
   availableLocales?: readonly Locale[];
+  /** Absolute UTC ISO-8601 instant for article pages. */
+  publishedAt?: string;
 }
 
 function pathForLocale(path: string, locale: Locale): string {
@@ -58,7 +60,8 @@ export function buildPageMetadata(page: PageMetadataInput): Metadata {
       url: canonicalUrl,
       siteName: site.name,
       locale: openGraphLocales[locale],
-      type: "website",
+      type: page.publishedAt ? "article" : "website",
+      ...(page.publishedAt ? { publishedTime: page.publishedAt } : {}),
       images: [{ url: `${site.url}${site.ogImage}`, width: 1200, height: 630 }],
     },
     twitter: {

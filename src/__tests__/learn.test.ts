@@ -64,7 +64,8 @@ describe("learn catalog", () => {
     expect(neuronsLessonEn.locales).toEqual(["en"]);
     expect(neuronsLessonEs.slug).toBe("como-se-comunican-las-neuronas");
     expect(neuronsLessonEn.slug).toBe("how-do-neurons-communicate");
-    expect("originalPostUrl" in neuronsLessonEs).toBe(false);
+    expect(neuronsLessonEs.publishedAt).toBe("2026-10-19T19:25:25.000Z");
+    expect(neuronsLessonEn.publishedAt).toBe("2026-11-17T07:03:34.000Z");
     expect(neuronsLessonEs.scenes.map((scene) => scene.id)).toEqual([
       ...neuronSceneIds,
     ]);

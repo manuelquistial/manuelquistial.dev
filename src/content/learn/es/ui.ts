@@ -19,7 +19,7 @@ export const learnUi = {
   incorrect: "Revisa esta opción.",
   deepenLabel: "Para profundizar",
   sourcesTitle: "Referencias",
-  originalPost: "Publicación original",
+  publishedLabel: "Publicado",
   backToIndex: "Aprendamos",
   closeCard: "Cerrar ficha",
   play: "Reproducir",

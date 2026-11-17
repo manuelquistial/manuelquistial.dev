@@ -3,7 +3,6 @@ import type { Experience } from "@/data/experience";
 import { localizedSectionPath } from "@/lib/localizedPath";
 import { pageSections } from "@/lib/pageSections";
 import { Section } from "@/components/layout/Section";
-import { SectionHeader } from "@/components/ui/SectionHeader";
 import { ExperienceCard } from "@/components/ui/ExperienceCard";
 import { ViewAllLink } from "@/components/ui/ViewAllLink";
 
@@ -22,23 +21,25 @@ export function ExperiencePreview({
 }: ExperiencePreviewProps) {
   return (
     <Section id={pageSections.experience} variant="bordered">
-      <SectionHeader number="04" label={sectionLabel} />
-
-      <ul className="mt-[var(--section-heading-gap)] divide-y divide-border border-y border-border">
-        {items.map((item) => (
-          <li key={item.id} className="py-8 last:pb-0 md:py-10 md:last:pb-0">
-            <ExperienceCard item={item} variant="preview" />
-          </li>
-        ))}
-      </ul>
-
-      <div className="mt-8 md:mt-10">
+      <div className="flex flex-wrap items-end justify-between gap-4">
+        <h2 className="font-display text-[length:var(--heading-1)] text-brand">
+          {sectionLabel}
+        </h2>
         <ViewAllLink
           href={localizedSectionPath(locale, "/about", pageSections.experience)}
+          className="text-brand hover:text-accent-violet"
         >
           {viewAllLabel}
         </ViewAllLink>
       </div>
+
+      <ul className="mt-[var(--section-heading-gap)] divide-y divide-border border-y border-border">
+        {items.map((item) => (
+          <li key={item.id} className="py-7 md:py-8">
+            <ExperienceCard item={item} variant="preview" />
+          </li>
+        ))}
+      </ul>
     </Section>
   );
 }

@@ -47,6 +47,11 @@ export const a11y = {
 
 export const hero = {
   title: "Software Engineer",
+  greeting: "Hi, I'm Manuel",
+  headline: "Ideas that connect",
+  descriptor:
+    "Software Engineer · Neuroengineering Research · Education",
+  note: "Technology + Science + People",
   overlinePrimary: "Software Engineer",
   overlineSecondary: "Neuroengineering Researcher",
   subtitle: [
@@ -71,8 +76,10 @@ export const sections = {
   selectedWorkIntro:
     "A selection of projects I have worked on as a software engineer.",
   aprendamosIntro:
-    "A space where I explore and explain technology, artificial intelligence, and neuroscience topics as I learn about them.",
-  exploreTopic: "Explore topic",
+    "Interactive experiences to learn and explore.",
+  exploreTopic: "Read more",
+  aboutPreviewIntro: "My path, interests, and personal projects.",
+  learnMore: "Read more",
   engineeringProjects: "Applications and platforms",
   researchProjects: "Research",
   agencyWebProjects: "Websites",

@@ -47,6 +47,7 @@ import { resolveUnlocalizedRedirect } from "@/lib/unlocalizedRedirect";
 
 const verifiedSources = [
   "https://openstax.org/books/anatomy-and-physiology-2e/pages/12-2-nervous-tissue",
+  "https://openstax.org/books/anatomy-and-physiology-2e/pages/3-3-the-nucleus-and-dna-replication",
   "https://openstax.org/books/anatomy-and-physiology-2e/pages/12-4-the-action-potential",
   "https://openstax.org/books/anatomy-and-physiology-2e/pages/12-5-communication-between-neurons",
   "https://www.ncbi.nlm.nih.gov/books/NBK10921/",
@@ -55,7 +56,7 @@ const verifiedSources = [
 ];
 
 describe("learn catalog", () => {
-  it("publishes one spanish lesson with eight stable scenes", () => {
+  it("publishes one spanish lesson with seven stable scenes", () => {
     expect(learnLessons).toHaveLength(1);
     expect(neuronsLesson.locales).toEqual(["es"]);
     expect("originalPostUrl" in neuronsLesson).toBe(false);
@@ -81,6 +82,7 @@ describe("learn catalog", () => {
     );
     expect(lessonCitationOrder(neuronsLesson)).toEqual([
       "tissue",
+      "nucleus",
       "communication",
       "myelin",
       "chemical",

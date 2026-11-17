@@ -81,7 +81,7 @@ export function IonScene() {
       onClose={() => setSelectedId(null)}
       legend={ionLegend}
       leading={
-        !selectedId && scene.prompt ? (
+        scene.prompt ? (
           <ScenePrompt title={learnUi.exploreMembrane} text={scene.prompt} />
         ) : null
       }

@@ -8,7 +8,8 @@ export function projectImageFrame(project: Project): {
 } {
   if (project.imageWidth && project.imageHeight) {
     return {
-      className: "relative w-full overflow-hidden bg-surface",
+      className:
+        "relative w-full overflow-hidden rounded-[var(--radius-module)] bg-surface-soft",
       style: {
         aspectRatio: `${project.imageWidth} / ${project.imageHeight}`,
       },
@@ -16,6 +17,7 @@ export function projectImageFrame(project: Project): {
   }
 
   return {
-    className: "relative aspect-[4/3] w-full overflow-hidden bg-surface",
+    className:
+      "relative aspect-[4/3] w-full overflow-hidden rounded-[var(--radius-module)] bg-surface-soft",
   };
 }

@@ -72,7 +72,7 @@ export function CaseStudyView({
     <Section>
       <Link
         href={localizedPath(locale, "/projects")}
-        className="text-base font-semibold text-foreground transition-colors duration-200 hover:text-accent"
+        className="text-base font-semibold text-foreground transition-colors duration-200 hover:text-accent-violet"
       >
         {caseStudy.backLabel}
       </Link>
@@ -120,7 +120,7 @@ export function CaseStudyView({
             href={project.liveUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-base font-semibold text-foreground transition-colors duration-200 hover:text-accent"
+            className="text-base font-semibold text-foreground transition-colors duration-200 hover:text-accent-violet"
           >
             {liveHost}
           </a>

@@ -51,7 +51,15 @@ export default async function AboutPage({ params }: AboutPageProps) {
 
   return (
     <Section>
-      <div id={pageSections.about}>
+      <div id={pageSections.about} className="relative overflow-hidden">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -right-10 top-0 h-36 w-36 rounded-full bg-accent-yellow/70"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute right-24 top-24 h-24 w-24 rounded-full bg-accent-coral/60"
+        />
         <SectionTitle
           as="h1"
           title={aboutPage.title}
@@ -60,6 +68,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
               ? aboutPage.intro
               : aboutPage.intro.join(" ")
           }
+          className="relative z-[1]"
         />
       </div>
 
@@ -69,11 +78,14 @@ export default async function AboutPage({ params }: AboutPageProps) {
         </Button>
       </div>
 
-      <section id={pageSections.experience} className="mt-16 border-t border-border pt-10 md:mt-24">
+      <section
+        id={pageSections.experience}
+        className="mt-[var(--section-y)] border-t border-border pt-[var(--section-y)]"
+      >
         <SectionTitle title={content.sections.experience} />
         <ul className="divide-y divide-border border-y border-border">
           {professional.map((item) => (
-            <li key={item.id} className="py-8 md:py-10">
+            <li key={item.id} className="py-7 md:py-8">
               <ExperienceCard item={item} />
             </li>
           ))}
@@ -81,11 +93,11 @@ export default async function AboutPage({ params }: AboutPageProps) {
       </section>
 
       {teaching.length > 0 ? (
-        <section className="mt-16 border-t border-border pt-10 md:mt-24">
+        <section className="mt-[var(--section-y)] border-t border-border pt-[var(--section-y)]">
           <SectionTitle title={content.sections.teaching} />
           <ul className="divide-y divide-border border-y border-border">
             {teaching.map((item) => (
-              <li key={item.id} className="py-8 md:py-10">
+              <li key={item.id} className="py-7 md:py-8">
                 <ExperienceCard item={item} />
               </li>
             ))}
@@ -93,13 +105,16 @@ export default async function AboutPage({ params }: AboutPageProps) {
         </section>
       ) : null}
 
-      <section className="mt-16 border-t border-border pt-10 md:mt-24">
+      <section className="mt-[var(--section-y)] border-t border-border pt-[var(--section-y)]">
         <h2 className="text-[length:var(--heading-2)] font-semibold tracking-[-0.03em] text-foreground">
           {aboutPage.education.title}
         </h2>
-        <div className="mt-8 space-y-8">
+        <div className="mt-[var(--section-heading-gap)] space-y-8">
           {aboutPage.education.items.map((item) => (
-            <article key={item.degree} className="border-t border-border pt-6 first:border-t-0 first:pt-0">
+            <article
+              key={item.degree}
+              className="border-t border-border pt-6 first:border-t-0 first:pt-0"
+            >
               <h3 className="text-[length:var(--heading-3)] font-semibold text-foreground">
                 {item.degree}
               </h3>
@@ -110,11 +125,11 @@ export default async function AboutPage({ params }: AboutPageProps) {
         </div>
       </section>
 
-      <section className="mt-16 border-t border-border pt-10 md:mt-24">
+      <section className="mt-[var(--section-y)] border-t border-border pt-[var(--section-y)]">
         <h2 className="text-[length:var(--heading-2)] font-semibold tracking-[-0.03em] text-foreground">
           {content.sections.skills}
         </h2>
-        <div className="mt-8 grid gap-8 border-t border-border pt-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-[var(--section-heading-gap)] grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {skills.map((category) => (
             <div key={category.id}>
               <h3 className="text-overline text-foreground">
@@ -132,21 +147,21 @@ export default async function AboutPage({ params }: AboutPageProps) {
         </div>
       </section>
 
-      <section className="mt-16 border-t border-border pt-10 md:mt-24">
+      <section className="mt-[var(--section-y)] border-t border-border pt-[var(--section-y)]">
         <h2 className="text-[length:var(--heading-2)] font-semibold tracking-[-0.03em] text-foreground">
           {aboutPage.researchOutputs.title}
         </h2>
         <p className="mt-4">
           <a
             href={localizedPath(locale, "/research")}
-            className="text-base font-semibold text-foreground transition-colors duration-200 hover:text-accent"
+            className="text-base font-semibold text-foreground transition-colors duration-200 hover:text-accent-violet"
           >
             {content.sections.viewResearch}
           </a>
         </p>
       </section>
 
-      <section className="mt-16 border-t border-border pt-10 md:mt-24">
+      <section className="mt-[var(--section-y)] border-t border-border pt-[var(--section-y)]">
         <h2 className="text-[length:var(--heading-2)] font-semibold tracking-[-0.03em] text-foreground">
           {aboutPage.languages.title}
         </h2>

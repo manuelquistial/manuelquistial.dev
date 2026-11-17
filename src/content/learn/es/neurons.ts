@@ -6,7 +6,7 @@ export const neuronsLesson = {
   locales: ["es"],
   title: "¿Cómo se comunican las neuronas?",
   description:
-    "Ocho escenas para ver cómo una neurona recibe señales, cómo puede generarse un potencial de acción y cómo esa actividad pasa a otra célula.",
+    "Siete escenas para ver cómo una neurona recibe señales, cómo puede generarse un potencial de acción y cómo esa actividad pasa a otra célula.",
   cardDescription:
     "Un recorrido por la neurona, la mielina, la sinapsis y una red. Las figuras son esquemas para seguir el proceso.",
   metaTitle: "¿Cómo se comunican las neuronas? · Aprendamos",
@@ -18,23 +18,16 @@ export const neuronsLesson = {
   ],
   scenes: [
     {
-      id: "una-neurona",
-      title: "Una neurona",
-      textAlternative:
-        "Neurona con un árbol de dendritas, el soma y un axón que termina en varios terminales.",
-      paragraphs: [
-        {
-          text: "En esta neurona, las dendritas y el soma reciben entradas sinápticas. Sus efectos se integran y pueden dar lugar a un potencial de acción que se propaga por el axón hasta sus terminales.",
-          cites: ["tissue", "communication"],
-        },
-      ],
-    },
-    {
       id: "partes",
-      title: "Partes de la neurona",
+      title: "La neurona",
       textAlternative:
-        "La misma neurona, sin rótulos fijos. Se pueden elegir el soma, las dendritas y el axón.",
+        "Neurona con un árbol de dendritas, el soma, el núcleo y un axón. Se pueden elegir el soma, el núcleo, las dendritas y el axón.",
       prompt: "Selecciona una estructura para conocer su función.",
+      idle: {
+        title: "Neurona",
+        text: "La neurona es la célula que constituye la base del tejido nervioso. Es eléctricamente activa: genera y conduce señales eléctricas, y puede liberar señales químicas hacia otras células para comunicar información. Su forma, con dendritas, soma y axón, permite recibir, integrar y transmitir esa información.",
+        cites: ["tissue"],
+      },
       paragraphs: [],
       parts: [
         {
@@ -48,6 +41,12 @@ export const neuronsLesson = {
           label: "Soma",
           text: "Contiene el núcleo y gran parte de la maquinaria metabólica de la neurona. También recibe e integra entradas sinápticas junto con las dendritas.",
           cites: ["tissue", "communication"],
+        },
+        {
+          id: "nucleus",
+          label: "Núcleo",
+          text: "Se encuentra en el soma. Es el orgánulo más prominente de la célula y almacena las instrucciones genéticas para fabricar proteínas, por lo que se considera el centro de control celular.",
+          cites: ["tissue", "nucleus"],
         },
         {
           id: "axon",
@@ -613,6 +612,15 @@ export const neuronsLesson = {
       edition:
         "Anatomy and Physiology 2e. OpenStax. Sección 12.2: Nervous Tissue.",
       href: "https://openstax.org/books/anatomy-and-physiology-2e/pages/12-2-nervous-tissue",
+    },
+    {
+      id: "nucleus",
+      title: "Anatomy and Physiology 2e, Sección 3.3: The Nucleus and DNA Replication",
+      authors: "Betts et al.",
+      year: "2022",
+      edition:
+        "Anatomy and Physiology 2e. OpenStax. Sección 3.3: The Nucleus and DNA Replication.",
+      href: "https://openstax.org/books/anatomy-and-physiology-2e/pages/3-3-the-nucleus-and-dna-replication",
     },
     {
       id: "communication",

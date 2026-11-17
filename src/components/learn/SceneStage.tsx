@@ -55,7 +55,7 @@ export function SceneStage({
   playback?: Playback;
   stages?: readonly LearnStageCopy[];
   parts?: readonly LearnPartCopy[];
-  idle?: { title?: string; text: string };
+  idle?: { title?: string; text: string; cites?: readonly string[] };
   reserves?: readonly { title: string; text: string; cites?: readonly string[] }[];
   card?: SceneCardAnchor | null;
   onClose?: () => void;
@@ -196,7 +196,7 @@ function explanationCopies({
   reserves,
   card,
 }: {
-  idle?: { title?: string; text: string };
+  idle?: { title?: string; text: string; cites?: readonly string[] };
   stages?: readonly LearnStageCopy[];
   parts?: readonly LearnPartCopy[];
   reserves?: readonly { title: string; text: string; cites?: readonly string[] }[];
@@ -205,7 +205,12 @@ function explanationCopies({
   const copies: ExplanationCopy[] = [];
 
   if (idle?.text) {
-    copies.push({ key: "prompt", title: idle.title ?? "", text: idle.text });
+    copies.push({
+      key: "prompt",
+      title: idle.title ?? "",
+      text: idle.text,
+      cites: idle.cites,
+    });
   }
 
   for (const item of stages ?? []) {

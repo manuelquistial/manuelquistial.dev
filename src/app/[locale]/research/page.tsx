@@ -41,32 +41,39 @@ export default async function ResearchPage({ params }: ResearchPageProps) {
 
   return (
     <Section>
-      <header className="max-w-[65ch] border-b border-border pb-10">
-        <p className="text-overline text-muted">{researchPage.affiliation}</p>
-        <h1 className="mt-4 font-display text-[length:var(--heading-1)] text-foreground">
-          {researchPage.title}
-        </h1>
-        <p className="mt-8 text-[length:var(--heading-2)] font-semibold leading-[1.15] tracking-[-0.03em] text-foreground">
-          {researchPage.projectTitle}
-        </p>
-      </header>
+      <div className="gp-module grid items-center gap-8 overflow-hidden bg-brand p-6 text-footer-text md:p-8 lg:grid-cols-12 lg:gap-10 lg:p-10">
+        <header className="lg:col-span-6">
+          <p className="text-sm text-footer-muted">{researchPage.affiliation}</p>
+          <h1 className="mt-4 font-display text-[length:var(--heading-1)] text-white">
+            {researchPage.title}
+          </h1>
+          <p className="mt-6 text-[length:var(--heading-3)] font-semibold leading-snug text-footer-text/95">
+            {researchPage.projectTitle}
+          </p>
+        </header>
+        <div className="relative hidden min-h-[10rem] lg:col-span-6 lg:block" aria-hidden>
+          <div className="absolute -right-4 top-0 h-28 w-28 rounded-full bg-accent-yellow/80" />
+          <div className="absolute bottom-4 right-10 h-24 w-24 rounded-full bg-accent-coral/80" />
+          <div className="absolute left-10 top-12 h-20 w-20 rounded-full bg-accent-violet/50" />
+        </div>
+      </div>
 
-      <p className="mt-10 max-w-[65ch] text-[length:var(--body-lg)] leading-[1.45] text-muted">
+      <p className="mt-[var(--section-heading-gap)] max-w-[65ch] text-[length:var(--body-lg)] leading-[1.45] text-muted">
         {researchPage.summary}
       </p>
 
-      <section className="mt-16 max-w-[65ch] border-t border-border pt-10 md:mt-24">
+      <section className="mt-[var(--section-y)] max-w-[65ch] border-t border-border pt-[var(--section-y)]">
         <h2 className="text-[length:var(--heading-3)] font-semibold text-foreground">
           {researchPage.objective.title}
         </h2>
         <Prose paragraphs={researchPage.objective.paragraphs} />
       </section>
 
-      <section className="mt-16 max-w-[65ch] border-t border-border pt-10 md:mt-24">
+      <section className="mt-[var(--section-y)] max-w-[65ch] border-t border-border pt-[var(--section-y)]">
         <h2 className="text-[length:var(--heading-3)] font-semibold text-foreground">
           {researchPage.system.title}
         </h2>
-        <div className="mt-8 space-y-8">
+        <div className="mt-[var(--section-heading-gap)] space-y-8">
           {researchPage.system.items.map((item) => (
             <div key={item.title}>
               <h3 className="text-lg font-semibold text-foreground">
@@ -80,14 +87,14 @@ export default async function ResearchPage({ params }: ResearchPageProps) {
         </div>
       </section>
 
-      <section className="mt-16 max-w-[65ch] border-t border-border pt-10 md:mt-24">
+      <section className="mt-[var(--section-y)] max-w-[65ch] border-t border-border pt-[var(--section-y)]">
         <h2 className="text-[length:var(--heading-3)] font-semibold text-foreground">
           {researchPage.design.title}
         </h2>
         <Prose paragraphs={researchPage.design.paragraphs} />
       </section>
 
-      <section className="mt-16 max-w-[65ch] border-t border-border pt-10 md:mt-24">
+      <section className="mt-[var(--section-y)] max-w-[65ch] border-t border-border pt-[var(--section-y)]">
         <h2 className="text-[length:var(--heading-3)] font-semibold text-foreground">
           {researchPage.evaluation.title}
         </h2>

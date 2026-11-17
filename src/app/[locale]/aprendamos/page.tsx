@@ -53,28 +53,27 @@ export default async function LearnIndexPage({ params }: LearnIndexPageProps) {
 
   return (
     <Section containerClassName="overflow-x-clip">
-      <p className="text-overline text-muted">03</p>
-      <h1 className="mt-4 max-w-[16ch] text-balance font-display text-[length:var(--heading-1)] text-foreground">
+      <h1 className="max-w-[16ch] text-balance font-display text-[length:var(--heading-1)] text-brand">
         {learnUi.indexTitle}
       </h1>
       <p className="mt-6 max-w-[55ch] text-[length:var(--body-lg)] leading-[1.45] text-muted">
         {learnUi.indexIntro}
       </p>
-      <div className="mt-12 md:mt-16">
+      <div className="mt-[var(--section-heading-gap)]">
         {lessons.map((lesson, index) => (
           <article
             key={lesson.slug}
-            className="grid gap-6 border-t border-border py-10 md:grid-cols-12 md:items-center md:gap-8"
+            className="grid gap-6 border-t border-border py-[var(--section-y)] md:grid-cols-12 md:items-center md:gap-8"
           >
             <div className="md:col-span-1">
               <span
-                className="font-display text-[clamp(2rem,4vw,3rem)] text-foreground"
+                className="font-display text-[clamp(2rem,4vw,3rem)] text-brand"
                 aria-hidden="true"
               >
                 {String(index + 1).padStart(2, "0")}
               </span>
             </div>
-            <div className="overflow-hidden border border-border bg-[#eef3f6] md:col-span-4">
+            <div className="gp-module overflow-hidden border border-border bg-surface-soft md:col-span-4">
               <NeuronArt label={lesson.scenes[0]?.textAlternative ?? lesson.title} />
             </div>
             <div className="min-w-0 md:col-span-7">

@@ -6,7 +6,9 @@ import type {
 } from "../pages-types";
 
 export const about = {
-  previewParagraphs: [],
+  previewParagraphs: [
+    "My path, interests, and personal projects.",
+  ],
   highlights: [],
 } satisfies AboutPreviewContent;
 

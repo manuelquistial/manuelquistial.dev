@@ -1,15 +1,9 @@
 import type { Locale } from "@/i18n/config";
+import { IconArrowRight } from "@/components/icons";
 import { localizedPath } from "@/lib/localizedPath";
 import { pageSections } from "@/lib/pageSections";
 import { Section } from "@/components/layout/Section";
-import { SectionHeader } from "@/components/ui/SectionHeader";
-import { TagChip } from "@/components/ui/TagChip";
-import { ViewAllLink } from "@/components/ui/ViewAllLink";
-
-interface ResearchSystemItem {
-  title: string;
-  description: string;
-}
+import Link from "next/link";
 
 interface ResearchPreviewProps {
   locale: Locale;
@@ -18,8 +12,8 @@ interface ResearchPreviewProps {
   projectTitle: string;
   affiliation?: string;
   summary: string;
+  previewTagline?: string;
   tags?: readonly string[];
-  systemItems?: readonly ResearchSystemItem[];
 }
 
 export function ResearchPreview({
@@ -29,59 +23,46 @@ export function ResearchPreview({
   projectTitle,
   affiliation,
   summary,
+  previewTagline,
   tags = [],
-  systemItems = [],
 }: ResearchPreviewProps) {
+  const blurb = previewTagline || summary;
+
   return (
     <Section id={pageSections.research} variant="bordered">
-      <SectionHeader number="02" label={sectionLabel} />
-
-      <div className="mt-[var(--section-heading-gap)] grid gap-10 lg:grid-cols-12 lg:gap-12">
-        <div className="flex flex-col border border-border bg-surface p-6 md:p-8 lg:col-span-6 lg:p-10">
-          <div>
-            <p className="text-overline text-muted">{affiliation}</p>
-            <h3 className="mt-6 font-display text-[clamp(2rem,4vw,3.5rem)] leading-[0.95] tracking-[-0.04em] text-foreground md:mt-8">
-              {projectTitle}
-            </h3>
-            <p className="mt-6 max-w-[42ch] text-[length:var(--body-lg)] leading-[1.45] text-muted md:mt-8">
-              {summary}
+      <div className="gp-module relative overflow-hidden bg-brand text-footer-text">
+        <div className="grid items-center gap-8 p-6 md:p-8 lg:grid-cols-12 lg:gap-10 lg:p-10">
+          <div className="relative z-[1] lg:col-span-7">
+            <h2 className="font-display text-[length:var(--heading-1)] leading-[1.05] text-white">
+              {sectionLabel}
+            </h2>
+            <p className="mt-4 max-w-[42ch] text-[length:var(--body-lg)] leading-relaxed text-footer-text/90">
+              {blurb}
             </p>
+            {affiliation ? (
+              <p className="mt-3 text-sm text-footer-muted">{affiliation}</p>
+            ) : null}
+            {tags.length > 0 ? (
+              <p className="mt-4 text-sm text-footer-muted">
+                {tags.join(" · ")}
+              </p>
+            ) : null}
+            <p className="mt-8">
+              <Link
+                href={localizedPath(locale, "/research")}
+                className="inline-flex min-h-11 items-center gap-1.5 text-[length:var(--body)] font-semibold text-accent-yellow transition-colors duration-200 hover:text-white"
+              >
+                {viewAllLabel}
+                <IconArrowRight className="size-[1.05em]" />
+              </Link>
+            </p>
+            <p className="sr-only">{projectTitle}</p>
           </div>
-          {systemItems.length > 0 ? (
-            <ul className="mt-8 space-y-4 border-t border-border pt-6">
-              {systemItems.map((item, index) => (
-                <li key={item.title} className="grid grid-cols-[auto_1fr] gap-3">
-                  <span className="text-overline text-muted" aria-hidden="true">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <div>
-                    <p className="text-[length:var(--body)] font-semibold text-foreground">
-                      {item.title}
-                    </p>
-                    <p className="mt-1 text-sm leading-[1.45] text-muted">
-                      {item.description}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          ) : null}
-        </div>
 
-        <div className="flex flex-col justify-center lg:col-span-5 lg:col-start-8">
-          {tags.length > 0 ? (
-            <ul className="flex flex-wrap gap-2">
-              {tags.map((tag) => (
-                <li key={tag}>
-                  <TagChip>{tag}</TagChip>
-                </li>
-              ))}
-            </ul>
-          ) : null}
-          <div className={tags.length > 0 ? "mt-8" : undefined}>
-            <ViewAllLink href={localizedPath(locale, "/research")}>
-              {viewAllLabel}
-            </ViewAllLink>
+          <div className="relative hidden min-h-[12rem] lg:col-span-5 lg:block" aria-hidden>
+            <div className="absolute right-0 top-0 h-36 w-36 rounded-full bg-accent-yellow/80" />
+            <div className="absolute bottom-4 right-16 h-28 w-28 rounded-full bg-accent-coral/80" />
+            <div className="absolute left-8 top-16 h-24 w-24 rounded-full bg-accent-violet/50" />
           </div>
         </div>
       </div>

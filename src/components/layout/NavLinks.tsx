@@ -56,8 +56,8 @@ export function NavLinks({
               "text-overline transition-colors duration-200",
               linkClassName,
               isActive
-                ? "text-accent"
-                : "text-foreground hover:text-accent",
+                ? "text-brand underline decoration-2 underline-offset-8"
+                : "text-foreground hover:text-accent-violet",
             )}
           >
             {numbered ? (

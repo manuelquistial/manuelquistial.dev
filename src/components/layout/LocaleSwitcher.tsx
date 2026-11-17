@@ -54,12 +54,12 @@ export function LocaleSwitcher({
               className={cn(
                 "inline-flex min-h-11 items-center px-1 uppercase transition-colors duration-200",
                 isActive
-                  ? "text-accent"
-                  : "text-foreground hover:text-accent",
+                  ? "text-brand"
+                  : "text-foreground hover:text-accent-violet",
               )}
             >
               {isActive ? (
-                <span className="mr-1.5 inline-block size-1.5 rounded-full bg-accent" aria-hidden="true" />
+                <span className="mr-1.5 inline-block size-1.5 rounded-full bg-accent-violet" aria-hidden="true" />
               ) : null}
               {item}
             </Link>

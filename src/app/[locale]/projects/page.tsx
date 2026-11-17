@@ -44,7 +44,7 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
     <Section>
       <SectionTitle as="h1" title={content.sections.projects} />
 
-      <div className="space-y-16 lg:space-y-24">
+      <div className="space-y-[var(--section-y)]">
         {categoryOrder.map((category) => {
           const items = localizeProjects(
             getProjectsByCategory(category),
@@ -54,21 +54,31 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
           if (items.length === 0) return null;
 
           return (
-            <section key={category} id={category} className="border-t border-border pt-10">
+            <section
+              key={category}
+              id={category}
+              className="border-t border-border pt-[var(--section-y)]"
+            >
               <SectionTitle
                 title={content.projectCategories[category]}
                 subtitle={categorySubtitles[category]}
-                className="mb-8 sm:mb-10"
+                className="mb-[var(--section-heading-gap)]"
               />
 
-              <div className="grid auto-rows-fr gap-10 sm:grid-cols-2 md:gap-8 lg:grid-cols-3">
-                {items.map((project) => (
-                  <ProjectCard
+              <div className="grid items-stretch gap-6 sm:grid-cols-2 md:gap-7 lg:grid-cols-3">
+                {items.map((project, index) => (
+                  <div
                     key={project.id}
-                    project={project}
-                    labels={content.projectCard}
-                    showTags
-                  />
+                    className="gp-module flex h-full flex-col border border-border bg-surface p-4 transition-transform duration-200 hover:-translate-y-1 md:p-5"
+                  >
+                    <ProjectCard
+                      project={project}
+                      labels={content.projectCard}
+                      meta="reserved"
+                      showTags
+                      priority={index < 2}
+                    />
+                  </div>
                 ))}
               </div>
             </section>

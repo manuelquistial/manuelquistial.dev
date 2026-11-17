@@ -1,5 +1,4 @@
 export const neuronSceneIds = [
-  "una-neurona",
   "partes",
   "recibir-y-transmitir",
   "iones-y-membrana",

@@ -33,10 +33,10 @@ export function SectionTitle({
       ) : null}
       <Heading
         className={cn(
-          "text-balance font-semibold tracking-tight text-foreground",
+          "text-balance font-semibold tracking-tight text-brand",
           Heading === "h1"
             ? "font-display text-[length:var(--heading-1)]"
-            : "text-[length:var(--heading-2)] leading-[1.1] tracking-[-0.03em]",
+            : "font-display text-[length:var(--heading-2)] leading-[1.1] tracking-[-0.03em]",
           eyebrow && "mt-2",
           align === "center" && "mx-auto",
         )}

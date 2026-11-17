@@ -29,7 +29,7 @@ export function LearnLesson({
   return (
     <LearnRefsProvider value={{ numbers, sources: lesson.sources }}>
       <section className="overflow-x-clip bg-background">
-        <div className="learn-lesson py-14 md:py-16 lg:py-24">
+        <div className="learn-lesson py-[var(--section-y)]">
           <p className="text-sm font-semibold">
             <Link
               href={localizedPath(locale, "/aprendamos")}

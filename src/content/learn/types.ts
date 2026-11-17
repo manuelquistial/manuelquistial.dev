@@ -26,6 +26,12 @@ export type LearnScene = {
   textAlternative: string;
   paragraphs: readonly LearnText[];
   prompt?: string;
+  /** Shown in the scene panel before the user selects a structure or stage. */
+  idle?: {
+    title?: string;
+    text: string;
+    cites?: readonly string[];
+  };
   badge?: string;
   closing?: readonly LearnText[];
   variantNotes?: Partial<

@@ -8,6 +8,7 @@ import {
   localizeProject,
 } from "@/lib/localize";
 import { localizedPath } from "@/lib/localizedPath";
+import { Container } from "@/components/layout/Container";
 import { Hero } from "@/components/sections/Hero";
 import { SelectedProjects } from "@/components/sections/SelectedProjects";
 import { ResearchPreview } from "@/components/sections/ResearchPreview";
@@ -26,9 +27,6 @@ export default async function HomePage({ params }: HomePageProps) {
   const babel = getProjectById("babel-scores");
   const sita = getProjectById("sita");
   const siar = getProjectById("siar");
-  const finanzas = getProjectById("finanzas");
-  const conciliacion = getProjectById("conciliacion");
-  const sal = getProjectById("sal-picciotto-website");
   const researchProject = getProjectById("eeg-motor-imagery-pipeline");
 
   const withHomeCopy = (project: ReturnType<typeof localizeProject>) =>
@@ -36,7 +34,7 @@ export default async function HomePage({ params }: HomePageProps) {
       ? { ...project, description: project.homeDescription }
       : project;
 
-  const selectedProjects = [babel, sita, siar, finanzas, conciliacion, sal]
+  const selectedProjects = [babel, sita, siar]
     .filter((project): project is NonNullable<typeof project> => Boolean(project))
     .map((project) => withHomeCopy(localizeProject(project, locale)));
 
@@ -53,16 +51,15 @@ export default async function HomePage({ params }: HomePageProps) {
     (lesson) => lesson.locales.length > 0,
   );
 
+  const aboutIntro =
+    content.about.previewParagraphs[0] ??
+    content.sections.aboutPreviewIntro;
+
   return (
     <>
-      <Hero
-        locale={locale}
-        content={content.hero}
-        imageSrc={babel?.image}
-        imageAlt={babel?.imageAlt}
-      />
+      <Hero locale={locale} content={content.hero} />
       <SelectedProjects
-        title={content.sections.selectedWork}
+        title={content.sections.projects}
         description={content.sections.selectedWorkIntro}
         projects={selectedProjects}
         projectCard={content.projectCard}
@@ -76,36 +73,37 @@ export default async function HomePage({ params }: HomePageProps) {
         projectTitle={content.researchPage.projectTitle}
         affiliation={content.researchPage.affiliation}
         summary={content.researchPage.summary}
+        previewTagline={content.researchPage.previewTagline}
         tags={localizedResearch?.tags}
-        systemItems={content.researchPage.system.items}
       />
-      {publishedLessons.length > 0 ? (
-        <AprendamosPreview
-          locale={locale}
-          sectionLabel={content.nav.learn}
-          intro={content.sections.aprendamosIntro}
-          exploreLabel={content.sections.exploreTopic}
-          lessons={publishedLessons.map((lesson) => ({
-            slug: lesson.slug,
-            title: lesson.title,
-            imageLabel: lesson.scenes[0]?.textAlternative ?? lesson.title,
-          }))}
-        />
-      ) : null}
+      <div className="bg-background">
+        <Container className="grid gap-6 py-[var(--section-y)] md:grid-cols-2 md:gap-7">
+          {publishedLessons.length > 0 ? (
+            <AprendamosPreview
+              locale={locale}
+              sectionLabel={content.nav.learn}
+              intro={content.sections.aprendamosIntro}
+              exploreLabel={content.sections.exploreTopic}
+              lessons={publishedLessons.map((lesson) => ({
+                slug: lesson.slug,
+                title: lesson.title,
+                imageLabel: lesson.scenes[0]?.textAlternative ?? lesson.title,
+              }))}
+            />
+          ) : null}
+          <AboutPreview
+            locale={locale}
+            sectionLabel={content.sections.about}
+            intro={aboutIntro}
+            viewAllLabel={content.sections.learnMore}
+          />
+        </Container>
+      </div>
       <ExperiencePreview
         locale={locale}
         items={experiencePreview}
         sectionLabel={content.sections.experience}
         viewAllLabel={content.sections.viewAllExperience}
-      />
-      <AboutPreview
-        locale={locale}
-        intro={content.aboutPage.intro}
-        education={content.aboutPage.education}
-        sectionLabel={content.sections.about}
-        viewAllLabel={content.aboutPage.title}
-        roleLabel={content.hero.overlinePrimary}
-        researcherLabel={content.hero.overlineSecondary}
       />
     </>
   );

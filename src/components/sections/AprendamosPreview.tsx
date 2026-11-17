@@ -1,10 +1,8 @@
 import Link from "next/link";
 import type { Locale } from "@/i18n/config";
+import { IconArrowRight } from "@/components/icons";
 import { localizedPathForAvailableContent } from "@/lib/localizedPath";
 import { pageSections } from "@/lib/pageSections";
-import { Section } from "@/components/layout/Section";
-import { SectionHeader } from "@/components/ui/SectionHeader";
-import { NeuronArt } from "@/components/learn/illustrations/NeuronArt";
 
 interface AprendamosLessonItem {
   slug: string;
@@ -27,59 +25,36 @@ export function AprendamosPreview({
   exploreLabel,
   lessons,
 }: AprendamosPreviewProps) {
+  const primary = lessons[0];
+  const href = primary
+    ? localizedPathForAvailableContent(locale, `/aprendamos/${primary.slug}`)
+    : localizedPathForAvailableContent(locale, "/aprendamos");
+
   return (
-    <Section id={pageSections.learn} variant="bordered">
-      <SectionHeader number="03" label={sectionLabel} description={intro} />
-
-      <div className="mt-[var(--section-heading-gap)]">
-        {lessons.slice(0, 3).map((lesson, index) => {
-          const href = localizedPathForAvailableContent(
-            locale,
-            `/aprendamos/${lesson.slug}`,
-          );
-
-          return (
-            <article
-              key={lesson.slug}
-              className="grid gap-6 border-t border-border py-8 last:pb-0 md:grid-cols-12 md:items-center md:gap-8 md:py-10 md:last:pb-0"
-            >
-              <div className="md:col-span-1">
-                <span
-                  className="font-display text-[clamp(2rem,4vw,3rem)] text-foreground"
-                  aria-hidden="true"
-                >
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-              </div>
-              <div className="overflow-hidden border border-border bg-[#eef3f6] md:col-span-3">
-                <NeuronArt label={lesson.imageLabel} />
-              </div>
-              <div className="min-w-0 md:col-span-8">
-                <h3 className="max-w-[22ch] text-[length:var(--heading-2)] font-semibold leading-[1.15] tracking-[-0.03em] text-foreground">
-                  <Link
-                    href={href.href}
-                    lang={href.lang}
-                    hrefLang={href.lang}
-                    className="transition-colors duration-200 hover:text-accent"
-                  >
-                    {lesson.title}
-                  </Link>
-                </h3>
-                <p className="mt-4">
-                  <Link
-                    href={href.href}
-                    lang={href.lang}
-                    hrefLang={href.lang}
-                    className="text-[length:var(--small)] font-semibold text-foreground transition-colors duration-200 hover:text-accent"
-                  >
-                    {exploreLabel}
-                  </Link>
-                </p>
-              </div>
-            </article>
-          );
-        })}
-      </div>
-    </Section>
+    <section id={pageSections.learn} className="h-full">
+      <Link
+        href={href.href}
+        lang={href.lang}
+        hrefLang={href.lang}
+        className="gp-module group relative flex h-full min-h-[18rem] flex-col overflow-hidden border border-border bg-surface transition-transform duration-200 hover:-translate-y-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-violet"
+      >
+        <div className="relative h-28 overflow-hidden bg-surface-soft" aria-hidden>
+          <div className="absolute -left-4 top-4 h-24 w-24 rounded-full bg-accent-yellow" />
+          <div className="absolute -right-6 top-8 h-20 w-20 rounded-full bg-accent-coral" />
+        </div>
+        <div className="flex flex-1 flex-col p-6 md:p-7">
+          <h2 className="font-display text-[length:var(--heading-2)] text-brand">
+            {sectionLabel}
+          </h2>
+          <p className="mt-3 max-w-[32ch] text-[length:var(--body)] leading-relaxed text-muted">
+            {intro}
+          </p>
+          <p className="mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-semibold text-brand transition-colors group-hover:text-accent-violet">
+            {exploreLabel}
+            <IconArrowRight className="size-[1.05em]" />
+          </p>
+        </div>
+      </Link>
+    </section>
   );
 }

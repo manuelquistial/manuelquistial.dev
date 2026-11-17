@@ -22,14 +22,14 @@ interface ButtonProps {
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
-    "bg-accent text-white hover:bg-accent-hover border border-accent",
+    "bg-brand text-white hover:bg-brand-hover border border-brand",
   secondary:
-    "bg-surface text-foreground border border-border hover:border-foreground/30",
-  ghost: "text-muted hover:text-foreground",
+    "bg-surface text-foreground border border-border hover:border-brand/30",
+  ghost: "text-muted hover:text-brand",
   outline:
-    "border border-border text-foreground hover:border-border-strong hover:text-accent bg-transparent",
+    "border border-border text-foreground hover:border-brand hover:text-brand bg-transparent",
   editorial:
-    "gap-3 border-0 bg-transparent p-0 text-foreground hover:text-accent font-semibold",
+    "gap-3 border-0 bg-transparent p-0 text-foreground hover:text-accent-violet font-semibold",
 };
 
 const sizeStyles: Record<ButtonSize, string> = {

@@ -63,7 +63,7 @@ export function NetworkScene() {
       onClose={() => setSelectedId(null)}
       legend={networkLegend}
       leading={
-        !selectedId && scene.prompt ? (
+        scene.prompt ? (
           <ScenePrompt title={learnUi.exploreNetwork} text={scene.prompt} />
         ) : null
       }

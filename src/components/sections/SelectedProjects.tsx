@@ -2,12 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/data/projects";
 import type { SiteContent } from "@/content";
+import { IconArrowRight, IconArrowUpRight } from "@/components/icons";
 import { Section } from "@/components/layout/Section";
-import { SectionHeader } from "@/components/ui/SectionHeader";
-import { TagChip } from "@/components/ui/TagChip";
 import { ViewAllLink } from "@/components/ui/ViewAllLink";
 import { pageSections } from "@/lib/pageSections";
-import { projectImageFrame } from "@/lib/projectImage";
 import { cn } from "@/lib/utils";
 
 interface SelectedProjectsProps {
@@ -19,19 +17,38 @@ interface SelectedProjectsProps {
   description?: string;
 }
 
-function padIndex(index: number, total: number): string {
-  const width = Math.max(2, String(total).length);
-  return `${String(index).padStart(width, "0")} / ${String(total).padStart(width, "0")}`;
-}
-
-function categoryLabel(
-  project: Project,
-  labels: SiteContent["projectCard"],
-): string {
-  if (project.category === "agency-web") return labels.webSelection;
-  if (project.category === "research") return labels.researchLabel;
-  return labels.softwareLabel;
-}
+const moduleAccents = [
+  {
+    shell: "bg-brand text-white",
+    shape: "bg-accent-coral",
+    shapePos: "-right-8 -top-10 h-28 w-28",
+    shape2: "bg-accent-yellow",
+    shape2Pos: "-left-10 -bottom-10 h-24 w-24",
+    meta: "text-white/70",
+    title: "text-white",
+    link: "text-white hover:text-accent-yellow",
+  },
+  {
+    shell: "bg-surface text-brand border border-border",
+    shape: "bg-accent-green",
+    shapePos: "-right-8 -bottom-10 h-28 w-28",
+    shape2: "bg-accent-violet/25",
+    shape2Pos: "-left-8 -top-8 h-24 w-24",
+    meta: "text-muted",
+    title: "text-brand",
+    link: "text-brand hover:text-accent-violet",
+  },
+  {
+    shell: "bg-surface-soft text-brand",
+    shape: "bg-accent-coral",
+    shapePos: "-right-8 -bottom-8 h-28 w-28",
+    shape2: "bg-accent-yellow",
+    shape2Pos: "-left-10 top-8 h-20 w-20",
+    meta: "text-muted",
+    title: "text-brand",
+    link: "text-brand hover:text-accent-coral",
+  },
+] as const;
 
 function ProjectMetaLine({
   project,
@@ -42,13 +59,13 @@ function ProjectMetaLine({
 }) {
   if (project.id === "sal-picciotto-website" && project.agency) {
     return (
-      <p className="mt-2 text-sm text-muted">
+      <p className="text-sm opacity-80">
         {labels.designBy} {project.agency}
       </p>
     );
   }
   if (project.category !== "agency-web" && project.clientType) {
-    return <p className="mt-2 text-sm text-muted">{project.clientType}</p>;
+    return <p className="text-sm opacity-80">{project.clientType}</p>;
   }
   return null;
 }
@@ -61,111 +78,141 @@ export function SelectedProjects({
   viewAllLabel,
   description,
 }: SelectedProjectsProps) {
-  const total = projects.length;
-
   return (
     <Section id={pageSections.selectedProjects} variant="bordered">
-      <SectionHeader number="01" label={title} description={description} />
+      <div className="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <h2 className="font-display text-[length:var(--heading-1)] text-brand">
+            {title}
+          </h2>
+          {description ? (
+            <p className="mt-3 max-w-[42ch] text-[length:var(--body)] text-muted">
+              {description}
+            </p>
+          ) : null}
+        </div>
+        <ViewAllLink href={viewAllHref} className="text-brand hover:text-accent-violet">
+          {viewAllLabel}
+        </ViewAllLink>
+      </div>
 
-      <div className="mt-[var(--section-heading-gap)] space-y-0">
+      <div className="mt-[var(--section-heading-gap)] grid items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-7">
         {projects.map((project, index) => {
-          const imageLeft = index % 2 === 0;
-          const imageFrame = projectImageFrame(project);
+          const accent = moduleAccents[index % moduleAccents.length];
           const detailHref = project.caseStudyUrl;
-          const indexLabel = padIndex(index + 1, total);
-          const titleContent = detailHref ? (
-            <Link
-              href={detailHref}
-              className="transition-colors duration-200 hover:text-accent"
-            >
-              {project.title}
-            </Link>
-          ) : (
-            project.title
-          );
-          const action = detailHref ? (
-            <Link
-              href={detailHref}
-              className="text-[length:var(--small)] font-semibold text-foreground transition-colors duration-200 hover:text-accent"
-            >
-              {projectCard.viewProject}
-            </Link>
-          ) : project.liveUrl && project.status !== "coming-soon" ? (
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[length:var(--small)] font-semibold text-foreground transition-colors duration-200 hover:text-accent"
-            >
-              {projectCard.viewSite}
-            </a>
-          ) : null;
+          const href =
+            detailHref ??
+            (project.liveUrl && project.status !== "coming-soon"
+              ? project.liveUrl
+              : undefined);
+          const external = Boolean(!detailHref && href);
+          const ArrowIcon = external ? IconArrowUpRight : IconArrowRight;
 
-          return (
+          const card = (
             <article
-              key={project.id}
-              className="grid gap-6 border-t border-border py-8 last:pb-0 md:gap-8 md:py-12 md:last:pb-0 lg:grid-cols-12 lg:items-center lg:gap-12"
+              className={cn(
+                "gp-module relative flex h-full min-h-[24rem] flex-col overflow-hidden transition-transform duration-200 hover:-translate-y-1",
+                accent.shell,
+              )}
             >
+              <span
+                aria-hidden
+                className={cn(
+                  "pointer-events-none absolute rounded-full opacity-90",
+                  accent.shape,
+                  accent.shapePos,
+                )}
+              />
+              <span
+                aria-hidden
+                className={cn(
+                  "pointer-events-none absolute rounded-full opacity-80",
+                  accent.shape2,
+                  accent.shape2Pos,
+                )}
+              />
+
               {project.image ? (
-                <div
-                  className={cn(
-                    imageFrame.className,
-                    imageLeft ? "lg:col-span-7" : "lg:order-2 lg:col-span-7",
-                  )}
-                  style={imageFrame.style}
-                >
+                <div className="relative z-[1] mx-4 mt-4 aspect-[4/3] shrink-0 overflow-hidden rounded-[calc(var(--radius-module)-0.35rem)] bg-white/10">
                   <Image
                     src={project.image}
                     alt={project.imageAlt ?? ""}
                     fill
                     priority={index < 2}
-                    sizes="(min-width: 1024px) 55vw, 100vw"
-                    className="editorial-image object-contain object-center"
+                    sizes="(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 100vw"
+                    className="object-cover object-top"
                   />
                 </div>
-              ) : null}
+              ) : (
+                <div className="relative z-[1] mx-4 mt-4 flex aspect-[4/3] shrink-0 items-center justify-center rounded-[calc(var(--radius-module)-0.35rem)] bg-brand/10">
+                  <span className="font-display text-4xl opacity-40">&</span>
+                </div>
+              )}
 
-              <div
-                className={cn(
-                  "min-w-0",
-                  project.image
-                    ? imageLeft
-                      ? "lg:col-span-5"
-                      : "lg:order-1 lg:col-span-5"
-                    : "lg:col-span-8",
-                )}
-              >
-                <p className="text-overline text-muted">{indexLabel}</p>
-                <p className="mt-3 text-overline text-muted">
-                  {categoryLabel(project, projectCard)}
+              <div className="relative z-[1] flex flex-1 flex-col p-5 md:p-6">
+                <p className={cn("text-overline", accent.meta)}>
+                  {project.tags.slice(0, 2).join(" · ") || project.category}
                 </p>
-                <h3 className="mt-3 text-balance text-[length:var(--heading-2)] font-semibold leading-[1.1] tracking-[-0.03em] text-foreground">
-                  {titleContent}
+                <h3
+                  className={cn(
+                    "mt-2 line-clamp-2 min-h-[2.5em] text-[length:var(--heading-3)] font-bold leading-tight tracking-[-0.02em]",
+                    accent.title,
+                  )}
+                >
+                  {project.title}
                 </h3>
-                <ProjectMetaLine project={project} labels={projectCard} />
-                {project.description ? (
-                  <p className="mt-4 max-w-[42ch] text-[length:var(--body)] leading-[1.45] text-muted">
-                    {project.description}
-                  </p>
-                ) : null}
-                {project.tags.length > 0 ? (
-                  <ul className="mt-5 flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <li key={tag}>
-                        <TagChip>{tag}</TagChip>
-                      </li>
-                    ))}
-                  </ul>
-                ) : null}
-                {action ? <p className="mt-6">{action}</p> : null}
+                <div className="mt-2 min-h-5">
+                  <ProjectMetaLine project={project} labels={projectCard} />
+                </div>
+                <p
+                  className={cn(
+                    "mt-3 line-clamp-3 min-h-[4.5em] flex-1 text-sm leading-relaxed",
+                    accent.meta,
+                  )}
+                >
+                  {project.description}
+                </p>
+                <span
+                  className={cn(
+                    "mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-semibold",
+                    accent.link,
+                  )}
+                >
+                  {detailHref
+                    ? projectCard.viewProject
+                    : projectCard.viewSite}
+                  <ArrowIcon className="size-[1.05em]" />
+                </span>
               </div>
             </article>
           );
-        })}
-      </div>
 
-      <div className="mt-8 border-t border-border pt-6 md:mt-10">
-        <ViewAllLink href={viewAllHref}>{viewAllLabel}</ViewAllLink>
+          if (!href) return <div key={project.id} className="h-full">{card}</div>;
+
+          if (external) {
+            return (
+              <a
+                key={project.id}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block h-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-violet"
+              >
+                {card}
+              </a>
+            );
+          }
+
+          return (
+            <Link
+              key={project.id}
+              href={href}
+              className="block h-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-violet"
+            >
+              {card}
+            </Link>
+          );
+        })}
       </div>
     </Section>
   );

@@ -27,13 +27,20 @@ export function CategoryProjectsSection({
   return (
     <Section>
       <SectionTitle title={title} subtitle={subtitle} />
-      <div className="grid gap-10 sm:grid-cols-2 md:gap-8">
-        {projects.map((project) => (
-          <ProjectCard
+      <div className="grid items-stretch gap-6 sm:grid-cols-2 md:gap-7 lg:grid-cols-3">
+        {projects.map((project, index) => (
+          <div
             key={project.id}
-            project={project}
-            labels={projectCard}
-          />
+            className="gp-module flex h-full flex-col border border-border bg-surface p-4 md:p-5"
+          >
+            <ProjectCard
+              project={project}
+              labels={projectCard}
+              meta="reserved"
+              showTags
+              priority={index < 2}
+            />
+          </div>
         ))}
       </div>
       {viewAllHref && viewAllLabel ? (

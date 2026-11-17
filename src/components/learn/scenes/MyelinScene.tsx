@@ -117,7 +117,7 @@ export function MyelinScene() {
       card={cardFor(scene.parts, gliaAnchors, selectedId)}
       onClose={() => setSelectedId(null)}
       leading={
-        !selectedId && scene.prompt ? (
+        scene.prompt ? (
           <ScenePrompt title={learnUi.exploreMyelin} text={scene.prompt} />
         ) : null
       }

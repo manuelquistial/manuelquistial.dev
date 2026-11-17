@@ -4,7 +4,6 @@ import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import type { Locale } from "@/i18n/config";
 import type { SiteContent } from "@/content";
-import { profile } from "@/data/profile";
 import { localizedPath } from "@/lib/localizedPath";
 import { Container } from "@/components/layout/Container";
 import { NavLinks } from "@/components/layout/NavLinks";
@@ -42,17 +41,14 @@ export function Header({ locale, content }: HeaderProps) {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background pt-[env(safe-area-inset-top)]">
+    <header className="sticky top-0 z-50 border-b border-border/70 bg-background/90 pt-[env(safe-area-inset-top)] backdrop-blur-md">
       <Container className="flex h-16 items-center justify-between gap-4 lg:h-[4.5rem]">
         <Link
           href={localizedPath(locale)}
           translate="no"
-          className="flex min-w-0 items-baseline gap-3 text-foreground transition-colors duration-200 hover:text-accent"
+          className="min-w-0 truncate text-[length:var(--body)] font-bold tracking-[-0.03em] text-brand transition-colors duration-200 hover:text-accent-violet"
         >
-          <span className="text-overline shrink-0">MQ</span>
-          <span className="hidden truncate text-overline sm:inline">
-            {profile.shortName}
-          </span>
+          manuelquistial.dev
         </Link>
 
         <div className="flex items-center gap-3 sm:gap-5">
@@ -60,13 +56,15 @@ export function Header({ locale, content }: HeaderProps) {
             locale={locale}
             nav={content.nav}
             ariaLabel={content.a11y.mainNav}
-            className="hidden items-center gap-4 xl:gap-5 xl:flex"
+            numbered={false}
+            className="hidden items-center gap-5 xl:gap-6 xl:flex"
+            linkClassName="text-[length:var(--small)] font-medium tracking-normal normal-case"
           />
           <LocaleSwitcher locale={locale} labels={content.languageSwitcher} />
           <button
             ref={menuButtonRef}
             type="button"
-            className="inline-flex size-11 items-center justify-center border border-border text-foreground transition-colors duration-200 hover:border-border-strong hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent xl:hidden"
+            className="inline-flex size-11 items-center justify-center rounded-full border border-border text-brand transition-colors duration-200 hover:border-brand hover:bg-surface-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-violet xl:hidden"
             aria-expanded={open}
             aria-controls={panelId}
             aria-label={open ? content.a11y.closeMenu : content.a11y.menu}
@@ -88,8 +86,9 @@ export function Header({ locale, content }: HeaderProps) {
               locale={locale}
               nav={content.nav}
               ariaLabel={content.a11y.mobileNav}
+              numbered={false}
               className="flex flex-col gap-1"
-              linkClassName="px-1 py-3"
+              linkClassName="px-1 py-3 text-[length:var(--body)] font-medium tracking-normal normal-case"
               onNavigate={() => setOpen(false)}
             />
           </Container>

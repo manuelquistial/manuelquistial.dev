@@ -5,7 +5,11 @@ import { learnColors } from "@/components/learn/illustrations/palette";
 import { Part } from "@/components/learn/illustrations/Part";
 import { Grain, useSvgId } from "@/components/learn/illustrations/shapes";
 import { axonCurves, neuronView, somaCenter } from "@/components/learn/illustrations/neuronModel";
-import { neuronNucleolus, neuronPaths, neuronSoma } from "@/components/learn/illustrations/tracedGeometry";
+import {
+  neuronNucleolus,
+  neuronPaths,
+  neuronSomaPath,
+} from "@/components/learn/illustrations/tracedGeometry";
 
 export function NeuronArt({
   label,
@@ -16,7 +20,7 @@ export function NeuronArt({
   children,
 }: {
   label?: string;
-  labels?: Partial<Record<"dendrites" | "soma" | "axon", string>>;
+  labels?: Partial<Record<"dendrites" | "soma" | "nucleus" | "axon", string>>;
   selectedId?: string | null;
   hintId?: string;
   onSelect?: (id: string) => void;
@@ -56,13 +60,12 @@ export function NeuronArt({
             <path key={d.slice(0, 24)} d={d} />
           ))}
         </clipPath>
-        <mask id={somaMask} maskUnits="userSpaceOnUse">
-          <rect width={neuronView.width} height={neuronView.height} fill="black" />
-          <ellipse cx={neuronSoma.cx} cy={neuronSoma.cy} rx={neuronSoma.rx} ry={neuronSoma.ry} fill="white" />
-        </mask>
+        <clipPath id={somaMask}>
+          <path d={neuronSomaPath} />
+        </clipPath>
         <mask id={dendriteMask} maskUnits="userSpaceOnUse">
           <rect width={neuronView.width} height={neuronView.height} fill="white" />
-          <ellipse cx={neuronSoma.cx} cy={neuronSoma.cy} rx={neuronSoma.rx} ry={neuronSoma.ry} fill="black" />
+          <path d={neuronSomaPath} fill="black" />
           <rect x="690" width="1000" height={neuronView.height} fill="black" />
         </mask>
         <mask id={axonMask} maskUnits="userSpaceOnUse">
@@ -99,8 +102,6 @@ export function NeuronArt({
         {neuronPaths.collars.map((d) => (
           <path key={d.slice(0, 24)} d={d} fill={learnColors.collar} stroke={learnColors.collarInk} strokeWidth="1.5" strokeLinejoin="round" />
         ))}
-        <path d={neuronPaths.nucleus} fill={learnColors.nucleus} stroke={learnColors.violetInk} strokeWidth="1.8" />
-        <circle cx={neuronNucleolus.cx} cy={neuronNucleolus.cy} r={neuronNucleolus.r} fill={learnColors.nucleolus} />
       </g>
       <Part
         id="dendrites"
@@ -110,7 +111,9 @@ export function NeuronArt({
         onSelect={onSelect}
       >
         <path className="learn-highlight" d={dendrites} fill={learnColors.coral} mask={`url(#${dendriteMask})`} />
-        {interactive ? <path d={dendrites} fill="transparent" /> : null}
+        {interactive ? (
+          <path d={dendrites} fill="transparent" mask={`url(#${dendriteMask})`} />
+        ) : null}
       </Part>
       <Part id="axon" label={labels?.axon ?? "Axón"} selected={selectedId === "axon"} hinted={hintId === "axon"} onSelect={onSelect}>
         <g className="learn-highlight">
@@ -129,10 +132,31 @@ export function NeuronArt({
         ) : null}
       </Part>
       <Part id="soma" label={labels?.soma ?? "Soma"} selected={selectedId === "soma"} hinted={hintId === "soma"} onSelect={onSelect}>
-        <path className="learn-highlight" d={dendrites} fill={learnColors.coral} mask={`url(#${somaMask})`} />
-        {interactive ? (
-          <ellipse cx={neuronSoma.cx} cy={neuronSoma.cy} rx={neuronSoma.rx} ry={neuronSoma.ry} fill="transparent" />
-        ) : null}
+        <path
+          className="learn-highlight"
+          d={dendrites}
+          fill={learnColors.coralDeep}
+          clipPath={`url(#${somaMask})`}
+        />
+        {interactive ? <path d={neuronSomaPath} fill="transparent" /> : null}
+      </Part>
+      <Part
+        id="nucleus"
+        label={labels?.nucleus ?? "Núcleo"}
+        selected={selectedId === "nucleus"}
+        hinted={hintId === "nucleus"}
+        onSelect={onSelect}
+      >
+        <path d={neuronPaths.nucleus} fill={learnColors.nucleus} stroke={learnColors.violetInk} strokeWidth="1.8" />
+        <path
+          className="learn-highlight"
+          d={neuronPaths.nucleus}
+          fill={learnColors.nucleus}
+          stroke={learnColors.violetInk}
+          strokeWidth="1.8"
+        />
+        <circle cx={neuronNucleolus.cx} cy={neuronNucleolus.cy} r={neuronNucleolus.r} fill={learnColors.nucleolus} />
+        {interactive ? <path d={neuronPaths.nucleus} fill="transparent" /> : null}
       </Part>
       {children}
     </svg>

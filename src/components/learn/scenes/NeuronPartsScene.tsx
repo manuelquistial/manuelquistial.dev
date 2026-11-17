@@ -16,11 +16,22 @@ export function NeuronPartsScene() {
   return (
     <SceneStage
       label={scene.textAlternative}
+      idle={
+        scene.idle
+          ? {
+              title: scene.idle.title,
+              text: scene.idle.text,
+              cites: scene.idle.cites,
+            }
+          : scene.prompt
+            ? { text: scene.prompt }
+            : undefined
+      }
       parts={scene.parts}
       card={cardFor(scene.parts, neuronAnchors, selectedId)}
       onClose={() => setSelectedId(null)}
       leading={
-        !selectedId && scene.prompt ? (
+        scene.prompt ? (
           <ScenePrompt title={learnUi.exploreNeuron} text={scene.prompt} />
         ) : null
       }

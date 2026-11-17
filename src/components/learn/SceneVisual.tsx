@@ -5,10 +5,6 @@ import { useEffect, useRef, useState, type ComponentType } from "react";
 import { neuronSceneIds, type NeuronSceneId } from "@/content/learn/scene-ids";
 
 const sceneLoaders = {
-  "una-neurona": () =>
-    import("@/components/learn/scenes/NeuronOverviewScene").then(
-      (mod) => mod.NeuronOverviewScene,
-    ),
   partes: () =>
     import("@/components/learn/scenes/NeuronPartsScene").then(
       (mod) => mod.NeuronPartsScene,

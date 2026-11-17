@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/data/projects";
 import type { SiteContent } from "@/content";
+import { IconArrowRight, IconArrowUpRight } from "@/components/icons";
 import { TagChip } from "@/components/ui/TagChip";
 import { projectImageFrame } from "@/lib/projectImage";
 import { cn } from "@/lib/utils";
@@ -23,32 +24,51 @@ interface ProjectCardProps {
   className?: string;
 }
 
+function metaText(
+  project: Project,
+  labels: SiteContent["projectCard"],
+  meta: ProjectCardMeta,
+): string | null {
+  if (meta === "hidden") return null;
+
+  if (meta === "design" && project.agency) {
+    return `${labels.designBy} ${project.agency}`;
+  }
+  if (meta === "agency" && project.category === "agency-web" && project.agency) {
+    return `${labels.deliveredThrough} ${project.agency}`;
+  }
+  if (project.category !== "agency-web" && project.clientType) {
+    return project.clientType;
+  }
+  if (
+    (meta === "auto" || meta === "reserved") &&
+    project.id === "sal-picciotto-website" &&
+    project.agency
+  ) {
+    return `${labels.designBy} ${project.agency}`;
+  }
+  return null;
+}
+
 function ProjectMeta({
   project,
   labels,
   meta,
+  reserve = false,
 }: {
   project: Project;
   labels: SiteContent["projectCard"];
   meta: ProjectCardMeta;
+  reserve?: boolean;
 }) {
   if (meta === "hidden") return null;
 
-  let text: string | null = null;
-
-  if (meta === "design" && project.agency) {
-    text = `${labels.designBy} ${project.agency}`;
-  } else if (meta === "agency" && project.category === "agency-web" && project.agency) {
-    text = `${labels.deliveredThrough} ${project.agency}`;
-  } else if (project.category !== "agency-web" && project.clientType) {
-    text = project.clientType;
-  }
-
-  const reserveSpace = meta === "reserved" || meta === "design";
-  if (!text && !reserveSpace) return null;
+  const text = metaText(project, labels, meta);
+  const shouldReserve = reserve || meta === "reserved" || meta === "design";
+  if (!text && !shouldReserve) return null;
 
   return (
-    <p className={cn("mt-2 text-sm text-muted", reserveSpace && "min-h-5")}>
+    <p className={cn("mt-2 text-sm text-muted", shouldReserve && "min-h-5")}>
       {text}
     </p>
   );
@@ -78,7 +98,7 @@ export function ProjectCard({
   const titleContent = detailHref ? (
     <Link
       href={detailHref}
-      className="transition-colors duration-200 hover:text-accent"
+      className="transition-colors duration-200 hover:text-accent-violet"
     >
       {project.title}
     </Link>
@@ -90,18 +110,20 @@ export function ProjectCard({
     detailHref ? (
       <Link
         href={detailHref}
-        className="text-[length:var(--small)] font-semibold text-foreground transition-colors duration-200 hover:text-accent"
+        className="inline-flex items-center gap-1.5 text-[length:var(--small)] font-semibold text-foreground transition-colors duration-200 hover:text-accent-violet"
       >
         {labels.viewProject}
+        <IconArrowRight className="size-[1.05em]" />
       </Link>
     ) : project.liveUrl && project.status !== "coming-soon" ? (
       <a
         href={project.liveUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-[length:var(--small)] font-semibold text-foreground transition-colors duration-200 hover:text-accent"
+        className="inline-flex items-center gap-1.5 text-[length:var(--small)] font-semibold text-foreground transition-colors duration-200 hover:text-accent-violet"
       >
         {labels.viewSite}
+        <IconArrowUpRight className="size-[1.05em]" />
       </a>
     ) : null;
 
@@ -139,25 +161,25 @@ export function ProjectCard({
     );
   }
 
-  const imageFrame = projectImageFrame(project);
-  const imageFallbackAspect =
-    layout === "featured"
-      ? "aspect-[4/3] md:aspect-[5/4]"
-      : layout === "compact"
-        ? "aspect-[4/3]"
-        : "aspect-[8/5]";
+  const useFixedFrame = layout === "default" || layout === "compact";
+  const imageFrame = useFixedFrame ? null : projectImageFrame(project);
 
   return (
     <article className={cn("flex h-full min-w-0 flex-col", className)}>
       {project.image ? (
         <div
           className={cn(
-            "mb-5",
-            imageFrame.style
-              ? imageFrame.className
-              : cn("relative w-full overflow-hidden bg-surface", imageFallbackAspect),
+            "relative mb-5 w-full shrink-0 overflow-hidden rounded-[var(--radius-module)] bg-surface-soft",
+            useFixedFrame
+              ? "aspect-[4/3]"
+              : imageFrame?.style
+                ? imageFrame.className
+                : cn(
+                    "aspect-[4/3]",
+                    layout === "featured" && "md:aspect-[5/4]",
+                  ),
           )}
-          style={imageFrame.style}
+          style={imageFrame?.style}
         >
           <Image
             src={project.image}
@@ -172,8 +194,13 @@ export function ProjectCard({
             className="editorial-image object-contain object-center"
           />
         </div>
-      ) : null}
-      <div className="mt-0 flex flex-1 flex-col">
+      ) : (
+        <div
+          className="mb-5 aspect-[4/3] w-full shrink-0 overflow-hidden rounded-[var(--radius-module)] bg-surface-soft"
+          aria-hidden
+        />
+      )}
+      <div className="flex min-h-0 flex-1 flex-col">
         {indexLabel ? (
           <p className="mb-2 text-overline text-muted">{indexLabel}</p>
         ) : null}
@@ -184,35 +211,46 @@ export function ProjectCard({
         ) : null}
         <h3
           className={cn(
-            "text-balance font-semibold leading-snug text-foreground",
+            "line-clamp-2 text-balance font-semibold leading-snug text-foreground",
             layout === "featured"
-              ? "text-[length:var(--heading-2)] tracking-[-0.03em]"
-              : "text-xl",
+              ? "min-h-[2.6em] text-[length:var(--heading-2)] tracking-[-0.03em]"
+              : "min-h-[2.5em] text-xl",
           )}
         >
           {titleContent}
         </h3>
-        <ProjectMeta project={project} labels={labels} meta={meta} />
-        {project.description ? (
-          <p
-            className={cn(
-              "mt-3 leading-[1.45] text-muted",
-              layout === "featured" ? "max-w-[42ch] text-[length:var(--body)]" : "max-w-[65ch] text-base",
-            )}
-          >
-            {project.description}
-          </p>
-        ) : null}
+        <ProjectMeta
+          project={project}
+          labels={labels}
+          meta={meta}
+          reserve={layout === "default" || layout === "compact"}
+        />
+        <p
+          className={cn(
+            "mt-3 line-clamp-3 min-h-[4.5em] leading-[1.45] text-muted",
+            layout === "featured"
+              ? "max-w-[42ch] text-[length:var(--body)]"
+              : "text-base",
+          )}
+        >
+          {project.description}
+        </p>
         {showTags && project.tags.length > 0 ? (
-          <ul className="mt-4 flex flex-wrap gap-2">
-            {project.tags.map((tag) => (
+          <ul className="mt-4 flex min-h-8 flex-wrap gap-2 overflow-hidden">
+            {project.tags.slice(0, 3).map((tag) => (
               <li key={tag}>
                 <TagChip>{tag}</TagChip>
               </li>
             ))}
           </ul>
+        ) : showTags ? (
+          <div className="mt-4 min-h-8" aria-hidden />
         ) : null}
-        {action ? <p className="mt-auto pt-5">{action}</p> : null}
+        {action ? (
+          <div className="mt-auto pt-5">{action}</div>
+        ) : (
+          <div className="mt-auto" />
+        )}
       </div>
     </article>
   );

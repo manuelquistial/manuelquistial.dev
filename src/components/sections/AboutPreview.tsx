@@ -1,71 +1,46 @@
+import Link from "next/link";
 import type { Locale } from "@/i18n/config";
-import type { SiteContent } from "@/content";
-import { profile } from "@/data/profile";
+import { IconArrowRight } from "@/components/icons";
 import { localizedPath } from "@/lib/localizedPath";
 import { pageSections } from "@/lib/pageSections";
-import { Section } from "@/components/layout/Section";
-import { SectionHeader } from "@/components/ui/SectionHeader";
-import { ViewAllLink } from "@/components/ui/ViewAllLink";
 
 interface AboutPreviewProps {
   locale: Locale;
-  intro: string | readonly string[];
-  education: SiteContent["aboutPage"]["education"];
   sectionLabel: string;
+  intro: string;
   viewAllLabel: string;
-  roleLabel: string;
-  researcherLabel: string;
 }
 
 export function AboutPreview({
   locale,
-  intro,
-  education,
   sectionLabel,
+  intro,
   viewAllLabel,
-  roleLabel,
-  researcherLabel,
 }: AboutPreviewProps) {
-  const featuredDegrees = education.items.slice(0, 2);
-
   return (
-    <Section id={pageSections.about} variant="bordered" spacing="footer-adjacent">
-      <SectionHeader number="05" label={sectionLabel} />
-
-      <div className="mt-[var(--section-heading-gap)] grid gap-10 lg:grid-cols-12 lg:gap-12">
-        <div className="lg:col-span-5">
-          <ul className="space-y-3">
-            <li className="text-[length:var(--heading-3)] font-semibold text-foreground">
-              {roleLabel}
-            </li>
-            <li className="text-[length:var(--heading-3)] font-semibold text-foreground">
-              {researcherLabel}
-            </li>
-            {featuredDegrees.map((item) => (
-              <li key={item.degree}>
-                <p className="text-[length:var(--body)] font-semibold leading-snug text-foreground">
-                  {item.degree}
-                </p>
-                <p className="mt-1 text-sm text-muted">{item.institution}</p>
-              </li>
-            ))}
-          </ul>
-          <p className="mt-6 text-overline text-muted">{profile.location}</p>
+    <section id={pageSections.about} className="h-full">
+      <Link
+        href={localizedPath(locale, "/about")}
+        className="gp-module group relative flex h-full min-h-[18rem] flex-col overflow-hidden border border-border bg-surface transition-transform duration-200 hover:-translate-y-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-violet"
+      >
+        <div className="relative h-28 overflow-hidden bg-surface-soft" aria-hidden>
+          <div className="absolute -left-2 top-6 h-20 w-20 rounded-full bg-accent-violet" />
+          <div className="absolute right-2 top-2 h-24 w-24 rounded-full bg-accent-yellow" />
+          <div className="absolute bottom-0 right-16 h-16 w-16 rounded-full bg-accent-coral" />
         </div>
-
-        <div className="lg:col-span-6 lg:col-start-7">
-          <div className="max-w-[42ch] space-y-4 text-[length:var(--body-lg)] leading-[1.45] text-muted">
-            {(Array.isArray(intro) ? intro : [intro]).map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
-          </div>
-          <div className="mt-8">
-            <ViewAllLink href={localizedPath(locale, "/about")}>
-              {viewAllLabel}
-            </ViewAllLink>
-          </div>
+        <div className="flex flex-1 flex-col p-6 md:p-7">
+          <h2 className="font-display text-[length:var(--heading-2)] text-brand">
+            {sectionLabel}
+          </h2>
+          <p className="mt-3 max-w-[32ch] text-[length:var(--body)] leading-relaxed text-muted">
+            {intro}
+          </p>
+          <p className="mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-semibold text-brand transition-colors group-hover:text-accent-coral">
+            {viewAllLabel}
+            <IconArrowRight className="size-[1.05em]" />
+          </p>
         </div>
-      </div>
-    </Section>
+      </Link>
+    </section>
   );
 }

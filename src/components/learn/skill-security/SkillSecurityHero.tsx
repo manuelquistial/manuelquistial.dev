@@ -1,4 +1,3 @@
-import { learnControlClass } from "@/components/learn/controlClass";
 import { PageHero } from "@/components/ui/PageHero";
 import {
   skillSecurityHero,
@@ -15,15 +14,12 @@ export function SkillSecurityHero({ locale }: { locale: Locale }) {
     <PageHero
       tone="learn"
       variant="compact"
+      illustration="learn"
       eyebrow={skillSecurityUi.eyebrow}
       eyebrowHref={indexHref}
       title={skillSecurityHero.title}
       description={skillSecurityUi.bannerDescription}
       className="skills-lesson__hero"
-    >
-      <a href="#riesgos" className={learnControlClass}>
-        {skillSecurityUi.exploreContent}
-      </a>
-    </PageHero>
+    />
   );
 }

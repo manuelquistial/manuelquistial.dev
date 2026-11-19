@@ -808,7 +808,8 @@ p.learn-reading {
   border-top: 1px solid var(--border);
 }
 
-.skills-lesson__intro + .skills-lesson__section {
+.skills-lesson__intro + .skills-lesson__section,
+.skills-lesson__intro + .learn-section {
   margin-top: 32px;
   padding-top: 32px;
 }

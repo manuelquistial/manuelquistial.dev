@@ -47,9 +47,10 @@ export function SecurityDecisionCases() {
               aria-selected={active}
               onClick={() => setIndex(itemIndex)}
               className={cn(
-                "skill-sec-option min-h-10 rounded-full border border-transparent px-4 text-sm font-semibold text-brand/70 hover:border-brand/20 hover:bg-surface hover:text-brand focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-violet",
-                active &&
-                  "border-brand bg-brand text-white hover:border-brand hover:bg-brand hover:text-white",
+                "skill-sec-option min-h-10 rounded-full border px-4 text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-violet",
+                active
+                  ? "border-brand bg-brand text-white hover:border-brand-hover hover:bg-brand-hover hover:text-white"
+                  : "border-transparent text-brand/70 hover:border-brand/20 hover:bg-surface hover:text-brand",
               )}
             >
               {skillSecurityUi.caseProgress

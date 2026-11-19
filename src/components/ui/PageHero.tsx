@@ -78,7 +78,7 @@ interface PageHeroProps {
   eyebrowHref?: string;
   tone?: PageHeroTone;
   illustration?: SpotIllustrationId;
-  /** Compact editorial banner without illustration or decorative circles. */
+  /** Compact editorial banner with tighter padding; may still include illustration. */
   variant?: "default" | "compact";
   className?: string;
   children?: ReactNode;
@@ -97,23 +97,40 @@ export function PageHero({
 }: PageHeroProps) {
   const styles = toneStyles[tone];
   const compact = variant === "compact";
-  const showIllustration = Boolean(illustration) && !compact;
+  const showIllustration = Boolean(illustration);
 
   return (
     <div
       className={cn(
-        "gp-module relative grid items-center gap-8 overflow-hidden",
+        "gp-module relative grid items-center overflow-hidden",
         compact
-          ? "gap-0 px-6 py-8 md:px-9 md:py-10 lg:px-14 lg:py-[3.25rem]"
-          : "p-6 md:p-8 lg:grid-cols-12 lg:gap-10 lg:p-10",
+          ? cn(
+              "gap-6 px-6 py-8 md:gap-8 md:px-9 md:py-10 lg:px-14 lg:py-[3.25rem]",
+              showIllustration && "lg:grid-cols-12 lg:gap-10",
+            )
+          : "gap-8 p-6 md:p-8 lg:grid-cols-12 lg:gap-10 lg:p-10",
         styles.shell,
         className,
       )}
     >
+      {compact && !showIllustration ? (
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 overflow-hidden"
+        >
+          {styles.circles.map((circle) => (
+            <div key={circle.className} className={circle.className} />
+          ))}
+        </div>
+      ) : null}
       <header
         className={cn(
           "relative z-[1]",
-          compact ? "max-w-[780px]" : showIllustration ? "lg:col-span-6" : "lg:col-span-10",
+          showIllustration
+            ? "lg:col-span-6"
+            : compact
+              ? "max-w-[780px]"
+              : "lg:col-span-10",
         )}
       >
         {eyebrow ? (
@@ -162,7 +179,12 @@ export function PageHero({
         ) : null}
       </header>
       {showIllustration ? (
-        <div className="relative flex min-h-[14rem] items-center justify-center lg:col-span-6 lg:justify-end">
+        <div
+          className={cn(
+            "relative flex items-center justify-center lg:col-span-6 lg:justify-end",
+            compact ? "min-h-[11rem]" : "min-h-[14rem]",
+          )}
+        >
           <div aria-hidden className="pointer-events-none absolute inset-0">
             {styles.circles.map((circle) => (
               <div key={circle.className} className={circle.className} />

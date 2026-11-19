@@ -148,8 +148,8 @@ export function SkillReviewSteps() {
         ))}
       </GuideCopy>
 
-      <div className="skills-lesson__split">
-        <div className="space-y-8">
+      <div className="skills-lesson__split skills-lesson__split--copy-wide">
+        <div className="min-w-0 space-y-8">
           {data.items.map((item) => {
             const Icon = stepIcons[item.id];
             const isActive = active === item.id;
@@ -187,7 +187,7 @@ export function SkillReviewSteps() {
                     {item.title}
                   </h3>
                 </button>
-                <div className="mt-4 space-y-3 lg:hidden">
+                <div className="mt-4 max-w-[15rem] space-y-3 lg:hidden">
                   <ReviewVisual
                     stepId={item.id}
                     skillMdOpen={skillMdOpen && item.id === "contents"}
@@ -221,7 +221,7 @@ export function SkillReviewSteps() {
           })}
         </div>
 
-        <div className="skills-lesson__demo sticky top-[calc(var(--site-header-height,72px)+24px)] hidden lg:block">
+        <div className="skills-lesson__demo sticky top-[calc(var(--site-header-height,72px)+24px)] hidden max-w-[15rem] w-full justify-self-end lg:block">
           <ReviewVisual
             stepId={active}
             skillMdOpen={skillMdOpen && active === "contents"}

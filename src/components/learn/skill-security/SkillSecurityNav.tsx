@@ -60,7 +60,10 @@ export function SkillSecurityNav() {
   );
 
   return (
-    <nav className="skill-sec-nav" aria-label={skillSecurityUi.sectionsLabel}>
+    <nav
+      className="skills-lesson__sidebar skill-sec-nav"
+      aria-label={skillSecurityUi.sectionsLabel}
+    >
       <div className="hidden lg:block">
         <p className="text-overline text-muted">{skillSecurityUi.sectionsLabel}</p>
         <div className="mt-3">{links}</div>

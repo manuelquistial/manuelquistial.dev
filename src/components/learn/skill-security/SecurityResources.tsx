@@ -19,8 +19,8 @@ export function SecurityResources() {
       </GuideCopy>
 
       {skillscan ? (
-        <article className="rounded-[1.5rem] bg-[color-mix(in_srgb,var(--surface-soft)_75%,white)] p-6 md:p-8">
-          <h3 className="font-display text-[length:var(--heading-3)] text-brand">
+        <article className="skills-lesson__demo">
+          <h3 className="font-display text-[1.1875rem] leading-[1.25] text-brand md:text-[1.3125rem]">
             {skillscan.title}
           </h3>
           <p className="mt-3">
@@ -29,7 +29,7 @@ export function SecurityResources() {
             </GuideExternalLink>
           </p>
           {"description" in skillscan && skillscan.description ? (
-            <p className="mt-4 max-w-[48rem] text-[length:var(--body)] leading-relaxed text-muted">
+            <p className="mt-4 max-w-[68ch] text-[length:var(--body)] leading-[1.65] text-muted">
               {skillscan.description}
             </p>
           ) : null}
@@ -37,16 +37,16 @@ export function SecurityResources() {
           {"howTo" in skillscan && skillscan.howTo ? (
             <div className="mt-6">
               <p className="text-overline text-muted">{skillscan.howToTitle}</p>
-              <ol className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+              <ol className="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
                 {skillscan.howTo.map((step, index) => (
                   <li key={step} className="relative pl-8">
                     <span
                       aria-hidden="true"
-                      className="absolute left-0 top-0 font-display text-[length:var(--heading-3)] leading-none text-brand/25"
+                      className="absolute left-0 top-0 font-display text-[1.1875rem] leading-none text-brand/25"
                     >
                       {String(index + 1).padStart(2, "0")}
                     </span>
-                    <p className="text-[length:var(--body)] leading-relaxed text-muted">
+                    <p className="text-[length:var(--body)] leading-[1.65] text-muted">
                       {step}
                     </p>
                   </li>
@@ -66,11 +66,11 @@ export function SecurityResources() {
                 </span>
                 {skillscan.safeTitle}
               </summary>
-              <div className="mt-4 max-w-[48rem] space-y-3">
+              <div className="mt-4 max-w-[68ch] space-y-4">
                 {skillscan.safeParagraphs.map((paragraph) => (
                   <p
                     key={paragraph}
-                    className="text-[length:var(--body)] leading-relaxed text-muted"
+                    className="text-[length:var(--body)] leading-[1.65] text-muted"
                   >
                     {paragraph}
                   </p>
@@ -84,10 +84,10 @@ export function SecurityResources() {
         </article>
       ) : null}
 
-      <div className="mt-8 grid gap-8 md:grid-cols-2">
+      <div className="skills-lesson__comparison">
         {others.map((tool) => (
-          <article key={tool.id} className="border-t border-border pt-5">
-            <h3 className="font-display text-[length:var(--heading-3)] text-brand">
+          <article key={tool.id} className="skills-lesson__card">
+            <h3 className="font-display text-[1.1875rem] leading-[1.25] text-brand md:text-[1.3125rem]">
               {tool.title}
             </h3>
             <p className="mt-3">
@@ -97,14 +97,14 @@ export function SecurityResources() {
               ? tool.paragraphs.map((paragraph) => (
                   <p
                     key={paragraph}
-                    className="mt-3 text-[length:var(--body)] leading-relaxed text-muted"
+                    className="mt-3 text-[length:var(--body)] leading-[1.65] text-muted"
                   >
                     {paragraph}
                   </p>
                 ))
               : null}
             {"warning" in tool && tool.warning ? (
-              <p className="mt-4 text-[length:var(--body)] font-semibold leading-relaxed text-brand">
+              <p className="skills-lesson__supplement mt-4 border-l-2 border-brand/25 pl-4 text-[length:var(--body)] font-semibold leading-[1.65] text-brand">
                 {tool.warning}
               </p>
             ) : null}

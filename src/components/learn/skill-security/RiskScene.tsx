@@ -19,7 +19,7 @@ export function RiskScene({ active }: { active: RiskId }) {
       viewBox="0 0 640 420"
       role="img"
       aria-hidden="true"
-      className="skill-sec-scene mx-auto block h-auto w-full max-w-[40rem]"
+      className="skill-sec-scene mx-auto block h-auto w-full"
     >
       <rect width="640" height="420" fill="color-mix(in srgb, var(--surface-soft) 70%, white)" rx="28" />
 

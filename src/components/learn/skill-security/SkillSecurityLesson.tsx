@@ -16,6 +16,7 @@ import {
 import { Section } from "@/components/layout/Section";
 import { LocalDateTime } from "@/components/ui/LocalDateTime";
 import {
+  skillSecurityHero,
   skillSecurityLessonMeta,
   skillSecurityLimits,
 } from "@/content/learn/es/skill-security";
@@ -28,40 +29,56 @@ export function SkillSecurityLesson({ locale }: { locale: Locale }) {
 
   return (
     <Section containerClassName="overflow-x-clip">
-      <SkillSecurityHero locale={locale} />
+      <div className="skills-lesson">
+        <SkillSecurityHero locale={locale} />
 
-      <LocalDateTime
-        className="mt-5"
-        dateTime={lesson.publishedAt}
-        locale={locale}
-        label={`${learnUi.publishedLabel}:`}
-      />
+        <LocalDateTime
+          className="mt-5"
+          dateTime={lesson.publishedAt}
+          locale={locale}
+          label={`${learnUi.publishedLabel}:`}
+        />
 
-      <div className="skill-sec-layout mt-[var(--section-y)]">
-        <SkillSecurityNav />
+        <div className="skills-lesson__layout">
+          <SkillSecurityNav />
 
-        <div className="learn-lesson skill-sec-main min-w-0">
-          <SecurityRiskExplorer />
-          <SkillReviewSteps />
-          <SecurityResources />
-          <SecurityDecisionCases />
-          <InstalledSkillsGuide />
-          <SecurityIncidentGuide />
-
-          <GuideSection
-            id={skillSecurityLimits.id}
-            title={skillSecurityLimits.title}
-          >
-            <GuideCopy>
-              {skillSecurityLimits.paragraphs.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
+          <div className="skills-lesson__content min-w-0">
+            <div className="skills-lesson__intro space-y-4">
+              {skillSecurityHero.intro.map((paragraph) => (
+                <p
+                  key={paragraph}
+                  className="text-[length:var(--body)] leading-[1.65] text-muted"
+                >
+                  {paragraph}
+                </p>
               ))}
-            </GuideCopy>
-            <GuideCallout>{skillSecurityLimits.highlight}</GuideCallout>
-          </GuideSection>
+              <p className="text-[length:var(--body)] font-semibold leading-[1.65] text-brand">
+                {skillSecurityHero.highlight}
+              </p>
+            </div>
 
-          <SecurityChecklist />
-          <SecurityReferences />
+            <SecurityRiskExplorer />
+            <SkillReviewSteps />
+            <SecurityResources />
+            <SecurityDecisionCases />
+            <InstalledSkillsGuide />
+            <SecurityIncidentGuide />
+
+            <GuideSection
+              id={skillSecurityLimits.id}
+              title={skillSecurityLimits.title}
+            >
+              <GuideCopy>
+                {skillSecurityLimits.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </GuideCopy>
+              <GuideCallout>{skillSecurityLimits.highlight}</GuideCallout>
+            </GuideSection>
+
+            <SecurityChecklist />
+            <SecurityReferences />
+          </div>
         </div>
       </div>
     </Section>

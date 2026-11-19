@@ -22,7 +22,7 @@ export function SecurityChecklist() {
             <p className="text-[length:var(--body)] font-semibold text-brand">
               {item.label}
             </p>
-            <p className="max-w-[44rem] text-[length:var(--body)] leading-relaxed text-muted">
+            <p className="max-w-[68ch] text-[length:var(--body)] leading-[1.65] text-muted">
               {item.text}
             </p>
           </li>

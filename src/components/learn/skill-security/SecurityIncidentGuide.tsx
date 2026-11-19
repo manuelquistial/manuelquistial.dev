@@ -25,7 +25,7 @@ export function SecurityIncidentGuide() {
         ))}
       </GuideCopy>
 
-      <div className="grid items-start gap-8 lg:grid-cols-[minmax(13rem,0.8fr)_minmax(0,1.2fr)] lg:gap-10">
+      <div className="skills-lesson__split">
         <div
           role="radiogroup"
           aria-label={data.title}
@@ -41,7 +41,7 @@ export function SecurityIncidentGuide() {
                 aria-checked={isActive}
                 onClick={() => setSelected(item.id)}
                 className={cn(
-                  "skill-sec-option min-h-11 shrink-0 rounded-[1rem] border border-transparent px-3 py-2.5 text-left text-sm font-semibold text-brand hover:bg-surface-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-violet lg:w-full",
+                  "skill-sec-option min-h-11 shrink-0 rounded-xl border border-transparent px-3 py-2.5 text-left text-sm font-semibold text-brand hover:bg-surface-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-violet lg:w-full",
                   isActive && `${learnControlActiveClass} border-brand/25`,
                 )}
               >
@@ -51,20 +51,20 @@ export function SecurityIncidentGuide() {
           })}
         </div>
 
-        <div className="space-y-3" aria-live="polite">
-          <h3 className="font-display text-[length:var(--heading-3)] text-brand">
+        <div className="space-y-4" aria-live="polite">
+          <h3 className="font-display text-[1.1875rem] leading-[1.25] text-brand md:text-[1.3125rem]">
             {active.title}
           </h3>
           {active.paragraphs.map((paragraph) => (
             <p
               key={paragraph}
-              className="max-w-[42rem] text-[length:var(--body)] leading-relaxed text-muted"
+              className="max-w-[68ch] text-[length:var(--body)] leading-[1.65] text-muted"
             >
               {paragraph}
             </p>
           ))}
           {"bullets" in active && active.bullets ? (
-            <ul className="list-disc space-y-2 pl-5 text-[length:var(--body)] leading-relaxed text-muted">
+            <ul className="list-disc space-y-2 pl-5 text-[length:var(--body)] leading-[1.65] text-muted">
               {active.bullets.map((bullet) => (
                 <li key={bullet}>{bullet}</li>
               ))}
@@ -74,7 +74,7 @@ export function SecurityIncidentGuide() {
             ? active.afterBullets.map((paragraph) => (
                 <p
                   key={paragraph}
-                  className="max-w-[42rem] text-[length:var(--body)] leading-relaxed text-muted"
+                  className="max-w-[68ch] text-[length:var(--body)] leading-[1.65] text-muted"
                 >
                   {paragraph}
                 </p>

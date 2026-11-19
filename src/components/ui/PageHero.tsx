@@ -78,6 +78,8 @@ interface PageHeroProps {
   eyebrowHref?: string;
   tone?: PageHeroTone;
   illustration?: SpotIllustrationId;
+  /** Compact editorial banner without illustration or decorative circles. */
+  variant?: "default" | "compact";
   className?: string;
   children?: ReactNode;
 }
@@ -89,20 +91,31 @@ export function PageHero({
   eyebrowHref,
   tone = "research",
   illustration,
+  variant = "default",
   className,
   children,
 }: PageHeroProps) {
   const styles = toneStyles[tone];
+  const compact = variant === "compact";
+  const showIllustration = Boolean(illustration) && !compact;
 
   return (
     <div
       className={cn(
-        "gp-module relative grid items-center gap-8 overflow-hidden p-6 md:p-8 lg:grid-cols-12 lg:gap-10 lg:p-10",
+        "gp-module relative grid items-center gap-8 overflow-hidden",
+        compact
+          ? "gap-0 px-6 py-8 md:px-9 md:py-10 lg:px-14 lg:py-[3.25rem]"
+          : "p-6 md:p-8 lg:grid-cols-12 lg:gap-10 lg:p-10",
         styles.shell,
         className,
       )}
     >
-      <header className={cn("relative z-[1]", illustration ? "lg:col-span-6" : "lg:col-span-10")}>
+      <header
+        className={cn(
+          "relative z-[1]",
+          compact ? "max-w-[780px]" : showIllustration ? "lg:col-span-6" : "lg:col-span-10",
+        )}
+      >
         {eyebrow ? (
           eyebrowHref ? (
             <Link
@@ -120,9 +133,14 @@ export function PageHero({
         ) : null}
         <h1
           className={cn(
-            "font-display text-[length:var(--heading-1)]",
+            "font-display",
+            compact
+              ? "mt-4 max-w-[760px] text-[clamp(1.875rem,7vw,2.375rem)] leading-[1.15] font-bold md:text-[2.75rem] md:leading-[1.12]"
+              : cn(
+                  "text-[length:var(--heading-1)]",
+                  eyebrow ? "mt-4" : null,
+                ),
             styles.title,
-            eyebrow ? "mt-4" : null,
           )}
         >
           {title}
@@ -130,16 +148,20 @@ export function PageHero({
         {description ? (
           <p
             className={cn(
-              "mt-6 text-[length:var(--heading-3)] font-semibold leading-snug",
+              compact
+                ? "mt-4 max-w-[640px] text-[0.9375rem] leading-[1.55] md:text-[1.0625rem] md:leading-[1.6]"
+                : "mt-6 text-[length:var(--heading-3)] font-semibold leading-snug",
               styles.description,
             )}
           >
             {description}
           </p>
         ) : null}
-        {children ? <div className="mt-8">{children}</div> : null}
+        {children ? (
+          <div className={cn(compact ? "mt-7" : "mt-8")}>{children}</div>
+        ) : null}
       </header>
-      {illustration ? (
+      {showIllustration ? (
         <div className="relative flex min-h-[14rem] items-center justify-center lg:col-span-6 lg:justify-end">
           <div aria-hidden className="pointer-events-none absolute inset-0">
             {styles.circles.map((circle) => (
@@ -147,7 +169,7 @@ export function PageHero({
             ))}
           </div>
           <SpotIllustration
-            id={illustration}
+            id={illustration!}
             alt=""
             size="xl"
             sizes="280px"

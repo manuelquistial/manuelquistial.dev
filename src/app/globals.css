@@ -712,26 +712,68 @@ p.learn-reading {
 }
 
 /* Skill security lesson: editorial interactive composition */
-.skill-sec-shell {
-  width: min(var(--learn-max), calc(100% - 2 * var(--learn-gutter)));
+.skills-lesson {
+  --lesson-max-width: 1240px;
+  --lesson-sidebar-width: 240px;
+  --lesson-layout-gap: 40px;
+  --lesson-reading-width: 68ch;
+  --lesson-section-gap: 48px;
+  --lesson-block-gap: 24px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--lesson-max-width);
   margin-inline: auto;
 }
 
-.skill-sec-layout {
-  display: grid;
-  gap: var(--section-y);
+@media (min-width: 768px) {
+  .skills-lesson {
+    --lesson-section-gap: 56px;
+  }
 }
 
 @media (min-width: 1024px) {
-  .skill-sec-layout {
-    grid-template-columns: 11.5rem minmax(0, 1fr);
-    align-items: start;
-    gap: 2.5rem;
+  .skills-lesson {
+    --lesson-sidebar-width: 220px;
+    --lesson-layout-gap: 32px;
+    --lesson-section-gap: 72px;
   }
+}
 
+@media (min-width: 1280px) {
+  .skills-lesson {
+    --lesson-sidebar-width: 240px;
+    --lesson-layout-gap: 40px;
+  }
+}
+
+.skills-lesson__layout {
+  display: grid;
+  gap: 32px;
+  margin-top: 32px;
+}
+
+@media (min-width: 1024px) {
+  .skills-lesson__layout {
+    grid-template-columns: var(--lesson-sidebar-width) minmax(0, 1fr);
+    align-items: start;
+    gap: var(--lesson-layout-gap);
+    margin-top: 48px;
+  }
+}
+
+.skills-lesson__sidebar,
+.skill-sec-nav {
+  min-width: 0;
+}
+
+@media (min-width: 1024px) {
   .skill-sec-nav {
     position: sticky;
-    top: 5.5rem;
+    top: calc(var(--site-header-height, 72px) + 24px);
+    align-self: start;
+    max-height: calc(100dvh - var(--site-header-height, 72px) - 48px);
+    overflow-y: auto;
+    scrollbar-width: thin;
   }
 }
 
@@ -746,6 +788,79 @@ p.learn-reading {
 .skill-sec-nav-link[aria-current="true"] {
   color: var(--brand);
   background: color-mix(in srgb, var(--accent-violet) 12%, var(--surface));
+}
+
+.skills-lesson__content {
+  min-width: 0;
+}
+
+.skills-lesson__intro {
+  max-width: 700px;
+}
+
+.skills-lesson__intro > p {
+  max-width: var(--lesson-reading-width);
+}
+
+.skills-lesson__section {
+  margin-top: var(--lesson-section-gap);
+  padding-top: var(--lesson-section-gap);
+  border-top: 1px solid var(--border);
+}
+
+.skills-lesson__intro + .skills-lesson__section {
+  margin-top: 32px;
+  padding-top: 32px;
+}
+
+.skills-lesson__split {
+  display: grid;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .skills-lesson__split {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    gap: 32px;
+  }
+
+  .skills-lesson__split--copy-wide {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  }
+}
+
+.skills-lesson__demo {
+  width: 100%;
+  min-width: 0;
+}
+
+.skills-lesson__comparison {
+  display: grid;
+  gap: 20px;
+  align-items: start;
+}
+
+@media (min-width: 768px) {
+  .skills-lesson__comparison {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.skills-lesson__card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  padding: 24px;
+}
+
+.skills-lesson__supplement {
+  max-width: var(--lesson-reading-width);
+}
+
+.skills-lesson__references {
+  font-size: 0.875rem;
+  line-height: 1.55;
 }
 
 .skill-sec-scene {

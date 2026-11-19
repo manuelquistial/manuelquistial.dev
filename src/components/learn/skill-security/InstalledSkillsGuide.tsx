@@ -18,7 +18,7 @@ export function InstalledSkillsGuide() {
       <div className="divide-y divide-border border-y border-border">
         {data.items.map((item) => (
           <details key={item.id} className="group py-1">
-            <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 py-3 text-[length:var(--body)] font-semibold text-brand marker:content-none [&::-webkit-details-marker]:hidden">
+            <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 py-3 text-[length:var(--body)] font-semibold text-brand marker:content-none [&::-webkit-details-marker]:hidden">
               <span>{item.title}</span>
               <span
                 aria-hidden="true"
@@ -27,11 +27,11 @@ export function InstalledSkillsGuide() {
                 +
               </span>
             </summary>
-            <div className="max-w-[44rem] space-y-3 pb-5">
+            <div className="max-w-[68ch] space-y-4 pb-5">
               {item.paragraphs.map((paragraph) => (
                 <p
                   key={paragraph}
-                  className="text-[length:var(--body)] leading-relaxed text-muted"
+                  className="text-[length:var(--body)] leading-[1.65] text-muted"
                 >
                   {paragraph}
                 </p>

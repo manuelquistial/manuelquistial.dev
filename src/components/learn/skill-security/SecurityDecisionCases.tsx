@@ -61,17 +61,17 @@ export function SecurityDecisionCases() {
 
       <div
         key={current.id}
-        className="mt-6 grid items-start gap-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-10"
+        className="skills-lesson__split"
       >
         <div className="space-y-5">
-          <h3 className="font-display text-[length:var(--heading-3)] text-brand">
+          <h3 className="font-display text-[1.1875rem] leading-[1.25] text-brand md:text-[1.3125rem]">
             {current.title}
           </h3>
-          <div className="space-y-3">
+          <div className="space-y-4">
             {current.situation.map((paragraph) => (
               <p
                 key={paragraph}
-                className="max-w-[36rem] text-[length:var(--body)] leading-relaxed text-muted"
+                className="max-w-[68ch] text-[length:var(--body)] leading-[1.65] text-muted"
               >
                 {paragraph}
               </p>
@@ -97,7 +97,7 @@ export function SecurityDecisionCases() {
                     }))
                   }
                   className={cn(
-                    "skill-sec-option flex min-h-[3.5rem] w-full items-start gap-3 rounded-[1.1rem] border border-transparent bg-[color-mix(in_srgb,var(--surface-soft)_70%,white)] px-4 py-3.5 text-left text-[length:var(--body)] leading-snug text-foreground hover:border-brand/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-violet",
+                    "skill-sec-option flex min-h-11 w-full items-start gap-3 rounded-xl border border-border bg-surface px-4 py-3.5 text-left text-[length:var(--body)] leading-snug text-foreground hover:border-brand/25 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-violet",
                     active && `${learnControlActiveClass} border-brand/30`,
                   )}
                 >
@@ -120,7 +120,7 @@ export function SecurityDecisionCases() {
 
           {selected && recommended ? (
             <div
-              className="space-y-3 border-t border-border pt-5"
+              className="mt-4 space-y-3 border-t border-border pt-4"
               aria-live="polite"
             >
               <p className="text-[length:var(--body)] font-semibold text-brand">
@@ -134,7 +134,7 @@ export function SecurityDecisionCases() {
               {current.feedback.map((paragraph) => (
                 <p
                   key={paragraph}
-                  className="max-w-[40rem] text-[length:var(--body)] leading-relaxed text-muted"
+                  className="max-w-[68ch] text-[length:var(--body)] leading-[1.65] text-muted"
                 >
                   {paragraph}
                 </p>

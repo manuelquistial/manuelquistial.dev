@@ -148,8 +148,8 @@ export function SkillReviewSteps() {
         ))}
       </GuideCopy>
 
-      <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(15rem,0.95fr)] lg:gap-10">
-        <div className="space-y-10">
+      <div className="skills-lesson__split">
+        <div className="space-y-8">
           {data.items.map((item) => {
             const Icon = stepIcons[item.id];
             const isActive = active === item.id;
@@ -183,7 +183,7 @@ export function SkillReviewSteps() {
                   >
                     <Icon />
                   </span>
-                  <h3 className="font-display text-[length:var(--heading-3)] text-brand">
+                  <h3 className="font-display text-[1.1875rem] leading-[1.25] text-brand md:text-[1.3125rem]">
                     {item.title}
                   </h3>
                 </button>
@@ -194,12 +194,12 @@ export function SkillReviewSteps() {
                     onToggleSkillMd={() => setSkillMdOpen((value) => !value)}
                   />
                 </div>
-                <div className="mt-4 space-y-3">
+                <div className="mt-4 space-y-4">
                   {item.paragraphs.map((paragraph) => (
                     <p
                       key={paragraph}
                       className={cn(
-                        "max-w-[40rem] text-[length:var(--body)] leading-relaxed text-muted",
+                        "max-w-[68ch] text-[length:var(--body)] leading-[1.65] text-muted",
                         item.id === "contents" &&
                           skillMdOpen &&
                           active === "contents" &&
@@ -212,7 +212,7 @@ export function SkillReviewSteps() {
                   ))}
                 </div>
                 {"warning" in item && item.warning ? (
-                  <p className="mt-4 max-w-[40rem] text-[length:var(--body)] font-semibold leading-relaxed text-brand">
+                  <p className="skills-lesson__supplement mt-4 border-l-2 border-brand/25 pl-4 text-[length:var(--body)] font-semibold leading-[1.65] text-brand">
                     {item.warning}
                   </p>
                 ) : null}
@@ -221,7 +221,7 @@ export function SkillReviewSteps() {
           })}
         </div>
 
-        <div className="sticky top-28 hidden lg:block">
+        <div className="skills-lesson__demo sticky top-[calc(var(--site-header-height,72px)+24px)] hidden lg:block">
           <ReviewVisual
             stepId={active}
             skillMdOpen={skillMdOpen && active === "contents"}

@@ -26,8 +26,11 @@ export const skillSecurityLessonMeta = {
 export const skillSecurityLesson = skillSecurityLessonMeta;
 
 export const skillSecurityUi = {
-  eyebrow: "Aprendamos · Seguridad en IA",
+  eyebrow: "APRENDAMOS / SEGURIDAD EN IA",
   sectionsLabel: "Contenido",
+  bannerDescription:
+    "Aprende a reconocer los riesgos de las skills y los MCP antes de darles acceso a tus herramientas y archivos.",
+  exploreContent: "Explorar el contenido",
   exploreRisks: "Explorar los riesgos",
   howToReview: "Cómo revisar una skill",
   whatWouldYouDo: "¿Qué harías?",

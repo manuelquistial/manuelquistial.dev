@@ -35,8 +35,8 @@ export function SecurityReferences() {
       </GuideCopy>
 
       {groups.map((group) => (
-        <div key={group.id} className="mt-8">
-          <h3 className="font-display text-[length:var(--heading-3)] text-brand">
+        <div key={group.id} className="skills-lesson__references">
+          <h3 className="font-display text-[1.1875rem] leading-[1.25] text-brand md:text-[1.3125rem]">
             {group.title}
           </h3>
           <ul className="mt-4 divide-y divide-border/80 border-y border-border/80">
@@ -44,18 +44,16 @@ export function SecurityReferences() {
               const item = byId.get(id);
               if (!item) return null;
               return (
-                <li key={item.id} className="py-4">
-                  <p className="max-w-[48rem] text-[length:var(--body)] font-semibold leading-snug text-brand">
+                <li key={item.id} className="py-3.5">
+                  <p className="max-w-[68ch] font-semibold leading-snug text-brand">
                     {item.title}
                   </p>
-                  <p className="mt-1 text-sm text-muted">
+                  <p className="mt-1 text-muted">
                     {item.authors}
                     {item.year ? ` · ${item.year}` : null}
                   </p>
                   {item.edition ? (
-                    <p className="mt-2 max-w-[48rem] text-[length:var(--body)] leading-relaxed text-muted">
-                      {item.edition}
-                    </p>
+                    <p className="mt-2 max-w-[68ch] text-muted">{item.edition}</p>
                   ) : null}
                   <p className="mt-2">
                     <GuideExternalLink href={item.href}>

@@ -13,23 +13,23 @@ export function GuideSection({
   return (
     <section
       id={id}
-      className="learn-section scroll-mt-28"
+      className="skills-lesson__section scroll-mt-28"
       aria-labelledby={headingId}
     >
       <h2
         id={headingId}
-        className="font-display text-[length:var(--heading-2)] text-brand"
+        className="font-display text-[1.5625rem] leading-[1.2] text-brand md:text-[1.875rem]"
       >
         {title}
       </h2>
-      <div className="learn-follow space-y-5">{children}</div>
+      <div className="mt-4 space-y-8">{children}</div>
     </section>
   );
 }
 
 export function GuideCopy({ children }: { children: ReactNode }) {
   return (
-    <div className="learn-reading space-y-4 text-[length:var(--body-lg)] leading-relaxed text-muted">
+    <div className="skills-lesson__intro space-y-4 text-[length:var(--body)] leading-[1.65] text-muted">
       {children}
     </div>
   );
@@ -37,7 +37,7 @@ export function GuideCopy({ children }: { children: ReactNode }) {
 
 export function GuideCallout({ children }: { children: ReactNode }) {
   return (
-    <p className="rounded-[calc(var(--radius-module)-0.35rem)] bg-surface-soft px-4 py-3 text-[length:var(--body)] font-semibold leading-relaxed text-brand">
+    <p className="skills-lesson__supplement border-l-2 border-brand/25 pl-4 text-[length:var(--body)] font-semibold leading-[1.65] text-brand">
       {children}
     </p>
   );
@@ -55,7 +55,7 @@ export function GuideExternalLink({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex min-h-11 items-center text-sm font-semibold text-brand transition-colors duration-200 hover:text-accent-violet focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-violet"
+      className="inline-flex min-h-11 max-w-full items-center break-all text-sm font-semibold text-brand transition-colors duration-200 hover:text-accent-violet focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-violet"
     >
       {children}
     </a>

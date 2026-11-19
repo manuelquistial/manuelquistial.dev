@@ -18,6 +18,7 @@ import { Section } from "@/components/layout/Section";
 import { LocalDateTime } from "@/components/ui/LocalDateTime";
 import { PageHero } from "@/components/ui/PageHero";
 import { NeuronArt } from "@/components/learn/illustrations/NeuronArt";
+import { SkillSecurityArt } from "@/components/learn/skill-security/SkillSecurityArt";
 
 interface LearnIndexPageProps {
   params: Promise<{ locale: string; learnRoot: string }>;
@@ -95,7 +96,11 @@ export default async function LearnIndexPage({ params }: LearnIndexPageProps) {
               </span>
             </div>
             <div className="gp-module overflow-hidden border border-border bg-surface-soft md:col-span-4">
-              <NeuronArt label={lesson.scenes[0]?.textAlternative ?? lesson.title} />
+              {lesson.cardArt === "skill-security" ? (
+                <SkillSecurityArt label={lesson.cardImageLabel} />
+              ) : (
+                <NeuronArt label={lesson.cardImageLabel} />
+              )}
             </div>
             <div className="min-w-0 md:col-span-7">
               <p className="text-overline text-muted">{learnUi.indexTitle}</p>

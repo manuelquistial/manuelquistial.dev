@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
-import { getLearnLesson } from "@/content/learn/catalog";
+import {
+  getLearnLesson,
+  isGuideLesson,
+  isSceneLesson,
+} from "@/content/learn/catalog";
 import {
   findLearnRouteBySlug,
   getLearnBasePath,
@@ -15,6 +19,7 @@ import type { Locale } from "@/i18n/config";
 import { buildPageMetadata } from "@/lib/metadata";
 import { localizedPath } from "@/lib/localizedPath";
 import { LearnLesson } from "@/components/learn/LearnLesson";
+import { SkillSecurityLesson } from "@/components/learn/skill-security/SkillSecurityLesson";
 
 interface LearnLessonPageProps {
   params: Promise<{ locale: string; learnRoot: string; slug: string }>;
@@ -86,6 +91,12 @@ export default async function LearnLessonPage({ params }: LearnLessonPageProps) 
   if (expectedSlug && expectedSlug !== slug) {
     redirect(localizedPath(locale, getLearnLessonPath(locale, expectedSlug)));
   }
+
+  if (isGuideLesson(lesson) && lesson.guideId === "skill-security") {
+    return <SkillSecurityLesson locale={locale} />;
+  }
+
+  if (!isSceneLesson(lesson)) notFound();
 
   return <LearnLesson lesson={lesson} locale={locale} />;
 }

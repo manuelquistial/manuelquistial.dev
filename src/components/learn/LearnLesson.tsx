@@ -1,5 +1,5 @@
 import { getLearnUi } from "@/content/learn/ui";
-import type { LearnLessonContent } from "@/content/learn/types";
+import type { LearnSceneLessonContent } from "@/content/learn/types";
 import type { Locale } from "@/i18n/config";
 import { lessonCitationOrder } from "@/lib/learn/citations";
 import { getLearnBasePath } from "@/content/learn/routes";
@@ -16,7 +16,7 @@ export function LearnLesson({
   lesson,
   locale,
 }: {
-  lesson: LearnLessonContent;
+  lesson: LearnSceneLessonContent;
   locale: Locale;
 }) {
   const learnUi = getLearnUi(locale);

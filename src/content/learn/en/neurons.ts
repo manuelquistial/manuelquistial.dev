@@ -2,6 +2,10 @@ import type { LearnLessonContent } from "@/content/learn/types";
 import type { NeuronSceneId } from "@/content/learn/scene-ids";
 
 export const neuronsLesson = {
+  kind: "scenes",
+  cardArt: "neurons",
+  cardImageLabel:
+    "Neuron with a dendrite tree, the soma, the nucleus, and an axon.",
   slug: "how-do-neurons-communicate",
   locales: ["en"],
   title: "How do neurons communicate?",

@@ -85,7 +85,7 @@ export default async function HomePage({ params }: HomePageProps) {
               lessons={publishedLessons.map((lesson) => ({
                 slug: lesson.slug,
                 title: lesson.title,
-                imageLabel: lesson.scenes[0]?.textAlternative ?? lesson.title,
+                imageLabel: lesson.cardImageLabel,
               }))}
             />
           ) : null}

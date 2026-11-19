@@ -1,7 +1,20 @@
 import { describe, expect, it } from "vitest";
-import { getLearnLesson, learnLessons } from "@/content/learn/catalog";
+import {
+  getLearnLesson,
+  isSceneLesson,
+  learnLessons,
+} from "@/content/learn/catalog";
 import { neuronsLesson as neuronsLessonEn } from "@/content/learn/en/neurons";
 import { neuronsLesson as neuronsLessonEs } from "@/content/learn/es/neurons";
+import {
+  skillSecurityCases,
+  skillSecurityHero,
+  skillSecurityLesson,
+  skillSecurityRisks,
+  skillSecuritySources,
+  skillSecurityWhereToCheck,
+} from "@/content/learn/es/skill-security";
+import { skillSecurityLinks } from "@/content/learn/links/skill-security";
 import { neuronSceneIds } from "@/content/learn/scene-ids";
 import {
   getLearnLocaleAvailability,
@@ -59,7 +72,7 @@ const verifiedSources = [
 
 describe("learn catalog", () => {
   it("publishes spanish and english lessons with seven stable scenes", () => {
-    expect(learnLessons).toHaveLength(2);
+    expect(learnLessons).toHaveLength(3);
     expect(neuronsLessonEs.locales).toEqual(["es"]);
     expect(neuronsLessonEn.locales).toEqual(["en"]);
     expect(neuronsLessonEs.slug).toBe("como-se-comunican-las-neuronas");
@@ -81,6 +94,14 @@ describe("learn catalog", () => {
         },
         locales: ["es", "en"],
       },
+      {
+        id: "skill-security",
+        slugs: {
+          es: skillSecurityLesson.slug,
+          en: "ai-skills-security",
+        },
+        locales: ["es"],
+      },
     ]);
     expect(getLearnLesson(neuronsLessonEs.slug, "en")?.title).toBe(
       neuronsLessonEn.title,
@@ -90,8 +111,59 @@ describe("learn catalog", () => {
     );
   });
 
+  it("publishes the spanish AI skills security guide", () => {
+    expect(skillSecurityLesson.kind).toBe("guide");
+    expect(skillSecurityLesson.locales).toEqual(["es"]);
+    expect(skillSecurityLesson.slug).toBe("seguridad-skills-ia");
+    expect(skillSecurityHero.title).toBe(
+      "¿Sabes qué estás instalando en tus herramientas de IA?",
+    );
+    expect(getLearnLesson(skillSecurityLesson.slug, "es")?.title).toBe(
+      skillSecurityLesson.title,
+    );
+    expect(getLearnLesson(skillSecurityLesson.slug, "en")).toBeUndefined();
+    expect(getLearnLocaleAvailability("/aprendamos/seguridad-skills-ia")).toEqual(
+      ["es"],
+    );
+    expect(skillSecurityRisks.items).toHaveLength(4);
+    expect(skillSecurityCases.cases).toHaveLength(3);
+    expect(skillSecurityWhereToCheck.tools.map((tool) => tool.id)).toEqual([
+      "skillscan",
+      "owasp",
+      "cisco",
+    ]);
+    expect(skillSecuritySources.map((source) => source.id)).toEqual([
+      "schmotz",
+      "zhan",
+      "liu",
+      "ferrag",
+      "openai-skills",
+      "anthropic-skills",
+      "owasp",
+      "owasp-agency",
+      "skillscan",
+      "cisco",
+    ]);
+    const copy = JSON.stringify({
+      skillSecurityLesson,
+      skillSecurityHero,
+      skillSecurityRisks,
+      skillSecurityCases,
+      skillSecurityWhereToCheck,
+      skillSecuritySources,
+      skillSecurityLinks,
+    });
+    expect(copy).not.toContain("\u2014");
+    expect(
+      Object.values(skillSecurityLinks).every((href) =>
+        href.startsWith("https://"),
+      ),
+    ).toBe(true);
+  });
+
   it("keeps questions, sources and copy tied to real scenes", () => {
     for (const lesson of [neuronsLessonEs, neuronsLessonEn]) {
+      expect(isSceneLesson(lesson)).toBe(true);
       expect(lesson.questions).toHaveLength(3);
       for (const question of lesson.questions) {
         expect(neuronSceneIds).toContain(question.afterSceneId);
@@ -131,6 +203,10 @@ describe("learn catalog", () => {
       {
         locale: "en",
         path: "/learn/how-do-neurons-communicate",
+      },
+      {
+        locale: "es",
+        path: "/aprendamos/seguridad-skills-ia",
       },
     ]);
     expect(getLearnLocaleAvailability("/aprendamos")).toEqual(["es", "en"]);

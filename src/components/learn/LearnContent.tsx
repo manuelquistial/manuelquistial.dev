@@ -2,12 +2,12 @@
 
 import { createContext, use, type ReactNode } from "react";
 import type { Locale } from "@/i18n/config";
-import type { LearnLessonContent } from "@/content/learn/types";
+import type { LearnSceneLessonContent } from "@/content/learn/types";
 import type { LearnUi } from "@/content/learn/ui";
 import type { NeuronSceneId } from "@/content/learn/scene-ids";
 
 type LearnContentValue = {
-  lesson: LearnLessonContent;
+  lesson: LearnSceneLessonContent;
   ui: LearnUi;
   locale: Locale;
 };
@@ -20,7 +20,7 @@ export function LearnContentProvider({
   locale,
   children,
 }: {
-  lesson: LearnLessonContent;
+  lesson: LearnSceneLessonContent;
   ui: LearnUi;
   locale: Locale;
   children: ReactNode;

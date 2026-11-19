@@ -72,7 +72,9 @@ export type LearnSource = {
   href: string;
 };
 
-export type LearnLessonContent = {
+export type LearnLessonCardArt = "neurons" | "skill-security";
+
+export type LearnLessonMeta = {
   slug: string;
   locales: readonly Locale[];
   title: string;
@@ -81,9 +83,57 @@ export type LearnLessonContent = {
   metaTitle: string;
   /** Absolute publication instant in UTC (ISO-8601 ending in Z). */
   publishedAt: string;
+  cardArt: LearnLessonCardArt;
+  cardImageLabel: string;
+};
+
+export type LearnSceneLessonContent = LearnLessonMeta & {
+  kind: "scenes";
   intro: readonly LearnText[];
   scenes: readonly LearnScene[];
   questions: readonly LearnQuestion[];
   deepen: readonly LearnDeepen[];
   sources: readonly LearnSource[];
 };
+
+/** @deprecated Prefer LearnSceneLessonContent; kept as alias for scene lessons. */
+export type LearnLessonContent = LearnSceneLessonContent;
+
+export type LearnGuideLink = {
+  id: string;
+  label: string;
+  href: string;
+};
+
+export type LearnGuideSource = {
+  id: string;
+  title: string;
+  href: string;
+  use: string;
+};
+
+export type LearnGuideLessonContent = LearnLessonMeta & {
+  kind: "guide";
+  guideId: "skill-security";
+  category: string;
+  subcategory: string;
+  author: string;
+  contentReviewLabel: string;
+  contentReviewDate: string;
+};
+
+export type LearnCatalogLesson =
+  | LearnSceneLessonContent
+  | LearnGuideLessonContent;
+
+export function isSceneLesson(
+  lesson: LearnCatalogLesson,
+): lesson is LearnSceneLessonContent {
+  return lesson.kind === "scenes";
+}
+
+export function isGuideLesson(
+  lesson: LearnCatalogLesson,
+): lesson is LearnGuideLessonContent {
+  return lesson.kind === "guide";
+}

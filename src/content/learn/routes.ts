@@ -16,6 +16,14 @@ export const learnRoutes = [
     },
     locales: ["es", "en"],
   },
+  {
+    id: "skill-security",
+    slugs: {
+      es: "seguridad-skills-ia",
+      en: "ai-skills-security",
+    },
+    locales: ["es"],
+  },
 ] as const satisfies readonly {
   id: string;
   slugs: Record<Locale, string>;

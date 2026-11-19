@@ -1,21 +1,28 @@
 import type { Locale } from "@/i18n/config";
 import { neuronsLesson as neuronsLessonEn } from "@/content/learn/en/neurons";
 import { neuronsLesson as neuronsLessonEs } from "@/content/learn/es/neurons";
+import { skillSecurityLesson } from "@/content/learn/es/skill-security";
 import {
   findLearnRouteBySlug,
   getLearnSlugForLocale,
 } from "@/content/learn/routes";
-import type { LearnLessonContent } from "@/content/learn/types";
+import type {
+  LearnCatalogLesson,
+  LearnGuideLessonContent,
+  LearnSceneLessonContent,
+} from "@/content/learn/types";
+import { isGuideLesson, isSceneLesson } from "@/content/learn/types";
 
 export const learnLessons = [
   neuronsLessonEs,
   neuronsLessonEn,
-] satisfies readonly LearnLessonContent[];
+  skillSecurityLesson,
+] satisfies readonly LearnCatalogLesson[];
 
 export function getLearnLesson(
   slug: string,
   locale?: Locale,
-): LearnLessonContent | undefined {
+): LearnCatalogLesson | undefined {
   if (locale) {
     const route = findLearnRouteBySlug(slug);
     const localizedSlug = route
@@ -32,8 +39,26 @@ export function getLearnLesson(
   return learnLessons.find((lesson) => lesson.slug === slug);
 }
 
-export function getLearnLessonsForLocale(locale: Locale): LearnLessonContent[] {
+export function getLearnLessonsForLocale(locale: Locale): LearnCatalogLesson[] {
   return learnLessons.filter((lesson) =>
     lesson.locales.some((item) => item === locale),
   );
 }
+
+export function getSceneLesson(
+  slug: string,
+  locale?: Locale,
+): LearnSceneLessonContent | undefined {
+  const lesson = getLearnLesson(slug, locale);
+  return lesson && isSceneLesson(lesson) ? lesson : undefined;
+}
+
+export function getGuideLesson(
+  slug: string,
+  locale?: Locale,
+): LearnGuideLessonContent | undefined {
+  const lesson = getLearnLesson(slug, locale);
+  return lesson && isGuideLesson(lesson) ? lesson : undefined;
+}
+
+export { isGuideLesson, isSceneLesson };

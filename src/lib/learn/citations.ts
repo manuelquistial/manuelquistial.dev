@@ -1,4 +1,4 @@
-import type { LearnLessonContent, LearnText } from "@/content/learn/types";
+import type { LearnSceneLessonContent, LearnText } from "@/content/learn/types";
 
 export function citationOrder(
   texts: readonly LearnText[],
@@ -16,7 +16,7 @@ export function citationOrder(
   return sourceIds.filter((id) => cited.has(id));
 }
 
-export function lessonTexts(lesson: LearnLessonContent): LearnText[] {
+export function lessonTexts(lesson: LearnSceneLessonContent): LearnText[] {
   const fromScenes = lesson.scenes.flatMap((scene) => [
     ...scene.paragraphs,
     ...(scene.closing ?? []),
@@ -46,7 +46,7 @@ export function lessonTexts(lesson: LearnLessonContent): LearnText[] {
   ];
 }
 
-export function lessonCitationOrder(lesson: LearnLessonContent): string[] {
+export function lessonCitationOrder(lesson: LearnSceneLessonContent): string[] {
   return citationOrder(
     lessonTexts(lesson),
     lesson.sources.map((source) => source.id),

@@ -84,7 +84,7 @@ export function SecurityResources() {
         </article>
       ) : null}
 
-      <div className="skills-lesson__comparison">
+      <div className="space-y-5">
         {others.map((tool) => (
           <article key={tool.id} className="skills-lesson__card">
             <h3 className="font-display text-[1.1875rem] leading-[1.25] text-brand md:text-[1.3125rem]">
@@ -97,7 +97,7 @@ export function SecurityResources() {
               ? tool.paragraphs.map((paragraph) => (
                   <p
                     key={paragraph}
-                    className="mt-3 text-[length:var(--body)] leading-[1.65] text-muted"
+                    className="mt-3 max-w-[68ch] text-[length:var(--body)] leading-[1.65] text-muted"
                   >
                     {paragraph}
                   </p>

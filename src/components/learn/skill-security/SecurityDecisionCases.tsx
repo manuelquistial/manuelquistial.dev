@@ -47,8 +47,9 @@ export function SecurityDecisionCases() {
               aria-selected={active}
               onClick={() => setIndex(itemIndex)}
               className={cn(
-                "skill-sec-option min-h-10 rounded-full px-4 text-sm font-semibold text-muted hover:bg-surface-soft hover:text-brand focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-violet",
-                active && "bg-brand text-white hover:bg-brand hover:text-white",
+                "skill-sec-option min-h-10 rounded-full border border-transparent px-4 text-sm font-semibold text-brand/70 hover:border-brand/20 hover:bg-surface hover:text-brand focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-violet",
+                active &&
+                  "border-brand bg-brand text-white hover:border-brand hover:bg-brand hover:text-white",
               )}
             >
               {skillSecurityUi.caseProgress
@@ -67,6 +68,7 @@ export function SecurityDecisionCases() {
           <h3 className="font-display text-[1.1875rem] leading-[1.25] text-brand md:text-[1.3125rem]">
             {current.title}
           </h3>
+          <CaseSituationArt kind={current.id} />
           <div className="space-y-4">
             {current.situation.map((paragraph) => (
               <p
@@ -77,7 +79,6 @@ export function SecurityDecisionCases() {
               </p>
             ))}
           </div>
-          <CaseSituationArt kind={current.id} />
         </div>
 
         <div className="space-y-3">
